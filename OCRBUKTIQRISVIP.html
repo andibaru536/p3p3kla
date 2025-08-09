@@ -41,23 +41,19 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+              url('https://cdn.areabermain.club/assets/cdn/az6/2025/07/31/20250731/eeb91f9b1f7b3247242ccba997460e8b/linetogel-bg-17agustus2025.jpg') no-repeat center center fixed;
+  background-size: cover;
   min-height: 100vh;
   padding: 20px;
   color: var(--text);
 }
 
 body.dark-mode {
-  background: linear-gradient(135deg, #0d1b2a, #1b263b, #0d1b2a);
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
+              url('https://cdn.areabermain.club/assets/cdn/az6/2025/07/31/20250731/eeb91f9b1f7b3247242ccba997460e8b/linetogel-bg-17agustus2025.jpg') no-repeat center center fixed;
+  background-size: cover;
   color: var(--dark-text);
-}
-
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
 }
 
 .container {
@@ -81,7 +77,7 @@ h1 {
   color: white;
   text-align: center;
   margin-bottom: 10px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,17 +92,18 @@ h1 i {
 }
 
 .card {
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 10px 30px var(--card-shadow);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   margin-bottom: 25px;
   border: 1px solid var(--border);
+  backdrop-filter: blur(5px);
 }
 
 body.dark-mode .card {
-  background-color: var(--dark-card);
-  box-shadow: 0 10px 30px var(--dark-shadow);
+  background-color: rgba(30, 30, 30, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   border-color: var(--dark-border);
 }
 
@@ -191,7 +188,7 @@ body.dark-mode .clear-btn:hover {
   cursor: pointer;
   margin-top: 15px;
   transition: all 0.3s;
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 body.dark-mode .upload-container {
@@ -201,7 +198,7 @@ body.dark-mode .upload-container {
 
 .upload-container:hover {
   border-color: var(--primary);
-  background-color: rgba(67, 97, 238, 0.05);
+  background-color: rgba(67, 97, 238, 0.1);
 }
 
 .upload-container i {
@@ -278,16 +275,17 @@ body.dark-mode #preview {
 .result {
   margin-top: 30px;
   padding: 25px;
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
-  box-shadow: 0 4px 20px var(--card-shadow);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
   border-left: 4px solid var(--primary);
+  backdrop-filter: blur(5px);
 }
 
 body.dark-mode .result {
-  background-color: var(--dark-card);
-  box-shadow: 0 4px 20px var(--dark-shadow);
+  background-color: rgba(30, 30, 30, 0.85);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .result:hover {
@@ -380,14 +378,15 @@ body.dark-mode .copy-btn:hover {
   text-align: center;
   margin: 25px 0;
   display: none;
-  background-color: var(--card-bg);
+  background-color: rgba(255, 255, 255, 0.9);
   padding: 20px;
   border-radius: 12px;
   border: 1px solid var(--border);
+  backdrop-filter: blur(5px);
 }
 
 body.dark-mode #loading {
-  background-color: var(--dark-card);
+  background-color: rgba(30, 30, 30, 0.85);
   border-color: var(--dark-border);
 }
 
@@ -463,17 +462,19 @@ body.dark-mode .progress-container {
 .btn-primary {
   background: linear-gradient(to right, var(--primary), var(--secondary));
   color: white;
+  box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+  box-shadow: 0 7px 15px rgba(67, 97, 238, 0.4);
 }
 
 .btn-secondary {
   background: rgba(0, 0, 0, 0.05);
   color: var(--text);
   border: 1px solid var(--border);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 body.dark-mode .btn-secondary {
@@ -504,6 +505,7 @@ body.dark-mode .btn-secondary:hover {
   font-size: 20px;
   transition: all 0.3s;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .theme-toggle:hover {
@@ -543,6 +545,7 @@ body.dark-mode .btn-secondary:hover {
   font-weight: bold;
   transition: 0.3s;
   cursor: pointer;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 #closePreview:hover,
@@ -593,6 +596,17 @@ body.dark-mode .btn-secondary:hover {
     top: 10px;
     text-align: center;
   }
+  
+  .header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
 }
 </style>
 </head>
@@ -601,7 +615,7 @@ body.dark-mode .btn-secondary:hover {
   <div class="header">
     <div class="header-content">
       <h1><i class="fas fa-bolt"></i> SHORTCUT VIP</h1>
-      <p style="text-align: center; color: rgba(255,255,255,0.8);">Ekstraktor Bukti Transfer DANA, BRI & BCA</p>
+      <p style="text-align: center; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Ekstraktor Bukti Transfer DANA, BRI & BCA</p>
     </div>
     <button class="theme-toggle" id="themeToggle">
       <i class="fas fa-moon"></i>
