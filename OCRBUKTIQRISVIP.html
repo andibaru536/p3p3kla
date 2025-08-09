@@ -399,7 +399,6 @@ body.dark-mode #loading {
   color: white;
   padding: 15px 25px;
   border-radius: 8px;
-  display: none;
   z-index: 1000;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   display: flex;
@@ -413,6 +412,10 @@ body.dark-mode #loading {
 .copy-notification.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.copy-notification i {
+  font-size: 20px;
 }
 
 .progress-container {
@@ -548,6 +551,17 @@ body.dark-mode .btn-secondary:hover {
   text-decoration: none;
 }
 
+/* Animasi salin */
+@keyframes copyPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.copy-success {
+  animation: copyPulse 0.5s ease;
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 10px;
@@ -571,6 +585,13 @@ body.dark-mode .btn-secondary:hover {
   
   #imagePreviewModal img {
     max-width: 95%;
+  }
+  
+  .copy-notification {
+    left: 20px;
+    right: 20px;
+    top: 10px;
+    text-align: center;
   }
 }
 </style>
@@ -711,7 +732,7 @@ body.dark-mode .btn-secondary:hover {
 </div>
 
 <div class="copy-notification" id="copyNotification">
-  <i class="fas fa-check-circle"></i> Teks telah disalin!
+  <i class="fas fa-check-circle"></i> <span id="notificationText">Teks telah disalin!</span>
 </div>
 
 <script>
@@ -741,13 +762,16 @@ function formatCurrency(amount) {
 // Fungsi untuk menampilkan notifikasi
 function showNotification(message, isError = false) {
   const notification = document.getElementById('copyNotification');
+  const notificationText = document.getElementById('notificationText');
+  
   if (isError) {
     notification.style.background = 'var(--error)';
+    notificationText.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
   } else {
     notification.style.background = 'var(--success)';
+    notificationText.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
   }
   
-  notification.innerHTML = `<i class="fas ${isError ? 'fa-exclamation-circle' : 'fa-check-circle'}"></i> ${message}`;
   notification.classList.add('show');
   
   setTimeout(() => {
@@ -990,14 +1014,33 @@ function copyToClipboard(elementId) {
   if (!element) return;
   
   let textToCopy = element.textContent;
+  let fieldName = "Teks";
 
   // Untuk totalAmount, gunakan nilai bersih jika ada
   if (elementId === 'totalAmount' && element.hasAttribute('data-clean')) {
     textToCopy = element.getAttribute('data-clean');
   }
+  
+  // Tentukan nama field yang disalin
+  switch(elementId) {
+    case 'resultUserId': fieldName = "User ID"; break;
+    case 'merchantName': fieldName = "Nama Merchant"; break;
+    case 'totalAmount': fieldName = "Total Pembayaran"; break;
+    case 'rrn': fieldName = "Nomor Referensi"; break;
+    case 'selectedBank': fieldName = "Jenis Bank"; break;
+  }
 
   navigator.clipboard.writeText(textToCopy).then(() => {
-    showNotification('Teks telah disalin!');
+    // Tambahkan animasi ke tombol salin
+    const copyButton = element.nextElementSibling;
+    if (copyButton) {
+      copyButton.classList.add('copy-success');
+      setTimeout(() => {
+        copyButton.classList.remove('copy-success');
+      }, 500);
+    }
+    
+    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
   }).catch(err => {
     console.error('Gagal menyalin teks: ', err);
     // Fallback untuk browser lama
@@ -1007,7 +1050,7 @@ function copyToClipboard(elementId) {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
-    showNotification('Teks telah disalin!');
+    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
   });
 }
 
@@ -1117,8 +1160,10 @@ document.addEventListener('DOMContentLoaded', function() {
       
       if (document.body.classList.contains('dark-mode')) {
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        themeToggle.title = 'Mode Terang';
       } else {
         themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        themeToggle.title = 'Mode Gelap';
       }
     });
   }
@@ -1162,12 +1207,6 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('imagePreviewModal').style.display = 'none';
     }
   });
-  
-  // Sembunyikan notifikasi saat halaman dimuat
-  const notification = document.getElementById('copyNotification');
-  if (notification) {
-    notification.style.display = 'none';
-  }
 });
 </script>
 </body>
