@@ -46,7 +46,7 @@ body {
   background-size: cover;
   min-height: 100vh;
   padding: 20px;
-  color: var(--text);
+  color: var(--text-light);
 }
 
 body.dark-mode {
@@ -94,7 +94,7 @@ h1 i {
 .card {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
-  padding: 30px;
+  padding: 25px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   margin-bottom: 25px;
   border: 1px solid var(--border);
@@ -108,16 +108,16 @@ body.dark-mode .card {
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   position: relative;
 }
 
 label {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   font-weight: 600;
   color: var(--primary);
-  font-size: 1.05rem;
+  font-size: 1rem;
 }
 
 body.dark-mode label {
@@ -130,10 +130,10 @@ body.dark-mode label {
 
 input, select {
   width: 100%;
-  padding: 14px 50px 14px 15px;
+  padding: 12px 45px 12px 15px;
   border: 2px solid var(--border);
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 15px;
   background-color: var(--input-bg);
   transition: all 0.3s;
   box-sizing: border-box;
@@ -154,16 +154,16 @@ input:focus, select:focus {
 
 .clear-btn {
   position: absolute;
-  right: 15px;
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: #777;
   cursor: pointer;
-  font-size: 18px;
-  width: 30px;
-  height: 30px;
+  font-size: 16px;
+  width: 28px;
+  height: 28px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,20 +180,21 @@ body.dark-mode .clear-btn:hover {
   background-color: #333;
 }
 
+/* PERUBAHAN: Unggah gambar diperkecil */
 .upload-container {
   border: 2px dashed var(--border);
-  border-radius: 12px;
-  padding: 15px;
+  border-radius: 10px;
+  padding: 12px;
   text-align: center;
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 12px;
   transition: all 0.3s;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 body.dark-mode .upload-container {
   border-color: var(--dark-border);
-  background-color: rgba(30, 30, 30, 0.5);
+  background-color: rgba(45, 45, 45, 0.6);
 }
 
 .upload-container:hover {
@@ -202,15 +203,15 @@ body.dark-mode .upload-container {
 }
 
 .upload-container i {
-  font-size: 36px;
+  font-size: 28px;
   color: var(--primary);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .upload-container p {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
 }
 
 body.dark-mode .upload-container p {
@@ -218,15 +219,15 @@ body.dark-mode .upload-container p {
 }
 
 .upload-container span {
-  font-size: 12px;
+  font-size: 11px;
   color: #999;
 }
 
 /* Preview Container */
 #preview-container {
-  margin-top: 25px;
+  margin-top: 20px;
   text-align: center;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   max-width: 100%;
   display: none;
@@ -235,7 +236,7 @@ body.dark-mode .upload-container p {
 
 #preview {
   max-width: 100%;
-  max-height: 200px;
+  max-height: 180px;
   border-radius: 8px;
   background-color: white;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -267,17 +268,17 @@ body.dark-mode #preview {
 }
 
 .preview-overlay i {
-  font-size: 48px;
+  font-size: 40px;
   color: white;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .result {
   margin-top: 30px;
-  padding: 25px;
+  padding: 20px;
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   border-left: 4px solid var(--primary);
   backdrop-filter: blur(5px);
@@ -285,44 +286,46 @@ body.dark-mode #preview {
 
 body.dark-mode .result {
   background-color: rgba(30, 30, 30, 0.85);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .result:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .result h3 {
   color: var(--primary);
   margin-top: 0;
-  margin-bottom: 25px;
-  padding-bottom: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
   border-bottom: 2px solid var(--border);
   display: flex;
   align-items: center;
   gap: 10px;
+  font-size: 1.4rem;
 }
 
 body.dark-mode .result h3 {
   border-color: var(--dark-border);
 }
 
-.result-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
+/* PERUBAHAN: Layout vertikal untuk hasil */
+.result-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .result-item {
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 .result-label {
   font-weight: 600;
   color: var(--primary);
   display: block;
-  margin-bottom: 8px;
-  font-size: 1rem;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -332,12 +335,12 @@ body.dark-mode .result h3 {
   background-color: rgba(67, 97, 238, 0.08);
   padding: 12px 15px;
   border-radius: 10px;
-  font-size: 17px;
+  font-size: 16px;
   border: 1px solid rgba(67, 97, 238, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 56px;
+  min-height: 50px;
 }
 
 body.dark-mode .result-value {
@@ -351,14 +354,14 @@ body.dark-mode .result-value {
   color: var(--primary);
   cursor: pointer;
   padding: 8px;
-  font-size: 18px;
+  font-size: 16px;
   border-radius: 8px;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
 }
 
 .copy-btn:hover {
@@ -376,10 +379,10 @@ body.dark-mode .copy-btn:hover {
 
 #loading {
   text-align: center;
-  margin: 25px 0;
+  margin: 20px 0;
   display: none;
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 20px;
+  padding: 18px;
   border-radius: 12px;
   border: 1px solid var(--border);
   backdrop-filter: blur(5px);
@@ -396,7 +399,7 @@ body.dark-mode #loading {
   right: 20px;
   background: var(--success);
   color: white;
-  padding: 15px 25px;
+  padding: 12px 20px;
   border-radius: 8px;
   z-index: 1000;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
@@ -414,15 +417,15 @@ body.dark-mode #loading {
 }
 
 .copy-notification i {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .progress-container {
   width: 100%;
-  height: 8px;
+  height: 7px;
   background-color: var(--progress-bg);
   border-radius: 4px;
-  margin-top: 15px;
+  margin-top: 12px;
   overflow: hidden;
 }
 
@@ -440,41 +443,41 @@ body.dark-mode .progress-container {
 
 .action-buttons {
   display: flex;
-  gap: 15px;
-  margin-top: 20px;
+  gap: 12px;
+  margin-top: 18px;
 }
 
 .btn {
   flex: 1;
-  padding: 14px;
+  padding: 12px;
   border: none;
-  border-radius: 12px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .btn-primary {
   background: linear-gradient(to right, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 7px 15px rgba(67, 97, 238, 0.4);
+  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.35);
 }
 
 .btn-secondary {
   background: rgba(0, 0, 0, 0.05);
   color: var(--text);
   border: 1px solid var(--border);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
 }
 
 body.dark-mode .btn-secondary {
@@ -492,24 +495,24 @@ body.dark-mode .btn-secondary:hover {
 }
 
 .theme-toggle {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
   border: none;
   border-radius: 50%;
-  width: 45px;
-  height: 45px;
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   transition: all 0.3s;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.35);
   transform: rotate(15deg);
 }
 
@@ -571,7 +574,7 @@ body.dark-mode .btn-secondary:hover {
   }
   
   .card {
-    padding: 20px;
+    padding: 18px;
   }
   
   h1 {
@@ -580,10 +583,6 @@ body.dark-mode .btn-secondary:hover {
   
   .action-buttons {
     flex-direction: column;
-  }
-  
-  .result-grid {
-    grid-template-columns: 1fr;
   }
   
   #imagePreviewModal img {
@@ -604,8 +603,19 @@ body.dark-mode .btn-secondary:hover {
   
   .theme-toggle {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 15px;
+    right: 15px;
+  }
+  
+  .result-value {
+    padding: 10px 12px;
+    font-size: 15px;
+    min-height: 46px;
+  }
+  
+  .btn {
+    padding: 10px;
+    font-size: 14px;
   }
 }
 </style>
@@ -615,7 +625,7 @@ body.dark-mode .btn-secondary:hover {
   <div class="header">
     <div class="header-content">
       <h1><i class="fas fa-bolt"></i> SHORTCUT VIP</h1>
-      <p style="text-align: center; color: rgba(255,255,255,0.9); text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Ekstraktor Bukti Transfer DANA, BRI & BCA</p>
+      <p style="text-align: center; color: #4361ee; font-weight: 500; margin-top: 5px;">Ekstraktor Bukti Transfer DANA, BRI & BCA</p>
     </div>
     <button class="theme-toggle" id="themeToggle">
       <i class="fas fa-moon"></i>
@@ -689,21 +699,22 @@ body.dark-mode .btn-secondary:hover {
 
   <div class="card result" id="results">
     <h3><i class="fas fa-file-invoice"></i> Hasil Ekstraksi</h3>
-    <div class="result-grid">
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-user"></i> User ID:</span>
-        <div class="result-value">
-          <span id="resultUserId">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('resultUserId')">
-            <i class="far fa-copy"></i>
-          </button>
-        </div>
-      </div>
+    <div class="result-list">
+      <!-- Urutan vertikal: Merchant, RRN, Total, User ID, Jenis Bank -->
       <div class="result-item">
         <span class="result-label"><i class="fas fa-store"></i> Nama Merchant/Toko:</span>
         <div class="result-value">
           <span id="merchantName">-</span>
           <button class="copy-btn" onclick="copyToClipboard('merchantName')">
+            <i class="far fa-copy"></i>
+          </button>
+        </div>
+      </div>
+      <div class="result-item">
+        <span class="result-label"><i class="fas fa-hashtag"></i> Nomor Referensi (RRN):</span>
+        <div class="result-value">
+          <span id="rrn">-</span>
+          <button class="copy-btn" onclick="copyToClipboard('rrn')">
             <i class="far fa-copy"></i>
           </button>
         </div>
@@ -718,10 +729,10 @@ body.dark-mode .btn-secondary:hover {
         </div>
       </div>
       <div class="result-item">
-        <span class="result-label"><i class="fas fa-hashtag"></i> Nomor Referensi (RRN):</span>
+        <span class="result-label"><i class="fas fa-user"></i> User ID:</span>
         <div class="result-value">
-          <span id="rrn">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('rrn')">
+          <span id="resultUserId">-</span>
+          <button class="copy-btn" onclick="copyToClipboard('resultUserId')">
             <i class="far fa-copy"></i>
           </button>
         </div>
