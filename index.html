@@ -15,7 +15,7 @@
             --header-text: white;
             --btn-bg: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
             --btn-hover: linear-gradient(135deg, #4e0ca8 0%, #1a5fd0 100%);
-            --shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            --shadow: 0 6px 20px rgba(31, 38, 135, 0.12);
             --card-bg: rgba(255, 255, 255, 0.92);
             --transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
             --suggestion-bg: rgba(255, 255, 255, 0.98);
@@ -28,9 +28,8 @@
             --success-color: #2ecc71;
             --gold-color: #ffd700;
             --premium-gradient: linear-gradient(135deg, #6a11cb, #2575fc, #ffd700);
-            --glass-bg: rgba(255, 255, 255, 0.2);
-            --glass-border: rgba(255, 255, 255, 0.25);
-            --diamond-color: #b9f2ff;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.2);
         }
 
         .dark-mode {
@@ -39,7 +38,7 @@
             --header-bg: linear-gradient(135deg, #1a0a2e 0%, #0c1445 100%);
             --btn-bg: linear-gradient(135deg, #1a0a2e 0%, #0c1445 100%);
             --btn-hover: linear-gradient(135deg, #140825 0%, #080e2e 100%);
-            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
             --card-bg: rgba(26, 26, 42, 0.92);
             --suggestion-bg: rgba(30, 30, 50, 0.98);
             --suggestion-hover: rgba(40, 40, 65, 0.98);
@@ -47,9 +46,8 @@
             --search-focus: #8a63d2;
             --search-border: rgba(138, 99, 210, 0.25);
             --accent-color: #8a63d2;
-            --glass-bg: rgba(26, 26, 42, 0.3);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --diamond-color: #00ccff;
+            --glass-bg: rgba(26, 26, 42, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.12);
         }
 
         * {
@@ -63,7 +61,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 15px;
+            padding: 12px;
             transition: var(--transition);
             min-height: 100vh;
             background-image: 
@@ -90,20 +88,20 @@
         /* Glassmorphism effect */
         .glass {
             background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             box-shadow: var(--shadow);
-            border-radius: 16px;
+            border-radius: 14px;
         }
 
         /* Login Screen */
         .login-container {
-            max-width: 450px;
-            margin: 40px auto;
-            padding: 35px 30px;
+            max-width: 420px;
+            margin: 30px auto;
+            padding: 25px 20px;
             background: var(--card-bg);
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: var(--shadow);
             text-align: center;
             transition: var(--transition);
@@ -126,20 +124,20 @@
         }
 
         .login-title {
-            font-size: 1.9rem;
-            margin-bottom: 20px;
+            font-size: 1.7rem;
+            margin-bottom: 15px;
             color: var(--text-color);
             font-weight: 700;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             position: relative;
         }
 
         .login-title i {
             color: var(--accent-color);
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -149,65 +147,65 @@
         .login-title::after {
             content: "PREMIUM";
             position: absolute;
-            bottom: -22px;
+            bottom: -18px;
             left: 50%;
             transform: translateX(-50%);
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 700;
             color: var(--gold-color);
-            background: rgba(255, 215, 0, 0.15);
-            padding: 4px 14px;
-            border-radius: 20px;
-            letter-spacing: 1.5px;
+            background: rgba(255, 215, 0, 0.12);
+            padding: 3px 12px;
+            border-radius: 16px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
         }
 
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 22px;
-            margin-top: 40px;
+            gap: 18px;
+            margin-top: 30px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
             text-align: left;
             position: relative;
         }
 
         .form-group label {
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             color: var(--text-color);
-            padding-left: 12px;
+            padding-left: 10px;
         }
 
         .form-group input {
-            padding: 14px 20px;
-            border-radius: 12px;
+            padding: 12px 16px;
+            border-radius: 10px;
             border: 1px solid var(--search-border);
             background: var(--card-bg);
-            font-size: 1rem;
+            font-size: 0.95rem;
             color: var(--text-color);
             transition: var(--transition);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.04);
         }
 
         .form-group input:focus {
             outline: none;
             border-color: var(--search-focus);
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.2);
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.18);
         }
 
         .login-btn {
             background: var(--btn-bg);
             color: white;
             border: none;
-            padding: 14px 20px;
-            border-radius: 12px;
-            font-size: 1.05rem;
+            padding: 12px 16px;
+            border-radius: 10px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
@@ -215,12 +213,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             position: relative;
             overflow: hidden;
             z-index: 1;
-            box-shadow: 0 6px 16px rgba(106, 17, 203, 0.3);
-            letter-spacing: 0.8px;
+            box-shadow: 0 5px 12px rgba(106, 17, 203, 0.25);
         }
 
         .login-btn::before {
@@ -230,15 +227,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.18);
             transform: translateX(-100%);
             transition: transform 0.4s ease;
             z-index: -1;
         }
 
         .login-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 20px rgba(106, 17, 203, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(106, 17, 203, 0.35);
         }
 
         .login-btn:hover::before {
@@ -247,9 +244,9 @@
 
         .error-message {
             color: var(--error-color);
-            font-size: 0.9rem;
-            margin-top: 6px;
-            height: 20px;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            height: 18px;
             text-align: center;
             font-weight: 500;
         }
@@ -263,11 +260,11 @@
 
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            padding: 30px 25px;
+            margin-bottom: 20px;
+            padding: 25px;
             background: var(--header-bg);
             color: var(--header-text);
-            border-radius: 20px;
+            border-radius: 16px;
             box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
@@ -282,59 +279,57 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             transform: rotate(30deg);
             pointer-events: none;
         }
 
         .header h1 {
             margin: 0;
-            font-size: 2.4rem;
-            letter-spacing: 0.8px;
-            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 0.6px;
+            font-weight: 700;
             position: relative;
-            text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.15);
             background: linear-gradient(135deg, #ffffff, #e0f7fa);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .header p {
-            margin-top: 10px;
-            font-size: 1.1rem;
-            opacity: 0.92;
+            margin-top: 8px;
+            font-size: 1rem;
+            opacity: 0.9;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
             font-weight: 300;
-            letter-spacing: 0.3px;
         }
 
         .switch-container {
             position: absolute;
-            top: 25px;
-            right: 25px;
+            top: 20px;
+            right: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .switch-label {
-            font-size: 0.9rem;
-            opacity: 0.92;
+            font-size: 0.85rem;
+            opacity: 0.9;
             color: white;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            font-weight: 300;
         }
 
         .switch {
             position: relative;
             display: inline-block;
-            width: 58px;
-            height: 30px;
+            width: 52px;
+            height: 26px;
         }
 
         .switch input {
@@ -350,34 +345,34 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: rgba(255,255,255,0.25);
+            background-color: rgba(255,255,255,0.2);
             transition: .4s;
-            border-radius: 30px;
+            border-radius: 26px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 9px;
-            border: 1px solid rgba(255,255,255,0.18);
+            padding: 0 7px;
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .slider:before {
             position: absolute;
             content: "";
-            height: 24px;
-            width: 24px;
+            height: 20px;
+            width: 20px;
             left: 3px;
             bottom: 3px;
             background-color: white;
             transition: .4s;
             border-radius: 50%;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             z-index: 2;
         }
 
         .mode-icon {
             color: #fff;
             z-index: 1;
-            font-size: 14px;
+            font-size: 12px;
             transition: opacity 0.3s;
         }
 
@@ -390,11 +385,11 @@
         }
 
         input:checked + .slider {
-            background-color: rgba(0,0,0,0.25);
+            background-color: rgba(0,0,0,0.2);
         }
 
         input:checked + .slider:before {
-            transform: translateX(28px);
+            transform: translateX(26px);
         }
 
         input:checked + .slider .sun-icon {
@@ -406,20 +401,20 @@
         }
 
         .search-container {
-            margin: 25px auto;
-            max-width: 700px;
+            margin: 20px auto;
+            max-width: 650px;
             position: relative;
         }
 
         .search-box {
             width: 100%;
-            padding: 16px 25px;
-            padding-left: 60px;
-            border-radius: 50px;
+            padding: 14px 20px;
+            padding-left: 50px;
+            border-radius: 45px;
             border: 1px solid var(--search-border);
             background: var(--card-bg);
             box-shadow: var(--shadow);
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: var(--text-color);
             transition: var(--transition);
             font-weight: 500;
@@ -427,23 +422,23 @@
 
         .search-box:focus {
             outline: none;
-            box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
             border-color: var(--search-focus);
         }
 
         .search-icon {
             position: absolute;
-            left: 25px;
+            left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--accent-color);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             transition: var(--transition);
         }
 
         .search-box:focus + .search-icon {
             color: var(--search-focus);
-            transform: translateY(-50%) scale(1.15);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .suggestions-container {
@@ -451,18 +446,18 @@
             top: 100%;
             left: 0;
             right: 0;
-            margin-top: 8px;
+            margin-top: 6px;
             background: var(--suggestion-bg);
-            border-radius: 16px;
+            border-radius: 14px;
             box-shadow: var(--shadow);
             z-index: 10;
-            max-height: 300px;
+            max-height: 280px;
             overflow-y: auto;
             display: none;
             border: 1px solid var(--search-border);
             animation: fadeIn 0.25s ease-out;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         @keyframes fadeIn {
@@ -471,63 +466,63 @@
         }
 
         .suggestion-item {
-            padding: 14px 20px;
+            padding: 12px 16px;
             cursor: pointer;
             display: flex;
             align-items: center;
             transition: var(--transition);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
         .suggestion-item:first-child {
-            border-top-left-radius: 16px;
-            border-top-right-radius: 16px;
+            border-top-left-radius: 14px;
+            border-top-right-radius: 14px;
         }
 
         .suggestion-item:last-child {
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 14px;
+            border-bottom-right-radius: 14px;
             border-bottom: none;
         }
 
         .suggestion-item:hover {
             background: var(--suggestion-hover);
-            transform: translateX(4px);
+            transform: translateX(3px);
         }
 
         .suggestion-item i {
-            margin-right: 15px;
-            font-size: 1.3rem;
+            margin-right: 12px;
+            font-size: 1.2rem;
             color: var(--accent-color);
-            width: 25px;
+            width: 22px;
             text-align: center;
         }
 
         .suggestion-text {
             flex-grow: 1;
-            font-size: 1.05rem;
+            font-size: 0.95rem;
         }
 
         .highlight {
             background-color: var(--highlight-color);
-            font-weight: 700;
-            padding: 0 3px;
-            border-radius: 3px;
+            font-weight: 600;
+            padding: 0 2px;
+            border-radius: 2px;
             color: #333;
         }
 
         .no-results {
-            padding: 15px 20px;
+            padding: 12px 16px;
             color: var(--text-color);
             opacity: 0.7;
             text-align: center;
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .search-clear {
             position: absolute;
-            right: 25px;
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: #aaa;
@@ -536,10 +531,10 @@
             transition: var(--transition);
             background: none;
             border: none;
-            font-size: 1.2rem;
-            background: rgba(0,0,0,0.05);
-            width: 32px;
-            height: 32px;
+            font-size: 1.1rem;
+            background: rgba(0,0,0,0.04);
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -552,14 +547,14 @@
 
         .search-clear:hover {
             color: #ff5252;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.08);
         }
 
         .shortcut-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 18px;
+            margin-bottom: 30px;
             transition: var(--transition);
         }
 
@@ -567,9 +562,9 @@
             background: var(--btn-bg);
             color: white;
             border: none;
-            padding: 26px 15px;
-            border-radius: 18px;
-            font-size: 1.05rem;
+            padding: 22px 12px;
+            border-radius: 14px;
+            font-size: 0.95rem;
             font-weight: 600;
             text-align: center;
             cursor: pointer;
@@ -583,7 +578,7 @@
             position: relative;
             overflow: hidden;
             z-index: 1;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
         }
 
         .shortcut-btn::before {
@@ -593,15 +588,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.12);
             transform: translateY(100%);
             transition: transform 0.4s ease;
             z-index: -1;
         }
 
         .shortcut-btn:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
         .shortcut-btn:hover::before {
@@ -609,14 +604,14 @@
         }
 
         .btn-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
+            margin-bottom: 12px;
             transition: transform 0.3s ease;
-            color: rgba(255,255,255,0.95);
+            color: rgba(255,255,255,0.92);
         }
 
         .shortcut-btn:hover .btn-icon {
-            transform: scale(1.2) rotate(5deg);
+            transform: scale(1.15) rotate(5deg);
         }
 
         .shortcut-btn:active {
@@ -626,21 +621,21 @@
         .btn-text {
             position: relative;
             z-index: 2;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.25);
-            letter-spacing: 0.4px;
-            font-size: 1rem;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            letter-spacing: 0.3px;
+            font-size: 0.9rem;
         }
 
         .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 40px 0 25px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 30px 0 18px;
             position: relative;
-            padding-left: 20px;
+            padding-left: 16px;
             color: var(--text-color);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
         }
 
         .section-title::before {
@@ -649,64 +644,64 @@
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 8px;
-            height: 70%;
+            width: 6px;
+            height: 65%;
             background: var(--accent-color);
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .section-title i {
             color: var(--accent-color);
-            font-size: 1.4rem;
+            font-size: 1.2rem;
         }
 
         /* Password Generator Styles */
         .password-generator-container {
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 18px;
-            margin: 25px 0;
+            padding: 20px;
+            border-radius: 14px;
+            margin: 20px 0;
             box-shadow: var(--shadow);
-            border: 1px solid rgba(106, 17, 203, 0.1);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(106, 17, 203, 0.08);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         .password-display {
-            font-size: 1.2rem;
-            margin: 18px 0;
-            padding: 16px;
-            background: rgba(0,0,0,0.05);
-            border-radius: 12px;
+            font-size: 1.1rem;
+            margin: 15px 0;
+            padding: 14px;
+            background: rgba(0,0,0,0.04);
+            border-radius: 10px;
             word-break: break-all;
             text-align: center;
             font-family: monospace;
             color: var(--text-color);
-            border: 1px dashed rgba(106, 17, 203, 0.25);
-            font-weight: 700;
-            letter-spacing: 1px;
+            border: 1px dashed rgba(106, 17, 203, 0.2);
+            font-weight: 600;
+            letter-spacing: 0.8px;
         }
 
         .password-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 18px;
-            margin: 18px 0;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 14px;
+            margin: 15px 0;
         }
 
         .password-options label {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .password-length {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin: 18px 0;
+            gap: 12px;
+            margin: 15px 0;
         }
 
         .password-length input {
@@ -716,14 +711,14 @@
 
         .password-buttons {
             display: flex;
-            gap: 15px;
-            margin-top: 18px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .password-buttons button {
             flex: 1;
-            padding: 15px;
-            border-radius: 12px;
+            padding: 12px;
+            border-radius: 10px;
             border: none;
             background: var(--btn-bg);
             color: white;
@@ -733,22 +728,22 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.2);
-            font-size: 1rem;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(106, 17, 203, 0.15);
+            font-size: 0.95rem;
         }
 
         .password-buttons button:hover {
             background: var(--btn-hover);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(106, 17, 203, 0.25);
         }
 
         .password-strength {
-            height: 6px;
-            background: rgba(0,0,0,0.1);
-            border-radius: 6px;
-            margin-top: 18px;
+            height: 5px;
+            background: rgba(0,0,0,0.08);
+            border-radius: 5px;
+            margin-top: 15px;
             overflow: hidden;
         }
 
@@ -756,32 +751,32 @@
             height: 100%;
             width: 0%;
             transition: width 0.4s ease;
-            border-radius: 6px;
+            border-radius: 5px;
         }
 
         /* Search results count */
         .search-results-count {
             text-align: center;
-            margin-bottom: 25px;
-            font-size: 1rem;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
             color: var(--text-color);
-            opacity: 0.9;
+            opacity: 0.85;
             display: none;
-            padding: 10px 22px;
-            border-radius: 30px;
-            background: rgba(106, 17, 203, 0.1);
+            padding: 8px 18px;
+            border-radius: 24px;
+            background: rgba(106, 17, 203, 0.08);
             display: inline-block;
-            margin: 0 auto 25px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(106, 17, 203, 0.15);
+            margin: 0 auto 20px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(106, 17, 203, 0.12);
         }
 
         /* Animation for search results */
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(15px);
+                transform: translateY(12px);
             }
             to {
                 opacity: 1;
@@ -790,53 +785,53 @@
         }
 
         .shortcut-btn {
-            animation: fadeInUp 0.4s ease-out;
+            animation: fadeInUp 0.35s ease-out;
             animation-fill-mode: both;
         }
 
         /* Logout Button */
         .logout-btn {
             position: absolute;
-            top: 25px;
-            left: 25px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 0.85rem;
             cursor: pointer;
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 8px;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            gap: 6px;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
             z-index: 10;
         }
 
         .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
         }
 
         /* Informasi login */
         .login-info {
             position: absolute;
-            top: 25px;
-            right: 180px;
-            background: rgba(255, 255, 255, 0.2);
+            top: 20px;
+            right: 150px;
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             border: none;
-            padding: 10px 20px;
-            border-radius: 30px;
-            font-size: 0.95rem;
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.15);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 0.85rem;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
         }
 
         /* Animasi */
@@ -851,185 +846,124 @@
         }
 
         .login-credentials {
-            background: rgba(106, 17, 203, 0.1);
-            padding: 18px;
-            border-radius: 16px;
-            margin-top: 25px;
-            font-size: 0.9rem;
+            background: rgba(106, 17, 203, 0.08);
+            padding: 14px;
+            border-radius: 12px;
+            margin-top: 20px;
+            font-size: 0.85rem;
             color: var(--text-color);
-            border: 1px dashed rgba(106, 17, 203, 0.25);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            border: 1px dashed rgba(106, 17, 203, 0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
         }
 
         .login-credentials p {
-            margin: 8px 0;
+            margin: 6px 0;
         }
 
         .login-credentials strong {
             color: var(--accent-color);
-            font-weight: 700;
+            font-weight: 600;
         }
 
         /* Floating elements */
         .floating {
             position: absolute;
             z-index: -1;
-            opacity: 0.1;
+            opacity: 0.08;
         }
 
         .floating-1 {
             top: 10%;
             left: 5%;
-            font-size: 8rem;
+            font-size: 5rem;
             color: var(--accent-color);
             transform: rotate(-15deg);
-            animation: float 15s ease-in-out infinite;
         }
 
         .floating-2 {
             bottom: 15%;
             right: 5%;
-            font-size: 6rem;
+            font-size: 4rem;
             color: #2575fc;
             transform: rotate(15deg);
-            animation: float 18s ease-in-out infinite;
-        }
-
-        .floating-3 {
-            top: 25%;
-            right: 10%;
-            font-size: 5rem;
-            color: var(--diamond-color);
-            animation: float 12s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(-15deg); }
-            50% { transform: translateY(-20px) rotate(-10deg); }
-            100% { transform: translateY(0) rotate(-15deg); }
         }
 
         /* VIP badge */
         .vip-badge {
             position: absolute;
-            top: -8px;
-            right: -8px;
+            top: -6px;
+            right: -6px;
             background: linear-gradient(45deg, #ffd700, #ffb700);
             color: #8a5500;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             transform: rotate(10deg);
             z-index: 2;
-            letter-spacing: 1px;
         }
 
         /* Premium badge */
         .premium-badge {
             position: absolute;
-            top: -10px;
-            left: -10px;
+            top: -6px;
+            left: -6px;
             background: linear-gradient(45deg, #6a11cb, #2575fc);
             color: white;
-            font-size: 0.7rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 14px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
             transform: rotate(-10deg);
             z-index: 2;
-            letter-spacing: 1px;
         }
-
-        /* Diamond effect */
-        .diamond {
-            position: absolute;
-            z-index: -1;
-            width: 8px;
-            height: 8px;
-            background: var(--diamond-color);
-            transform: rotate(45deg);
-            opacity: 0.7;
-            animation: sparkle 2s infinite;
-        }
-
-        @keyframes sparkle {
-            0% { opacity: 0.7; }
-            50% { opacity: 0.3; }
-            100% { opacity: 0.7; }
-        }
-
-        /* Grid item animation delay */
-        .shortcut-btn:nth-child(1) { animation-delay: 0.05s; }
-        .shortcut-btn:nth-child(2) { animation-delay: 0.1s; }
-        .shortcut-btn:nth-child(3) { animation-delay: 0.15s; }
-        .shortcut-btn:nth-child(4) { animation-delay: 0.2s; }
-        .shortcut-btn:nth-child(5) { animation-delay: 0.25s; }
-        .shortcut-btn:nth-child(6) { animation-delay: 0.3s; }
-        .shortcut-btn:nth-child(7) { animation-delay: 0.35s; }
-        .shortcut-btn:nth-child(8) { animation-delay: 0.4s; }
-        .shortcut-btn:nth-child(9) { animation-delay: 0.45s; }
-        .shortcut-btn:nth-child(10) { animation-delay: 0.5s; }
-        .shortcut-btn:nth-child(11) { animation-delay: 0.55s; }
-        .shortcut-btn:nth-child(12) { animation-delay: 0.6s; }
-        .shortcut-btn:nth-child(13) { animation-delay: 0.65s; }
-        .shortcut-btn:nth-child(14) { animation-delay: 0.7s; }
-        .shortcut-btn:nth-child(15) { animation-delay: 0.75s; }
-        .shortcut-btn:nth-child(16) { animation-delay: 0.8s; }
-        .shortcut-btn:nth-child(17) { animation-delay: 0.85s; }
-        .shortcut-btn:nth-child(18) { animation-delay: 0.9s; }
-        .shortcut-btn:nth-child(19) { animation-delay: 0.95s; }
-        .shortcut-btn:nth-child(20) { animation-delay: 1.0s; }
-        .shortcut-btn:nth-child(21) { animation-delay: 1.05s; }
-        .shortcut-btn:nth-child(22) { animation-delay: 1.1s; }
-        .shortcut-btn:nth-child(23) { animation-delay: 1.15s; }
 
         @media (max-width: 992px) {
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 16px;
             }
             
             .header h1 {
-                font-size: 2.1rem;
+                font-size: 1.8rem;
             }
         }
 
         @media (max-width: 768px) {
             body {
-                padding: 12px;
-                font-size: 14px;
+                padding: 10px;
+                font-size: 13.5px;
             }
             
             .login-container {
-                padding: 30px 25px;
-                margin: 35px auto;
+                padding: 22px 18px;
+                margin: 25px auto;
             }
             
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-                gap: 18px;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 14px;
             }
 
             .header {
-                padding: 25px 20px;
+                padding: 20px 16px;
             }
 
             .header h1 {
-                font-size: 1.9rem;
-                padding-right: 90px;
+                font-size: 1.6rem;
+                padding-right: 70px;
             }
 
             .header p {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
 
             .switch-container {
-                top: 20px;
-                right: 20px;
+                top: 16px;
+                right: 16px;
             }
 
             .password-options {
@@ -1041,37 +975,38 @@
             }
             
             .logout-btn {
-                top: 20px;
-                left: 20px;
+                top: 16px;
+                left: 16px;
+                padding: 7px 14px;
             }
             
             .section-title {
-                font-size: 1.35rem;
+                font-size: 1.2rem;
             }
         }
 
         @media (max-width: 480px) {
             .header {
-                padding: 22px 18px;
+                padding: 18px 14px;
             }
 
             .header h1 {
-                font-size: 1.7rem;
-                padding-right: 80px;
+                font-size: 1.4rem;
+                padding-right: 60px;
             }
             
             .header p {
-                font-size: 0.95rem;
+                font-size: 0.85rem;
             }
 
             .shortcut-grid {
                 grid-template-columns: 1fr;
-                gap: 16px;
+                gap: 12px;
             }
 
             .section-title {
-                font-size: 1.3rem;
-                margin: 35px 0 20px;
+                font-size: 1.15rem;
+                margin: 25px 0 16px;
             }
 
             .password-options {
@@ -1079,27 +1014,27 @@
             }
 
             .login-container {
-                padding: 25px 20px;
-                margin: 30px auto;
+                padding: 20px 16px;
+                margin: 20px auto;
             }
 
             .login-title {
-                font-size: 1.7rem;
+                font-size: 1.5rem;
             }
             
             .login-btn {
-                padding: 13px 18px;
+                padding: 11px 14px;
             }
             
             .search-box {
-                padding: 14px 22px;
-                padding-left: 55px;
-                font-size: 0.98rem;
+                padding: 12px 18px;
+                padding-left: 45px;
+                font-size: 0.9rem;
             }
             
             .search-icon {
-                left: 22px;
-                font-size: 1.2rem;
+                left: 18px;
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -1110,9 +1045,6 @@
     </div>
     <div class="floating floating-2">
         <i class="fas fa-crown"></i>
-    </div>
-    <div class="floating floating-3">
-        <i class="fas fa-gem"></i>
     </div>
     
     <!-- Login Screen -->
@@ -1177,7 +1109,7 @@
         <h2 class="section-title"><i class="fas fa-th-large"></i> Shortcut Tersedia</h2>
 
         <div class="shortcut-grid" id="shortcutGrid">
-            <!-- Urutan sesuai permintaan -->
+            <!-- Shortcuts yang sudah ada -->
             <a href="https://whatismyipaddress.com/" class="shortcut-btn" target="_blank" data-keywords="ip address network">
                 <i class="fas fa-network-wired btn-icon"></i>
                 <span class="btn-text">CEK IP ADDRESS</span>
@@ -1323,17 +1255,6 @@
     </div>
 
     <script>
-        /**
-         * MODUL UTAMA APLIKASI
-         * 
-         * Struktur kode:
-         * 1. Login Functionality
-         * 2. Dark Mode Toggle
-         * 3. Search Functionality
-         * 4. Password Generator
-         * 5. Event Listeners dan Inisialisasi
-         */
-
         // ============== 1. LOGIN FUNCTIONALITY ==============
         const loginContainer = document.getElementById('loginContainer');
         const mainContainer = document.getElementById('mainContainer');
@@ -1346,9 +1267,6 @@
         const VALID_USERNAME = "Andi";
         const VALID_PASSWORD = "Aa112233";
 
-        /**
-         * Memeriksa status login pengguna
-         */
         function checkLogin() {
             const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
             const username = localStorage.getItem('username');
@@ -1363,9 +1281,6 @@
             }
         }
 
-        /**
-         * Menangani proses login
-         */
         function handleLogin(username, password) {
             if (username.toLowerCase() === VALID_USERNAME.toLowerCase() && password === VALID_PASSWORD) {
                 localStorage.setItem('isLoggedIn', 'true');
@@ -1376,9 +1291,6 @@
             return false;
         }
 
-        /**
-         * Menangani proses logout
-         */
         function handleLogout() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('username');
@@ -1391,9 +1303,6 @@
         const darkModeToggle = document.getElementById('darkModeToggle');
         const body = document.body;
 
-        /**
-         * Menginisialisasi mode gelap berdasarkan preferensi pengguna
-         */
         function initDarkMode() {
             if (localStorage.getItem('darkMode') === 'enabled') {
                 body.classList.add('dark-mode');
@@ -1401,9 +1310,6 @@
             }
         }
 
-        /**
-         * Mengatur mode gelap berdasarkan toggle
-         */
         function toggleDarkMode() {
             if (darkModeToggle.checked) {
                 body.classList.add('dark-mode');
@@ -1425,9 +1331,6 @@
         // Simpan shortcut asli untuk reset
         const originalShortcuts = [...shortcutButtons];
 
-        /**
-         * Menginisialisasi kata kunci untuk setiap shortcut
-         */
         function initKeywords() {
             shortcutButtons.forEach(btn => {
                 const keywords = btn.querySelector('.btn-text').textContent.toLowerCase() + ' ' + (btn.dataset.keywords || '');
@@ -1435,9 +1338,6 @@
             });
         }
 
-        /**
-         * Fungsi debounce untuk membatasi eksekusi fungsi
-         */
         function debounce(func, wait) {
             let timeout;
             return function(...args) {
@@ -1446,9 +1346,6 @@
             };
         }
 
-        /**
-         * Mencari shortcut berdasarkan kata kunci
-         */
         function searchShortcuts(searchTerm) {
             if (!searchTerm) {
                 resetShortcuts();
@@ -1472,9 +1369,6 @@
             updateSearchResults(results, searchTerm);
         }
 
-        /**
-         * Mengatur ulang shortcut ke keadaan awal
-         */
         function resetShortcuts() {
             shortcutGrid.innerHTML = '';
             originalShortcuts.forEach(btn => shortcutGrid.appendChild(btn.cloneNode(true)));
@@ -1482,9 +1376,6 @@
             suggestionsContainer.style.display = 'none';
         }
 
-        /**
-         * Memperbarui hasil pencarian di UI
-         */
         function updateSearchResults(results, searchTerm) {
             shortcutGrid.innerHTML = '';
             results.forEach(btn => shortcutGrid.appendChild(btn));
@@ -1501,9 +1392,6 @@
             }
         }
 
-        /**
-         * Menampilkan saran pencarian
-         */
         function renderSuggestions(searchTerm) {
             suggestionsContainer.innerHTML = '';
             const terms = searchTerm.toLowerCase().split(' ');
@@ -1551,9 +1439,6 @@
             suggestionsContainer.style.display = 'block';
         }
 
-        /**
-         * Menyoroti hasil pencarian yang cocok
-         */
         function highlightMatches(text, terms) {
             let highlighted = text;
             terms.forEach(term => {
@@ -1563,9 +1448,6 @@
             return highlighted;
         }
 
-        /**
-         * Membersihkan pencarian
-         */
         function clearSearch() {
             searchInput.value = '';
             searchClear.style.opacity = '0';
@@ -1590,9 +1472,6 @@
         const NUMBER_CHARS = '0123456789';
         const SYMBOL_CHARS = '!@#$%^&*()_+-=[]{}|;:,.<>?';
 
-        /**
-         * Memuat pengaturan password yang disimpan
-         */
         function loadPasswordSettings() {
             const savedPassword = localStorage.getItem('generatedPassword');
             const savedLength = localStorage.getItem('pwLength');
@@ -1617,9 +1496,6 @@
             if (savedSymbols !== null) includeSymbols.checked = savedSymbols === 'true';
         }
 
-        /**
-         * Menyimpan pengaturan password
-         */
         function savePasswordSettings() {
             localStorage.setItem('pwLength', passwordLength.value);
             localStorage.setItem('pwUppercase', includeUppercase.checked);
@@ -1628,9 +1504,6 @@
             localStorage.setItem('pwSymbols', includeSymbols.checked);
         }
 
-        /**
-         * Membuat password acak
-         */
         function generatePassword() {
             const length = parseInt(passwordLength.value);
             let chars = '';
@@ -1656,9 +1529,6 @@
             localStorage.setItem('generatedPassword', password);
         }
 
-        /**
-         * Menyalin password ke clipboard
-         */
         function copyPassword() {
             const password = passwordDisplay.textContent;
 
@@ -1681,9 +1551,6 @@
                 });
         }
 
-        /**
-         * Memperbarui indikator kekuatan password
-         */
         function updateStrengthBar(password) {
             let strength = 0;
 
@@ -1819,38 +1686,7 @@
 
             generateBtn.addEventListener('click', generatePassword);
             copyBtn.addEventListener('click', copyPassword);
-            
-            // Tambahkan efek berlian
-            createDiamonds();
         });
-        
-        /**
-         * Membuat efek berlian di latar belakang
-         */
-        function createDiamonds() {
-            const container = document.body;
-            const count = 15;
-            
-            for (let i = 0; i < count; i++) {
-                const diamond = document.createElement('div');
-                diamond.className = 'diamond';
-                
-                // Posisi acak
-                const top = Math.random() * 100;
-                const left = Math.random() * 100;
-                const size = 4 + Math.random() * 8;
-                
-                diamond.style.top = `${top}%`;
-                diamond.style.left = `${left}%`;
-                diamond.style.width = `${size}px`;
-                diamond.style.height = `${size}px`;
-                
-                // Animasi delay acak
-                diamond.style.animationDelay = `${Math.random() * 2}s`;
-                
-                container.appendChild(diamond);
-            }
-        }
     </script>
 </body>
 </html>
