@@ -571,14 +571,14 @@ body.dark-mode .btn-secondary:hover {
 }
 
 /* Efek visual untuk kolom yang disalin */
-.copy-flash {
-  animation: flashAnimation 1s ease;
-}
-
 @keyframes flashAnimation {
   0% { background-color: rgba(76, 175, 80, 0.1); }
   50% { background-color: rgba(76, 175, 80, 0.4); }
   100% { background-color: initial; }
+}
+
+.copy-flash {
+  animation: flashAnimation 1s ease;
 }
 
 @media (max-width: 600px) {
@@ -802,7 +802,10 @@ function cleanNumber(text) {
 
 // Fungsi untuk memformat mata uang
 function formatCurrency(amount) {
-  return 'Rp ' + parseInt(amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  const num = parseInt(amount);
+  if (isNaN(num)) return 'Rp 0';
+  
+  return 'Rp ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
 // Fungsi untuk menampilkan notifikasi
@@ -825,11 +828,20 @@ function showNotification(message, isError = false) {
   }, 3000);
 }
 
-// Fungsi untuk memproses nominal (hilangkan koma dan desimal)
+// Fungsi untuk memproses nominal
 function processAmount(amountStr) {
-  let cleaned = amountStr.replace(/\./g, '');
-  cleaned = cleaned.replace(/,.*$/, '');
-  return cleaned.replace(/\D/g, '');
+  // Hapus semua karakter non-digit kecuali koma dan titik
+  let cleaned = amountStr.replace(/[^\d,.]/g, '');
+  
+  // Jika ada koma sebagai pemisah desimal, ambil hanya bagian bulat
+  if (cleaned.includes(',')) {
+    cleaned = cleaned.split(',')[0];
+  }
+  
+  // Hapus semua titik (pemisah ribuan)
+  cleaned = cleaned.replace(/\./g, '');
+  
+  return cleaned;
 }
 
 // Fungsi utama untuk memproses gambar
@@ -949,11 +961,13 @@ function extractDataFromText(text, bankType) {
 
     if (amountMatch) {
       const amountValue = processAmount(amountMatch[1]);
-      totalAmount = formatCurrency(amountValue);
-      const totalElement = document.getElementById('totalAmount');
-      if (totalElement) {
-        totalElement.setAttribute('data-clean', amountValue);
-        totalElement.textContent = totalAmount;
+      if (amountValue && !isNaN(parseInt(amountValue))) {
+        totalAmount = formatCurrency(amountValue);
+        const totalElement = document.getElementById('totalAmount');
+        if (totalElement) {
+          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.textContent = totalAmount;
+        }
       }
     }
 
@@ -969,35 +983,76 @@ function extractDataFromText(text, bankType) {
 
     if (amountMatch) {
       const amountValue = processAmount(amountMatch[1]);
-      totalAmount = formatCurrency(amountValue);
-      const totalElement = document.getElementById('totalAmount');
-      if (totalElement) {
-        totalElement.setAttribute('data-clean', amountValue);
-        totalElement.textContent = totalAmount;
+      if (amountValue && !isNaN(parseInt(amountValue))) {
+        totalAmount = formatCurrency(amountValue);
+        const totalElement = document.getElementById('totalAmount');
+        if (totalElement) {
+          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.textContent = totalAmount;
+        }
       }
     }
 
   } else if (bankType === 'BCA') {
-    const merchantMatch = text.match(/Merchant\s*[:]?\s*([^\n]+)/i) ||
-                          text.match(/(.*STORE)/i);
-    const amountLineMatch = text.match(/TOTAL\s+PEMBAYARAN\s*[\s\S]*?Rp\s*([\d.,]+)/i);
-    const amountMatch = amountLineMatch || 
-                       text.match(/TOTAL\s+BAYAR\s*[\s\S]*?Rp\s*([\d.,]+)/i) ||
-                       text.match(/Rp\s*([\d.,]+)\s*(?:TOTAL|BAYAR)/i);
-
-    merchantName = merchantMatch ? merchantMatch[1].trim() : merchantName;
+    // PERBAIKAN KHUSUS UNTUK BCA - Fokus pada nominal di atas kata "DARI"
+    
+    // 1. Merchant Name: Ambil di atas nomor transaksi
+    const transaksiMatch = text.match(/No\.?\s*Transaksi\s*[:]?\s*([^\n]+)/i);
+    if (transaksiMatch) {
+      const lines = text.split('\n');
+      const index = lines.findIndex(line => line.includes(transaksiMatch[0]));
+      if (index > 0) {
+        // Ambil baris sebelumnya sebagai merchant name
+        merchantName = lines[index - 1].trim();
+      }
+    }
+    
+    // 2. RRN: Ambil nomor RRN
     const rrnMatch = text.match(/RRN\s*[:]?\s*(\d{6,})/i) ||
-                     text.match(/Ref\s*[:]?\s*(\d+)/i);
+                     text.match(/Ref(?:erence)?\s*[:]?\s*(\d{6,})/i);
     rrn = rrnMatch ? rrnMatch[1].trim() : rrn;
+
+    // 3. Total: Fokus pada nominal sebelum kata "DARI"
+    let amountMatch = null;
+    
+    // Pola 1: Cari Rp [nominal] diikuti oleh kata "DARI" (dalam baris yang sama atau berbeda)
+    const amountPattern = /Rp\s*([\d.,]+)[\s\S]*?DARI/i;
+    amountMatch = text.match(amountPattern);
+    
+    // Pola 2: Jika tidak ditemukan, cari nominal terbesar di seluruh teks
+    if (!amountMatch) {
+      const allAmounts = text.match(/Rp\s*([\d.,]+)/gi) || [];
+      if (allAmounts.length > 0) {
+        // Urutkan dari terbesar ke terkecil
+        const sortedAmounts = allAmounts
+          .map(amt => {
+            const value = parseInt(processAmount(amt)) || 0;
+            return {text: amt, value: value};
+          })
+          .sort((a, b) => b.value - a.value);
+        
+        // Ambil nilai terbesar
+        if (sortedAmounts.length > 0 && sortedAmounts[0].value > 0) {
+          const biggestAmount = sortedAmounts[0].text;
+          amountMatch = biggestAmount.match(/Rp\s*([\d.,]+)/i);
+        }
+      }
+    }
 
     if (amountMatch) {
       const amountValue = processAmount(amountMatch[1]);
-      totalAmount = formatCurrency(amountValue);
-      const totalElement = document.getElementById('totalAmount');
-      if (totalElement) {
-        totalElement.setAttribute('data-clean', amountValue);
-        totalElement.textContent = totalAmount;
+      if (amountValue && !isNaN(parseInt(amountValue))) {
+        totalAmount = formatCurrency(amountValue);
+        const totalElement = document.getElementById('totalAmount');
+        if (totalElement) {
+          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.textContent = totalAmount;
+        }
+      } else {
+        console.error('Nilai nominal tidak valid:', amountMatch[1]);
       }
+    } else {
+      console.error('Tidak ditemukan pola nominal untuk BCA');
     }
 
   } else if (bankType === 'BNI') {
@@ -1012,11 +1067,13 @@ function extractDataFromText(text, bankType) {
 
     if (amountMatch) {
       const amountValue = processAmount(amountMatch[1]);
-      totalAmount = formatCurrency(amountValue);
-      const totalElement = document.getElementById('totalAmount');
-      if (totalElement) {
-        totalElement.setAttribute('data-clean', amountValue);
-        totalElement.textContent = totalAmount;
+      if (amountValue && !isNaN(parseInt(amountValue))) {
+        totalAmount = formatCurrency(amountValue);
+        const totalElement = document.getElementById('totalAmount');
+        if (totalElement) {
+          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.textContent = totalAmount;
+        }
       }
     }
   } else if (bankType === 'MANDIRI') {
@@ -1031,20 +1088,27 @@ function extractDataFromText(text, bankType) {
 
     if (amountMatch) {
       const amountValue = processAmount(amountMatch[1]);
-      totalAmount = formatCurrency(amountValue);
-      const totalElement = document.getElementById('totalAmount');
-      if (totalElement) {
-        totalElement.setAttribute('data-clean', amountValue);
-        totalElement.textContent = totalAmount;
+      if (amountValue && !isNaN(parseInt(amountValue))) {
+        totalAmount = formatCurrency(amountValue);
+        const totalElement = document.getElementById('totalAmount');
+        if (totalElement) {
+          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.textContent = totalAmount;
+        }
       }
     }
   }
 
+  // Set hasil ke elemen
   if (document.getElementById('merchantName')) {
     document.getElementById('merchantName').textContent = merchantName;
   }
   if (document.getElementById('rrn')) {
     document.getElementById('rrn').textContent = rrn;
+  }
+  if (document.getElementById('totalAmount') && totalAmount === 'Tidak ditemukan') {
+    document.getElementById('totalAmount').textContent = totalAmount;
+    document.getElementById('totalAmount').removeAttribute('data-clean');
   }
 }
 
