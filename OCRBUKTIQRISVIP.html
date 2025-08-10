@@ -137,7 +137,7 @@ input, select {
   background-color: var(--input-bg);
   transition: all 0.3s;
   box-sizing: border-box;
-  color: var(--text); /* Warna teks untuk mode terang */
+  color: var(--text);
 }
 
 body.dark-mode input, 
@@ -181,7 +181,6 @@ body.dark-mode .clear-btn:hover {
   background-color: #333;
 }
 
-/* Unggah gambar diperkecil */
 .upload-container {
   border: 2px dashed var(--border);
   border-radius: 10px;
@@ -224,7 +223,6 @@ body.dark-mode .upload-container p {
   color: #999;
 }
 
-/* Preview Container */
 #preview-container {
   margin-top: 20px;
   text-align: center;
@@ -310,7 +308,6 @@ body.dark-mode .result h3 {
   border-color: var(--dark-border);
 }
 
-/* Layout vertikal untuk hasil */
 .result-list {
   display: flex;
   flex-direction: column;
@@ -332,7 +329,6 @@ body.dark-mode .result h3 {
   gap: 8px;
 }
 
-/* Warna teks hasil untuk mode terang */
 .result-value {
   background-color: rgba(67, 97, 238, 0.08);
   padding: 12px 15px;
@@ -343,13 +339,14 @@ body.dark-mode .result h3 {
   justify-content: space-between;
   align-items: center;
   min-height: 50px;
-  color: var(--text); /* Warna teks gelap untuk mode terang */
+  color: var(--text);
+  transition: all 0.3s;
 }
 
 body.dark-mode .result-value {
   background-color: rgba(67, 97, 238, 0.15);
   border-color: rgba(67, 97, 238, 0.3);
-  color: var(--dark-text); /* Warna teks terang untuk mode gelap */
+  color: var(--dark-text);
 }
 
 .copy-btn {
@@ -390,7 +387,7 @@ body.dark-mode .copy-btn:hover {
   border-radius: 12px;
   border: 1px solid var(--border);
   backdrop-filter: blur(5px);
-  color: var(--text); /* Warna teks untuk mode terang */
+  color: var(--text);
 }
 
 body.dark-mode #loading {
@@ -522,7 +519,6 @@ body.dark-mode .btn-secondary:hover {
   transform: rotate(15deg);
 }
 
-/* Preview Image Modal */
 #imagePreviewModal {
   display: none;
   position: fixed;
@@ -572,6 +568,17 @@ body.dark-mode .btn-secondary:hover {
 
 .copy-success {
   animation: copyPulse 0.5s ease;
+}
+
+/* Efek visual untuk kolom yang disalin */
+.copy-flash {
+  animation: flashAnimation 1s ease;
+}
+
+@keyframes flashAnimation {
+  0% { background-color: rgba(76, 175, 80, 0.1); }
+  50% { background-color: rgba(76, 175, 80, 0.4); }
+  100% { background-color: initial; }
 }
 
 @media (max-width: 600px) {
@@ -706,7 +713,6 @@ body.dark-mode .btn-secondary:hover {
   <div class="card result" id="results">
     <h3><i class="fas fa-file-invoice"></i> Hasil Ekstraksi</h3>
     <div class="result-list">
-      <!-- Urutan vertikal: Merchant, RRN, Total, User ID, Jenis Bank -->
       <div class="result-item">
         <span class="result-label"><i class="fas fa-store"></i> Nama Merchant/Toko:</span>
         <div class="result-value">
@@ -743,7 +749,6 @@ body.dark-mode .btn-secondary:hover {
           </button>
         </div>
       </div>
-      <!-- Baru: Tambahan Salin URL -->
       <div class="result-item">
         <span class="result-label"><i class="fas fa-link"></i> URL Gambar:</span>
         <div class="result-value">
@@ -781,7 +786,7 @@ body.dark-mode .btn-secondary:hover {
 let currentProcessId = 0;
 let isProcessing = false;
 let uploadedImageUrl = null;
-let currentImageUrl = null; // Untuk menyimpan URL gambar yang diproses
+let currentImageUrl = null;
 
 // Fungsi untuk memvalidasi URL gambar
 function isValidImageUrl(url) {
@@ -822,11 +827,8 @@ function showNotification(message, isError = false) {
 
 // Fungsi untuk memproses nominal (hilangkan koma dan desimal)
 function processAmount(amountStr) {
-  // Hapus semua titik (ribuan separator)
   let cleaned = amountStr.replace(/\./g, '');
-  // Hapus koma dan angka setelahnya (desimal)
   cleaned = cleaned.replace(/,.*$/, '');
-  // Hapus karakter non-digit yang tersisa
   return cleaned.replace(/\D/g, '');
 }
 
@@ -834,7 +836,6 @@ function processAmount(amountStr) {
 async function processImage() {
   let imageUrl = document.getElementById('imageUrl').value;
   
-  // Gunakan gambar yang diupload jika ada
   if (!imageUrl && uploadedImageUrl) {
     imageUrl = uploadedImageUrl;
   }
@@ -847,7 +848,6 @@ async function processImage() {
   const previewContainer = document.getElementById('preview-container');
   const preview = document.getElementById('preview');
 
-  // Validasi input
   if (!imageUrl) {
     showNotification('Silakan masukkan URL gambar atau unggah gambar terlebih dahulu', true);
     return;
@@ -862,17 +862,14 @@ async function processImage() {
     showNotification('URL gambar tidak valid. Pastikan URL berakhir dengan ekstensi gambar (.jpg, .png, dll)', true);
     return;
   }
-
-  // Simpan gambar yang diproses
+  
   currentImageUrl = imageUrl;
   
-  // Tampilkan preview gambar
   if (preview) {
     preview.src = imageUrl;
     previewContainer.style.display = 'block';
   }
   
-  // Set status pemrosesan
   isProcessing = true;
   const processId = ++currentProcessId;
 
@@ -907,15 +904,12 @@ async function processImage() {
       document.getElementById('selectedBank').textContent = bankSelect.value;
     }
     
-    // Tampilkan URL gambar yang diproses
     if (document.getElementById('imageUrlResult')) {
-      // Jika URL terlalu panjang, tampilkan versi singkatnya
       let displayUrl = imageUrl;
       if (imageUrl.length > 50) {
         displayUrl = imageUrl.substring(0, 25) + '...' + imageUrl.substring(imageUrl.length - 25);
       }
       document.getElementById('imageUrlResult').textContent = displayUrl;
-      // Simpan URL lengkap sebagai atribut data
       document.getElementById('imageUrlResult').setAttribute('data-full-url', imageUrl);
     }
 
@@ -986,12 +980,7 @@ function extractDataFromText(text, bankType) {
   } else if (bankType === 'BCA') {
     const merchantMatch = text.match(/Merchant\s*[:]?\s*([^\n]+)/i) ||
                           text.match(/(.*STORE)/i);
-    
-    // PERBAIKAN KHUSUS UNTUK BCA: Ambil nominal yang tepat setelah "TOTAL PEMBAYARAN"
-    // Mencari baris yang mengandung "TOTAL PEMBAYARAN" dan mengambil nilai di sampingnya
     const amountLineMatch = text.match(/TOTAL\s+PEMBAYARAN\s*[\s\S]*?Rp\s*([\d.,]+)/i);
-    
-    // Jika tidak ditemukan, coba pola alternatif
     const amountMatch = amountLineMatch || 
                        text.match(/TOTAL\s+BAYAR\s*[\s\S]*?Rp\s*([\d.,]+)/i) ||
                        text.match(/Rp\s*([\d.,]+)\s*(?:TOTAL|BAYAR)/i);
@@ -1002,7 +991,6 @@ function extractDataFromText(text, bankType) {
     rrn = rrnMatch ? rrnMatch[1].trim() : rrn;
 
     if (amountMatch) {
-      // Proses nominal: hapus titik dan ambil hanya bagian sebelum koma (jika ada)
       const amountValue = processAmount(amountMatch[1]);
       totalAmount = formatCurrency(amountValue);
       const totalElement = document.getElementById('totalAmount');
@@ -1052,13 +1040,24 @@ function extractDataFromText(text, bankType) {
     }
   }
 
-  // Update UI dengan hasil ekstraksi
   if (document.getElementById('merchantName')) {
     document.getElementById('merchantName').textContent = merchantName;
   }
   if (document.getElementById('rrn')) {
     document.getElementById('rrn').textContent = rrn;
   }
+}
+
+// Fungsi untuk memberi efek visual pada kolom yang disalin
+function flashCopyEffect(element) {
+  // Reset animasi sebelumnya
+  element.classList.remove('copy-flash');
+  
+  // Trigger reflow
+  void element.offsetWidth;
+  
+  // Tambahkan kelas animasi
+  element.classList.add('copy-flash');
 }
 
 // Fungsi untuk menyalin teks ke clipboard
@@ -1098,6 +1097,12 @@ function copyToClipboard(elementId) {
       }, 500);
     }
     
+    // Dapatkan elemen result-value untuk efek flash
+    const resultValueElement = element.closest('.result-value');
+    if (resultValueElement) {
+      flashCopyEffect(resultValueElement);
+    }
+    
     showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
   }).catch(err => {
     console.error('Gagal menyalin teks: ', err);
@@ -1108,6 +1113,13 @@ function copyToClipboard(elementId) {
     textarea.select();
     document.execCommand('copy');
     document.body.removeChild(textarea);
+    
+    // Dapatkan elemen result-value untuk efek flash
+    const resultValueElement = element.closest('.result-value');
+    if (resultValueElement) {
+      flashCopyEffect(resultValueElement);
+    }
+    
     showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
   });
 }
@@ -1176,7 +1188,6 @@ document.addEventListener('DOMContentLoaded', function() {
       currentImageUrl = null;
       if (fileInput) fileInput.value = '';
       
-      // Sembunyikan modal jika sedang terbuka
       document.getElementById('imagePreviewModal').style.display = 'none';
     });
   }
@@ -1191,7 +1202,6 @@ document.addEventListener('DOMContentLoaded', function() {
       if (e.target.files && e.target.files[0]) {
         const file = e.target.files[0];
         
-        // Validasi ukuran file
         if (file.size > 5 * 1024 * 1024) {
           showNotification('Ukuran file terlalu besar. Maksimal 5MB', true);
           return;
@@ -1201,9 +1211,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         reader.onload = function(event) {
           uploadedImageUrl = event.target.result;
-          currentImageUrl = uploadedImageUrl; // Simpan untuk preview nanti
+          currentImageUrl = uploadedImageUrl;
           
-          // Tampilkan preview
           if (preview) {
             preview.src = uploadedImageUrl;
             previewContainer.style.display = 'block';
