@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter 6 Kolom Tools</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4caf50;
+            --primary-dark: #388e3c;
+            --primary-darker: #2e7d32;
+            --primary-light: #81c784;
+            --primary-lighter: #1a3b1c;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --bg-primary: #0a0e12;
+            --bg-secondary: #151a21;
+            --bg-card: #1d242e;
+            --border-color: #2a3542;
+            --success-color: #388e3c;
+            --success-bg: rgba(56, 142, 60, 0.2);
+            --shadow-color: rgba(0, 0, 0, 0.6);
+            --col1-color: #ff6b6b;
+            --col2-color: #4ecdc4;
+            --col3-color: #ffd166;
+            --col4-color: #9b5de5;
+            --col5-color: #f15bb5;
+            --col6-color: #00bbf9;
+            --blue-light: #64b5f6; /* Warna biru muda baru */
+            --blue-lighter: rgba(100, 181, 246, 0.1); /* Background biru muda */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            background-color: var(--bg-primary);
+            overflow-x: hidden;
+            background-image: url('https://cdn.areabermain.club/assets/cdn/az6/2025/07/31/20250731/eeb91f9b1f7b3247242ccba997460e8b/linetogel-bg-17agustus2025.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            font-weight: 500;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 18, 0.7);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-darker));
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 15px 40px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 0 0 25px;
+            font-weight: 700;
+            font-size: 1.7rem;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        h3 {
+            color: var(--primary-light);
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.2rem;
+            padding-bottom: 10px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 80px; /* Diperkecil */
+            padding: 12px; /* Diperkecil */
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            font-family: 'Inter', monospace;
+            font-size: 13px; /* Diperkecil */
+            resize: vertical;
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+            font-weight: 500;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3), inset 0 3px 6px rgba(0,0,0,0.3);
+        }
+
+        .six-columns-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px; /* Diperkecil */
+            margin-top: 20px;
+        }
+
+        .column-input {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .column-input h4 {
+            color: var(--primary-light);
+            margin-bottom: 8px; /* Diperkecil */
+            font-size: 0.95rem; /* Diperkecil */
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .column-input textarea {
+            min-height: 80px; /* Diperkecil */
+            font-size: 0.8rem; /* Diperkecil */
+            padding: 10px; /* Diperkecil */
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            border: none;
+        }
+
+        .btn-clear {
+            background: linear-gradient(145deg, #f44336, #d32f2f); /* Gradien merah */
+            color: white;
+            border: none;
+        }
+
+        .btn-clear:hover {
+            background: linear-gradient(145deg, #e53935, #c62828);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(229, 57, 53, 0.3);
+        }
+
+        .result-container {
+            margin-top: 30px;
+        }
+
+        .six-columns-result {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px; /* Diperkecil */
+            margin-top: 25px;
+        }
+
+        .column-result {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 15px;
+            box-shadow: 0 8px 20px var(--shadow-color);
+            position: relative;
+            transition: all 0.4s ease;
+        }
+
+        /* Kolom dengan hasil akan memiliki warna biru muda */
+        .column-result.has-data {
+            background: var(--blue-lighter);
+            border-top: 4px solid var(--blue-light);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .column-result.done {
+            background: var(--success-bg);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 20px rgba(56, 142, 60, 0.2);
+        }
+
+        .column-result.col1.has-data { border-top-color: var(--blue-light); }
+        .column-result.col2.has-data { border-top-color: var(--blue-light); }
+        .column-result.col3.has-data { border-top-color: var(--blue-light); }
+        .column-result.col4.has-data { border-top-color: var(--blue-light); }
+        .column-result.col5.has-data { border-top-color: var(--blue-light); }
+        .column-result.col6.has-data { border-top-color: var(--blue-light); }
+
+        .column-result h4 {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            text-align: center;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border-color);
+            font-weight: 700;
+        }
+
+        .column-result.has-data h4 {
+            font-weight: 800;
+            color: var(--blue-light); /* Warna biru muda untuk header */
+        }
+
+        .column-result.col1 h4 { color: var(--blue-light); } /* Semua warna kolom menjadi biru muda */
+        .column-result.col2 h4 { color: var(--blue-light); }
+        .column-result.col3 h4 { color: var(--blue-light); }
+        .column-result.col4 h4 { color: var(--blue-light); }
+        .column-result.col5 h4 { color: var(--blue-light); }
+        .column-result.col6 h4 { color: var(--blue-light); }
+
+        .column-result.done h4 {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .column-result-item {
+            margin-bottom: 10px;
+            padding: 8px 10px;
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            box-shadow: 0 3px 8px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+        }
+
+        .column-result.has-data .column-result-item {
+            background-color: rgba(100, 181, 246, 0.15); /* Biru muda transparan */
+            border-color: rgba(100, 181, 246, 0.3);
+        }
+
+        .column-result.done .column-result-item {
+            background-color: rgba(56, 142, 60, 0.15);
+            border-color: rgba(56, 142, 60, 0.3);
+        }
+
+        .column-result-label {
+            font-weight: 700;
+            color: var(--primary-light);
+            font-size: 0.8rem;
+            margin-bottom: 3px;
+            flex: 1;
+        }
+
+        .column-result.has-data .column-result-label {
+            color: var(--blue-light); /* Warna biru muda untuk label */
+        }
+
+        .column-result.done .column-result-label {
+            color: var(--primary-color);
+        }
+
+        .column-result-value {
+            font-size: 0.8rem;
+            word-break: break-all;
+            font-family: 'Inter', monospace;
+            flex: 2;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .column-result.done .column-result-value {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .column-btn-copy {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: none;
+            padding: 5px;
+            border-radius: 50%;
+            cursor: pointer;
+            width: 26px;
+            height: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            margin-left: 6px;
+        }
+
+        .column-btn-copy:hover {
+            background-color: rgba(56, 142, 60, 0.15);
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+        
+        .column-result-item.copied {
+            animation: highlightCopy 1.5s ease-out;
+            border-color: var(--primary-color);
+        }
+
+        @keyframes highlightCopy {
+            0% {
+                background-color: var(--bg-card);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+            20% {
+                background-color: rgba(76, 175, 80, 0.1);
+                box-shadow: 0 0 10px 5px rgba(76, 175, 80, 0.2);
+            }
+            100% {
+                background-color: var(--bg-card);
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+            }
+        }
+        
+        .view-image-btn {
+            background: rgba(56, 142, 60, 0.15);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 12px;
+            font-weight: 600;
+        }
+
+        .view-image-btn:hover {
+            background: rgba(56, 142, 60, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(56, 142, 60, 0.15);
+            border-color: var(--primary-light);
+        }
+        
+        .done-btn {
+            background: linear-gradient(145deg, var(--primary-color), var(--primary-darker));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            font-weight: 700;
+            box-shadow: 0 4px 12px rgba(56, 142, 60, 0.3);
+        }
+
+        .done-btn:hover {
+            background: linear-gradient(145deg, var(--primary-dark), #1b5e20);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(56, 142, 60, 0.4);
+        }
+
+        .done-btn.undo {
+            background: linear-gradient(145deg, #616161, #424242);
+        }
+
+        .done-btn.undo:hover {
+            background: linear-gradient(145deg, #757575, #616161);
+        }
+
+        .link-preview-container {
+            display: flex;
+            gap: 5px;
+            justify-content: flex-end;
+        }
+
+        .link-placeholder {
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Modal untuk preview gambar */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+            animation: fadeIn 0.3s;
+        }
+
+        .modal-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            animation: zoomIn 0.3s;
+            border: 3px solid var(--primary-color);
+            border-radius: 8px;
+            box-shadow: 0 0 40px rgba(76, 175, 80, 0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: var(--primary-color);
+            font-size: 45px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: var(--primary-light);
+            transform: rotate(90deg);
+        }
+
+        /* Navigation buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-size: 55px;
+            cursor: pointer;
+            z-index: 1001;
+            background-color: rgba(0, 0, 0, 0.6);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+            user-select: none;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .nav-btn:hover {
+            background-color: rgba(0, 0, 0, 0.9);
+            color: var(--primary-light);
+            transform: translateY(-50%) scale(1.05);
+        }
+
+        .prev-btn {
+            left: 40px;
+        }
+
+        .next-btn {
+            right: 40px;
+        }
+
+        /* Image counter */
+        .image-counter {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary-color);
+            font-size: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px 25px;
+            border-radius: 30px;
+            z-index: 1001;
+            font-weight: 600;
+        }
+
+        .image-info {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            color: var(--primary-color);
+            font-size: 18px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 15px 25px;
+            border-radius: 30px;
+            z-index: 1001;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 5px;
+            max-width: 600px;
+        }
+
+        .image-detail {
+            font-size: 16px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .image-detail i {
+            color: var(--blue-light);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .nav-btn.hidden {
+            display: none;
+        }
+
+        /* Kolom navigator di modal */
+        .modal-column-navigator {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            display: flex;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .column-nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .column-nav-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .column-nav-btn.active {
+            border-color: white;
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5);
+        }
+
+        .column-nav-btn.col1 { background-color: var(--col1-color); color: white; }
+        .column-nav-btn.col2 { background-color: var(--col2-color); color: white; }
+        .column-nav-btn.col3 { background-color: var(--col3-color); color: var(--bg-card); }
+        .column-nav-btn.col4 { background-color: var(--col4-color); color: white; }
+        .column-nav-btn.col5 { background-color: var(--col5-color); color: white; }
+        .column-nav-btn.col6 { background-color: var(--col6-color); color: white; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes zoomIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 20px 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Auto processing indicator */
+        .processing-indicator {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        .processing-indicator.active {
+            opacity: 1;
+        }
+
+        .processing-indicator .spinner {
+            width: 14px;
+            height: 14px;
+            border: 3px solid rgba(76, 175, 80, 0.3);
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Sidebar navigasi */
+        #sidebar-nav {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 100;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sidebar-title {
+            text-align: center;
+            color: var(--primary-light);
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sidebar-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            border: 2px solid transparent;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
+        }
+
+        .sidebar-btn:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .sidebar-btn.active {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+        }
+
+        .sidebar-btn.col1 { background-color: var(--col1-color); color: white; }
+        .sidebar-btn.col2 { background-color: var(--col2-color); color: white; }
+        .sidebar-btn.col3 { background-color: var(--col3-color); color: var(--bg-card); }
+        .sidebar-btn.col4 { background-color: var(--col4-color); color: white; }
+        .sidebar-btn.col5 { background-color: var(--col5-color); color: white; }
+        .sidebar-btn.col6 { background-color: var(--col6-color); color: white; }
+
+        @media (max-width: 1600px) {
+            .six-columns-grid,
+            .six-columns-result {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .six-columns-grid,
+            .six-columns-result {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            #sidebar-nav {
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                flex-direction: row;
+                width: auto;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .six-columns-grid,
+            .six-columns-result {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 25px 15px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .six-columns-grid,
+            .six-columns-result {
+                grid-template-columns: 1fr;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .close-btn {
+                top: 20px;
+                right: 25px;
+                font-size: 35px;
+            }
+            
+            .nav-btn {
+                font-size: 40px;
+                width: 50px;
+                height: 50px;
+            }
+            
+            .prev-btn {
+                left: 15px;
+            }
+            
+            .next-btn {
+                right: 15px;
+            }
+            
+            .image-counter,
+            .image-info {
+                font-size: 16px;
+                padding: 8px 20px;
+                bottom: 20px;
+            }
+            
+            .image-info {
+                top: 20px;
+                left: 15px;
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+            
+            .modal-column-navigator {
+                top: 20px;
+                right: 15px;
+                gap: 5px;
+            }
+            
+            .column-nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Scatter 6 Kolom</h1>
+            <p></p>
+        </header>
+        
+        <div class="card">
+            <h2>Input Data Scatter</h2>
+            
+            <div class="six-columns-grid">
+                <div class="column-input">
+                    <h4>Kolom 1</h4>
+                    <textarea id="inputCol1" placeholder="Tempel data kolom 1 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator1">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+                <div class="column-input">
+                    <h4>Kolom 2</h4>
+                    <textarea id="inputCol2" placeholder="Tempel data kolom 2 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator2">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+                <div class="column-input">
+                    <h4>Kolom 3</h4>
+                    <textarea id="inputCol3" placeholder="Tempel data kolom 3 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator3">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+                <div class="column-input">
+                    <h4>Kolom 4</h4>
+                    <textarea id="inputCol4" placeholder="Tempel data kolom 4 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator4">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+                <div class="column-input">
+                    <h4>Kolom 5</h4>
+                    <textarea id="inputCol5" placeholder="Tempel data kolom 5 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator5">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+                <div class="column-input">
+                    <h4>Kolom 6</h4>
+                    <textarea id="inputCol6" placeholder="Tempel data kolom 6 di sini..."></textarea>
+                    <div class="processing-indicator" id="indicator6">
+                        <div class="spinner"></div>
+                        <span>Memproses...</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-clear" id="clearScatter6Btn">
+                    <i class="fas fa-trash-alt"></i> Hapus Semua
+                </button>
+            </div>
+            
+            <div class="result-container">
+                <h2>Hasil Format Scatter</h2>
+                <div class="six-columns-result" id="scatter6Results">
+                    <!-- Hasil akan diisi oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar navigasi -->
+    <div id="sidebar-nav">
+        <div class="sidebar-title">Kolom</div>
+        <button class="sidebar-btn col1" data-col="1">1</button>
+        <button class="sidebar-btn col2" data-col="2">2</button>
+        <button class="sidebar-btn col3" data-col="3">3</button>
+        <button class="sidebar-btn col4" data-col="4">4</button>
+        <button class="sidebar-btn col5" data-col="5">5</button>
+        <button class="sidebar-btn col6" data-col="6">6</button>
+    </div>
+
+    <!-- Modal untuk preview gambar -->
+    <div id="imageModal" class="modal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <div class="image-info" id="imageInfo">
+                <div class="image-detail">
+                    <i class="fas fa-columns"></i>
+                    <span id="colInfo">Kolom 1</span>
+                </div>
+                <div class="image-detail">
+                    <i class="fas fa-user"></i>
+                    <span id="userIdInfo">User ID: -</span>
+                </div>
+                <div class="image-detail">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span id="ticketInfo">Kode Tiket: -</span>
+                </div>
+            </div>
+            
+            <div class="modal-column-navigator" id="modalColumnNavigator">
+                <button class="column-nav-btn col1" data-col="1">1</button>
+                <button class="column-nav-btn col2" data-col="2">2</button>
+                <button class="column-nav-btn col3" data-col="3">3</button>
+                <button class="column-nav-btn col4" data-col="4">4</button>
+                <button class="column-nav-btn col5" data-col="5">5</button>
+                <button class="column-nav-btn col6" data-col="6">6</button>
+            </div>
+            
+            <div class="nav-btn prev-btn" id="prevBtn">
+                <i class="fas fa-chevron-left"></i>
+            </div>
+            <img id="modalImage" class="modal-img" src="" alt="Preview Gambar">
+            <div class="nav-btn next-btn" id="nextBtn">
+                <i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="image-counter" id="imageCounter"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen DOM
+            const inputCol1 = document.getElementById('inputCol1');
+            const inputCol2 = document.getElementById('inputCol2');
+            const inputCol3 = document.getElementById('inputCol3');
+            const inputCol4 = document.getElementById('inputCol4');
+            const inputCol5 = document.getElementById('inputCol5');
+            const inputCol6 = document.getElementById('inputCol6');
+            const clearScatter6Btn = document.getElementById('clearScatter6Btn');
+            const scatter6Results = document.getElementById('scatter6Results');
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            const closeBtn = document.querySelector('.close-btn');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const imageCounter = document.getElementById('imageCounter');
+            const imageInfo = document.getElementById('imageInfo');
+            const colInfo = document.getElementById('colInfo');
+            const userIdInfo = document.getElementById('userIdInfo');
+            const ticketInfo = document.getElementById('ticketInfo');
+            const indicators = [
+                document.getElementById('indicator1'),
+                document.getElementById('indicator2'),
+                document.getElementById('indicator3'),
+                document.getElementById('indicator4'),
+                document.getElementById('indicator5'),
+                document.getElementById('indicator6')
+            ];
+            const sidebarNav = document.getElementById('sidebar-nav');
+            const sidebarBtns = sidebarNav.querySelectorAll('.sidebar-btn');
+            const modalColumnNavigator = document.getElementById('modalColumnNavigator');
+            const modalColumnBtns = modalColumnNavigator.querySelectorAll('.column-nav-btn');
+            
+            // Variabel global untuk menyimpan hasil
+            let scatterResults = [null, null, null, null, null, null];
+            
+            // Variabel untuk menyimpan data gambar
+            let currentImageLinks = [];
+            let currentImageIndex = 0;
+            let currentColIndex = 0;
+            let currentUserId = '-';
+            let currentTicketCode = '-';
+            
+            // Tombol hapus untuk tab 6 kolom
+            clearScatter6Btn.addEventListener('click', function() {
+                inputCol1.value = '';
+                inputCol2.value = '';
+                inputCol3.value = '';
+                inputCol4.value = '';
+                inputCol5.value = '';
+                inputCol6.value = '';
+                scatter6Results.innerHTML = '';
+                scatterResults = [null, null, null, null, null, null];
+                updateSidebar();
+                updateModalColumnNavigator();
+            });
+            
+            // Event untuk modal gambar
+            closeBtn.addEventListener('click', closeModal);
+            
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Navigasi gambar
+            prevBtn.addEventListener('click', showPrevImage);
+            nextBtn.addEventListener('click', showNextImage);
+            
+            // Tutup modal dengan tombol ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === "Escape" && modal.style.display === "block") {
+                    closeModal();
+                } else if (modal.style.display === "block") {
+                    if (e.key === "ArrowLeft") {
+                        showPrevImage();
+                    } else if (e.key === "ArrowRight") {
+                        showNextImage();
+                    }
+                }
+            });
+            
+            // Event listener untuk setiap kolom input
+            [inputCol1, inputCol2, inputCol3, inputCol4, inputCol5, inputCol6].forEach((input, index) => {
+                input.addEventListener('input', function() {
+                    // Tampilkan indikator pemrosesan
+                    showProcessingIndicator(index);
+                    
+                    // Proses data setelah penundaan kecil
+                    setTimeout(() => {
+                        processScatter6Data();
+                        hideProcessingIndicator(index);
+                        updateSidebar();
+                        updateModalColumnNavigator();
+                    }, 300);
+                });
+            });
+            
+            // Event listener untuk sidebar navigasi
+            sidebarBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const colIndex = parseInt(this.getAttribute('data-col'));
+                    scrollToColumn(colIndex);
+                });
+            });
+            
+            // Event listener untuk navigasi kolom di modal
+            modalColumnBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const colIndex = parseInt(this.getAttribute('data-col'));
+                    showImagesForColumn(colIndex);
+                });
+            });
+            
+            // Fungsi untuk menampilkan indikator pemrosesan
+            function showProcessingIndicator(index) {
+                indicators[index].classList.add('active');
+            }
+            
+            // Fungsi untuk menyembunyikan indikator pemrosesan
+            function hideProcessingIndicator(index) {
+                indicators[index].classList.remove('active');
+            }
+            
+            // Fungsi untuk memproses data dari 6 kolom
+            function processScatter6Data() {
+                const col1Data = inputCol1.value.trim();
+                const col2Data = inputCol2.value.trim();
+                const col3Data = inputCol3.value.trim();
+                const col4Data = inputCol4.value.trim();
+                const col5Data = inputCol5.value.trim();
+                const col6Data = inputCol6.value.trim();
+                
+                // Kosongkan hasil sebelumnya
+                scatter6Results.innerHTML = '';
+                
+                // Proses masing-masing kolom
+                const col1Result = processSingleScatterData(col1Data);
+                const col2Result = processSingleScatterData(col2Data);
+                const col3Result = processSingleScatterData(col3Data);
+                const col4Result = processSingleScatterData(col4Data);
+                const col5Result = processSingleScatterData(col5Data);
+                const col6Result = processSingleScatterData(col6Data);
+                
+                // Simpan hasil secara global
+                scatterResults[0] = col1Result;
+                scatterResults[1] = col2Result;
+                scatterResults[2] = col3Result;
+                scatterResults[3] = col4Result;
+                scatterResults[4] = col5Result;
+                scatterResults[5] = col6Result;
+                
+                // Tampilkan hasil
+                renderScatter6Result(col1Result, 1);
+                renderScatter6Result(col2Result, 2);
+                renderScatter6Result(col3Result, 3);
+                renderScatter6Result(col4Result, 4);
+                renderScatter6Result(col5Result, 5);
+                renderScatter6Result(col6Result, 6);
+            }
+            
+            // Fungsi untuk memproses data scatter tunggal
+            function processSingleScatterData(data) {
+                if (!data) {
+                    return {
+                        userId: '-',
+                        ticketCode: '-',
+                        links: [],
+                        linksText: '-',
+                        betValue: '-',
+                        hasData: false,
+                        hasImages: false
+                    };
+                }
+                
+                // Split data menjadi array
+                const parts = data.split(/\s+/);
+                
+                // Ekstrak kode tiket (19 digit)
+                const ticketMatch = data.match(/\b\d{19}\b/);
+                const ticketCode = ticketMatch ? ticketMatch[0] : '-';
+                
+                // Ekstrak username (kata sebelum link pertama)
+                let username = '-';
+                const firstLinkIndex = parts.findIndex(part => part.startsWith('http'));
+                if (firstLinkIndex > 0) {
+                    username = parts[firstLinkIndex - 1];
+                } else if (parts.length > 0) {
+                    username = parts[0];
+                }
+                
+                // Ekstrak link (maksimal 3)
+                const imageLinks = (data.match(/https?:\/\/[^\s]+/g) || []).slice(0, 3);
+                const linksText = imageLinks.join(', ') || '-';
+                const hasImages = imageLinks.length > 0;
+                
+                // Ekstrak nilai BET
+                const betMatch = data.match(/BET\s*([\d,]+)/i);
+                const betValue = betMatch ? formatNumber(betMatch[1].replace(/,/g, '')) : '-';
+                
+                return {
+                    userId: username,
+                    ticketCode,
+                    links: imageLinks,
+                    linksText,
+                    betValue,
+                    hasData: true,
+                    hasImages: hasImages
+                };
+            }
+            
+            // Fungsi untuk merender hasil satu kolom
+            function renderScatter6Result(result, colIndex) {
+                const colDiv = document.createElement('div');
+                colDiv.className = `column-result col${colIndex}`;
+                colDiv.id = `result-col${colIndex}`;
+                colDiv.dataset.colIndex = colIndex;
+                
+                // Tambahkan class has-data jika ada data
+                if (result.hasData) {
+                    colDiv.classList.add('has-data');
+                }
+                
+                colDiv.innerHTML = `
+                    <h4>Kolom ${colIndex}</h4>
+                    <div class="column-result-item">
+                        <div class="column-result-label">User ID :</div>
+                        <div class="column-result-value">${result.userId}</div>
+                        <button class="column-btn-copy" data-value="${result.userId}" title="Salin User ID">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="column-result-item">
+                        <div class="column-result-label">Kode Tiket :</div>
+                        <div class="column-result-value">${result.ticketCode}</div>
+                        <button class="column-btn-copy" data-value="${result.ticketCode}" title="Salin Kode Tiket">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="column-result-item">
+                        <div class="column-result-label">Link Bukti :</div>
+                        <div class="column-result-value">
+                            <div class="link-preview-container">
+                                <div class="link-placeholder">..</div>
+                                <button class="column-btn-copy" data-value="${result.linksText}" title="Salin Link">
+                                    <i class="far fa-copy"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-result-item">
+                        <div class="column-result-label">Bettingan :</div>
+                        <div class="column-result-value">${result.betValue}</div>
+                        <button class="column-btn-copy" data-value="${result.betValue}" title="Salin Bettingan">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    ${result.links.length > 0 ? `
+                    <button class="view-image-btn" data-col-index="${colIndex}">
+                        <i class="fas fa-images"></i> Lihat Gambar
+                    </button>
+                    ` : ''}
+                    <button class="done-btn">
+                        <i class="fas fa-check-circle"></i> Tandai Selesai
+                    </button>
+                `;
+                
+                scatter6Results.appendChild(colDiv);
+            }
+            
+            // Event delegation untuk tombol salin di hasil 6 kolom
+            scatter6Results.addEventListener('click', function(e) {
+                const btn = e.target.closest('.column-btn-copy');
+                if (btn) {
+                    const value = btn.getAttribute('data-value');
+                    const btnIcon = btn.querySelector('i');
+                    const originalIcon = btnIcon.className;
+                    const parentItem = btn.closest('.column-result-item');
+                    
+                    // Animasi tombol
+                    btn.classList.add('copied');
+                    
+                    // Animasi highlight pada seluruh kolom item
+                    parentItem.classList.add('copied');
+                    
+                    // Ganti ikon ke centang
+                    btnIcon.className = 'fas fa-check';
+                    
+                    // Salin teks
+                    copyText(value).then(() => {
+                        console.log('Teks berhasil disalin');
+                    }).catch(() => {
+                        console.error('Gagal menyalin teks');
+                    });
+                    
+                    // Kembalikan ke ikon semula setelah 2 detik
+                    setTimeout(() => {
+                        btnIcon.className = originalIcon;
+                        btn.classList.remove('copied');
+                    }, 2000);
+                    
+                    // Hapus class highlight setelah animasi selesai
+                    setTimeout(() => {
+                        parentItem.classList.remove('copied');
+                    }, 1500);
+                }
+                
+                // Event untuk tombol "Lihat Gambar"
+                const viewBtn = e.target.closest('.view-image-btn');
+                if (viewBtn) {
+                    const colIndex = parseInt(viewBtn.getAttribute('data-col-index'));
+                    showImagesForColumn(colIndex);
+                }
+                
+                // Event untuk tombol Done
+                const doneBtn = e.target.closest('.done-btn');
+                if (doneBtn) {
+                    const columnResult = doneBtn.closest('.column-result');
+                    
+                    if (doneBtn.classList.contains('undo')) {
+                        // Jika tombol sudah dalam mode "Undo", kembalikan ke normal
+                        doneBtn.innerHTML = '<i class="fas fa-check-circle"></i> Tandai Selesai';
+                        doneBtn.classList.remove('undo');
+                        columnResult.classList.remove('done');
+                    } else {
+                        // Tandai kolom sebagai selesai
+                        doneBtn.innerHTML = '<i class="fas fa-undo"></i> Batalkan';
+                        doneBtn.classList.add('undo');
+                        columnResult.classList.add('done');
+                    }
+                }
+            });
+            
+            // Fungsi untuk menutup modal
+            function closeModal() {
+                modal.style.display = "none";
+            }
+            
+            // Fungsi untuk menampilkan gambar sebelumnya (tidak berputar)
+            function showPrevImage() {
+                if (currentImageLinks.length === 0) return;
+                
+                // Jika bukan di gambar pertama, tampilkan gambar sebelumnya
+                if (currentImageIndex > 0) {
+                    currentImageIndex--;
+                    updateModalImage();
+                }
+                
+                updateNavButtonsVisibility();
+            }
+            
+            // Fungsi untuk menampilkan gambar berikutnya (tidak berputar)
+            function showNextImage() {
+                if (currentImageLinks.length === 0) return;
+                
+                // Jika bukan di gambar terakhir, tampilkan gambar berikutnya
+                if (currentImageIndex < currentImageLinks.length - 1) {
+                    currentImageIndex++;
+                    updateModalImage();
+                }
+                
+                updateNavButtonsVisibility();
+            }
+            
+            // Fungsi untuk memperbarui gambar di modal
+            function updateModalImage() {
+                if (currentImageLinks.length === 0) return;
+                
+                modalImg.src = currentImageLinks[currentImageIndex];
+                updateImageCounter();
+                updateNavButtonsVisibility();
+            }
+            
+            // Fungsi untuk memperbarui counter gambar
+            function updateImageCounter() {
+                if (currentImageLinks.length > 1) {
+                    imageCounter.textContent = `${currentImageIndex + 1} / ${currentImageLinks.length}`;
+                    imageCounter.style.display = 'block';
+                } else {
+                    imageCounter.style.display = 'none';
+                }
+            }
+            
+            // Fungsi untuk memperbarui visibilitas tombol navigasi
+            function updateNavButtonsVisibility() {
+                if (currentImageLinks.length <= 1) {
+                    prevBtn.classList.add('hidden');
+                    nextBtn.classList.add('hidden');
+                    return;
+                }
+                
+                // Tampilkan/sembunyikan tombol prev
+                if (currentImageIndex === 0) {
+                    prevBtn.classList.add('hidden');
+                } else {
+                    prevBtn.classList.remove('hidden');
+                }
+                
+                // Tampilkan/sembunyikan tombol next
+                if (currentImageIndex === currentImageLinks.length - 1) {
+                    nextBtn.classList.add('hidden');
+                } else {
+                    nextBtn.classList.remove('hidden');
+                }
+            }
+            
+            // Fungsi untuk menampilkan gambar dari kolom tertentu
+            function showImagesForColumn(colIndex) {
+                const colData = scatterResults[colIndex - 1];
+                if (!colData || !colData.hasImages) return;
+                
+                currentImageLinks = colData.links;
+                currentImageIndex = 0;
+                currentColIndex = colIndex;
+                currentUserId = colData.userId;
+                currentTicketCode = colData.ticketCode;
+                
+                modal.style.display = "block";
+                updateModalImage();
+                
+                // Update informasi kolom
+                colInfo.textContent = `Kolom ${colIndex}`;
+                userIdInfo.textContent = `User ID: ${currentUserId}`;
+                ticketInfo.textContent = `Kode Tiket: ${currentTicketCode}`;
+                
+                // Update navigator kolom
+                updateModalColumnNavigator();
+            }
+            
+            // Fungsi untuk memperbarui sidebar navigasi
+            function updateSidebar() {
+                sidebarBtns.forEach(btn => {
+                    const colIndex = parseInt(btn.getAttribute('data-col'));
+                    const colResult = scatterResults[colIndex - 1];
+                    
+                    if (colResult && colResult.hasData) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Fungsi untuk memperbarui navigator kolom di modal
+            function updateModalColumnNavigator() {
+                modalColumnBtns.forEach(btn => {
+                    const colIndex = parseInt(btn.getAttribute('data-col'));
+                    const colResult = scatterResults[colIndex - 1];
+                    
+                    // Tandai tombol aktif
+                    if (colIndex === currentColIndex) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                    
+                    // Aktifkan/nonaktifkan tombol berdasarkan ada/tidaknya gambar
+                    if (colResult && colResult.hasImages) {
+                        btn.disabled = false;
+                        btn.style.opacity = '1';
+                    } else {
+                        btn.disabled = true;
+                        btn.style.opacity = '0.5';
+                    }
+                });
+            }
+            
+            // Fungsi untuk scroll ke kolom tertentu
+            function scrollToColumn(colIndex) {
+                const colElement = document.getElementById(`result-col${colIndex}`);
+                if (colElement) {
+                    colElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                    
+                    // Tambahkan efek highlight
+                    colElement.classList.add('highlighted');
+                    setTimeout(() => {
+                        colElement.classList.remove('highlighted');
+                    }, 1500);
+                }
+            }
+            
+            function formatNumber(num) {
+                return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            function copyText(text) {
+                return new Promise((resolve, reject) => {
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(text)
+                            .then(resolve)
+                            .catch(() => {
+                                fallbackCopy(text) ? resolve() : reject();
+                            });
+                    } else {
+                        fallbackCopy(text) ? resolve() : reject();
+                    }
+                });
+            }
+            
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                textarea.style.position = 'fixed';
+                document.body.appendChild(textarea);
+                textarea.select();
+                
+                try {
+                    return document.execCommand('copy');
+                } catch (err) {
+                    return false;
+                } finally {
+                    document.body.removeChild(textarea);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
