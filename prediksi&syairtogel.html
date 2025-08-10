@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Togel & Generator Syair</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            padding: 15px;
+            min-height: 100vh;
+            color: #2d3436;
+        }
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #0d1b2a);
+            color: #ffffff;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dark-mode .container {
+            background-color: rgba(30, 30, 30, 0.97);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dark-mode h1 {
+            color: #ffffff;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            position: relative;
+            justify-content: center;
+        }
+        
+        .dark-mode .tabs {
+            border-color: #444;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #7f8c8d;
+            position: relative;
+            transition: all 0.3s;
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+        }
+        
+        .dark-mode .tab {
+            color: #bdbdbd;
+        }
+        
+        .tab.active {
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .dark-mode .tab.active {
+            color: #4fc3f7;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #3498db;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .dark-mode .tab.active::after {
+            background: #4fc3f7;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* STYLE UNTUK PREDIKSI TOGEL */
+        .input-section {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .input-label {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .dark-mode .input-label {
+            color: #ffffff;
+        }
+        
+        .dark-mode-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .dark-mode-toggle {
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .dark-mode .dark-mode-toggle {
+            background: #333;
+        }
+        
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark-mode .toggle-handle {
+            left: calc(100% - 23px);
+            background: #FFD700;
+        }
+        
+        .moon-icon, .sun-icon {
+            width: 14px;
+            height: 14px;
+            transition: all 0.3s;
+        }
+        
+        .moon-icon {
+            opacity: 1;
+        }
+        
+        .sun-icon {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .dark-mode .moon-icon {
+            opacity: 0;
+        }
+        
+        .dark-mode .sun-icon {
+            opacity: 1;
+        }
+        
+        /* FITUR PENCARIAN */
+        .search-container {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        #marketSearch {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 15px;
+            background-color: white;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode #marketSearch {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #ffffff;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            z-index: 2;
+        }
+        
+        .dark-mode .search-icon {
+            color: #bdbdbd;
+        }
+        
+        .search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #dfe6e9;
+            border-radius: 0 0 10px 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode .search-suggestions {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+        
+        .suggestion-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+        
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .dark-mode .suggestion-item:hover {
+            background-color: #3d3d3d;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            font-weight: bold;
+            padding: 2px;
+        }
+        
+        .dark-mode .highlight {
+            background-color: #5c4d00;
+            color: #fff;
+        }
+        
+        select, input[type="date"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 15px;
+            background-color: white;
+            color: #333;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode select,
+        .dark-mode input[type="date"] {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #ffffff;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .manual-date-container {
+            display: none;
+            margin-top: 15px;
+        }
+        
+        .result-container {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
+            margin-bottom: 25px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .result-container {
+            background: linear-gradient(to right, #252525, #2d2d2d);
+            border-color: #444;
+        }
+        
+        .prediction-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 18px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #ccc;
+        }
+        
+        .dark-mode .prediction-title {
+            color: #ffffff;
+            border-color: #555;
+        }
+        
+        .result-line {
+            display: flex;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #eee;
+        }
+        
+        .dark-mode .result-line {
+            border-color: #444;
+        }
+        
+        .result-label {
+            min-width: 160px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .dark-mode .result-label {
+            color: #bb86fc;
+        }
+        
+        .result-value {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .dark-mode .result-value {
+            color: #ffffff;
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 200px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        #generateBtn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+        }
+        
+        #copyBtn {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        #copyAllBtn {
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            color: white;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 14px;
+            padding: 15px;
+            background: rgba(236, 240, 241, 0.5);
+            border-radius: 8px;
+        }
+        
+        .dark-mode .footer-note {
+            color: #bdbdbd;
+            background: rgba(66, 66, 66, 0.5);
+        }
+        
+        /* STYLE UNTUK GENERATOR SYAIR */
+        .syair-container {
+            background: linear-gradient(to right, #f8f4e5, #d7ccc8);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            border: 1px solid #5d4037;
+            position: relative;
+            min-height: 220px;
+        }
+        
+        .dark-mode .syair-container {
+            background: linear-gradient(to right, #2a2a2a, #3d3d3d);
+            border-color: #444;
+        }
+        
+        .syair-container::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px dashed #8d6e63;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        .dark-mode .syair-container::before {
+            border-color: #666;
+        }
+        
+        .baris {
+            font-size: 18px;
+            line-height: 1.7;
+            margin: 12px 0;
+            color: #4e342e;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .dark-mode .baris {
+            color: #e0e0e0;
+        }
+        
+        .baris:hover {
+            background-color: rgba(141, 110, 99, 0.1);
+            transform: translateX(5px);
+            border-radius: 4px;
+        }
+        
+        .dark-mode .baris:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .syair-button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #generateSyairBtn {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        #copySyairBtn {
+            background: linear-gradient(to right, #2d6a4f, #1b5e20);
+            color: white;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .pattern-info {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #5d4037;
+            background-color: rgba(141, 110, 99, 0.1);
+            padding: 12px 18px;
+            border-radius: 8px;
+            display: inline-block;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .dark-mode .pattern-info {
+            color: #bdbdbd;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .copy-success {
+            color: #2d6a4f;
+            font-size: 15px;
+            margin-top: 15px;
+            height: 22px;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .dark-mode .copy-success {
+            color: #81c784;
+        }
+        
+        /* STYLE UNTUK MK DAN NAGA */
+        .prediction-boxes {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .prediction-box {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .prediction-box {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+        }
+        
+        .prediction-title-small {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .dark-mode .prediction-title-small {
+            color: #a5d6a7;
+        }
+        
+        .prediction-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1b5e20;
+            letter-spacing: 1px;
+        }
+        
+        .dark-mode .prediction-value {
+            color: #c8e6c9;
+        }
+        
+        .copy-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .copy-small-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+            background: #4caf50;
+            color: white;
+        }
+        
+        .copy-small-btn:hover {
+            background: #388e3c;
+        }
+        
+        .dark-mode .copy-small-btn {
+            background: #43a047;
+        }
+        
+        .dark-mode .copy-small-btn:hover {
+            background: #2e7d32;
+        }
+        
+        /* Responsif */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+                padding: 12px;
+            }
+            
+            .button-container, .syair-button-container {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .prediction-boxes {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-crystal-ball"></i> Prediksi Togel & Generator Syair <i class="fas fa-feather-alt"></i></h1>
+            <div class="tabs">
+                <div class="tab active" data-tab="togel">Prediksi Togel</div>
+                <div class="tab" data-tab="syair">Generator Syair</div>
+            </div>
+        </div>
+        
+        <!-- Konten Prediksi Togel -->
+        <div id="togelContent" class="tab-content active">
+            <div class="input-section">
+                <div class="input-header">
+                    <label class="input-label">Pilih Pasaran (<span id="marketCount">0</span> pasaran tersedia):</label>
+                    <div class="dark-mode-container">
+                        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                            <span class="toggle-handle">
+                                <svg class="moon-icon" viewBox="0 0 24 24">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                </svg>
+                                <svg class="sun-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="5"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <span>Mode Gelap</span>
+                    </div>
+                </div>
+                
+                <!-- Fitur Pencarian Pasaran -->
+                <div class="search-container">
+                    <div class="search-icon">🔍</div>
+                    <input type="text" id="marketSearch" placeholder="Cari pasaran...">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+                
+                <!-- Dropdown Pasaran Standar -->
+                <select id="marketSelect" style="width:100%; padding:14px;">
+                    <option value="" disabled selected>Pilih pasaran</option>
+                    <option value="HOKIDRAW 00">HOKIDRAW 00</option>
+                    <option value="TOTOMACAU PAGI">TOTOMACAU PAGI</option>
+                    <option value="KENTUCKY MIDDAY">KENTUCKY MIDDAY</option>
+                    <option value="FLORIDA MIDDAY">FLORIDA MIDDAY</option>
+                    <option value="HUAHIN0100">HUAHIN0100</option>
+                    <option value="HOKIDRAW 01">HOKIDRAW 01</option>
+                    <option value="BANGKOK 0130">BANGKOK 0130</option>
+                    <option value="NEW YORK MIDDAY">NEW YORK MIDDAY</option>
+                    <option value="CAROLINA DAY">CAROLINA DAY</option>
+                    <option value="HOKIDRAW 02">HOKIDRAW 02</option>
+                    <option value="BRUNEI 02">BRUNEI 02</option>
+                    <option value="OREGON 03">OREGON 03</option>
+                    <option value="HOKIDRAW 03">HOKIDRAW 03</option>
+                    <option value="HOKIDRAW 04">HOKIDRAW 04</option>
+                    <option value="HOKIDRAW 05">HOKIDRAW 05</option>
+                    <option value="OREGON 06">OREGON 06</option>
+                    <option value="HOKIDRAW 06">HOKIDRAW 06</option>
+                    <option value="HOKIDRAW 07">HOKIDRAW 07</option>
+                    <option value="HOKIDRAW 08">HOKIDRAW 08</option>
+                    <option value="CALIFORNIA">CALIFORNIA</option>
+                    <option value="FLORIDA EVENING">FLORIDA EVENING</option>
+                    <option value="OREGON 09">OREGON 09</option>
+                    <option value="HOKIDRAW 09">HOKIDRAW 09</option>
+                    <option value="BANGKOK 0930">BANGKOK 0930</option>
+                    <option value="NEW YORK EVENING">NEW YORK EVENING</option>
+                    <option value="KENTUCKY EVENING">KENTUCKY EVENING</option>
+                    <option value="HOKIDRAW 10">HOKIDRAW 10</option>
+                    <option value="CAROLINA EVENING">CAROLINA EVENING</option>
+                    <option value="TOTO CAMBODIA">TOTO CAMBODIA</option>
+                    <option value="HOKIDRAW 11">HOKIDRAW 11</option>
+                    <option value="CHELSEA 11">CHELSEA 11</option>
+                    <option value="OREGON 12">OREGON 12</option>
+                    <option value="HOKIDRAW 12">HOKIDRAW 12</option>
+                    <option value="BULLSEYE">BULLSEYE</option>
+                    <option value="POIPET12">POIPET12</option>
+                    <option value="HOKIDRAW 13">HOKIDRAW 13</option>
+                    <option value="TOTOMACAU SIANG">TOTOMACAU SIANG</option>
+                    <option value="SYDNEY">SYDNEY</option>
+                    <option value="JAKARTA 1400">JAKARTA 1400</option>
+                    <option value="HOKI DRAW 14">HOKI DRAW 14</option>
+                    <option value="BRUNEI 14">BRUNEI 14</option>
+                    <option value="HOKIDRAW 15">HOKIDRAW 15</option>
+                    <option value="CHELSEA 15">CHELSEA 15</option>
+                    <option value="TOTO MACAU 5D">TOTO MACAU 5D</option>
+                    <option value="TOTOMALI 1530">TOTOMALI 1530</option>
+                    <option value="POIPET15">POIPET15</option>
+                    <option value="HOKIDRAW 16">HOKIDRAW 16</option>
+                    <option value="TOTOMACAU SORE">TOTOMACAU SORE</option>
+                    <option value="HUAHIN 1630">HUAHIN 1630</option>
+                    <option value="HOKIDRAW 17">HOKIDRAW 17</option>
+                    <option value="KING KONG 4D SORE">KING KONG 4D SORE</option>
+                    <option value="KING KONG 4D MALAM">KING KONG 4D MALAM</option>
+                    <option value="SINGAPORE">SINGAPORE</option>
+                    <option value="HOKIDRAW 18">HOKIDRAW 18</option>
+                    <option value="MAGNUM4D">MAGNUM4D</option>
+                    <option value="HOKIDRAW 19">HOKIDRAW 19</option>
+                    <option value="TOTOMACAU MALAM I">TOTOMACAU MALAM I</option>
+                    <option value="CHELSEA 19">CHELSEA 19</option>
+                    <option value="POIPET19">POIPET19</option>
+                    <option value="PCSO">PCSO</option>
+                    <option value="HOKIDRAW 20">HOKIDRAW 20</option>
+                    <option value="TOTOMALI 2030">TOTOMALI 2030</option>
+                    <option value="HUAHIN 2100">HUAHIN 2100</option>
+                    <option value="HOKIDRAW 21">HOKIDRAW 21</option>
+                    <option value="CHELSEA 21">CHELSEA 21</option>
+                    <option value="TOTOMACAU POOLS 5D II">TOTOMACAU POOLS 5D II</option>
+                    <option value="NEVADA">NEVADA</option>
+                    <option value="BRUNEI 21">BRUNEI 21</option>
+                    <option value="HOKIDRAW 22">HOKIDRAW 22</option>
+                    <option value="TOTOMACAU MALAM II">TOTOMACAU MALAM II</option>
+                    <option value="POIPET22">POIPET22</option>
+                    <option value="HOKIDRAW 23">HOKIDRAW 23</option>
+                    <option value="HONGKONG">HONGKONG</option>
+                    <option value="TOTOMACAU MALAM III">TOTOMACAU MALAM III</option>
+                    <option value="TOTOMALI 2330">TOTOMALI 2330</option>
+                    <option value="JAKARTA 2300">JAKARTA 2300</option>
+                </select>
+            </div>
+            
+            <div class="input-section">
+                <label class="input-label">Pilih Tanggal:</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="autoDate" name="dateOption" value="auto" checked>
+                        <label for="autoDate">Tanggal Otomatis</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="manualDate" name="dateOption" value="manual">
+                        <label for="manualDate">Tanggal Manual</label>
+                    </div>
+                </div>
+                <div class="manual-date-container" id="manualDateInput">
+                    <input type="date" id="customDateInput">
+                </div>
+            </div>
+            
+            <div class="result-container" id="predictionResult">
+                <div class="prediction-title">Pilih pasaran dan klik Generate Baru</div>
+                <div class="result-line">
+                    <div class="result-label">BBFS Kuat:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">AM/AI/CK:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">4D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">3D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">2D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Bebas:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Bebas 2D:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Shio:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Invest Twin:</div>
+                    <div class="result-value">-</div>
+                </div>
+            </div>
+            
+            <div class="button-container">
+                <button id="generateBtn"><i class="fas fa-sync-alt"></i> Generate Baru</button>
+                <button id="copyBtn"><i class="fas fa-copy"></i> Copy Hasil</button>
+                <button id="copyAllBtn"><i class="fas fa-copy"></i> Copy Semua Pasaran</button>
+            </div>
+            
+            <div class="footer-note">
+                Hasil prediksi ini dibuat secara acak. Selalu utamakan prediksi sendiri dan bermainlah dengan bijak.
+            </div>
+        </div>
+        
+        <!-- Konten Generator Syair -->
+        <div id="syairContent" class="tab-content">
+            <div class="syair-container">
+                <div class="baris" id="baris1">Angka tersembunyi</div>
+                <div class="baris" id="baris2">Petunjuk alam</div>
+                <div class="baris" id="baris3">Keberuntungan menanti</div>
+                <div class="baris" id="baris4">Rahasia terungkap</div>
+            </div>
+            
+            <div class="prediction-boxes">
+                <div class="prediction-box">
+                    <div class="prediction-title-small">MK (Mimpi Kunci)</div>
+                    <div class="prediction-value" id="mkValue">5 / 6</div>
+                    <div class="copy-buttons">
+                        <button class="copy-small-btn" id="copyMkBtn">
+                            <i class="fas fa-copy"></i> Salin MK
+                        </button>
+                    </div>
+                </div>
+                <div class="prediction-box">
+                    <div class="prediction-title-small">Naga</div>
+                    <div class="prediction-value" id="nagaValue">1 - 5 - 7</div>
+                    <div class="copy-buttons">
+                        <button class="copy-small-btn" id="copyNagaBtn">
+                            <i class="fas fa-copy"></i> Salin Naga
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pattern-info" id="pattern-info">Pola rima: a-a-b-b (contoh: merah - merah - biru - biru)</div>
+            
+            <div class="syair-button-container">
+                <button id="generateSyairBtn"><i class="fas fa-feather-alt"></i> Buat Syair Baru</button>
+                <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
+            </div>
+            
+            <div class="copy-success" id="copy-success"></div>
+            
+            <div class="footer-note">
+                Syair ini mengandung petunjuk angka dalam bentuk simbol dan metafora
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen untuk tab
+            const tabs = document.querySelectorAll('.tab');
+            const togelContent = document.getElementById('togelContent');
+            const syairContent = document.getElementById('syairContent');
+            
+            // Fungsi untuk mengubah tab
+            function changeTab(tabId) {
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.tab === tabId) {
+                        tab.classList.add('active');
+                    }
+                });
+                
+                togelContent.classList.remove('active');
+                syairContent.classList.remove('active');
+                
+                if (tabId === 'togel') {
+                    togelContent.classList.add('active');
+                } else {
+                    syairContent.classList.add('active');
+                }
+            }
+            
+            // Event listener untuk tab
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    changeTab(tab.dataset.tab);
+                });
+            });
+            
+            // Fungsi untuk generator syair
+            function setupSyairGenerator() {
+                const baris1 = document.getElementById('baris1');
+                const baris2 = document.getElementById('baris2');
+                const baris3 = document.getElementById('baris3');
+                const baris4 = document.getElementById('baris4');
+                const patternInfo = document.getElementById('pattern-info');
+                const generateSyairBtn = document.getElementById('generateSyairBtn');
+                const copySyairBtn = document.getElementById('copySyairBtn');
+                const copyMkBtn = document.getElementById('copyMkBtn');
+                const copyNagaBtn = document.getElementById('copyNagaBtn');
+                const mkValue = document.getElementById('mkValue');
+                const nagaValue = document.getElementById('nagaValue');
+                const copySuccess = document.getElementById('copy-success');
+                
+                // Database kata-kata puitis pendek (3-4 kata per baris)
+                const barisPendek = [
+                    "Angka tersembunyi",
+                    "Petunjuk alam",
+                    "Keberuntungan menanti",
+                    "Rahasia terungkap",
+                    "Bulan bersinar terang",
+                    "Bintang memberi isyarat",
+                    "Nasib baik datang",
+                    "Mimpi menjadi nyata",
+                    "Angin berbisik lembut",
+                    "Sungai mengalir deras",
+                    "Gunung menjulang tinggi",
+                    "Lautan luas membentang",
+                    "Hutan penuh misteri",
+                    "Burung terbang bebas",
+                    "Kupu-kupu menari",
+                    "Harimau mengaum kencang",
+                    "Naga terbang tinggi",
+                    "Pelangi muncul indah",
+                    "Hujan turun deras",
+                    "Matahari bersinar cerah",
+                    "Rahasia alam",
+                    "Angka keberuntungan",
+                    "Teka-teki terpecahkan",
+                    "Jalan terbuka lebar"
+                ];
+                
+                // Pola rima yang mungkin
+                const polaRima = [
+                    { pola: "a-a-a-a", contoh: "merah - merah - merah - merah" },
+                    { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
+                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
+                    { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" }
+                ];
+                
+                // Fungsi untuk membuat baris pendek
+                function buatBarisPendek() {
+                    return barisPendek[Math.floor(Math.random() * barisPendek.length)];
+                }
+                
+                // Fungsi untuk menghasilkan angka unik
+                function generateUniqueNumbers(count, min, max) {
+                    let numbers = [];
+                    while(numbers.length < count) {
+                        const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                        if (!numbers.includes(num)) {
+                            numbers.push(num);
+                        }
+                    }
+                    return numbers;
+                }
+                
+                // Fungsi untuk menghasilkan syair baru
+                function buatSyair() {
+                    // Pilih pola rima secara acak
+                    const polaTerpilih = acakKata(polaRima);
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh})`;
+                    
+                    // Buat empat baris syair pendek
+                    const baris = [
+                        buatBarisPendek(),
+                        buatBarisPendek(),
+                        buatBarisPendek(),
+                        buatBarisPendek()
+                    ];
+                    
+                    // Generate MK (2 angka unik 0-9)
+                    const mkNumbers = generateUniqueNumbers(2, 0, 9);
+                    mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
+                    
+                    // Generate Naga (3 angka unik 0-9)
+                    const nagaNumbers = generateUniqueNumbers(3, 0, 9);
+                    nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    
+                    // Terapkan efek animasi
+                    baris1.style.opacity = "0";
+                    baris2.style.opacity = "0";
+                    baris3.style.opacity = "0";
+                    baris4.style.opacity = "0";
+                    
+                    setTimeout(() => {
+                        baris1.textContent = baris[0];
+                        baris1.style.opacity = "1";
+                        
+                        setTimeout(() => {
+                            baris2.textContent = baris[1];
+                            baris2.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                baris3.textContent = baris[2];
+                                baris3.style.opacity = "1";
+                                
+                                setTimeout(() => {
+                                    baris4.textContent = baris[3];
+                                    baris4.style.opacity = "1";
+                                }, 150);
+                            }, 150);
+                        }, 150);
+                    }, 150);
+                }
+                
+                // Fungsi untuk menyalin syair ke clipboard
+                function salinSyair() {
+                    const syair = `${baris1.textContent}\n${baris2.textContent}\n${baris3.textContent}\n${baris4.textContent}`;
+                    
+                    navigator.clipboard.writeText(syair)
+                        .then(() => {
+                            // Tampilkan pesan sukses
+                            copySuccess.textContent = "✓ Syair berhasil disalin!";
+                            copySuccess.style.opacity = "1";
+                            
+                            // Sembunyikan pesan setelah 2 detik
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            copySuccess.textContent = "✗ Gagal menyalin syair";
+                            copySuccess.style.color = "#e57373";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                }
+                
+                // Fungsi untuk menyalin MK ke clipboard
+                function salinMk() {
+                    navigator.clipboard.writeText(mkValue.textContent)
+                        .then(() => {
+                            copySuccess.textContent = "✓ MK berhasil disalin!";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            copySuccess.textContent = "✗ Gagal menyalin MK";
+                            copySuccess.style.color = "#e57373";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                }
+                
+                // Fungsi untuk menyalin Naga ke clipboard
+                function salinNaga() {
+                    navigator.clipboard.writeText(nagaValue.textContent)
+                        .then(() => {
+                            copySuccess.textContent = "✓ Naga berhasil disalin!";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            copySuccess.textContent = "✗ Gagal menyalin Naga";
+                            copySuccess.style.color = "#e57373";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                }
+                
+                // Fungsi untuk memilih kata secara acak dari array
+                function acakKata(array) {
+                    return array[Math.floor(Math.random() * array.length)];
+                }
+                
+                // Event listener untuk tombol syair
+                generateSyairBtn.addEventListener('click', buatSyair);
+                copySyairBtn.addEventListener('click', salinSyair);
+                copyMkBtn.addEventListener('click', salinMk);
+                copyNagaBtn.addEventListener('click', salinNaga);
+                
+                // Buat syair pertama saat halaman dimuat
+                buatSyair();
+            }
+            
+            // Fungsi untuk prediksi togel (VERSI SIMPEL YANG BERFUNGSI)
+            function setupTogelPrediction() {
+                // Elements
+                const generateBtn = document.getElementById('generateBtn');
+                const copyBtn = document.getElementById('copyBtn');
+                const copyAllBtn = document.getElementById('copyAllBtn');
+                const marketSelect = document.getElementById('marketSelect');
+                const predictionResult = document.getElementById('predictionResult');
+                const autoDateRadio = document.getElementById('autoDate');
+                const manualDateRadio = document.getElementById('manualDate');
+                const manualDateInput = document.getElementById('manualDateInput');
+                const customDateInput = document.getElementById('customDateInput');
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                const marketSearch = document.getElementById('marketSearch');
+                const searchSuggestions = document.getElementById('searchSuggestions');
+                
+                // Data
+                const allMarkets = Array.from(marketSelect.options)
+                    .filter(option => option.value)
+                    .map(option => option.value);
+                
+                const shios = ['TIKUS', 'KERBAU', 'HARIMAU', 'KELINCI', 'NAGA', 'ULAR', 
+                              'KUDA', 'KAMBING', 'MONYET', 'AYAM', 'ANJING', 'BABI'];
+                const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                              'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                
+                // Tampilkan jumlah pasaran
+                document.getElementById('marketCount').textContent = allMarkets.length;
+                
+                // Format tanggal Indonesia
+                function formatCustomDate(dateString) {
+                    const date = new Date(dateString);
+                    const dayName = days[date.getDay()];
+                    const day = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    return `${dayName}, ${day} ${month} ${year}`;
+                }
+                
+                // Fungsi untuk mengecek apakah ada digit yang sama
+                function hasCommonDigits(num1, num2) {
+                    const digits1 = num1.toString().split('');
+                    const digits2 = num2.toString().split('');
+                    return digits1.some(digit => digits2.includes(digit));
+                }
+                
+                // Fungsi untuk generate angka dengan digit unik dalam 1 nomor
+                function generateUniqueDigitsNumber(length) {
+                    let digits = [];
+                    while(digits.length < length) {
+                        const digit = Math.floor(Math.random() * 10).toString();
+                        if (!digits.includes(digit)) {
+                            digits.push(digit);
+                        }
+                    }
+                    return digits.join('');
+                }
+                
+                // Update tampilan tanggal
+                function updateDateDisplay() {
+                    let dateText;
+                    
+                    if (autoDateRadio.checked) {
+                        const date = new Date();
+                        dateText = formatCustomDate(date);
+                    } else if (customDateInput.value) {
+                        dateText = formatCustomDate(customDateInput.value);
+                    } else {
+                        // Set default ke hari ini jika manual date dipilih tapi belum ada input
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        customDateInput.value = `${yyyy}-${mm}-${dd}`;
+                        dateText = formatCustomDate(customDateInput.value);
+                    }
+                    
+                    return dateText;
+                }
+                
+                // Simpan prediksi ke localStorage
+                function savePredictionsToStorage(predictions) {
+                    localStorage.setItem('togelPredictions', JSON.stringify(predictions));
+                }
+                
+                // Ambil prediksi dari localStorage
+                function loadPredictionsFromStorage() {
+                    const saved = localStorage.getItem('togelPredictions');
+                    return saved ? JSON.parse(saved) : {};
+                }
+                
+                // Generate angka unik (tanpa duplikat dalam 1 nomor)
+                function generateUniqueNumbers(count, digits, existingNumbers = []) {
+                    let numbers = [];
+                    while(numbers.length < count) {
+                        let num = generateUniqueDigitsNumber(digits);
+                        
+                        if (!existingNumbers.includes(num) && !numbers.includes(num)) {
+                            numbers.push(num);
+                        }
+                    }
+                    return numbers;
+                }
+                
+                // Generate angka kembar
+                function generateUniqueTwinNumbers(count, existingNumbers = []) {
+                    let twins = [];
+                    while(twins.length < count) {
+                        const num = Math.floor(Math.random() * 10);
+                        const twin = num.toString() + num.toString();
+                        
+                        if (!existingNumbers.includes(twin) && !twins.includes(twin)) {
+                            twins.push(twin);
+                        }
+                    }
+                    return twins;
+                }
+                
+                // Generate shio unik
+                function generateUniqueShios(existingShios = []) {
+                    let result = [];
+                    const availableShios = [...shios];
+                    
+                    existingShios.forEach(shio => {
+                        const index = availableShios.indexOf(shio);
+                        if (index > -1) {
+                            availableShios.splice(index, 1);
+                        }
+                    });
+                    
+                    while(result.length < 3 && availableShios.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * availableShios.length);
+                        result.push(availableShios[randomIndex]);
+                        availableShios.splice(randomIndex, 1);
+                    }
+                    
+                    return result;
+                }
+                
+                // Buat prediksi dalam format HTML (untuk tampilan)
+                function createStyledPrediction(market, dateText, data) {
+                    let html = `
+                        <div style="margin-bottom: 15px;">
+                            <div class="prediction-title">Prediksi ${market}</div>
+                            <div class="prediction-date" style="text-align:center;margin-bottom:15px;color:#7f8c8d;">${dateText}</div>
+                    `;
+                    
+                    Object.entries(data).forEach(([label, value]) => {
+                        html += `
+                            <div class="result-line">
+                                <div class="result-label">${label}</div>
+                                <div class="result-value">${value}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                        </div>
+                        <div class="footer-text" style="text-align:center;margin-top:20px;font-style:italic;">
+                            Selalu utamakan prediksi sendiri
+                        </div>
+                    `;
+                    
+                    return html;
+                }
+                
+                // Buat prediksi dalam format plain text (untuk copy)
+                function createPlainTextPrediction(market, dateText, data) {
+                    let text = `Prediksi ${market}\n${dateText}\n`;
+                    
+                    Object.entries(data).forEach(([label, value]) => {
+                        text += `${label}: ${value}\n`;
+                    });
+                    
+                    text += `Selalu utamakan prediksi sendiri`;
+                    
+                    return text;
+                }
+                
+                // Generate prediksi lengkap
+                function createPrediction(market, useCustomDate = false) {
+                    const dateText = updateDateDisplay();
+                    
+                    // Generate BBFS Kuat (7 digit unik)
+                    const bbfs = generateUniqueDigitsNumber(7);
+                    
+                    // Generate AM/AI/CK (5 digit unik) yang tidak ada digit sama dengan BBFS
+                    let amaic;
+                    let attempts = 0;
+                    const maxAttempts = 100;
+                    let foundUnique = false;
+                    
+                    while (!foundUnique && attempts < maxAttempts) {
+                        amaic = generateUniqueDigitsNumber(5);
+                        if (!hasCommonDigits(bbfs, amaic)) {
+                            foundUnique = true;
+                        }
+                        attempts++;
+                    }
+                    
+                    if (!foundUnique) {
+                        amaic = generateUniqueDigitsNumber(5);
+                    }
+                    
+                    // Generate angka prediksi lainnya (4D, 3D, 2D) dengan digit unik dalam 1 nomor
+                    const d4Numbers = generateUniqueNumbers(4, 4).join(' ');
+                    const d3Numbers = generateUniqueNumbers(4, 3).join(' ');
+                    const d2Numbers = generateUniqueNumbers(10, 2).join(' ');
+                    
+                    // Colok Bebas (1 digit unik)
+                    const colokBebas = generateUniqueNumbers(2, 1).join(' / ');
+                    
+                    // Colok Bebas 2D (2 digit unik dalam 1 nomor)
+                    const colokBebasDigits = colokBebas.replace(/[^0-9]/g, '').split('');
+                    let colokBebas2d;
+                    let valid2d = false;
+                    
+                    while (!valid2d) {
+                        const temp2d = [];
+                        for (let i = 0; i < 3; i++) {
+                            temp2d.push(generateUniqueDigitsNumber(2));
+                        }
+                        const hasDuplicate = temp2d.some(num => 
+                            colokBebasDigits.some(digit => num.includes(digit))
+                        );
+                        
+                        if (!hasDuplicate) {
+                            colokBebas2d = temp2d.join(' / ');
+                            valid2d = true;
+                        }
+                    }
+                    
+                    // Shio
+                    const shioValues = generateUniqueShios().join(' / ');
+                    
+                    // Invest Twin
+                    const investTwin = generateUniqueTwinNumbers(3).join(' / ');
+                    
+                    const predictionData = {
+                        "BBFS Kuat": bbfs,
+                        "AM/AI/CK": amaic,
+                        "4D (BB)": d4Numbers,
+                        "3D (BB)": d3Numbers,
+                        "2D (BB)": d2Numbers,
+                        "Colok Bebas": colokBebas,
+                        "Colok Bebas 2D": colokBebas2d,
+                        "Colok Shio": shioValues,
+                        "Invest Twin": investTwin
+                    };
+                    
+                    return {
+                        styled: createStyledPrediction(market, dateText, predictionData),
+                        plainText: createPlainTextPrediction(market, dateText, predictionData)
+                    };
+                }
+                
+                // Update tampilan prediksi
+                function updatePrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    const useCustomDate = manualDateRadio.checked;
+                    
+                    if (!selectedMarket) {
+                        predictionResult.innerHTML = '<div class="prediction-title">Pilih pasaran terlebih dahulu</div>';
+                        return;
+                    }
+                    
+                    if (predictions[selectedMarket]) {
+                        const storedPrediction = predictions[selectedMarket];
+                        const storedDateMatch = storedPrediction.plainText.match(/Prediksi .+\n(.+)\n/);
+                        const currentDate = updateDateDisplay();
+                        
+                        if (storedDateMatch && storedDateMatch[1] === currentDate) {
+                            predictionResult.innerHTML = storedPrediction.styled;
+                        } else {
+                            const newPrediction = createPrediction(selectedMarket, useCustomDate);
+                            predictionResult.innerHTML = newPrediction.styled;
+                            predictions[selectedMarket] = newPrediction;
+                            savePredictionsToStorage(predictions);
+                        }
+                    } else {
+                        const prediction = createPrediction(selectedMarket, useCustomDate);
+                        predictionResult.innerHTML = prediction.styled;
+                        predictions[selectedMarket] = prediction;
+                        savePredictionsToStorage(predictions);
+                    }
+                }
+                
+                // Generate prediksi baru
+                function generateNewPrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    const useCustomDate = manualDateRadio.checked;
+                    
+                    if (!selectedMarket) {
+                        predictionResult.innerHTML = '<div class="prediction-title">Pilih pasaran terlebih dahulu</div>';
+                        return;
+                    }
+                    
+                    const prediction = createPrediction(selectedMarket, useCustomDate);
+                    predictionResult.innerHTML = prediction.styled;
+                    predictions[selectedMarket] = prediction;
+                    savePredictionsToStorage(predictions);
+                }
+                
+                // Copy hasil prediksi
+                function copyPrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    
+                    if (!selectedMarket) {
+                        alert("Silakan pilih pasaran terlebih dahulu!");
+                        return;
+                    }
+                    
+                    const textToCopy = predictions[selectedMarket].plainText;
+                    
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Tercopy!';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Hasil';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Gagal menyalin teks: ', err);
+                    });
+                }
+                
+                // Copy semua pasaran
+                function copyAllPredictions() {
+                    let allPredictionsText = '';
+                    const useCustomDate = manualDateRadio.checked;
+                    const currentDate = updateDateDisplay();
+                    
+                    allPredictionsText += `PREDIKSI TOGEL SEMUA PASARAN\n${currentDate}\n\n`;
+                    
+                    const predictions = {};
+                    allMarkets.forEach(market => {
+                        predictions[market] = createPrediction(market, useCustomDate);
+                    });
+                    
+                    savePredictionsToStorage(predictions);
+                    
+                    allMarkets.forEach(market => {
+                        allPredictionsText += predictions[market].plainText + '\n\n';
+                    });
+                    
+                    navigator.clipboard.writeText(allPredictionsText).then(() => {
+                        copyAllBtn.innerHTML = '<i class="fas fa-check"></i> Tercopy Semua!';
+                        setTimeout(() => {
+                            copyAllBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Semua Pasaran';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Gagal menyalin teks: ', err);
+                    });
+                }
+                
+                // Dark mode functions
+                function toggleDarkMode() {
+                    const body = document.body;
+                    body.classList.toggle('dark-mode');
+                    const isDarkMode = body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+                }
+                
+                function loadDarkModePreference() {
+                    const savedPreference = localStorage.getItem('darkMode');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    
+                    if (savedPreference === 'enabled' || (savedPreference === null && prefersDark)) {
+                        document.body.classList.add('dark-mode');
+                    }
+                }
+                
+                // Fungsi untuk pencarian pasaran
+                function searchMarkets(query) {
+                    if (!query) {
+                        searchSuggestions.style.display = 'none';
+                        return;
+                    }
+                    
+                    const lowerQuery = query.toLowerCase();
+                    const filteredMarkets = allMarkets.filter(market => 
+                        market.toLowerCase().includes(lowerQuery)
+                    );
+                    
+                    if (filteredMarkets.length === 0) {
+                        searchSuggestions.innerHTML = '<div class="suggestion-item">Tidak ditemukan</div>';
+                        searchSuggestions.style.display = 'block';
+                        return;
+                    }
+                    
+                    searchSuggestions.innerHTML = '';
+                    filteredMarkets.forEach(market => {
+                        const div = document.createElement('div');
+                        div.className = 'suggestion-item';
+                        
+                        // Highlight teks yang cocok
+                        const lowerMarket = market.toLowerCase();
+                        const startIndex = lowerMarket.indexOf(lowerQuery);
+                        const endIndex = startIndex + query.length;
+                        
+                        if (startIndex >= 0) {
+                            const before = market.substring(0, startIndex);
+                            const match = market.substring(startIndex, endIndex);
+                            const after = market.substring(endIndex);
+                            
+                            div.innerHTML = `${before}<span class="highlight">${match}</span>${after}`;
+                        } else {
+                            div.textContent = market;
+                        }
+                        
+                        div.addEventListener('click', () => {
+                            marketSelect.value = market;
+                            marketSearch.value = market;
+                            searchSuggestions.style.display = 'none';
+                            updatePrediction();
+                        });
+                        
+                        searchSuggestions.appendChild(div);
+                    });
+                    
+                    searchSuggestions.style.display = 'block';
+                }
+                
+                // Event listeners
+                generateBtn.addEventListener('click', generateNewPrediction);
+                marketSelect.addEventListener('change', updatePrediction);
+                copyBtn.addEventListener('click', copyPrediction);
+                copyAllBtn.addEventListener('click', copyAllPredictions);
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+                
+                // Event listeners untuk fitur pencarian
+                marketSearch.addEventListener('input', (e) => {
+                    searchMarkets(e.target.value);
+                });
+                
+                marketSearch.addEventListener('focus', () => {
+                    if (marketSearch.value) {
+                        searchMarkets(marketSearch.value);
+                    }
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!marketSearch.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                        searchSuggestions.style.display = 'none';
+                    }
+                });
+                
+                autoDateRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        manualDateInput.style.display = 'none';
+                        updatePrediction();
+                    }
+                });
+                
+                manualDateRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        manualDateInput.style.display = 'block';
+                        if (!customDateInput.value) {
+                            const today = new Date();
+                            const yyyy = today.getFullYear();
+                            const mm = String(today.getMonth() + 1).padStart(2, '0');
+                            const dd = String(today.getDate()).padStart(2, '0');
+                            customDateInput.value = `${yyyy}-${mm}-${dd}`;
+                        }
+                        updatePrediction();
+                    }
+                });
+                
+                customDateInput.addEventListener('change', function() {
+                    updatePrediction();
+                });
+                
+                // Inisialisasi
+                loadDarkModePreference();
+                updatePrediction();
+            }
+            
+            // Panggil setup fungsi untuk kedua fitur
+            setupTogelPrediction();
+            setupSyairGenerator();
+        });
+    </script>
+</body>
+</html>
