@@ -332,7 +332,7 @@ body.dark-mode .result h3 {
   gap: 8px;
 }
 
-/* PERUBAHAN: Warna teks hasil untuk mode terang */
+/* Warna teks hasil untuk mode terang */
 .result-value {
   background-color: rgba(67, 97, 238, 0.08);
   padding: 12px 15px;
@@ -743,6 +743,16 @@ body.dark-mode .btn-secondary:hover {
           </button>
         </div>
       </div>
+      <!-- Baru: Tambahan Salin URL -->
+      <div class="result-item">
+        <span class="result-label"><i class="fas fa-link"></i> URL Gambar:</span>
+        <div class="result-value">
+          <span id="imageUrlResult">-</span>
+          <button class="copy-btn" onclick="copyToClipboard('imageUrlResult')">
+            <i class="far fa-copy"></i>
+          </button>
+        </div>
+      </div>
       <div class="result-item">
         <span class="result-label"><i class="fas fa-landmark"></i> Jenis Bank:</span>
         <div class="result-value">
@@ -896,6 +906,18 @@ async function processImage() {
     if (document.getElementById('selectedBank')) {
       document.getElementById('selectedBank').textContent = bankSelect.value;
     }
+    
+    // Tampilkan URL gambar yang diproses
+    if (document.getElementById('imageUrlResult')) {
+      // Jika URL terlalu panjang, tampilkan versi singkatnya
+      let displayUrl = imageUrl;
+      if (imageUrl.length > 50) {
+        displayUrl = imageUrl.substring(0, 25) + '...' + imageUrl.substring(imageUrl.length - 25);
+      }
+      document.getElementById('imageUrlResult').textContent = displayUrl;
+      // Simpan URL lengkap sebagai atribut data
+      document.getElementById('imageUrlResult').setAttribute('data-full-url', imageUrl);
+    }
 
     showNotification('Gambar berhasil diproses!');
 
@@ -1047,8 +1069,12 @@ function copyToClipboard(elementId) {
   let textToCopy = element.textContent;
   let fieldName = "Teks";
 
+  // Untuk imageUrlResult, gunakan URL lengkap dari data attribute
+  if (elementId === 'imageUrlResult' && element.hasAttribute('data-full-url')) {
+    textToCopy = element.getAttribute('data-full-url');
+  }
   // Untuk totalAmount, gunakan nilai bersih jika ada
-  if (elementId === 'totalAmount' && element.hasAttribute('data-clean')) {
+  else if (elementId === 'totalAmount' && element.hasAttribute('data-clean')) {
     textToCopy = element.getAttribute('data-clean');
   }
   
@@ -1059,6 +1085,7 @@ function copyToClipboard(elementId) {
     case 'totalAmount': fieldName = "Total Pembayaran"; break;
     case 'rrn': fieldName = "Nomor Referensi"; break;
     case 'selectedBank': fieldName = "Jenis Bank"; break;
+    case 'imageUrlResult': fieldName = "URL Gambar"; break;
   }
 
   navigator.clipboard.writeText(textToCopy).then(() => {
@@ -1141,6 +1168,10 @@ document.addEventListener('DOMContentLoaded', function() {
       if (document.getElementById('totalAmount')) document.getElementById('totalAmount').textContent = '-';
       if (document.getElementById('rrn')) document.getElementById('rrn').textContent = '-';
       if (document.getElementById('selectedBank')) document.getElementById('selectedBank').textContent = '-';
+      if (document.getElementById('imageUrlResult')) {
+        document.getElementById('imageUrlResult').textContent = '-';
+        document.getElementById('imageUrlResult').removeAttribute('data-full-url');
+      }
       uploadedImageUrl = null;
       currentImageUrl = null;
       if (fileInput) fileInput.value = '';
