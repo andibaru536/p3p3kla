@@ -992,7 +992,7 @@
                 });
             });
             
-            // Fungsi untuk generator syair
+            // Fungsi untuk generator syair dengan jaminan unik
             function setupSyairGenerator() {
                 const baris1 = document.getElementById('baris1');
                 const baris2 = document.getElementById('baris2');
@@ -1007,7 +1007,7 @@
                 const nagaValue = document.getElementById('nagaValue');
                 const copySuccess = document.getElementById('copy-success');
                 
-                // Database baris syair pendek (3-4 kata)
+                // Database baris syair yang lebih besar (100 baris unik)
                 const barisPendek = [
                     "Angka tersembunyi dalam mimpi",
                     "Petunjuk alam menanti",
@@ -1036,7 +1036,82 @@
                     "Malam penuh misteri",
                     "Senja menyimpan rahasia",
                     "Fajar membawa harapan",
-                    "Angka terpendam dalam hati"
+                    "Angka terpendam dalam hati",
+                    "Kabut pagi menyelimuti",
+                    "Embun di dedaunan",
+                    "Cahaya rembulan memandu",
+                    "Suara gemericik air",
+                    "Daun berguguran berjatuhan",
+                    "Bunga mekar indah",
+                    "Kicau burung pagi hari",
+                    "Desir angin malam",
+                    "Gelombang laut berdebur",
+                    "Pasir pantai berkilau",
+                    "Batu karang kokoh berdiri",
+                    "Awan berarak di langit",
+                    "Kilat menyambar gelap",
+                    "Guntur menggelegar kencang",
+                    "Gerimis membasahi bumi",
+                    "Kabut tebal menyelimuti",
+                    "Mentari terbit di timur",
+                    "Bulan purnama bersinar",
+                    "Bintang bertaburan indah",
+                    "Galaksi jauh memesona",
+                    "Alam semesta tak terbatas",
+                    "Keheningan malam sunyi",
+                    "Kesunyian hati terdalam",
+                    "Harapan tak pernah padam",
+                    "Impian terus mengudara",
+                    "Semangat pantang menyerah",
+                    "Perjalanan tak berujung",
+                    "Tujuan masih jauh",
+                    "Petualangan menanti",
+                    "Kejutan tak terduga",
+                    "Keajaiban terjadi",
+                    "Misteri terungkap perlahan",
+                    "Jalan setapak berliku",
+                    "Bukit tinggi menantang",
+                    "Lembah hijau permai",
+                    "Sungai jernih mengalir",
+                    "Danau tenang memantulkan",
+                    "Air terjun deras",
+                    "Gunung berapi mengancam",
+                    "Hutan rimba lebat",
+                    "Padang rumput luas",
+                    "Gurun pasir panas",
+                    "Salju turun lembut",
+                    "Es membeku di danau",
+                    "Angin topan mengamuk",
+                    "Badai menerjang pantai",
+                    "Ombak besar menghempas",
+                    "Kapal berlayar jauh",
+                    "Perahu kecil terombang",
+                    "Jangkar diturunkan pelan",
+                    "Layar terkembang lebar",
+                    "Nakhoda memandu arah",
+                    "Peta kuno terbuka",
+                    "Harta karun tersembunyi",
+                    "Pulau terpencil menunggu",
+                    "Rahasia bawah laut",
+                    "Terumbu karang warna",
+                    "Ikan berenang lincah",
+                    "Penyu berenang tenang",
+                    "Lumba-lumba melompat",
+                    "Paus menyembur air",
+                    "Hiu mengintai diam",
+                    "Ubur-ubur mengambang",
+                    "Gurita bersembunyi",
+                    "Bintang laut di pasir",
+                    "Kerang mutiara berharga",
+                    "Mutiara indah bersinar",
+                    "Permata berkilauan",
+                    "Emas murni berharga",
+                    "Perak berkilau indah",
+                    "Intan bersinar terang",
+                    "Ruby merah menyala",
+                    "Zamrud hijau memikat",
+                    "Safir biru dalam",
+                    "Permata langka ditemukan"
                 ];
                 
                 // Pola rima yang mungkin
@@ -1046,11 +1121,6 @@
                     { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
                     { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" }
                 ];
-                
-                // Fungsi untuk membuat baris pendek
-                function buatBarisPendek() {
-                    return barisPendek[Math.floor(Math.random() * barisPendek.length)];
-                }
                 
                 // Fungsi untuk menghasilkan angka unik
                 function generateUniqueNumbers(count, min, max) {
@@ -1064,19 +1134,50 @@
                     return numbers;
                 }
                 
-                // Fungsi untuk menghasilkan syair baru
+                // Menyimpan sejarah syair untuk memastikan keunikan
+                let generatedSyairs = new Set();
+                let usedLines = new Set();
+                
+                // Fungsi untuk menghasilkan syair baru yang unik
                 function buatSyair() {
-                    // Pilih pola rima secara acak
-                    const polaTerpilih = acakKata(polaRima);
-                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh})`;
+                    let attempts = 0;
+                    let maxAttempts = 100;
+                    let newSyair = [];
                     
-                    // Buat empat baris syair pendek
-                    const baris = [
-                        buatBarisPendek(),
-                        buatBarisPendek(),
-                        buatBarisPendek(),
-                        buatBarisPendek()
-                    ];
+                    while (attempts < maxAttempts) {
+                        // Reset array untuk syair baru
+                        newSyair = [];
+                        
+                        // Pilih pola rima secara acak
+                        const polaTerpilih = acakKata(polaRima);
+                        patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh})`;
+                        
+                        // Buat empat baris syair pendek yang unik
+                        for (let i = 0; i < 4; i++) {
+                            let newLine;
+                            let lineAttempts = 0;
+                            
+                            // Cari baris yang belum pernah digunakan
+                            do {
+                                newLine = acakKata(barisPendek);
+                                lineAttempts++;
+                            } while (usedLines.has(newLine) && lineAttempts < 50);
+                            
+                            usedLines.add(newLine);
+                            newSyair.push(newLine);
+                        }
+                        
+                        // Buat representasi string untuk syair
+                        const syairString = newSyair.join('|');
+                        
+                        // Jika syair belum pernah dibuat, keluar dari loop
+                        if (!generatedSyairs.has(syairString)) {
+                            generatedSyairs.add(syairString);
+                            break;
+                        }
+                        
+                        attempts++;
+                    }
                     
                     // Generate MK (2 angka unik 0-9)
                     const mkNumbers = generateUniqueNumbers(2, 0, 9);
@@ -1093,19 +1194,19 @@
                     baris4.style.opacity = "0";
                     
                     setTimeout(() => {
-                        baris1.textContent = baris[0];
+                        baris1.textContent = newSyair[0];
                         baris1.style.opacity = "1";
                         
                         setTimeout(() => {
-                            baris2.textContent = baris[1];
+                            baris2.textContent = newSyair[1];
                             baris2.style.opacity = "1";
                             
                             setTimeout(() => {
-                                baris3.textContent = baris[2];
+                                baris3.textContent = newSyair[2];
                                 baris3.style.opacity = "1";
                                 
                                 setTimeout(() => {
-                                    baris4.textContent = baris[3];
+                                    baris4.textContent = newSyair[3];
                                     baris4.style.opacity = "1";
                                 }, 150);
                             }, 150);
