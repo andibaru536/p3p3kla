@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediksi Togel & Generator Syair</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%233498db'/><path d='M50 20 L65 40 L75 35 L70 55 L85 60 L65 65 L70 85 L50 75 L30 85 L35 65 L15 60 L30 55 L25 35 L35 40 Z' fill='%23FFD700'/><text x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dominant-baseline='middle'>PS</text></svg>">
     <style>
         * {
             box-sizing: border-box;
@@ -155,10 +156,27 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            background: rgba(240, 240, 240, 0.2);
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dark-mode .dark-mode-container {
+            background: rgba(50, 50, 50, 0.3);
+        }
+        
+        .dark-mode-container:hover {
+            background: rgba(200, 200, 200, 0.3);
+        }
+        
+        .dark-mode .dark-mode-container:hover {
+            background: rgba(70, 70, 70, 0.5);
         }
         
         .dark-mode-toggle {
-            background: #f0f0f0;
+            background: linear-gradient(to right, #3498db, #2980b9);
             border: none;
             cursor: pointer;
             width: 50px;
@@ -166,10 +184,12 @@
             border-radius: 13px;
             position: relative;
             transition: all 0.3s;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
         }
         
         .dark-mode .dark-mode-toggle {
-            background: #333;
+            background: linear-gradient(to right, #4a5568, #2d3748);
+            box-shadow: 0 0 5px rgba(66, 153, 225, 0.5);
         }
         
         .toggle-handle {
@@ -180,21 +200,29 @@
             height: 20px;
             background: white;
             border-radius: 50%;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         .dark-mode .toggle-handle {
             left: calc(100% - 23px);
             background: #FFD700;
+            transform: rotate(360deg);
         }
         
         .moon-icon, .sun-icon {
             width: 14px;
             height: 14px;
             transition: all 0.3s;
+            fill: #2c3e50;
+        }
+        
+        .dark-mode .moon-icon, 
+        .dark-mode .sun-icon {
+            fill: #ffffff;
         }
         
         .moon-icon {
@@ -212,6 +240,16 @@
         
         .dark-mode .sun-icon {
             opacity: 1;
+        }
+        
+        .dark-mode-label {
+            font-weight: 500;
+            font-size: 14px;
+            color: #2c3e50;
+        }
+        
+        .dark-mode .dark-mode-label {
+            color: #f0f0f0;
         }
         
         /* FITUR PENCARIAN */
@@ -704,8 +742,8 @@
             <div class="input-section">
                 <div class="input-header">
                     <label class="input-label">Pilih Pasaran (<span id="marketCount">0</span> pasaran tersedia):</label>
-                    <div class="dark-mode-container">
-                        <button class="dark-mode-toggle" id="darkModeToggle" aria-label="Toggle dark mode">
+                    <div class="dark-mode-container" id="darkModeToggle">
+                        <button class="dark-mode-toggle">
                             <span class="toggle-handle">
                                 <svg class="moon-icon" viewBox="0 0 24 24">
                                     <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -715,7 +753,7 @@
                                 </svg>
                             </span>
                         </button>
-                        <span>Mode Gelap</span>
+                        <span class="dark-mode-label">Mode Gelap</span>
                     </div>
                 </div>
                 
