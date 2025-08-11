@@ -561,6 +561,47 @@
             background: rgba(0,0,0,0.08);
         }
 
+        /* ===== VIEW TOGGLE STYLES ===== */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0 25px;
+            gap: 8px;
+        }
+
+        .view-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--search-border);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: var(--shadow);
+        }
+
+        .view-btn:hover {
+            background: rgba(106, 17, 203, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .view-btn.active {
+            background: var(--btn-bg);
+            color: white;
+            border-color: rgba(255,255,255,0.2);
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.25);
+        }
+
+        .view-btn i {
+            font-size: 1rem;
+        }
+
+        /* ===== SHORTCUT VIEW STYLES ===== */
         .shortcut-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -638,6 +679,102 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
             letter-spacing: 0.3px;
             font-size: 0.9rem;
+        }
+
+        /* Table View Styles */
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+            display: none;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .shortcut-table th {
+            background: var(--btn-bg);
+            color: white;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+
+        .shortcut-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .shortcut-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .shortcut-table tr:hover td {
+            background: rgba(106, 17, 203, 0.05);
+        }
+
+        .table-icon {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-right: 12px;
+            vertical-align: middle;
+        }
+
+        /* Compact View Styles */
+        .shortcut-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 14px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .compact-btn {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--search-border);
+            padding: 14px 10px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .compact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            border-color: var(--accent-color);
+        }
+
+        .compact-icon {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .compact-btn:hover .compact-icon {
+            transform: scale(1.15);
+        }
+
+        .compact-text {
+            font-size: 0.8rem;
+            line-height: 1.3;
         }
 
         .section-title {
@@ -1103,6 +1240,16 @@
             .floating {
                 display: none;
             }
+            
+            .view-btn {
+                padding: 7px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .shortcut-table th, 
+            .shortcut-table td {
+                padding: 12px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1155,6 +1302,29 @@
             .search-icon {
                 left: 18px;
                 font-size: 1.1rem;
+            }
+            
+            .view-toggle {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .view-btn {
+                padding: 6px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .shortcut-table {
+                font-size: 0.85rem;
+            }
+            
+            .shortcut-table th, 
+            .shortcut-table td {
+                padding: 10px;
+            }
+            
+            .table-icon {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -1234,9 +1404,23 @@
         </div>
 
         <div class="search-results-count glass" id="searchResultsCount"></div>
+        
+        <!-- View Toggle -->
+        <div class="view-toggle glass">
+            <button class="view-btn active" id="gridViewBtn" data-view="grid">
+                <i class="fas fa-th-large"></i> Grid
+            </button>
+            <button class="view-btn" id="tableViewBtn" data-view="table">
+                <i class="fas fa-table"></i> Tabel
+            </button>
+            <button class="view-btn" id="compactViewBtn" data-view="compact">
+                <i class="fas fa-list"></i> Compact
+            </button>
+        </div>
 
         <h2 class="section-title"><i class="fas fa-th-large"></i> Shortcut Tersedia</h2>
 
+        <!-- Grid View -->
         <div class="shortcut-grid" id="shortcutGrid">
             <!-- Shortcuts yang sudah ada -->
             <a href="https://whatismyipaddress.com/" class="shortcut-btn" target="_blank" data-keywords="ip address network">
@@ -1343,6 +1527,25 @@
                 <i class="fas fa-id-card btn-icon"></i>
                 <span class="btn-text">CEK KTP</span>
             </a>
+        </div>
+        
+        <!-- Table View -->
+        <table class="shortcut-table" id="shortcutTable">
+            <thead>
+                <tr>
+                    <th>Icon</th>
+                    <th>Nama Shortcut</th>
+                    <th>Deskripsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Shortcuts akan diisi oleh JavaScript -->
+            </tbody>
+        </table>
+        
+        <!-- Compact View -->
+        <div class="shortcut-compact" id="shortcutCompact">
+            <!-- Shortcuts akan diisi oleh JavaScript -->
         </div>
 
         <!-- Password Generator Section -->
@@ -1458,11 +1661,15 @@
         const searchClear = document.getElementById('searchClear');
         const suggestionsContainer = document.getElementById('suggestionsContainer');
         const shortcutGrid = document.getElementById('shortcutGrid');
+        const shortcutTable = document.getElementById('shortcutTable');
+        const shortcutTableBody = shortcutTable.querySelector('tbody');
+        const shortcutCompact = document.getElementById('shortcutCompact');
         const searchResultsCount = document.getElementById('searchResultsCount');
         const shortcutButtons = Array.from(document.querySelectorAll('.shortcut-btn'));
 
         // Simpan shortcut asli untuk reset
         const originalShortcuts = [...shortcutButtons];
+        let currentView = localStorage.getItem('viewPreference') || 'grid';
 
         function initKeywords() {
             shortcutButtons.forEach(btn => {
@@ -1503,15 +1710,50 @@
         }
 
         function resetShortcuts() {
-            shortcutGrid.innerHTML = '';
-            originalShortcuts.forEach(btn => shortcutGrid.appendChild(btn.cloneNode(true)));
+            // Reset view based on current preference
+            switchView(currentView);
             searchResultsCount.style.display = 'none';
             suggestionsContainer.style.display = 'none';
         }
 
         function updateSearchResults(results, searchTerm) {
+            // Clear current view
             shortcutGrid.innerHTML = '';
-            results.forEach(btn => shortcutGrid.appendChild(btn));
+            shortcutTableBody.innerHTML = '';
+            shortcutCompact.innerHTML = '';
+            
+            // Update based on current view
+            if (currentView === 'grid') {
+                results.forEach(btn => shortcutGrid.appendChild(btn));
+            } else if (currentView === 'table') {
+                results.forEach(btn => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><i class="${btn.querySelector('.btn-icon').className.replace('btn-icon', '').trim()} table-icon"></i></td>
+                        <td>${btn.querySelector('.btn-text').textContent}</td>
+                        <td>${btn.dataset.keywords || ''}</td>
+                    `;
+                    
+                    // Add click event to open link
+                    row.addEventListener('click', () => {
+                        window.open(btn.href, '_blank');
+                    });
+                    
+                    shortcutTableBody.appendChild(row);
+                });
+            } else if (currentView === 'compact') {
+                results.forEach(btn => {
+                    const compactBtn = document.createElement('a');
+                    compactBtn.className = 'compact-btn';
+                    compactBtn.href = btn.href;
+                    compactBtn.target = '_blank';
+                    compactBtn.innerHTML = `
+                        <i class="${btn.querySelector('.btn-icon').className.replace('btn-icon', '').trim()} compact-icon"></i>
+                        <span class="compact-text">${btn.querySelector('.btn-text').textContent}</span>
+                    `;
+                    shortcutCompact.appendChild(compactBtn);
+                });
+            }
 
             if (results.length > 0) {
                 searchResultsCount.textContent = `Menampilkan ${results.length} hasil untuk "${searchTerm}"`;
@@ -1586,8 +1828,89 @@
             searchClear.style.opacity = '0';
             resetShortcuts();
         }
-
-        // ============== 4. PASSWORD GENERATOR ==============
+        
+        // ============== 4. VIEW TOGGLE FUNCTIONALITY ==============
+        const gridViewBtn = document.getElementById('gridViewBtn');
+        const tableViewBtn = document.getElementById('tableViewBtn');
+        const compactViewBtn = document.getElementById('compactViewBtn');
+        
+        function initViewPreference() {
+            const savedView = localStorage.getItem('viewPreference') || 'grid';
+            switchView(savedView);
+            
+            // Set active button
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-view="${savedView}"]`).classList.add('active');
+        }
+        
+        function switchView(viewType) {
+            currentView = viewType;
+            localStorage.setItem('viewPreference', viewType);
+            
+            // Hide all views
+            shortcutGrid.style.display = 'none';
+            shortcutTable.style.display = 'none';
+            shortcutCompact.style.display = 'none';
+            
+            // Show selected view
+            if (viewType === 'grid') {
+                shortcutGrid.style.display = 'grid';
+                populateGridView();
+            } else if (viewType === 'table') {
+                shortcutTable.style.display = 'table';
+                populateTableView();
+            } else if (viewType === 'compact') {
+                shortcutCompact.style.display = 'grid';
+                populateCompactView();
+            }
+        }
+        
+        function populateGridView() {
+            shortcutGrid.innerHTML = '';
+            originalShortcuts.forEach(btn => {
+                shortcutGrid.appendChild(btn.cloneNode(true));
+            });
+        }
+        
+        function populateTableView() {
+            shortcutTableBody.innerHTML = '';
+            
+            originalShortcuts.forEach(btn => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><i class="${btn.querySelector('.btn-icon').className.replace('btn-icon', '').trim()} table-icon"></i></td>
+                    <td>${btn.querySelector('.btn-text').textContent}</td>
+                    <td>${btn.dataset.keywords || ''}</td>
+                `;
+                
+                // Add click event to open link
+                row.addEventListener('click', () => {
+                    window.open(btn.href, '_blank');
+                });
+                
+                shortcutTableBody.appendChild(row);
+            });
+        }
+        
+        function populateCompactView() {
+            shortcutCompact.innerHTML = '';
+            
+            originalShortcuts.forEach(btn => {
+                const compactBtn = document.createElement('a');
+                compactBtn.className = 'compact-btn';
+                compactBtn.href = btn.href;
+                compactBtn.target = '_blank';
+                compactBtn.innerHTML = `
+                    <i class="${btn.querySelector('.btn-icon').className.replace('btn-icon', '').trim()} compact-icon"></i>
+                    <span class="compact-text">${btn.querySelector('.btn-text').textContent}</span>
+                `;
+                shortcutCompact.appendChild(compactBtn);
+            });
+        }
+        
+        // ============== 5. PASSWORD GENERATOR ==============
         const generateBtn = document.getElementById('generateBtn');
         const copyBtn = document.getElementById('copyBtn');
         const passwordDisplay = document.getElementById('passwordDisplay');
@@ -1711,7 +2034,7 @@
             }
         }
 
-        // ============== 5. PARTICLE EFFECT ==============
+        // ============== 6. PARTICLE EFFECT ==============
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 20;
@@ -1736,7 +2059,7 @@
             }
         }
 
-        // ============== 6. EVENT LISTENERS DAN INISIALISASI ==============
+        // ============== 7. EVENT LISTENERS DAN INISIALISASI ==============
         document.addEventListener('DOMContentLoaded', function() {
             // Inisialisasi status login
             checkLogin();
@@ -1757,6 +2080,9 @@
 
             // Buat particle effect
             createParticles();
+            
+            // Inisialisasi tampilan shortcut
+            initViewPreference();
 
             // Event Listeners
             // Login
@@ -1834,6 +2160,25 @@
                     }
                 }
             });
+            
+            // View Toggle
+            gridViewBtn.addEventListener('click', () => {
+                switchView('grid');
+                document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+                gridViewBtn.classList.add('active');
+            });
+            
+            tableViewBtn.addEventListener('click', () => {
+                switchView('table');
+                document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+                tableViewBtn.classList.add('active');
+            });
+            
+            compactViewBtn.addEventListener('click', () => {
+                switchView('compact');
+                document.querySelectorAll('.view-btn').forEach(btn => btn.classList.remove('active'));
+                compactViewBtn.classList.add('active');
+            });
 
             // Password Generator
             passwordLength.addEventListener('input', function() {
@@ -1851,8 +2196,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
