@@ -1114,6 +1114,12 @@
                     "Permata langka ditemukan"
                 ];
                 
+                // Filter baris yang memiliki 3-4 kata
+                const filteredBaris = barisPendek.filter(baris => {
+                    const words = baris.split(' ');
+                    return words.length >= 3 && words.length <= 4;
+                });
+                
                 // Pola rima yang mungkin
                 const polaRima = [
                     { pola: "a-a-a-a", contoh: "merah - merah - merah - merah" },
@@ -1159,7 +1165,7 @@
                             
                             // Cari baris yang belum pernah digunakan
                             do {
-                                newLine = acakKata(barisPendek);
+                                newLine = acakKata(filteredBaris);
                                 lineAttempts++;
                             } while (usedLines.has(newLine) && lineAttempts < 50);
                             
