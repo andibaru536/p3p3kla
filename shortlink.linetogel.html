@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short Link Generator</title>
+    <!-- Favicon baru yang sesuai dengan tema -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -196,6 +198,7 @@
             margin-top: 15px;
         }
         
+        /* Perubahan di sini: Mengubah menjadi link yang bisa diklik */
         .short-url {
             flex: 1;
             padding: 12px 15px;
@@ -206,6 +209,17 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            /* Styling tambahan untuk link */
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: block;
+        }
+        
+        .short-url:hover {
+            background: rgba(30, 41, 59, 0.9);
+            color: #bfdbfe;
+            text-decoration: underline;
         }
         
         .copy-btn {
@@ -375,7 +389,8 @@
                 <div class="result-container" id="result-container">
                     <h3><i class="fas fa-check-circle"></i> Tautan Pendek Anda:</h3>
                     <div class="result-box">
-                        <div class="short-url" id="short-url"></div>
+                        <!-- Perubahan di sini: Mengubah menjadi link yang bisa diklik -->
+                        <a href="#" class="short-url" id="short-url" target="_blank"></a>
                         <button class="copy-btn" id="copy-btn">
                             <i class="far fa-copy"></i> Salin
                         </button>
@@ -502,8 +517,9 @@
                 try {
                     const shortUrl = await shortenUrl(longUrl);
                     
-                    // Display result
+                    // Display result dan set href untuk link
                     shortUrlElement.textContent = shortUrl;
+                    shortUrlElement.href = shortUrl;
                     shortUrlElement.setAttribute('data-url', shortUrl);
                     resultContainer.classList.add('active');
                 } catch (error) {
