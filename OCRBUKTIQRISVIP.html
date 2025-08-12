@@ -828,7 +828,21 @@ function showNotification(message, isError = false) {
   }, 3000);
 }
 
-// Fungsi untuk memproses nominal
+// Fungsi untuk memproses nominal khusus BCA (hilangkan .00)
+function processBCAAmount(amountStr) {
+  // Hapus semua karakter non-digit kecuali koma dan titik
+  let cleaned = amountStr.replace(/[^\d,.]/g, '');
+  
+  // Hapus desimal .00 atau ,00 jika ada di akhir
+  cleaned = cleaned.replace(/(\.|,)\d{2}$/, '');
+  
+  // Hapus semua titik (pemisah ribuan)
+  cleaned = cleaned.replace(/\./g, '').replace(',', '');
+  
+  return cleaned;
+}
+
+// Fungsi untuk memproses nominal bank lain
 function processAmount(amountStr) {
   // Hapus semua karakter non-digit kecuali koma dan titik
   let cleaned = amountStr.replace(/[^\d,.]/g, '');
@@ -994,15 +1008,12 @@ function extractDataFromText(text, bankType) {
     }
 
   } else if (bankType === 'BCA') {
-    // PERBAIKAN KHUSUS UNTUK BCA - Fokus pada nominal di atas kata "DARI"
-    
     // 1. Merchant Name: Ambil di atas nomor transaksi
     const transaksiMatch = text.match(/No\.?\s*Transaksi\s*[:]?\s*([^\n]+)/i);
     if (transaksiMatch) {
       const lines = text.split('\n');
       const index = lines.findIndex(line => line.includes(transaksiMatch[0]));
       if (index > 0) {
-        // Ambil baris sebelumnya sebagai merchant name
         merchantName = lines[index - 1].trim();
       }
     }
@@ -1012,49 +1023,59 @@ function extractDataFromText(text, bankType) {
                      text.match(/Ref(?:erence)?\s*[:]?\s*(\d{6,})/i);
     rrn = rrnMatch ? rrnMatch[1].trim() : rrn;
 
-    // 3. Total: Fokus pada nominal sebelum kata "DARI"
-    let amountMatch = null;
+    // 3. PERBAIKAN KHUSUS UNTUK TOTAL BCA: Ambil nominal dengan pembulatan
+    // Cari semua kemunculan Rp. diikuti angka
+    const amountMatches = [...text.matchAll(/Rp\.?\s*([\d.,]+)/gi)];
     
-    // Pola 1: Cari Rp [nominal] diikuti oleh kata "DARI" (dalam baris yang sama atau berbeda)
-    const amountPattern = /Rp\s*([\d.,]+)[\s\S]*?DARI/i;
-    amountMatch = text.match(amountPattern);
-    
-    // Pola 2: Jika tidak ditemukan, cari nominal terbesar di seluruh teks
-    if (!amountMatch) {
-      const allAmounts = text.match(/Rp\s*([\d.,]+)/gi) || [];
-      if (allAmounts.length > 0) {
-        // Urutkan dari terbesar ke terkecil
-        const sortedAmounts = allAmounts
-          .map(amt => {
-            const value = parseInt(processAmount(amt)) || 0;
-            return {text: amt, value: value};
-          })
-          .sort((a, b) => b.value - a.value);
+    if (amountMatches.length > 0) {
+      // Ekstrak angka dari setiap match dan konversi ke number
+      const amounts = amountMatches.map(match => {
+        // Proses khusus untuk BCA: hilangkan desimal .00
+        const cleaned = processBCAAmount(match[1]);
+        return parseInt(cleaned) || 0;
+      });
+      
+      // Cari nilai maksimum (biasanya total transfer)
+      const maxAmount = Math.max(...amounts);
+      
+      if (maxAmount > 0) {
+        // Format ulang untuk ditampilkan (tanpa desimal)
+        totalAmount = 'Rp' + maxAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         
-        // Ambil nilai terbesar
-        if (sortedAmounts.length > 0 && sortedAmounts[0].value > 0) {
-          const biggestAmount = sortedAmounts[0].text;
-          amountMatch = biggestAmount.match(/Rp\s*([\d.,]+)/i);
-        }
-      }
-    }
-
-    if (amountMatch) {
-      const amountValue = processAmount(amountMatch[1]);
-      if (amountValue && !isNaN(parseInt(amountValue))) {
-        totalAmount = formatCurrency(amountValue);
         const totalElement = document.getElementById('totalAmount');
         if (totalElement) {
-          totalElement.setAttribute('data-clean', amountValue);
+          totalElement.setAttribute('data-clean', maxAmount.toString());
           totalElement.textContent = totalAmount;
         }
-      } else {
-        console.error('Nilai nominal tidak valid:', amountMatch[1]);
       }
-    } else {
-      console.error('Tidak ditemukan pola nominal untuk BCA');
     }
-
+    
+    // Jika tidak ditemukan, coba pendekatan alternatif
+    if (totalAmount === 'Tidak ditemukan') {
+      const lines = text.split('\n');
+      
+      // Cari baris yang mengandung "DARI"
+      const dariIndex = lines.findIndex(line => line.includes('DARI'));
+      if (dariIndex > 0) {
+        const amountLine = lines[dariIndex - 1];
+        const match = amountLine.match(/Rp\.?\s*([\d.,]+)/i);
+        if (match) {
+          // Proses khusus untuk BCA: hilangkan desimal .00
+          const cleaned = processBCAAmount(match[1]);
+          const amountValue = parseInt(cleaned) || 0;
+          
+          if (amountValue > 0) {
+            totalAmount = 'Rp' + amountValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            
+            const totalElement = document.getElementById('totalAmount');
+            if (totalElement) {
+              totalElement.setAttribute('data-clean', amountValue.toString());
+              totalElement.textContent = totalAmount;
+            }
+          }
+        }
+      }
+    }
   } else if (bankType === 'BNI') {
     const merchantMatch = text.match(/Nama\s+Merchant\s+([^\n]+)/i);
     const amountMatch = text.match(/Nominal\s+Bayar\s+Rp\s*([\d.]+)(?:,|$)/i) ||
@@ -1346,6 +1367,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
-
