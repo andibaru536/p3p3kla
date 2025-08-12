@@ -1098,23 +1098,78 @@ function extractDataFromText(text, bankType) {
       }
     }
   } else if (bankType === 'MANDIRI') {
-    const merchantMatch = text.match(/Nama\s+Merchant\s+([^\n]+)/i);
-    const amountMatch = text.match(/Nominal\s+Rp\s*([\d.,]+)/i) ||
-                       text.match(/Total\s+Rp\s*([\d.,]+)/i);
-    const rrnMatch = text.match(/Nomor\s+Referensi\s+(\d{6,})/i) ||
-                     text.match(/RRN\s*[:]?\s*(\d+)/i);
+    // PERBAIKAN KHUSUS MANDIRI
+    const lines = text.split('\n');
+    let merchantFound = false;
+    let rrnFound = false;
+    let totalFound = false;
 
-    merchantName = merchantMatch ? merchantMatch[1].trim() : merchantName;
-    rrn = rrnMatch ? rrnMatch[1].trim() : rrn;
+    // 1. Cari Nama Merchant (tepat di bawah "penerima")
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].match(/penerima/i)) {
+        if (i + 1 < lines.length) {
+          merchantName = lines[i + 1].trim();
+          merchantFound = true;
+          break;
+        }
+      }
+    }
 
-    if (amountMatch) {
-      const amountValue = processAmount(amountMatch[1]);
-      if (amountValue && !isNaN(parseInt(amountValue))) {
-        totalAmount = formatCurrency(amountValue);
-        const totalElement = document.getElementById('totalAmount');
-        if (totalElement) {
-          totalElement.setAttribute('data-clean', amountValue);
-          totalElement.textContent = totalAmount;
+    // 2. Cari Nomor Referensi (dari "No. referensi qris")
+    const rrnQrisMatch = text.match(/No\.?\s*referensi\s*qris\s*[:]?\s*([^\s\n]+)/i);
+    if (rrnQrisMatch) {
+      rrn = rrnQrisMatch[1].trim();
+      rrnFound = true;
+    }
+
+    // 3. Cari Total Transaksi (setelah kata "total")
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].match(/\btotal\b/i)) {
+        // Cari di baris yang sama
+        const sameLineMatch = lines[i].match(/Rp\s*([\d.,]+)/i);
+        if (sameLineMatch) {
+          const amountValue = processAmount(sameLineMatch[1]);
+          if (amountValue) {
+            totalAmount = formatCurrency(amountValue);
+            totalFound = true;
+            break;
+          }
+        }
+        
+        // Coba baris berikutnya jika tidak ditemukan
+        if (!totalFound && i + 1 < lines.length) {
+          const nextLineMatch = lines[i + 1].match(/Rp\s*([\d.,]+)/i);
+          if (nextLineMatch) {
+            const amountValue = processAmount(nextLineMatch[1]);
+            if (amountValue) {
+              totalAmount = formatCurrency(amountValue);
+              totalFound = true;
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    // Fallback jika tidak ditemukan dengan pola khusus
+    if (!merchantFound) {
+      const merchantMatch = text.match(/Nama\s+Merchant\s+([^\n]+)/i);
+      merchantName = merchantMatch ? merchantMatch[1].trim() : merchantName;
+    }
+    
+    if (!rrnFound) {
+      const rrnMatch = text.match(/RRN\s*[:]?\s*(\d+)/i) ||
+                       text.match(/Nomor\s+Referensi\s+(\d+)/i);
+      rrn = rrnMatch ? rrnMatch[1].trim() : rrn;
+    }
+    
+    if (!totalFound) {
+      const amountMatch = text.match(/Total\s*[:]?\s*Rp\s*([\d.,]+)/i) ||
+                         text.match(/Nominal\s+Rp\s*([\d.,]+)/i);
+      if (amountMatch) {
+        const amountValue = processAmount(amountMatch[1]);
+        if (amountValue) {
+          totalAmount = formatCurrency(amountValue);
         }
       }
     }
@@ -1127,9 +1182,15 @@ function extractDataFromText(text, bankType) {
   if (document.getElementById('rrn')) {
     document.getElementById('rrn').textContent = rrn;
   }
-  if (document.getElementById('totalAmount') && totalAmount === 'Tidak ditemukan') {
-    document.getElementById('totalAmount').textContent = totalAmount;
-    document.getElementById('totalAmount').removeAttribute('data-clean');
+  if (document.getElementById('totalAmount')) {
+    if (totalAmount !== 'Tidak ditemukan') {
+      const amountValue = processAmount(totalAmount.replace('Rp ', ''));
+      document.getElementById('totalAmount').setAttribute('data-clean', amountValue);
+      document.getElementById('totalAmount').textContent = totalAmount;
+    } else {
+      document.getElementById('totalAmount').textContent = totalAmount;
+      document.getElementById('totalAmount').removeAttribute('data-clean');
+    }
   }
 }
 
