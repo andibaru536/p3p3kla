@@ -1098,7 +1098,7 @@ function extractDataFromText(text, bankType) {
       }
     }
   } else if (bankType === 'MANDIRI') {
-    // PERBAIKAN KHUSUS MANDIRI
+    // PERBAIKAN KHUSUS MANDIRI - CARI MERCHANT DI BAWAH "PENERIMA"
     const lines = text.split('\n');
     let merchantFound = false;
     let rrnFound = false;
@@ -1106,7 +1106,8 @@ function extractDataFromText(text, bankType) {
 
     // 1. Cari Nama Merchant (tepat di bawah "penerima")
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i].match(/penerima/i)) {
+      if (lines[i].toLowerCase().includes('penerima')) {
+        // Langsung ambil baris berikutnya sebagai merchant
         if (i + 1 < lines.length) {
           merchantName = lines[i + 1].trim();
           merchantFound = true;
@@ -1152,11 +1153,6 @@ function extractDataFromText(text, bankType) {
     }
 
     // Fallback jika tidak ditemukan dengan pola khusus
-    if (!merchantFound) {
-      const merchantMatch = text.match(/Nama\s+Merchant\s+([^\n]+)/i);
-      merchantName = merchantMatch ? merchantMatch[1].trim() : merchantName;
-    }
-    
     if (!rrnFound) {
       const rrnMatch = text.match(/RRN\s*[:]?\s*(\d+)/i) ||
                        text.match(/Nomor\s+Referensi\s+(\d+)/i);
