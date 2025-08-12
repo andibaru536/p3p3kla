@@ -612,7 +612,7 @@
             color: #81c784;
         }
         
-        /* STYLE UNTUK MK DAN NAGA */
+        /* STYLE UNTUK MK, NAGA DAN KARAKTER BINATANG */
         .prediction-boxes {
             display: flex;
             gap: 15px;
@@ -690,6 +690,53 @@
             background: #2e7d32;
         }
         
+        /* Kotak Karakter Binatang */
+        .character-box {
+            min-width: 200px;
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .character-box {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+        }
+        
+        .character-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1565c0;
+        }
+        
+        .dark-mode .character-title {
+            color: #90caf9;
+        }
+        
+        .character-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0d47a1;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dark-mode .character-value {
+            color: #e3f2fd;
+        }
+        
+        .character-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
         /* Responsif */
         @media (max-width: 768px) {
             .container {
@@ -721,8 +768,13 @@
                 width: 100%;
             }
             
-            .prediction-boxes {
+            .prediction-boxes, .character-container {
                 flex-direction: column;
+            }
+            
+            .prediction-box, .character-box {
+                min-width: 100%;
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -944,6 +996,19 @@
                 </div>
             </div>
             
+            <!-- Kotak Karakter Binatang Baru -->
+            <div class="character-container">
+                <div class="character-box">
+                    <div class="character-title">Karakter Binatang</div>
+                    <div class="character-value" id="binatangValue">Pemberontak</div>
+                    <div class="copy-buttons">
+                        <button class="copy-small-btn" id="copyBinatangBtn">
+                            <i class="fas fa-copy"></i> Salin Karakter
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="pattern-info" id="pattern-info">Pola rima: a-a-b-b (contoh: merah - merah - biru - biru)</div>
             
             <div class="syair-button-container">
@@ -1003,8 +1068,10 @@
                 const copySyairBtn = document.getElementById('copySyairBtn');
                 const copyMkBtn = document.getElementById('copyMkBtn');
                 const copyNagaBtn = document.getElementById('copyNagaBtn');
+                const copyBinatangBtn = document.getElementById('copyBinatangBtn');
                 const mkValue = document.getElementById('mkValue');
                 const nagaValue = document.getElementById('nagaValue');
+                const binatangValue = document.getElementById('binatangValue');
                 const copySuccess = document.getElementById('copy-success');
                 
                 // Database baris syair yang lebih besar (100 baris unik)
@@ -1128,6 +1195,20 @@
                     { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" }
                 ];
                 
+                // Daftar karakter binatang (100 kata sifat)
+                const karakterBinatang = [
+                    "Pemberontak", "Penurut", "Pemalu", "Berani", "Licik", "Pemimpin", "Bijaksana", "Cermat", "Tenang", "Ganas", 
+                    "Santai", "Tegas", "Lembut", "Cepat", "Lambat", "Manis", "Keras", "Rapi", "Acak", "Ramah", 
+                    "Keras kepala", "Patuh", "Mandiri", "Bergantung", "Optimis", "Pesimis", "Realistis", "Imajinatif", "Sensitif", "Egois", 
+                    "Dermawan", "Pemurung", "Ceria", "Muram", "Hangat", "Dingin", "Kreatif", "Tekun", "Malas", "Gigih", 
+                    "Tertib", "Agresif", "Santuy", "Melankolis", "Sabar", "Gelisah", "Kuat", "Lembek", "Tegang", "Tenang", 
+                    "Bijak", "Konyol", "Asyik", "Kaku", "Fleksibel", "Arogan", "Rendah hati", "Sinis", "Jujur", "Halus", 
+                    "Kasar", "Penuh cinta", "Bersahaja", "Elegan", "Nyentrik", "Teliti", "Ceroboh", "Tangguh", "Lembut", "Beku", 
+                    "Hiperaktif", "Pendiam", "Ramai", "Introvert", "Ekstrovert", "Lemah lembut", "Spontan", "Terencana", "Lugu", "Pintar", 
+                    "Bodoh", "Bingung", "Fokus", "Ambigu", "Empatik", "Apatis", "Murah hati", "Pelit", "Humor", "Serius", 
+                    "Petualang", "Bijaksana", "Penuh semangat", "Tenang", "Gigih", "Lembut", "Kuat", "Cerdas", "Setia", "Berani"
+                ];
+                
                 // Fungsi untuk menghasilkan angka unik
                 function generateUniqueNumbers(count, min, max) {
                     let numbers = [];
@@ -1138,6 +1219,12 @@
                         }
                     }
                     return numbers;
+                }
+                
+                // Fungsi untuk menghasilkan karakter binatang acak
+                function generateKarakterBinatang() {
+                    const randomIndex = Math.floor(Math.random() * karakterBinatang.length);
+                    return karakterBinatang[randomIndex];
                 }
                 
                 // Menyimpan sejarah syair untuk memastikan keunikan
@@ -1192,6 +1279,9 @@
                     // Generate Naga (3 angka unik 0-9)
                     const nagaNumbers = generateUniqueNumbers(3, 0, 9);
                     nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    
+                    // Generate karakter binatang
+                    binatangValue.textContent = generateKarakterBinatang();
                     
                     // Terapkan efek animasi
                     baris1.style.opacity = "0";
@@ -1293,6 +1383,29 @@
                         });
                 }
                 
+                // Fungsi untuk menyalin Karakter Binatang ke clipboard
+                function salinBinatang() {
+                    navigator.clipboard.writeText(binatangValue.textContent)
+                        .then(() => {
+                            copySuccess.textContent = "✓ Karakter Binatang berhasil disalin!";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                        })
+                        .catch(err => {
+                            copySuccess.textContent = "✗ Gagal menyalin Karakter";
+                            copySuccess.style.color = "#e57373";
+                            copySuccess.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                copySuccess.style.opacity = "0";
+                            }, 2000);
+                            console.error('Gagal menyalin teks: ', err);
+                        });
+                }
+                
                 // Fungsi untuk memilih kata secara acak dari array
                 function acakKata(array) {
                     return array[Math.floor(Math.random() * array.length)];
@@ -1303,6 +1416,7 @@
                 copySyairBtn.addEventListener('click', salinSyair);
                 copyMkBtn.addEventListener('click', salinMk);
                 copyNagaBtn.addEventListener('click', salinNaga);
+                copyBinatangBtn.addEventListener('click', salinBinatang);
                 
                 // Buat syair pertama saat halaman dimuat
                 buatSyair();
