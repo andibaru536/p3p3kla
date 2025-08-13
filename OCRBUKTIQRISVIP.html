@@ -6,6 +6,8 @@
 <title>SHORTCUT VIP - Ekstraktor Bukti Transfer</title>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<!-- Favicon baru dengan desain petir dan warna tema -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%234361ee%22>⚡</text></svg>">
 <style>
 :root {
   --primary: #4361ee;
@@ -631,10 +633,36 @@ body.dark-mode .btn-secondary:hover {
     font-size: 14px;
   }
 }
+
+/* Tambahan styling untuk favicon baru */
+.favicon-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  z-index: 10;
+}
+
+.favicon-container i {
+  font-size: 20px;
+  color: white;
+}
 </style>
 </head>
 <body>
 <div class="container">
+  <!-- Favicon tambahan di dalam aplikasi -->
+  <div class="favicon-container">
+    <i class="fas fa-bolt"></i>
+  </div>
+
   <div class="header">
     <div class="header-content">
       <h1><i class="fas fa-bolt"></i> SHORTCUT VIP </h1>
