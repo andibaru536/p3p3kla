@@ -1098,20 +1098,48 @@ function extractDataFromText(text, bankType) {
       }
     }
   } else if (bankType === 'MANDIRI') {
-    // PERBAIKAN KHUSUS MANDIRI - CARI MERCHANT DI BAWAH "PENERIMA"
     const lines = text.split('\n');
     let merchantFound = false;
     let rrnFound = false;
     let totalFound = false;
 
-    // 1. Cari Nama Merchant (tepat di bawah "penerima")
+    // PERBAIKAN KHUSUS: CARI BERDASARKAN "ID" DAN AMBIL BARIS DI ATASNYA
     for (let i = 0; i < lines.length; i++) {
-      if (lines[i].toLowerCase().includes('penerima')) {
-        // Langsung ambil baris berikutnya sebagai merchant
-        if (i + 1 < lines.length) {
-          merchantName = lines[i + 1].trim();
+      // Cari baris yang mengandung "ID" (bisa berupa "ID Transaksi", "ID Pembayaran", dll)
+      if (lines[i].match(/\bID\b/i)) {
+        // Ambil baris sebelumnya sebagai merchant
+        if (i - 1 >= 0) {
+          merchantName = lines[i - 1].trim();
           merchantFound = true;
           break;
+        }
+      }
+    }
+
+    // Jika belum ditemukan, coba dengan pola "Detail Transaksi"
+    if (!merchantFound) {
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].toLowerCase().includes('detail transaksi')) {
+          // Ambil 2 baris di atasnya
+          if (i - 2 >= 0) {
+            merchantName = lines[i - 2].trim();
+            merchantFound = true;
+            break;
+          }
+        }
+      }
+    }
+
+    // Jika masih belum ditemukan, coba dengan pola lama (di bawah "Penerima")
+    if (!merchantFound) {
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].toLowerCase().includes('penerima')) {
+          // Langsung ambil baris berikutnya sebagai merchant
+          if (i + 1 < lines.length) {
+            merchantName = lines[i + 1].trim();
+            merchantFound = true;
+            break;
+          }
         }
       }
     }
