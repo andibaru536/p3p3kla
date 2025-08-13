@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatter 6 Kolom Tools</title>
+    <!-- Favicon dadu dalam format base64 -->
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTUgM0gxOUMyMC4xIDMgMjEgMy45IDIxIDVWMTlDMjEgMjAuMSAyMC4xIDIxIDE5IDIxSDVDMy45IDIxIDMgMjAuMSAzIDE5VjVDMyAzLjkgMy45IDMgNSAzeiIvPjxjaXJjbGUgY3g9IjE2LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjcuNSIgY3k9IjE2LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2LjUiIGN5PSIxNi41IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI3LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjwvc3ZnPg==" type="image/svg+xml">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -28,8 +30,8 @@
             --col4-color: #9b5de5;
             --col5-color: #f15bb5;
             --col6-color: #00bbf9;
-            --blue-light: #64b5f6; /* Warna biru muda baru */
-            --blue-lighter: rgba(100, 181, 246, 0.1); /* Background biru muda */
+            --blue-light: #64b5f6;
+            --blue-lighter: rgba(100, 181, 246, 0.1);
         }
 
         * {
@@ -150,12 +152,12 @@
 
         textarea {
             width: 100%;
-            min-height: 80px; /* Diperkecil */
-            padding: 12px; /* Diperkecil */
+            min-height: 80px;
+            padding: 12px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             font-family: 'Inter', monospace;
-            font-size: 13px; /* Diperkecil */
+            font-size: 13px;
             resize: vertical;
             background-color: var(--bg-secondary);
             color: var(--text-primary);
@@ -173,7 +175,7 @@
         .six-columns-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 12px; /* Diperkecil */
+            gap: 12px;
             margin-top: 20px;
         }
 
@@ -185,16 +187,16 @@
 
         .column-input h4 {
             color: var(--primary-light);
-            margin-bottom: 8px; /* Diperkecil */
-            font-size: 0.95rem; /* Diperkecil */
+            margin-bottom: 8px;
+            font-size: 0.95rem;
             font-weight: 600;
             text-align: center;
         }
 
         .column-input textarea {
-            min-height: 80px; /* Diperkecil */
-            font-size: 0.8rem; /* Diperkecil */
-            padding: 10px; /* Diperkecil */
+            min-height: 80px;
+            font-size: 0.8rem;
+            padding: 10px;
         }
 
         .action-buttons {
@@ -219,7 +221,7 @@
         }
 
         .btn-clear {
-            background: linear-gradient(145deg, #f44336, #d32f2f); /* Gradien merah */
+            background: linear-gradient(145deg, #f44336, #d32f2f);
             color: white;
             border: none;
         }
@@ -237,7 +239,7 @@
         .six-columns-result {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            gap: 12px; /* Diperkecil */
+            gap: 12px;
             margin-top: 25px;
         }
 
@@ -251,7 +253,6 @@
             transition: all 0.4s ease;
         }
 
-        /* Kolom dengan hasil akan memiliki warna biru muda */
         .column-result.has-data {
             background: var(--blue-lighter);
             border-top: 4px solid var(--blue-light);
@@ -282,10 +283,10 @@
 
         .column-result.has-data h4 {
             font-weight: 800;
-            color: var(--blue-light); /* Warna biru muda untuk header */
+            color: var(--blue-light);
         }
 
-        .column-result.col1 h4 { color: var(--blue-light); } /* Semua warna kolom menjadi biru muda */
+        .column-result.col1 h4 { color: var(--blue-light); }
         .column-result.col2 h4 { color: var(--blue-light); }
         .column-result.col3 h4 { color: var(--blue-light); }
         .column-result.col4 h4 { color: var(--blue-light); }
@@ -311,7 +312,7 @@
         }
 
         .column-result.has-data .column-result-item {
-            background-color: rgba(100, 181, 246, 0.15); /* Biru muda transparan */
+            background-color: rgba(100, 181, 246, 0.15);
             border-color: rgba(100, 181, 246, 0.3);
         }
 
@@ -329,7 +330,7 @@
         }
 
         .column-result.has-data .column-result-label {
-            color: var(--blue-light); /* Warna biru muda untuk label */
+            color: var(--blue-light);
         }
 
         .column-result.done .column-result-label {
@@ -467,7 +468,6 @@
             font-size: 0.85rem;
         }
         
-        /* Modal untuk preview gambar */
         .modal {
             display: none;
             position: fixed;
@@ -518,7 +518,6 @@
             transform: rotate(90deg);
         }
 
-        /* Navigation buttons */
         .nav-btn {
             position: absolute;
             top: 50%;
@@ -553,7 +552,6 @@
             right: 40px;
         }
 
-        /* Image counter */
         .image-counter {
             position: absolute;
             bottom: 30px;
@@ -604,7 +602,6 @@
             display: none;
         }
 
-        /* Kolom navigator di modal */
         .modal-column-navigator {
             position: absolute;
             top: 30px;
@@ -663,7 +660,6 @@
             font-weight: 500;
         }
 
-        /* Auto processing indicator */
         .processing-indicator {
             position: absolute;
             bottom: 10px;
@@ -696,7 +692,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Sidebar navigasi */
         #sidebar-nav {
             position: fixed;
             top: 50%;
@@ -866,7 +861,7 @@
     <div class="container">
         <header>
             <h1>Scatter 6 Kolom</h1>
-            <p></p>
+            <p>Tools untuk memproses data scatter dari 6 kolom berbeda</p>
         </header>
         
         <div class="card">
@@ -989,7 +984,7 @@
     </div>
 
     <footer>
-        <p></p>
+        <p>© 2025 Scatter 6 Kolom Tools - All rights reserved</p>
     </footer>
 
     <script>
