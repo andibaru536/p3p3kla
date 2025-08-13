@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Short Link Generator</title>
-    <!-- Favicon baru yang sesuai dengan tema -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔗</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -198,7 +197,6 @@
             margin-top: 15px;
         }
         
-        /* Perubahan di sini: Mengubah menjadi link yang bisa diklik */
         .short-url {
             flex: 1;
             padding: 12px 15px;
@@ -209,7 +207,6 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            /* Styling tambahan untuk link */
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s;
@@ -262,6 +259,10 @@
         
         .notification.show {
             transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: linear-gradient(45deg, #ef4444, #b91c1c);
         }
         
         .loading {
@@ -389,7 +390,6 @@
                 <div class="result-container" id="result-container">
                     <h3><i class="fas fa-check-circle"></i> Tautan Pendek Anda:</h3>
                     <div class="result-box">
-                        <!-- Perubahan di sini: Mengubah menjadi link yang bisa diklik -->
                         <a href="#" class="short-url" id="short-url" target="_blank"></a>
                         <button class="copy-btn" id="copy-btn">
                             <i class="far fa-copy"></i> Salin
@@ -459,7 +459,7 @@
                 longUrlInput.focus();
             });
             
-            // Menggunakan API alternatif yang andal
+            // Menggunakan API TinyURL saja
             async function shortenUrl(longUrl) {
                 try {
                     // Menggunakan layanan TinyURL
@@ -470,28 +470,40 @@
                     }
                     
                     const shortUrl = await response.text();
+                    
+                    // Validasi hasil dari TinyURL
+                    if (!shortUrl.startsWith('https://tinyurl.com/')) {
+                        throw new Error('Format URL pendek tidak valid');
+                    }
+                    
                     return shortUrl;
                 } catch (error) {
                     console.error('Error:', error);
-                    
-                    // Fallback ke layanan alternatif
-                    try {
-                        const backupResponse = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`);
-                        
-                        if (!backupResponse.ok) {
-                            throw new Error('Gagal memendekkan URL dengan layanan cadangan');
-                        }
-                        
-                        const backupShortUrl = await backupResponse.text();
-                        return backupShortUrl;
-                    } catch (backupError) {
-                        console.error('Backup Error:', backupError);
-                        
-                        // Jika semua gagal, buat URL pendek lokal
-                        const randomString = Math.random().toString(36).substring(2, 10);
-                        return `https://short.link/${randomString}`;
-                    }
+                    throw new Error('Gagal membuat tautan pendek menggunakan TinyURL');
                 }
+            }
+            
+            // Fungsi untuk menampilkan notifikasi error
+            function showError(message) {
+                // Buat salinan notifikasi untuk error
+                const errorNotification = notification.cloneNode(true);
+                errorNotification.id = 'error-notification';
+                errorNotification.className = 'notification error';
+                errorNotification.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
+                document.body.appendChild(errorNotification);
+                
+                // Tampilkan notifikasi
+                setTimeout(() => {
+                    errorNotification.classList.add('show');
+                }, 10);
+                
+                // Sembunyikan setelah 3 detik
+                setTimeout(() => {
+                    errorNotification.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(errorNotification);
+                    }, 400);
+                }, 3000);
             }
             
             shortenBtn.addEventListener('click', async function() {
@@ -523,7 +535,7 @@
                     shortUrlElement.setAttribute('data-url', shortUrl);
                     resultContainer.classList.add('active');
                 } catch (error) {
-                    showError('Gagal membuat tautan pendek. Silakan coba lagi.');
+                    showError(error.message || 'Gagal membuat tautan pendek. Silakan coba lagi.');
                     console.error('Error:', error);
                 } finally {
                     // Hide loading
@@ -558,33 +570,9 @@
                 }
             });
             
-            function showError(message) {
-                const errorElement = document.createElement('div');
-                errorElement.className = 'notification';
-                errorElement.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${message}`;
-                errorElement.style.background = 'linear-gradient(45deg, #ef4444, #b91c1c)';
-                errorElement.style.position = 'fixed';
-                errorElement.style.top = '30px';
-                errorElement.style.right = '30px';
-                errorElement.style.transform = 'translateX(120%)';
-                document.body.appendChild(errorElement);
-                
-                setTimeout(() => {
-                    errorElement.style.transform = 'translateX(0)';
-                }, 10);
-                
-                setTimeout(() => {
-                    errorElement.style.transform = 'translateX(120%)';
-                    setTimeout(() => {
-                        document.body.removeChild(errorElement);
-                    }, 400);
-                }, 3000);
-            }
-            
             // Auto focus input
             longUrlInput.focus();
         });
     </script>
 </body>
 </html>
-
