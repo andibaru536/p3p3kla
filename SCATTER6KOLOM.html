@@ -4,26 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scatter 6 Kolom Tools</title>
-    <!-- Favicon dadu dalam format base64 -->
-    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTUgM0gxOUMyMC4xIDMgMjEgMy45IDIxIDVWMTlDMjEgMjAuMSAyMC4xIDIxIDE5IDIxSDVDMy45IDIxIDMgMjAuMSAzIDE5VjVDMyAzLjkgMy45IDMgNSAzeiIvPjxjaXJjbGUgY3g9IjE2LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjcuNSIgY3k9IjE2LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE2LjUiIGN5PSIxNi41IiByPSIxLjUiLz48Y2lyY2xlIGN4PSI3LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjwvc3ZnPg==" type="image/svg+xml">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-color: #4caf50;
             --primary-dark: #388e3c;
-            --primary-darker: #2e7d32;
             --primary-light: #81c784;
-            --primary-lighter: #1a3b1c;
-            --text-primary: #f0f0f0;
-            --text-secondary: #b0b0b0;
-            --bg-primary: #0a0e12;
-            --bg-secondary: #151a21;
-            --bg-card: #1d242e;
-            --border-color: #2a3542;
+            --primary-lighter: #e8f5e9;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --bg-primary: #1e1e2e;
+            --bg-secondary: #25253c;
+            --bg-card: #2a2a45;
+            --border-color: #3a3a5a;
             --success-color: #388e3c;
-            --success-bg: rgba(56, 142, 60, 0.2);
-            --shadow-color: rgba(0, 0, 0, 0.6);
+            --success-bg: rgba(56, 142, 60, 0.15);
+            --shadow-color: rgba(0, 0, 0, 0.25);
             --col1-color: #ff6b6b;
             --col2-color: #4ecdc4;
             --col3-color: #ffd166;
@@ -31,7 +28,8 @@
             --col5-color: #f15bb5;
             --col6-color: #00bbf9;
             --blue-light: #64b5f6;
-            --blue-lighter: rgba(100, 181, 246, 0.1);
+            --blue-lighter: rgba(100, 181, 246, 0.15);
+            --delete-color: #f44336;
         }
 
         * {
@@ -49,23 +47,10 @@
             min-height: 100vh;
             background-color: var(--bg-primary);
             overflow-x: hidden;
-            background-image: url('https://cdn.areabermain.club/assets/cdn/az6/2025/07/31/20250731/eeb91f9b1f7b3247242ccba997460e8b/linetogel-bg-17agustus2025.jpg');
-            background-size: cover;
-            background-position: center;
+            background-image: radial-gradient(circle at 10% 20%, #2d2b55 0%, #1e1e2e 90%);
             background-attachment: fixed;
             position: relative;
             font-weight: 500;
-        }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 14, 18, 0.7);
-            z-index: -1;
         }
 
         .container {
@@ -86,11 +71,11 @@
         header h1 {
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--primary-light);
             margin-bottom: 10px;
             position: relative;
             display: inline-block;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         header h1::after {
@@ -101,9 +86,8 @@
             transform: translateX(-50%);
             width: 100px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-darker));
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
             border-radius: 4px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
         }
 
         header p {
@@ -128,7 +112,7 @@
         }
 
         h2 {
-            color: var(--primary-color);
+            color: var(--primary-light);
             margin: 0 0 25px;
             font-weight: 700;
             font-size: 1.7rem;
@@ -137,15 +121,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
         }
 
-        h3 {
-            color: var(--primary-light);
-            margin-bottom: 15px;
-            font-weight: 600;
-            font-size: 1.2rem;
-            padding-bottom: 10px;
-        }
-
-        .input-group {
+        .input-wrapper {
             position: relative;
             margin-bottom: 20px;
         }
@@ -153,7 +129,7 @@
         textarea {
             width: 100%;
             min-height: 80px;
-            padding: 12px;
+            padding: 12px 40px 12px 12px;
             border-radius: 12px;
             border: 1px solid var(--border-color);
             font-family: 'Inter', monospace;
@@ -162,14 +138,14 @@
             background-color: var(--bg-secondary);
             color: var(--text-primary);
             transition: all 0.3s ease;
-            box-shadow: inset 0 3px 6px rgba(0,0,0,0.3);
+            box-shadow: inset 0 3px 6px rgba(0,0,0,0.2);
             font-weight: 500;
         }
 
         textarea:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3), inset 0 3px 6px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3), inset 0 3px 6px rgba(0,0,0,0.2);
         }
 
         .six-columns-grid {
@@ -191,12 +167,16 @@
             font-size: 0.95rem;
             font-weight: 600;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .column-input textarea {
             min-height: 80px;
             font-size: 0.8rem;
-            padding: 10px;
+            padding: 10px 35px 10px 10px;
         }
 
         .action-buttons {
@@ -256,7 +236,7 @@
         .column-result.has-data {
             background: var(--blue-lighter);
             border-top: 4px solid var(--blue-light);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
         }
 
         .column-result.done {
@@ -264,13 +244,6 @@
             border-color: var(--primary-color);
             box-shadow: 0 8px 20px rgba(56, 142, 60, 0.2);
         }
-
-        .column-result.col1.has-data { border-top-color: var(--blue-light); }
-        .column-result.col2.has-data { border-top-color: var(--blue-light); }
-        .column-result.col3.has-data { border-top-color: var(--blue-light); }
-        .column-result.col4.has-data { border-top-color: var(--blue-light); }
-        .column-result.col5.has-data { border-top-color: var(--blue-light); }
-        .column-result.col6.has-data { border-top-color: var(--blue-light); }
 
         .column-result h4 {
             margin-bottom: 12px;
@@ -346,11 +319,6 @@
             font-weight: 500;
         }
 
-        .column-result.done .column-result-value {
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
         .column-btn-copy {
             background-color: transparent;
             color: var(--text-secondary);
@@ -422,7 +390,7 @@
         }
         
         .done-btn {
-            background: linear-gradient(145deg, var(--primary-color), var(--primary-darker));
+            background: linear-gradient(145deg, var(--primary-color), var(--primary-dark));
             color: white;
             border: none;
             border-radius: 10px;
@@ -476,7 +444,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
+            background-color: rgba(0, 0, 0, 0.9);
             overflow: auto;
             animation: fadeIn 0.3s;
         }
@@ -751,6 +719,45 @@
         .sidebar-btn.col5 { background-color: var(--col5-color); color: white; }
         .sidebar-btn.col6 { background-color: var(--col6-color); color: white; }
 
+        /* Tombol hapus per kolom */
+        .clear-col-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--delete-color);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        .clear-col-btn:hover {
+            background: rgba(244, 67, 54, 0.3);
+            color: white;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        /* Badge warna untuk kolom */
+        .col-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -869,48 +876,78 @@
             
             <div class="six-columns-grid">
                 <div class="column-input">
-                    <h4>Kolom 1</h4>
-                    <textarea id="inputCol1" placeholder="Tempel data kolom 1 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col1-color);"></span> Kolom 1</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol1" placeholder="Tempel data kolom 1 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="1">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator1">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
                     </div>
                 </div>
                 <div class="column-input">
-                    <h4>Kolom 2</h4>
-                    <textarea id="inputCol2" placeholder="Tempel data kolom 2 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col2-color);"></span> Kolom 2</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol2" placeholder="Tempel data kolom 2 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="2">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator2">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
                     </div>
                 </div>
                 <div class="column-input">
-                    <h4>Kolom 3</h4>
-                    <textarea id="inputCol3" placeholder="Tempel data kolom 3 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col3-color);"></span> Kolom 3</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol3" placeholder="Tempel data kolom 3 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="3">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator3">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
                     </div>
                 </div>
                 <div class="column-input">
-                    <h4>Kolom 4</h4>
-                    <textarea id="inputCol4" placeholder="Tempel data kolom 4 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col4-color);"></span> Kolom 4</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol4" placeholder="Tempel data kolom 4 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="4">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator4">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
                     </div>
                 </div>
                 <div class="column-input">
-                    <h4>Kolom 5</h4>
-                    <textarea id="inputCol5" placeholder="Tempel data kolom 5 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col5-color);"></span> Kolom 5</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol5" placeholder="Tempel data kolom 5 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="5">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator5">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
                     </div>
                 </div>
                 <div class="column-input">
-                    <h4>Kolom 6</h4>
-                    <textarea id="inputCol6" placeholder="Tempel data kolom 6 di sini..."></textarea>
+                    <h4><span class="col-badge" style="background: var(--col6-color);"></span> Kolom 6</h4>
+                    <div class="input-wrapper">
+                        <textarea id="inputCol6" placeholder="Tempel data kolom 6 di sini..."></textarea>
+                        <button class="clear-col-btn" data-col="6">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
                     <div class="processing-indicator" id="indicator6">
                         <div class="spinner"></div>
                         <span>Memproses...</span>
@@ -1020,6 +1057,7 @@
             const sidebarBtns = sidebarNav.querySelectorAll('.sidebar-btn');
             const modalColumnNavigator = document.getElementById('modalColumnNavigator');
             const modalColumnBtns = modalColumnNavigator.querySelectorAll('.column-nav-btn');
+            const clearColBtns = document.querySelectorAll('.clear-col-btn');
             
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
@@ -1043,6 +1081,27 @@
                 scatterResults = [null, null, null, null, null, null];
                 updateSidebar();
                 updateModalColumnNavigator();
+            });
+            
+            // Event untuk tombol hapus per kolom
+            clearColBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const colNum = this.getAttribute('data-col');
+                    const inputId = `inputCol${colNum}`;
+                    const inputElement = document.getElementById(inputId);
+                    
+                    // Kosongkan input kolom
+                    inputElement.value = '';
+                    
+                    // Proses ulang data
+                    showProcessingIndicator(parseInt(colNum) - 1);
+                    setTimeout(() => {
+                        processScatter6Data();
+                        hideProcessingIndicator(parseInt(colNum) - 1);
+                        updateSidebar();
+                        updateModalColumnNavigator();
+                    }, 300);
+                });
             });
             
             // Event untuk modal gambar
