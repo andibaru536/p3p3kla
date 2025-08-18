@@ -737,6 +737,69 @@
             justify-content: center;
         }
         
+        /* Fitur Baru: Pilihan Jumlah Kata */
+        .kata-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 12px;
+        }
+        
+        .dark-mode .kata-options {
+            background: rgba(66, 66, 66, 0.3);
+        }
+        
+        .kata-options label {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+        
+        .dark-mode .kata-options label {
+            color: #f0f0f0;
+        }
+        
+        .kata-option-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .kata-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(200, 230, 201, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .dark-mode .kata-option {
+            background: rgba(30, 70, 30, 0.3);
+        }
+        
+        .kata-option:hover {
+            background: rgba(165, 214, 167, 0.7);
+        }
+        
+        .dark-mode .kata-option:hover {
+            background: rgba(50, 100, 50, 0.5);
+        }
+        
+        .kata-option.active {
+            background: rgba(76, 175, 80, 0.7);
+            color: white;
+        }
+        
+        .dark-mode .kata-option.active {
+            background: rgba(30, 120, 30, 0.7);
+        }
+        
         /* Responsif */
         @media (max-width: 768px) {
             .container {
@@ -775,6 +838,14 @@
             .prediction-box, .character-box {
                 min-width: 100%;
                 margin-bottom: 15px;
+            }
+            
+            .kata-option-group {
+                flex-direction: column;
+            }
+            
+            .kata-option {
+                width: 100%;
             }
         }
     </style>
@@ -968,6 +1039,25 @@
         
         <!-- Konten Generator Syair -->
         <div id="syairContent" class="tab-content">
+            <!-- Fitur Baru: Pilihan Jumlah Kata -->
+            <div class="kata-options">
+                <label>Pilih Jumlah Kata per Baris:</label>
+                <div class="kata-option-group">
+                    <div class="kata-option active" data-kata="3">
+                        <input type="radio" name="kataOption" id="kata3" value="3" checked>
+                        <label for="kata3">3 Kata</label>
+                    </div>
+                    <div class="kata-option" data-kata="4">
+                        <input type="radio" name="kataOption" id="kata4" value="4">
+                        <label for="kata4">4 Kata</label>
+                    </div>
+                    <div class="kata-option" data-kata="5">
+                        <input type="radio" name="kataOption" id="kata5" value="5">
+                        <label for="kata5">5 Kata</label>
+                    </div>
+                </div>
+            </div>
+            
             <div class="syair-container">
                 <div class="baris" id="baris1">Angka tersembunyi dalam mimpi</div>
                 <div class="baris" id="baris2">Petunjuk alam menanti</div>
@@ -1073,119 +1163,77 @@
                 const nagaValue = document.getElementById('nagaValue');
                 const binatangValue = document.getElementById('binatangValue');
                 const copySuccess = document.getElementById('copy-success');
+                const kataOptions = document.querySelectorAll('.kata-option');
                 
-                // Database baris syair yang lebih besar (100 baris unik)
-                const barisPendek = [
-                    "Angka tersembunyi dalam mimpi",
-                    "Petunjuk alam menanti",
-                    "Keberuntungan menyapa hati",
-                    "Rahasia angka terungkap nanti",
-                    "Bulan bersinar penuh arti",
-                    "Bintang memberi isyarat hati",
-                    "Nasib baik segera datang",
-                    "Mimpi indah menjadi nyata",
-                    "Angin berbisik lembut",
-                    "Sungai mengalir deras",
-                    "Gunung menjulang tinggi",
-                    "Lautan luas membentang",
-                    "Hutan penuh misteri",
-                    "Burung terbang bebas",
-                    "Kupu-kupu menari indah",
-                    "Harimau mengaum kencang",
-                    "Naga terbang tinggi",
-                    "Pelangi muncul indah",
-                    "Hujan turun deras",
-                    "Matahari bersinar cerah",
-                    "Rahasia alam semesta",
-                    "Angka keberuntungan datang",
-                    "Teka-teki terpecahkan akhirnya",
-                    "Jalan terbuka lebar",
-                    "Malam penuh misteri",
-                    "Senja menyimpan rahasia",
-                    "Fajar membawa harapan",
-                    "Angka terpendam dalam hati",
-                    "Kabut pagi menyelimuti",
-                    "Embun di dedaunan",
-                    "Cahaya rembulan memandu",
-                    "Suara gemericik air",
-                    "Daun berguguran berjatuhan",
-                    "Bunga mekar indah",
-                    "Kicau burung pagi hari",
-                    "Desir angin malam",
-                    "Gelombang laut berdebur",
-                    "Pasir pantai berkilau",
-                    "Batu karang kokoh berdiri",
-                    "Awan berarak di langit",
-                    "Kilat menyambar gelap",
-                    "Guntur menggelegar kencang",
-                    "Gerimis membasahi bumi",
-                    "Kabut tebal menyelimuti",
-                    "Mentari terbit di timur",
-                    "Bulan purnama bersinar",
-                    "Bintang bertaburan indah",
-                    "Galaksi jauh memesona",
-                    "Alam semesta tak terbatas",
-                    "Keheningan malam sunyi",
-                    "Kesunyian hati terdalam",
-                    "Harapan tak pernah padam",
-                    "Impian terus mengudara",
-                    "Semangat pantang menyerah",
-                    "Perjalanan tak berujung",
-                    "Tujuan masih jauh",
-                    "Petualangan menanti",
-                    "Kejutan tak terduga",
-                    "Keajaiban terjadi",
-                    "Misteri terungkap perlahan",
-                    "Jalan setapak berliku",
-                    "Bukit tinggi menantang",
-                    "Lembah hijau permai",
-                    "Sungai jernih mengalir",
-                    "Danau tenang memantulkan",
-                    "Air terjun deras",
-                    "Gunung berapi mengancam",
-                    "Hutan rimba lebat",
-                    "Padang rumput luas",
-                    "Gurun pasir panas",
-                    "Salju turun lembut",
-                    "Es membeku di danau",
-                    "Angin topan mengamuk",
-                    "Badai menerjang pantai",
-                    "Ombak besar menghempas",
-                    "Kapal berlayar jauh",
-                    "Perahu kecil terombang",
-                    "Jangkar diturunkan pelan",
-                    "Layar terkembang lebar",
-                    "Nakhoda memandu arah",
-                    "Peta kuno terbuka",
-                    "Harta karun tersembunyi",
-                    "Pulau terpencil menunggu",
-                    "Rahasia bawah laut",
-                    "Terumbu karang warna",
-                    "Ikan berenang lincah",
-                    "Penyu berenang tenang",
-                    "Lumba-lumba melompat",
-                    "Paus menyembur air",
-                    "Hiu mengintai diam",
-                    "Ubur-ubur mengambang",
-                    "Gurita bersembunyi",
-                    "Bintang laut di pasir",
-                    "Kerang mutiara berharga",
-                    "Mutiara indah bersinar",
-                    "Permata berkilauan",
-                    "Emas murni berharga",
-                    "Perak berkilau indah",
-                    "Intan bersinar terang",
-                    "Ruby merah menyala",
-                    "Zamrud hijau memikat",
-                    "Safir biru dalam",
-                    "Permata langka ditemukan"
-                ];
-                
-                // Filter baris yang memiliki 3-4 kata
-                const filteredBaris = barisPendek.filter(baris => {
-                    const words = baris.split(' ');
-                    return words.length >= 3 && words.length <= 4;
-                });
+                // Database baris syair yang lebih besar (dikelompokkan berdasarkan jumlah kata)
+                const barisPendek = {
+                    kata3: [
+                        "Petunjuk alam menanti",
+                        "Angka tersembunyi rahasia",
+                        "Keberuntungan menyapa hati",
+                        "Mimpi indah terwujud",
+                        "Bulan bersinar terang",
+                        "Bintang memberi petunjuk",
+                        "Nasib baik datang",
+                        "Harapan tak terputus",
+                        "Angin berbisik lembut",
+                        "Sungai mengalir deras",
+                        "Gunung menjulang tinggi",
+                        "Lautan membentang luas",
+                        "Hutan penuh misteri",
+                        "Burung terbang bebas",
+                        "Kupu menari indah",
+                        "Harimau mengaum kencang",
+                        "Naga terbang tinggi",
+                        "Pelangi muncul indah",
+                        "Hujan turun deras",
+                        "Matahari bersinar cerah"
+                    ],
+                    kata4: [
+                        "Angka tersembunyi dalam mimpi",
+                        "Petunjuk alam menanti hadir",
+                        "Keberuntungan menyapa hati bersih",
+                        "Rahasia angka terungkap nanti",
+                        "Bulan bersinar penuh arti",
+                        "Bintang memberi isyarat hati",
+                        "Nasib baik segera datang",
+                        "Mimpi indah menjadi nyata",
+                        "Angin berbisik lembut tenang",
+                        "Sungai mengalir deras jernih",
+                        "Gunung menjulang tinggi megah",
+                        "Lautan luas membentang indah",
+                        "Hutan rimba penuh misteri",
+                        "Burung terbang bebas tinggi",
+                        "Kupu-kupu menari indah",
+                        "Harimau mengaum kencang kuat",
+                        "Naga terbang tinggi langit",
+                        "Pelangi muncul indah sempurna",
+                        "Hujan turun deras membasahi",
+                        "Matahari bersinar cerah terang"
+                    ],
+                    kata5: [
+                        "Angka tersembunyi dalam mimpi kubur",
+                        "Petunjuk alam menanti di depan mata",
+                        "Keberuntungan menyapa hati yang bersih",
+                        "Rahasia angka terungkap seketika nanti",
+                        "Bulan bersinar penuh arti kehidupan",
+                        "Bintang memberi isyarat di malam hari",
+                        "Nasib baik segera datang menghampiri",
+                        "Mimpi indah menjadi nyata sempurna",
+                        "Angin berbisik lembut di telinga",
+                        "Sungai mengalir deras menuju lautan",
+                        "Gunung menjulang tinggi ke angkasa",
+                        "Lautan luas membentang tak berujung",
+                        "Hutan rimba lebat penuh misteri",
+                        "Burung terbang bebas di angkasa luas",
+                        "Kupu-kupu menari indah di taman",
+                        "Harimau mengaum kencang di hutan rimba",
+                        "Naga terbang tinggi di awan putih",
+                        "Pelangi muncul indah setelah hujan reda",
+                        "Hujan turun deras membasahi bumi",
+                        "Matahari bersinar cerah di pagi hari"
+                    ]
+                };
                 
                 // Pola rima yang mungkin
                 const polaRima = [
@@ -1237,6 +1285,10 @@
                     let maxAttempts = 100;
                     let newSyair = [];
                     
+                    // Ambil jumlah kata yang dipilih
+                    const selectedKata = document.querySelector('input[name="kataOption"]:checked').value;
+                    const barisCollection = barisPendek[`kata${selectedKata}`];
+                    
                     while (attempts < maxAttempts) {
                         // Reset array untuk syair baru
                         newSyair = [];
@@ -1252,7 +1304,7 @@
                             
                             // Cari baris yang belum pernah digunakan
                             do {
-                                newLine = acakKata(filteredBaris);
+                                newLine = acakKata(barisCollection);
                                 lineAttempts++;
                             } while (usedLines.has(newLine) && lineAttempts < 50);
                             
@@ -1410,6 +1462,24 @@
                 function acakKata(array) {
                     return array[Math.floor(Math.random() * array.length)];
                 }
+                
+                // Event listener untuk pilihan jumlah kata
+                kataOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Hapus kelas active dari semua opsi
+                        kataOptions.forEach(opt => opt.classList.remove('active'));
+                        
+                        // Tambahkan kelas active ke opsi yang dipilih
+                        this.classList.add('active');
+                        
+                        // Update radio button
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        
+                        // Generate syair baru dengan jumlah kata yang baru
+                        buatSyair();
+                    });
+                });
                 
                 // Event listener untuk tombol syair
                 generateSyairBtn.addEventListener('click', buatSyair);
