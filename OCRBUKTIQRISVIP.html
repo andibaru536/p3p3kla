@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SHORTCUT VIP - Ekstraktor Bukti Transfer</title>
+<title>SHORTCUT VIP - Ekstraktor Bukti Transfer & Penggabung Gambar</title>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-<!-- Favicon baru dengan desain petir dan warna tema -->
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22 fill=%22%234361ee%22>⚡</text></svg>">
 <style>
+/* ======= VARIABEL WARNA ======= */
 :root {
   --primary: #4361ee;
   --secondary: #3a0ca3;
@@ -32,8 +32,15 @@
   --dark-border: #333333;
   --dark-input: #2d2d2d;
   --dark-shadow: rgba(0, 0, 0, 0.4);
+  
+  /* Variabel untuk penggabung gambar */
+  --primary-green: #1e7a4c;
+  --primary-light: #3a9e7d;
+  --secondary-green: #3a9e7d;
+  --accent-yellow: #ffca28;
 }
 
+/* ======= STYLING UMUM ======= */
 * {
   margin: 0;
   padding: 0;
@@ -63,11 +70,12 @@ body.dark-mode {
   margin: 0 auto;
 }
 
+/* ======= HEADER ======= */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .header-content {
@@ -75,15 +83,15 @@ body.dark-mode {
 }
 
 h1 {
-  font-size: 2.2rem;
+  font-size: 2.0rem;
   color: white;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 h1 i {
@@ -93,33 +101,88 @@ h1 i {
   -webkit-text-fill-color: transparent;
 }
 
+/* ======= TAB NAVIGASI ======= */
+.tabs-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 15px;
+  background: linear-gradient(135deg, #252525, #2a2a2a);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+body.dark-mode .tab-btn {
+  border-color: var(--dark-border);
+}
+
+.tab-btn:hover {
+  background: linear-gradient(135deg, #2e2e2e, #222222);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-color: var(--primary);
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ======= KARTU & FORM ======= */
 .card {
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-  margin-bottom: 25px;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
   border: 1px solid var(--border);
   backdrop-filter: blur(5px);
 }
 
 body.dark-mode .card {
   background-color: rgba(30, 30, 30, 0.85);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   border-color: var(--dark-border);
 }
 
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   position: relative;
 }
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   font-weight: 600;
   color: var(--primary);
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 body.dark-mode label {
@@ -132,10 +195,10 @@ body.dark-mode label {
 
 input, select {
   width: 100%;
-  padding: 12px 45px 12px 15px;
+  padding: 10px 40px 10px 12px;
   border: 2px solid var(--border);
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 8px;
+  font-size: 14px;
   background-color: var(--input-bg);
   transition: all 0.3s;
   box-sizing: border-box;
@@ -157,16 +220,16 @@ input:focus, select:focus {
 
 .clear-btn {
   position: absolute;
-  right: 12px;
+  right: 10px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: #777;
   cursor: pointer;
-  font-size: 16px;
-  width: 28px;
-  height: 28px;
+  font-size: 14px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,11 +248,11 @@ body.dark-mode .clear-btn:hover {
 
 .upload-container {
   border: 2px dashed var(--border);
-  border-radius: 10px;
-  padding: 12px;
+  border-radius: 8px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
-  margin-top: 12px;
+  margin-top: 10px;
   transition: all 0.3s;
   background-color: rgba(255, 255, 255, 0.8);
 }
@@ -205,15 +268,15 @@ body.dark-mode .upload-container {
 }
 
 .upload-container i {
-  font-size: 28px;
+  font-size: 24px;
   color: var(--primary);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .upload-container p {
-  font-size: 13px;
+  font-size: 12px;
   color: #666;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 body.dark-mode .upload-container p {
@@ -221,14 +284,15 @@ body.dark-mode .upload-container p {
 }
 
 .upload-container span {
-  font-size: 11px;
+  font-size: 10px;
   color: #999;
 }
 
+/* ======= PREVIEW GAMBAR ======= */
 #preview-container {
-  margin-top: 20px;
+  margin-top: 15px;
   text-align: center;
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   max-width: 100%;
   display: none;
@@ -237,10 +301,10 @@ body.dark-mode .upload-container p {
 
 #preview {
   max-width: 100%;
-  max-height: 180px;
-  border-radius: 8px;
+  max-height: 150px;
+  border-radius: 6px;
   background-color: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.3s;
 }
@@ -261,7 +325,7 @@ body.dark-mode #preview {
   justify-content: center;
   opacity: 0;
   transition: opacity 0.3s;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 #preview-container:hover .preview-overlay {
@@ -269,41 +333,42 @@ body.dark-mode #preview {
 }
 
 .preview-overlay i {
-  font-size: 40px;
+  font-size: 30px;
   color: white;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
+/* ======= HASIL EKSTRAKSI ======= */
 .result {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 20px;
+  padding: 15px;
   background-color: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  border-left: 4px solid var(--primary);
+  border-left: 3px solid var(--primary);
   backdrop-filter: blur(5px);
 }
 
 body.dark-mode .result {
   background-color: rgba(30, 30, 30, 0.85);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .result:hover {
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 }
 
 .result h3 {
   color: var(--primary);
   margin-top: 0;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
+  margin-bottom: 15px;
+  padding-bottom: 8px;
   border-bottom: 2px solid var(--border);
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 1.4rem;
+  gap: 8px;
+  font-size: 1.2rem;
 }
 
 body.dark-mode .result h3 {
@@ -313,7 +378,7 @@ body.dark-mode .result h3 {
 .result-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .result-item {
@@ -324,23 +389,23 @@ body.dark-mode .result h3 {
   font-weight: 600;
   color: var(--primary);
   display: block;
-  margin-bottom: 6px;
-  font-size: 0.95rem;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .result-value {
   background-color: rgba(67, 97, 238, 0.08);
-  padding: 12px 15px;
-  border-radius: 10px;
-  font-size: 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 14px;
   border: 1px solid rgba(67, 97, 238, 0.2);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 50px;
+  min-height: 40px;
   color: var(--text);
   transition: all 0.3s;
 }
@@ -356,15 +421,15 @@ body.dark-mode .result-value {
   border: none;
   color: var(--primary);
   cursor: pointer;
-  padding: 8px;
-  font-size: 16px;
-  border-radius: 8px;
+  padding: 6px;
+  font-size: 14px;
+  border-radius: 6px;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
 }
 
 .copy-btn:hover {
@@ -380,13 +445,14 @@ body.dark-mode .copy-btn:hover {
   background-color: rgba(187, 134, 252, 0.1);
 }
 
+/* ======= LOADING ======= */
 #loading {
   text-align: center;
-  margin: 20px 0;
+  margin: 15px 0;
   display: none;
   background-color: rgba(255, 255, 255, 0.9);
-  padding: 18px;
-  border-radius: 12px;
+  padding: 15px;
+  border-radius: 10px;
   border: 1px solid var(--border);
   backdrop-filter: blur(5px);
   color: var(--text);
@@ -398,39 +464,12 @@ body.dark-mode #loading {
   color: var(--dark-text);
 }
 
-.copy-notification {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--success);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 8px;
-  z-index: 1000;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.copy-notification.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.copy-notification i {
-  font-size: 18px;
-}
-
 .progress-container {
   width: 100%;
-  height: 7px;
+  height: 6px;
   background-color: var(--progress-bg);
-  border-radius: 4px;
-  margin-top: 12px;
+  border-radius: 3px;
+  margin-top: 10px;
   overflow: hidden;
 }
 
@@ -441,48 +480,49 @@ body.dark-mode .progress-container {
 .progress-bar {
   height: 100%;
   background: linear-gradient(to right, var(--primary), var(--accent));
-  border-radius: 4px;
+  border-radius: 3px;
   width: 0%;
   transition: width 0.3s ease;
 }
 
+/* ======= TOMBOL AKSI ======= */
 .action-buttons {
   display: flex;
-  gap: 12px;
-  margin-top: 18px;
+  gap: 10px;
+  margin-top: 15px;
 }
 
 .btn {
   flex: 1;
-  padding: 12px;
+  padding: 10px;
   border: none;
-  border-radius: 10px;
-  font-size: 15px;
+  border-radius: 8px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .btn-primary {
   background: linear-gradient(to right, var(--primary), var(--secondary));
   color: white;
-  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.25);
+  box-shadow: 0 3px 6px rgba(67, 97, 238, 0.2);
 }
 
 .btn-primary:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(67, 97, 238, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
 }
 
 .btn-secondary {
   background: rgba(0, 0, 0, 0.05);
   color: var(--text);
   border: 1px solid var(--border);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.05);
 }
 
 body.dark-mode .btn-secondary {
@@ -499,21 +539,22 @@ body.dark-mode .btn-secondary:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* ======= TOGGLE TEMA ======= */
 .theme-toggle {
   background: rgba(255, 255, 255, 0.25);
   border: none;
   border-radius: 50%;
-  width: 42px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   transition: all 0.3s;
   backdrop-filter: blur(10px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.15);
 }
 
 .theme-toggle:hover {
@@ -521,11 +562,12 @@ body.dark-mode .btn-secondary:hover {
   transform: rotate(15deg);
 }
 
+/* ======= PREVIEW MODAL ======= */
 #imagePreviewModal {
   display: none;
   position: fixed;
   z-index: 1000;
-  padding-top: 50px;
+  padding-top: 40px;
   left: 0;
   top: 0;
   width: 100%;
@@ -538,17 +580,17 @@ body.dark-mode .btn-secondary:hover {
   display: block;
   max-width: 80%;
   max-height: 80%;
-  border: 3px solid white;
-  border-radius: 8px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border: 2px solid white;
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
 }
 
 #closePreview {
   position: absolute;
-  top: 15px;
-  right: 35px;
+  top: 12px;
+  right: 25px;
   color: #f1f1f1;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: bold;
   transition: 0.3s;
   cursor: pointer;
@@ -561,7 +603,35 @@ body.dark-mode .btn-secondary:hover {
   text-decoration: none;
 }
 
-/* Animasi salin */
+/* ======= NOTIFIKASI ======= */
+.copy-notification {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  background: var(--success);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.copy-notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.copy-notification i {
+  font-size: 16px;
+}
+
+/* ======= ANIMASI ======= */
 @keyframes copyPulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.1); }
@@ -572,7 +642,6 @@ body.dark-mode .btn-secondary:hover {
   animation: copyPulse 0.5s ease;
 }
 
-/* Efek visual untuk kolom yang disalin */
 @keyframes flashAnimation {
   0% { background-color: rgba(76, 175, 80, 0.1); }
   50% { background-color: rgba(76, 175, 80, 0.4); }
@@ -583,217 +652,859 @@ body.dark-mode .btn-secondary:hover {
   animation: flashAnimation 1s ease;
 }
 
-@media (max-width: 600px) {
+/* ======= FITUR PENGGABUNG GAMBAR ======= */
+.panel {
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border);
+  margin-bottom: 15px;
+}
+
+body.dark-mode .panel {
+  background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
+  border-color: var(--dark-border);
+}
+
+.panel-title {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--primary-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary-green);
+  font-weight: 600;
+}
+
+.panel-title i {
+  color: var(--accent-yellow);
+}
+
+.url-input-section {
+  margin-bottom: 15px;
+}
+
+.url-input-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.url-input-header h3 {
+  color: #e0ffe0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.supported-services {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.service-badge {
+  background: rgba(30, 122, 76, 0.2);
+  border: 1px solid var(--primary-light);
+  border-radius: 15px;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #c0ffd0;
+  font-weight: 500;
+}
+
+body.dark-mode .service-badge {
+  background: rgba(30, 122, 76, 0.3);
+  border-color: var(--primary-light);
+}
+
+.url-input-group {
+  display: flex;
+  margin-bottom: 12px;
+}
+
+.url-input-group input {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px 0 0 8px;
+  background: rgba(20, 36, 26, 0.7);
+  color: var(--text-light);
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+body.dark-mode .url-input-group input {
+  background: rgba(20, 36, 26, 0.8);
+  border-color: var(--dark-border);
+}
+
+.url-input-group input::placeholder {
+  color: rgba(200, 255, 220, 0.6);
+}
+
+.url-input-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 2px rgba(58, 158, 125, 0.3);
+}
+
+.url-input-group button {
+  padding: 10px 15px;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  border-left: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.url-input-group button:hover {
+  background: var(--primary-light);
+}
+
+body.dark-mode .url-input-group button {
+  background: var(--primary-green);
+  border-color: var(--dark-border);
+}
+
+body.dark-mode .url-input-group button:hover {
+  background: var(--primary-light);
+}
+
+.settings {
+  margin: 15px 0;
+}
+
+.setting-group {
+  margin-bottom: 12px;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: #e0ffe0;
+  font-size: 0.9rem;
+}
+
+.setting-group select, .setting-group input {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  background: rgba(20, 36, 26, 0.7);
+  color: var(--text-light);
+  border: 1px solid var(--border);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+body.dark-mode .setting-group select, 
+body.dark-mode .setting-group input {
+  background: rgba(20, 36, 26, 0.8);
+  border-color: var(--dark-border);
+}
+
+.setting-group select:focus, .setting-group input:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 2px rgba(58, 158, 125, 0.3);
+}
+
+.quality-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.quality-value {
+  min-width: 35px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--accent-yellow);
+  font-size: 0.9rem;
+}
+
+.preview-container {
+  margin-top: 15px;
+}
+
+.counter {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  background: rgba(30, 46, 40, 0.7);
+  padding: 8px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #c0ffd0;
+  font-weight: 500;
+}
+
+body.dark-mode .counter {
+  background: rgba(30, 46, 40, 0.8);
+}
+
+.image-previews {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  min-height: 120px;
+}
+
+.preview-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s;
+  aspect-ratio: 1/1;
+  border: 1px solid var(--border);
+}
+
+body.dark-mode .preview-item {
+  border-color: var(--dark-border);
+}
+
+.preview-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--primary-light);
+}
+
+.preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.preview-item .remove-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(239, 83, 80, 0.8);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+}
+
+.result-container {
+  text-align: center;
+  margin-top: 20px;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background: rgba(30, 46, 40, 0.7);
+  border-radius: 8px;
+  border: 1px dashed var(--border);
+}
+
+body.dark-mode .result-container {
+  background: rgba(30, 46, 40, 0.8);
+  border-color: var(--dark-border);
+}
+
+#resultImage {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+  display: none;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+#resultImage:hover {
+  transform: scale(1.02);
+}
+
+.placeholder {
+  color: rgba(200, 255, 220, 0.7);
+  font-style: italic;
+  padding: 20px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.link-container {
+  margin-top: 15px;
+  width: 100%;
+  background: rgba(30, 46, 40, 0.7);
+  border-radius: 8px;
+  padding: 15px;
+  display: none;
+  animation: fadeIn 0.5s ease;
+}
+
+body.dark-mode .link-container {
+  background: rgba(30, 46, 40, 0.8);
+}
+
+.link-container h4 {
+  margin-bottom: 10px;
+  font-size: 1.0rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--secondary-green);
+  font-weight: 600;
+}
+
+.image-link {
+  display: flex;
+  gap: 8px;
+}
+
+.image-link input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: none;
+  background: rgba(20, 36, 26, 0.7);
+  color: var(--text-light);
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  font-weight: 500;
+}
+
+body.dark-mode .image-link input {
+  background: rgba(20, 36, 26, 0.8);
+  border-color: var(--dark-border);
+}
+
+.image-link button {
+  padding: 10px 15px;
+  background: var(--primary-green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.image-link button:hover {
+  background: var(--primary-light);
+}
+
+body.dark-mode .image-link button {
+  background: var(--primary-green);
+  border-color: var(--dark-border);
+}
+
+body.dark-mode .image-link button:hover {
+  background: var(--primary-light);
+}
+
+.download-btn {
+  margin-top: 15px;
+  padding: 12px 20px;
+  background: linear-gradient(to right, var(--primary-green), var(--secondary-green));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  display: none;
+  border: 1px solid var(--border);
+  font-weight: 600;
+}
+
+.download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .download-btn {
+  border-color: var(--dark-border);
+}
+
+/* ======= LOADER ======= */
+#mergerLoader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 18, 18, 0.9);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.loader-content {
+  text-align: center;
+}
+
+.loader-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(212, 175, 55, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--accent-yellow);
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto;
+}
+
+.loader-text {
+  margin-top: 8px;
+  color: var(--accent-yellow);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ======= LIGHTBOX ======= */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  z-index: 2000;
+  overflow: auto;
+  text-align: center;
+}
+
+.lightbox-content {
+  margin: 5% auto;
+  max-width: 90%;
+  max-height: 85%;
+  display: block;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  color: #f1f1f1;
+  font-size: 35px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+  z-index: 2001;
+}
+
+.close-btn:hover {
+  color: #bbb;
+  text-decoration: none;
+}
+
+/* ======= RESPONSIVE ======= */
+@media (max-width: 992px) {
   .container {
-    padding: 10px;
+    padding: 15px;
   }
   
-  .card {
-    padding: 18px;
+  .tabs-container {
+    flex-direction: column;
+  }
+  
+  .tab-btn {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
   }
   
   h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+  
+  .card, .panel {
+    padding: 15px;
+  }
+  
+  .url-input-group {
+    flex-direction: column;
+  }
+  
+  .url-input-group input {
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  
+  .url-input-group button {
+    border-radius: 8px;
+    width: 100%;
   }
   
   .action-buttons {
     flex-direction: column;
   }
   
-  #imagePreviewModal img {
-    max-width: 95%;
+  .image-previews {
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   }
   
-  .copy-notification {
-    left: 20px;
-    right: 20px;
-    top: 10px;
-    text-align: center;
+  .download-btn {
+    width: 100%;
   }
-  
-  .header {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .theme-toggle {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-  }
-  
-  .result-value {
-    padding: 10px 12px;
-    font-size: 15px;
-    min-height: 46px;
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.4rem;
   }
   
   .btn {
-    padding: 10px;
-    font-size: 14px;
+    width: 100%;
+    justify-content: center;
   }
-}
-
-/* Tambahan styling untuk favicon baru */
-.favicon-container {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 40px;
-  height: 40px;
-  background: linear-gradient(45deg, var(--primary), var(--accent));
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-  z-index: 10;
-}
-
-.favicon-container i {
-  font-size: 20px;
-  color: white;
+  
+  .image-previews {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  }
+  
+  .result-container {
+    padding: 12px;
+  }
+  
+  .panel-title {
+    font-size: 1.0rem;
+  }
 }
 </style>
 </head>
 <body>
 <div class="container">
-  <!-- Favicon tambahan di dalam aplikasi -->
-  <div class="favicon-container">
-    <i class="fas fa-bolt"></i>
-  </div>
-
   <div class="header">
     <div class="header-content">
       <h1><i class="fas fa-bolt"></i> SHORTCUT VIP </h1>
-      <p style="text-align: center; color: #4361ee; font-weight: 500; margin-top: 5px;">Ekstraktor Bukti Transfer DANA, BRI & BCA</p>
+      <p style="text-align: center; color: #4361ee; font-weight: 500; margin-top: 3px; font-size: 0.9rem;">Ekstraktor Bukti Transfer & Penggabung Gambar</p>
     </div>
     <button class="theme-toggle" id="themeToggle">
       <i class="fas fa-moon"></i>
     </button>
   </div>
 
-  <div class="card">
-    <div class="form-group">
-      <label for="userId"><i class="fas fa-user"></i> User ID:</label>
-      <div class="input-container">
-        <input type="text" id="userId" placeholder="Masukkan User ID">
-        <button class="clear-btn" id="clearUserId">
-          <i class="fas fa-times"></i>
+  <!-- Tab Navigasi -->
+  <div class="tabs-container">
+    <button class="tab-btn active" data-tab="extractor-app">
+      <i class="fas fa-file-invoice"></i> Ekstraktor
+    </button>
+    <button class="tab-btn" data-tab="merger-app">
+      <i class="fas fa-object-group"></i> Gabung Gambar
+    </button>
+  </div>
+  
+  <!-- Tab: Ekstraktor Bukti Transfer -->
+  <div id="extractor-app" class="tab-content active">
+    <div class="card">
+      <div class="form-group">
+        <label for="userId"><i class="fas fa-user"></i> User ID:</label>
+        <div class="input-container">
+          <input type="text" id="userId" placeholder="Masukkan User ID">
+          <button class="clear-btn" id="clearUserId">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="imageUrl"><i class="fas fa-link"></i> URL Gambar Bukti:</label>
+        <div class="input-container">
+          <input type="text" id="imageUrl" placeholder="Tempel URL gambar bukti transfer">
+          <button class="clear-btn" id="clearImageUrl">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="upload-container" id="uploadContainer">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Unggah Gambar Bukti Transfer</p>
+        <span>Klik untuk memilih file (JPG, PNG, maks 5MB)</span>
+        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+      </div>
+
+      <div class="form-group">
+        <label for="bankSelect"><i class="fas fa-university"></i> Pilih Jenis Bank:</label>
+        <select id="bankSelect">
+          <option value="DANA">DANA</option>
+          <option value="BRI">BRI</option>
+          <option value="BCA">BCA</option>
+          <option value="BNI">BNI</option>
+          <option value="MANDIRI">Mandiri</option>
+        </select>
+      </div>
+
+      <!-- Preview Container -->
+      <div id="preview-container">
+        <img id="preview" alt="Preview Gambar">
+        <div class="preview-overlay">
+          <i class="fas fa-search-plus"></i>
+        </div>
+      </div>
+
+      <div class="action-buttons">
+        <button id="processButton" class="btn btn-primary">
+          <i class="fas fa-cogs"></i> Proses Gambar
+        </button>
+        <button id="resetButton" class="btn btn-secondary">
+          <i class="fas fa-redo"></i> Reset Form
         </button>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="imageUrl"><i class="fas fa-link"></i> URL Gambar Bukti:</label>
-      <div class="input-container">
-        <input type="text" id="imageUrl" placeholder="Tempel URL gambar bukti transfer">
-        <button class="clear-btn" id="clearImageUrl">
-          <i class="fas fa-times"></i>
-        </button>
+      <div id="loading">
+        <p><i class="fas fa-sync fa-spin"></i> Sedang memproses gambar... Harap tunggu</p>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p id="progressStatus">Menginisialisasi...</p>
       </div>
     </div>
 
-    <div class="upload-container" id="uploadContainer">
-      <i class="fas fa-cloud-upload-alt"></i>
-      <p>Unggah Gambar Bukti Transfer</p>
-      <span>Klik untuk memilih file (JPG, PNG, maks 5MB)</span>
-      <input type="file" id="fileInput" accept="image/*" style="display: none;">
-    </div>
-
-    <div class="form-group">
-      <label for="bankSelect"><i class="fas fa-university"></i> Pilih Jenis Bank:</label>
-      <select id="bankSelect">
-        <option value="DANA">DANA</option>
-        <option value="BRI">BRI</option>
-        <option value="BCA">BCA</option>
-        <option value="BNI">BNI</option>
-        <option value="MANDIRI">Mandiri</option>
-      </select>
-    </div>
-
-    <!-- Preview Container -->
-    <div id="preview-container">
-      <img id="preview" alt="Preview Gambar">
-      <div class="preview-overlay">
-        <i class="fas fa-search-plus"></i>
+    <div class="card result" id="results">
+      <h3><i class="fas fa-file-invoice"></i> Hasil Ekstraksi</h3>
+      <div class="result-list">
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-store"></i> Nama Merchant/Toko:</span>
+          <div class="result-value">
+            <span id="merchantName">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('merchantName')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-hashtag"></i> Nomor Referensi (RRN):</span>
+          <div class="result-value">
+            <span id="rrn">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('rrn')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-money-bill-wave"></i> Total:</span>
+          <div class="result-value">
+            <span id="totalAmount">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('totalAmount')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-user"></i> User ID:</span>
+          <div class="result-value">
+            <span id="resultUserId">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('resultUserId')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-link"></i> URL Gambar:</span>
+          <div class="result-value">
+            <span id="imageUrlResult">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('imageUrlResult')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
+        <div class="result-item">
+          <span class="result-label"><i class="fas fa-landmark"></i> Jenis Bank:</span>
+          <div class="result-value">
+            <span id="selectedBank">-</span>
+            <button class="copy-btn" onclick="copyToClipboard('selectedBank')">
+              <i class="far fa-copy"></i>
+            </button>
+          </div>
+        </div>
       </div>
-    </div>
-
-    <div class="action-buttons">
-      <button id="processButton" class="btn btn-primary">
-        <i class="fas fa-cogs"></i> Proses Gambar
-      </button>
-      <button id="resetButton" class="btn btn-secondary">
-        <i class="fas fa-redo"></i> Reset Form
-      </button>
-    </div>
-
-    <div id="loading">
-      <p><i class="fas fa-sync fa-spin"></i> Sedang memproses gambar... Harap tunggu</p>
-      <div class="progress-container">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
-      <p id="progressStatus">Menginisialisasi...</p>
     </div>
   </div>
-
-  <div class="card result" id="results">
-    <h3><i class="fas fa-file-invoice"></i> Hasil Ekstraksi</h3>
-    <div class="result-list">
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-store"></i> Nama Merchant/Toko:</span>
-        <div class="result-value">
-          <span id="merchantName">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('merchantName')">
-            <i class="far fa-copy"></i>
+  
+  <!-- Tab: Penggabung Gambar -->
+  <div id="merger-app" class="tab-content">
+    <div class="panel">
+      <h2 class="panel-title">
+        <i class="fas fa-cogs"></i> Input & Pengaturan
+      </h2>
+      
+      <div class="url-input-section">
+        <div class="url-input-group">
+          <input type="text" id="mergerImageUrl" placeholder="https://prnt.sc/... atau https://sleekshot.app/...">
+          <button id="addUrlBtn">
+            <i class="fas fa-plus"></i> Tambah
           </button>
+        </div>
+        
+        <div class="supported-services">
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> prnt.sc
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> sleekshot.app
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> imghostr.com
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> imgur.com
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> gambar langsung
+          </span>
         </div>
       </div>
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-hashtag"></i> Nomor Referensi (RRN):</span>
-        <div class="result-value">
-          <span id="rrn">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('rrn')">
-            <i class="far fa-copy"></i>
-          </button>
+      
+      <div class="settings">
+        <h2 class="panel-title">
+          <i class="fas fa-sliders-h"></i> Pengaturan Gabungan
+        </h2>
+        
+        <div class="setting-group">
+          <label for="layout">Tata Letak Gambar:</label>
+          <select id="layout">
+            <option value="horizontal">Horizontal (Sejajar)</option>
+            <option value="vertical">Vertikal (Bertumpuk)</option>
+            <option value="grid2">Grid 2 Kolom</option>
+            <option value="grid3">Grid 3 Kolom</option>
+          </select>
+        </div>
+        
+        <div class="setting-group">
+          <label for="spacing">Jarak Antar Gambar:</label>
+          <select id="spacing">
+            <option value="0">0px</option>
+            <option value="5" selected>5px</option>
+            <option value="10">10px</option>
+            <option value="15">15px</option>
+            <option value="20">20px</option>
+          </select>
+        </div>
+        
+        <div class="setting-group">
+          <label for="background">Latar Belakang:</label>
+          <select id="background">
+            <option value="transparent">Transparan</option>
+            <option value="white" selected>Putih</option>
+            <option value="black">Hitam</option>
+          </select>
+        </div>
+        
+        <div class="setting-group">
+          <label>Kualitas Gambar:</label>
+          <div class="quality-control">
+            <input type="range" id="quality" min="50" max="100" value="90">
+            <span class="quality-value" id="qualityValue">90%</span>
+          </div>
         </div>
       </div>
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-money-bill-wave"></i> Total:</span>
-        <div class="result-value">
-          <span id="totalAmount">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('totalAmount')">
-            <i class="far fa-copy"></i>
-          </button>
+      
+      <div class="action-buttons">
+        <button id="mergeBtn" class="btn btn-primary">
+          <i class="fas fa-object-group"></i> Gabungkan Gambar
+        </button>
+        <button id="resetBtn" class="btn btn-secondary">
+          <i class="fas fa-trash-alt"></i> Reset
+        </button>
+      </div>
+    </div>
+    
+    <div class="panel">
+      <h2 class="panel-title">
+        <i class="fas fa-images"></i> Preview & Hasil
+      </h2>
+      
+      <div class="preview-container">
+        <div class="counter">
+          <i class="fas fa-layer-group"></i> Gambar Terpilih: <span id="imageCount">0</span>/10
+        </div>
+        
+        <div class="image-previews" id="previewContainer">
+          <!-- Preview gambar akan muncul di sini -->
         </div>
       </div>
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-user"></i> User ID:</span>
-        <div class="result-value">
-          <span id="resultUserId">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('resultUserId')">
-            <i class="far fa-copy"></i>
-          </button>
+      
+      <div class="merger-loader" id="mergerLoader" style="display: none;">
+        <div class="loader-content">
+          <div class="loader-spinner"></div>
+          <div class="loader-text">MEMPROSES GAMBAR...</div>
         </div>
       </div>
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-link"></i> URL Gambar:</span>
-        <div class="result-value">
-          <span id="imageUrlResult">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('imageUrlResult')">
-            <i class="far fa-copy"></i>
-          </button>
+      
+      <div class="result-container" id="resultContainer">
+        <p class="placeholder">Hasil gabungan gambar akan muncul di sini<br>Klik pada gambar untuk memperbesar</p>
+        <img id="resultImage" alt="Hasil gabungan gambar">
+        
+        <div class="link-container" id="linkContainer">
+          <h4><i class="fas fa-link"></i> Link Gambar Hasil Gabungan:</h4>
+          <div class="image-link">
+            <input type="text" id="imageLink" readonly>
+            <button id="copyLinkBtn">
+              <i class="fas fa-copy"></i> Salin
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="result-item">
-        <span class="result-label"><i class="fas fa-landmark"></i> Jenis Bank:</span>
-        <div class="result-value">
-          <span id="selectedBank">-</span>
-          <button class="copy-btn" onclick="copyToClipboard('selectedBank')">
-            <i class="far fa-copy"></i>
-          </button>
-        </div>
+        
+        <button id="downloadBtn" class="download-btn">
+          <i class="fas fa-download"></i> Unduh Gambar
+        </button>
       </div>
     </div>
   </div>
@@ -805,16 +1516,28 @@ body.dark-mode .btn-secondary:hover {
   <img id="previewImage" alt="Bukti Transfer">
 </div>
 
+<!-- Lightbox untuk tampilan gambar besar -->
+<div id="lightbox" class="lightbox">
+  <span class="close-btn">&times;</span>
+  <img class="lightbox-content" id="lightboxImg">
+</div>
+
 <div class="copy-notification" id="copyNotification">
   <i class="fas fa-check-circle"></i> <span id="notificationText">Teks telah disalin!</span>
 </div>
 
 <script>
-// Inisialisasi variabel
+// ======= VARIABEL GLOBAL =======
 let currentProcessId = 0;
 let isProcessing = false;
 let uploadedImageUrl = null;
 let currentImageUrl = null;
+
+// Untuk fitur penggabung gambar
+let images = [];
+let mergedImageData = null;
+
+// ======= FUNGSI UMUM =======
 
 // Fungsi untuk memvalidasi URL gambar
 function isValidImageUrl(url) {
@@ -885,6 +1608,84 @@ function processAmount(amountStr) {
   
   return cleaned;
 }
+
+// Fungsi untuk memberi efek visual pada kolom yang disalin
+function flashCopyEffect(element) {
+  // Reset animasi sebelumnya
+  element.classList.remove('copy-flash');
+  
+  // Trigger reflow
+  void element.offsetWidth;
+  
+  // Tambahkan kelas animasi
+  element.classList.add('copy-flash');
+}
+
+// Fungsi untuk menyalin teks ke clipboard
+function copyToClipboard(elementId) {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+  
+  let textToCopy = element.textContent;
+  let fieldName = "Teks";
+
+  // Untuk imageUrlResult, gunakan URL lengkap dari data attribute
+  if (elementId === 'imageUrlResult' && element.hasAttribute('data-full-url')) {
+    textToCopy = element.getAttribute('data-full-url');
+  }
+  // Untuk totalAmount, gunakan nilai bersih jika ada
+  else if (elementId === 'totalAmount' && element.hasAttribute('data-clean')) {
+    textToCopy = element.getAttribute('data-clean');
+  }
+  
+  // Tentukan nama field yang disalin
+  switch(elementId) {
+    case 'resultUserId': fieldName = "User ID"; break;
+    case 'merchantName': fieldName = "Nama Merchant"; break;
+    case 'totalAmount': fieldName = "Total Pembayaran"; break;
+    case 'rrn': fieldName = "Nomor Referensi"; break;
+    case 'selectedBank': fieldName = "Jenis Bank"; break;
+    case 'imageUrlResult': fieldName = "URL Gambar"; break;
+  }
+
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    // Tambahkan animasi ke tombol salin
+    const copyButton = element.nextElementSibling;
+    if (copyButton) {
+      copyButton.classList.add('copy-success');
+      setTimeout(() => {
+        copyButton.classList.remove('copy-success');
+      }, 500);
+    }
+    
+    // Dapatkan elemen result-value untuk efek flash
+    const resultValueElement = element.closest('.result-value');
+    if (resultValueElement) {
+      flashCopyEffect(resultValueElement);
+    }
+    
+    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
+  }).catch(err => {
+    console.error('Gagal menyalin teks: ', err);
+    // Fallback untuk browser lama
+    const textarea = document.createElement('textarea');
+    textarea.value = textToCopy;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+    
+    // Dapatkan elemen result-value untuk efek flash
+    const resultValueElement = element.closest('.result-value');
+    if (resultValueElement) {
+      flashCopyEffect(resultValueElement);
+    }
+    
+    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
+  });
+}
+
+// ======= FUNGSI EKSTRAKTOR BUKTI TRANSFER =======
 
 // Fungsi utama untuk memproses gambar
 async function processImage() {
@@ -1246,84 +2047,324 @@ function extractDataFromText(text, bankType) {
   }
 }
 
-// Fungsi untuk memberi efek visual pada kolom yang disalin
-function flashCopyEffect(element) {
-  // Reset animasi sebelumnya
-  element.classList.remove('copy-flash');
-  
-  // Trigger reflow
-  void element.offsetWidth;
-  
-  // Tambahkan kelas animasi
-  element.classList.add('copy-flash');
+// ======= FUNGSI PENGGABUNG GAMBAR =======
+
+// Fungsi untuk mengekstrak URL gambar sebenarnya dari berbagai layanan
+async function extractImageUrl(url) {
+  try {
+    // Untuk layanan prnt.sc
+    if (url.includes('prnt.sc')) {
+      // Coba ambil dari meta og:image
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      
+      // Metode 1: Cari meta property og:image
+      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^"]+)"/i;
+      const ogMatch = ogImageRegex.exec(html);
+      if (ogMatch && ogMatch[1]) {
+        return ogMatch[1].replace(/&amp;/g, '&');
+      }
+      
+      // Metode 2: Cari gambar dengan class khusus
+      const classRegex = /<img[^>]+class="[^"]*screenshot-image[^"]*"[^>]+src="([^">]+)"/i;
+      const classMatches = classRegex.exec(html);
+      if (classMatches && classMatches[1]) {
+        return classMatches[1].startsWith('//') ? 'https:' + classMatches[1] : classMatches[1];
+      }
+      
+      return url;
+    }
+    
+    // Untuk layanan sleekshot.app
+    if (url.includes('sleekshot.app')) {
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^">]+)"/i;
+      const matches = ogImageRegex.exec(html);
+      if (matches && matches[1]) {
+        return matches[1];
+      }
+      return url;
+    }
+    
+    // Untuk layanan imghostr.com
+    if (url.includes('imghostr.com')) {
+      // Coba ekstrak ID gambar dari URL (contoh: https://imghostr.com/66e5d9_wl61 -> ID:66e5d9)
+      const idMatch = url.match(/imghostr\.com\/([a-zA-Z0-9]+)_/);
+      if (idMatch && idMatch[1]) {
+        return `https://img.imghostr.com/${idMatch[1]}.png`;
+      }
+      
+      // Jika tidak berhasil, coba parsing HTML
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      const imgRegex = /<img[^>]+id="image-view"[^>]+src="([^">]+)"/i;
+      const matches = imgRegex.exec(html);
+      if (matches && matches[1]) {
+        return matches[1];
+      }
+      return url;
+    }
+    
+    // Untuk imgur.com
+    if (url.includes('imgur.com')) {
+      // Konversi URL gallery ke direct image
+      if (url.includes('/gallery/') || url.includes('/a/')) {
+        const idMatch = url.match(/\/([a-zA-Z0-9]+)$/);
+        if (idMatch && idMatch[1]) {
+          return `https://i.imgur.com/${idMatch[1]}.jpg`;
+        }
+      }
+      return url;
+    }
+    
+    // Untuk URL langsung
+    return url;
+  } catch (error) {
+    console.error('Extraction error:', error);
+    return url;
+  }
 }
 
-// Fungsi untuk menyalin teks ke clipboard
-function copyToClipboard(elementId) {
-  const element = document.getElementById(elementId);
-  if (!element) return;
+// Fungsi untuk memperbarui preview gambar
+function updatePreviews() {
+  const previewContainer = document.getElementById('previewContainer');
+  previewContainer.innerHTML = '';
   
-  let textToCopy = element.textContent;
-  let fieldName = "Teks";
-
-  // Untuk imageUrlResult, gunakan URL lengkap dari data attribute
-  if (elementId === 'imageUrlResult' && element.hasAttribute('data-full-url')) {
-    textToCopy = element.getAttribute('data-full-url');
-  }
-  // Untuk totalAmount, gunakan nilai bersih jika ada
-  else if (elementId === 'totalAmount' && element.hasAttribute('data-clean')) {
-    textToCopy = element.getAttribute('data-clean');
-  }
-  
-  // Tentukan nama field yang disalin
-  switch(elementId) {
-    case 'resultUserId': fieldName = "User ID"; break;
-    case 'merchantName': fieldName = "Nama Merchant"; break;
-    case 'totalAmount': fieldName = "Total Pembayaran"; break;
-    case 'rrn': fieldName = "Nomor Referensi"; break;
-    case 'selectedBank': fieldName = "Jenis Bank"; break;
-    case 'imageUrlResult': fieldName = "URL Gambar"; break;
-  }
-
-  navigator.clipboard.writeText(textToCopy).then(() => {
-    // Tambahkan animasi ke tombol salin
-    const copyButton = element.nextElementSibling;
-    if (copyButton) {
-      copyButton.classList.add('copy-success');
-      setTimeout(() => {
-        copyButton.classList.remove('copy-success');
-      }, 500);
-    }
+  images.forEach((image, index) => {
+    const previewItem = document.createElement('div');
+    previewItem.className = 'preview-item';
     
-    // Dapatkan elemen result-value untuk efek flash
-    const resultValueElement = element.closest('.result-value');
-    if (resultValueElement) {
-      flashCopyEffect(resultValueElement);
-    }
+    const img = document.createElement('img');
+    img.src = image.src;
+    img.alt = `Preview ${index + 1}`;
     
-    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
-  }).catch(err => {
-    console.error('Gagal menyalin teks: ', err);
-    // Fallback untuk browser lama
-    const textarea = document.createElement('textarea');
-    textarea.value = textToCopy;
-    document.body.appendChild(textarea);
-    textarea.select();
-    document.execCommand('copy');
-    document.body.removeChild(textarea);
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'remove-btn';
+    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+    removeBtn.onclick = () => removeImage(index);
     
-    // Dapatkan elemen result-value untuk efek flash
-    const resultValueElement = element.closest('.result-value');
-    if (resultValueElement) {
-      flashCopyEffect(resultValueElement);
-    }
-    
-    showNotification(`<strong>${fieldName}</strong> berhasil disalin!`);
+    previewItem.appendChild(img);
+    previewItem.appendChild(removeBtn);
+    previewContainer.appendChild(previewItem);
   });
+  
+  document.getElementById('imageCount').textContent = images.length;
+  
+  // Disable tombol gabungkan jika tidak ada gambar
+  document.getElementById('mergeBtn').disabled = images.length === 0;
 }
 
-// Event listeners
+// Fungsi untuk menghapus gambar
+function removeImage(index) {
+  images.splice(index, 1);
+  updatePreviews();
+  showNotification('Gambar dihapus', 'info');
+}
+
+// Fungsi untuk menggabungkan gambar
+async function mergeImages() {
+  if (images.length === 0) {
+    showNotification('Tidak ada gambar untuk digabungkan!', 'error');
+    return;
+  }
+  
+  // Tampilkan loader
+  const loader = document.getElementById('mergerLoader');
+  loader.style.display = 'block';
+  const resultContainer = document.getElementById('resultContainer');
+  resultContainer.style.display = 'none';
+  
+  try {
+    // Sembunyikan placeholder
+    const placeholder = resultContainer.querySelector('.placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+    
+    // Buat canvas untuk penggabungan
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Dapatkan pengaturan
+    const layout = document.getElementById('layout').value;
+    const spacing = parseInt(document.getElementById('spacing').value);
+    const background = document.getElementById('background').value;
+    const quality = parseInt(document.getElementById('quality').value) / 100;
+    
+    // Preload semua gambar
+    const imgElements = await Promise.all(images.map(imageData => {
+      return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(img);
+        img.src = imageData.src;
+      });
+    }));
+    
+    // Hitung dimensi canvas
+    let canvasWidth = 0;
+    let canvasHeight = 0;
+    
+    if (layout === 'horizontal') {
+      canvasWidth = imgElements.reduce((sum, img) => sum + img.width, 0) + 
+                   spacing * (imgElements.length - 1);
+      canvasHeight = Math.max(...imgElements.map(img => img.height));
+    } else if (layout === 'vertical') {
+      canvasWidth = Math.max(...imgElements.map(img => img.width));
+      canvasHeight = imgElements.reduce((sum, img) => sum + img.height, 0) + 
+                    spacing * (imgElements.length - 1);
+    } else {
+      const columns = layout === 'grid2' ? 2 : 3;
+      const rows = Math.ceil(imgElements.length / columns);
+      
+      let maxWidths = Array(columns).fill(0);
+      let maxHeights = Array(rows).fill(0);
+      
+      imgElements.forEach((img, i) => {
+        const col = i % columns;
+        const row = Math.floor(i / columns);
+        
+        if (img.width > maxWidths[col]) maxWidths[col] = img.width;
+        if (img.height > maxHeights[row]) maxHeights[row] = img.height;
+      });
+      
+      canvasWidth = maxWidths.reduce((sum, w) => sum + w, 0) + 
+                   spacing * (columns - 1);
+      canvasHeight = maxHeights.reduce((sum, h) => sum + h, 0) + 
+                    spacing * (rows - 1);
+    }
+    
+    // Set ukuran canvas
+    canvas.width = canvasWidth;
+    canvas.height = canvasHeight;
+    
+    // Isi background
+    if (background === 'white') {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    } else if (background === 'black') {
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    }
+    
+    // Gambar semua gambar di canvas
+    let x = 0;
+    let y = 0;
+    
+    imgElements.forEach((img, i) => {
+      if (layout === 'horizontal') {
+        ctx.drawImage(img, x, 0);
+        x += img.width + spacing;
+      } else if (layout === 'vertical') {
+        ctx.drawImage(img, 0, y);
+        y += img.height + spacing;
+      } else {
+        const columns = layout === 'grid2' ? 2 : 3;
+        const col = i % columns;
+        const row = Math.floor(i / columns);
+        
+        // Cari lebar maks kolom sebelumnya
+        let offsetX = 0;
+        for (let c = 0; c < col; c++) {
+          let maxW = 0;
+          for (let r = row * columns; r < (row + 1) * columns; r++) {
+            if (r < imgElements.length && imgElements[r].width > maxW) {
+              maxW = imgElements[r].width;
+            }
+          }
+          offsetX += maxW + spacing;
+        }
+        
+        // Cari tinggi maks baris sebelumnya
+        let offsetY = 0;
+        for (let r = 0; r < row; r++) {
+          let maxH = 0;
+          for (let c = 0; c < columns; c++) {
+            const idx = r * columns + c;
+            if (idx < imgElements.length && imgElements[idx].height > maxH) {
+              maxH = imgElements[idx].height;
+            }
+          }
+          offsetY += maxH + spacing;
+        }
+        
+        ctx.drawImage(img, offsetX, offsetY);
+      }
+    });
+    
+    // Konversi canvas ke data URL dengan kualitas yang dipilih
+    const format = background === 'transparent' ? 'image/png' : 'image/jpeg';
+    mergedImageData = canvas.toDataURL(format, quality);
+    
+    // Tampilkan hasil
+    const resultImage = document.getElementById('resultImage');
+    resultImage.src = mergedImageData;
+    resultImage.style.display = 'block';
+    document.getElementById('downloadBtn').style.display = 'block';
+    
+    // Tampilkan link gambar
+    const imageLink = document.getElementById('imageLink');
+    imageLink.value = mergedImageData;
+    document.getElementById('linkContainer').style.display = 'block';
+    
+    // Tampilkan kembali kontainer hasil
+    resultContainer.style.display = 'flex';
+    
+    showNotification('Gambar berhasil digabungkan! Klik pada gambar untuk memperbesar.', 'success');
+  } catch (error) {
+    console.error('Merge error:', error);
+    showNotification('Terjadi kesalahan saat menggabungkan gambar.', 'error');
+  } finally {
+    // Sembunyikan loader
+    loader.style.display = 'none';
+  }
+}
+
+// Fungsi untuk mengunduh gambar
+function downloadImage() {
+  if (!mergedImageData) return;
+  
+  const link = document.createElement('a');
+  link.href = mergedImageData;
+  const background = document.getElementById('background').value;
+  link.download = `gabungan-gambar-${new Date().getTime()}.${background === 'transparent' ? 'png' : 'jpg'}`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+  showNotification('Gambar berhasil diunduh!', 'success');
+}
+
+// Fungsi untuk menyalin link gambar
+function copyImageLink() {
+  const imageLink = document.getElementById('imageLink');
+  imageLink.select();
+  imageLink.setSelectionRange(0, 99999);
+  document.execCommand('copy');
+  showNotification('Link berhasil disalin ke clipboard!', 'success');
+}
+
+// Fungsi untuk mereset semua
+function resetAll() {
+  images = [];
+  mergedImageData = null;
+  const previewContainer = document.getElementById('previewContainer');
+  previewContainer.innerHTML = '';
+  document.getElementById('imageCount').textContent = '0';
+  const resultImage = document.getElementById('resultImage');
+  resultImage.style.display = 'none';
+  document.getElementById('linkContainer').style.display = 'none';
+  document.getElementById('downloadBtn').style.display = 'none';
+  const placeholder = document.querySelector('.placeholder');
+  if (placeholder) placeholder.style.display = 'block';
+  document.getElementById('mergerImageUrl').value = '';
+  
+  showNotification('Semua gambar telah direset', 'info');
+}
+
+// ======= EVENT LISTENERS =======
 document.addEventListener('DOMContentLoaded', function() {
+  // Event listeners untuk ekstraktor bukti transfer
   const imageUrlInput = document.getElementById('imageUrl');
   const userIdInput = document.getElementById('userId');
   const clearUserIdBtn = document.getElementById('clearUserId');
@@ -1336,6 +2377,38 @@ document.addEventListener('DOMContentLoaded', function() {
   const previewContainer = document.getElementById('preview-container');
   const preview = document.getElementById('preview');
   const closePreview = document.getElementById('closePreview');
+  
+  // Event listeners untuk penggabung gambar
+  const mergerImageUrl = document.getElementById('mergerImageUrl');
+  const addUrlBtn = document.getElementById('addUrlBtn');
+  const mergeBtn = document.getElementById('mergeBtn');
+  const downloadBtn = document.getElementById('downloadBtn');
+  const resetBtn = document.getElementById('resetBtn');
+  const copyLinkBtn = document.getElementById('copyLinkBtn');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const closeBtn = document.querySelector('.lightbox .close-btn');
+  const qualitySlider = document.getElementById('quality');
+  const qualityValue = document.getElementById('qualityValue');
+  
+  // Inisialisasi kualitas
+  qualityValue.textContent = `${qualitySlider.value}%`;
+  
+  // Tab Navigasi
+  document.querySelectorAll('.tab-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      // Hapus kelas active dari semua tab dan tombol
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+      
+      // Tambahkan kelas active ke tombol yang diklik
+      button.classList.add('active');
+      
+      // Tampilkan konten tab yang sesuai
+      const tabId = button.getAttribute('data-tab');
+      document.getElementById(tabId).classList.add('active');
+    });
+  });
   
   // Clear user ID
   if (clearUserIdBtn) {
@@ -1476,6 +2549,126 @@ document.addEventListener('DOMContentLoaded', function() {
       document.getElementById('imagePreviewModal').style.display = 'none';
     }
   });
+  
+  // ======= EVENT LISTENERS PENGGABUNG GAMBAR =======
+  
+  // Tambahkan gambar dari URL
+  if (addUrlBtn) {
+    addUrlBtn.addEventListener('click', async function() {
+      const url = mergerImageUrl.value.trim();
+      if (!url) {
+        showNotification('Masukkan URL gambar!', 'error');
+        return;
+      }
+      
+      if (images.length >= 10) {
+        showNotification('Maksimal 10 gambar!', 'warning');
+        return;
+      }
+      
+      // Tampilkan loader
+      const loader = document.getElementById('mergerLoader');
+      loader.style.display = 'block';
+      
+      try {
+        // Ekstrak URL gambar sebenarnya menggunakan teknik khusus
+        const directImageUrl = await extractImageUrl(url);
+        
+        // Validasi URL gambar
+        const img = new Image();
+        img.crossOrigin = 'Anonymous';
+        
+        await new Promise((resolve, reject) => {
+          img.onload = resolve;
+          img.onerror = () => {
+            reject(new Error('Gagal memuat gambar'));
+          };
+          img.src = directImageUrl;
+        });
+        
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        
+        const imageData = {
+          src: canvas.toDataURL('image/png'),
+          name: 'url-image',
+          type: 'url',
+          originalUrl: url
+        };
+        
+        images.push(imageData);
+        updatePreviews();
+        mergerImageUrl.value = '';
+        showNotification('Gambar berhasil ditambahkan!', 'success');
+      } catch (error) {
+        console.error('Error:', error);
+        showNotification('Gagal memuat gambar. Pastikan URL benar dan mendukung CORS.', 'error');
+      } finally {
+        // Sembunyikan loader
+        loader.style.display = 'none';
+      }
+    });
+  }
+  
+  // Tambahkan gambar saat tekan Enter
+  if (mergerImageUrl) {
+    mergerImageUrl.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addUrlBtn.click();
+      }
+    });
+  }
+  
+  // Merge gambar
+  if (mergeBtn) {
+    mergeBtn.addEventListener('click', mergeImages);
+  }
+  
+  // Download gambar
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', downloadImage);
+  }
+  
+  // Reset form
+  if (resetBtn) {
+    resetBtn.addEventListener('click', resetAll);
+  }
+  
+  // Copy link
+  if (copyLinkBtn) {
+    copyLinkBtn.addEventListener('click', copyImageLink);
+  }
+  
+  // Lightbox
+  if (lightboxImg) {
+    const resultImage = document.getElementById('resultImage');
+    resultImage.addEventListener('click', () => {
+      if (mergedImageData) {
+        lightboxImg.src = mergedImageData;
+        lightbox.style.display = 'block';
+      }
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+    
+    window.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+  }
+  
+  // Kualitas
+  if (qualitySlider) {
+    qualitySlider.addEventListener('input', () => {
+      qualityValue.textContent = `${qualitySlider.value}%`;
+    });
+  }
 });
 </script>
 </body>
