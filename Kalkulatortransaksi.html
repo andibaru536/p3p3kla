@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Transaksi</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --success-color: #27ae60;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --dark-bg: #1a1a1a;
+            --dark-card: #2d2d2d;
+            --dark-text: #f5f5f5;
+            --dark-border: #444;
+            --light-bg: #f5f7fa;
+            --light-card: #ffffff;
+            --light-text: #333333;
+            --light-border: #ddd;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light-text);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: var(--dark-text);
+        }
+
+        .calculator {
+            background-color: var(--light-card);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .calculator {
+            background-color: var(--dark-card);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        body.dark-mode .header {
+            border-bottom: 2px solid #444;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin: 0;
+        }
+
+        body.dark-mode h2 {
+            color: #5dade2;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: var(--light-text);
+            transition: all 0.3s;
+        }
+
+        body.dark-mode .theme-toggle {
+            color: var(--dark-text);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        body.dark-mode label {
+            color: var(--dark-text);
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            box-sizing: border-box;
+            border: 1px solid var(--light-border);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background-color: var(--light-card);
+            color: var(--light-text);
+        }
+
+        body.dark-mode input {
+            background-color: #3c3c3c;
+            color: var(--dark-text);
+            border: 1px solid var(--dark-border);
+        }
+
+        input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        button {
+            color: white;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            flex: 1;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+        }
+
+        .reset-btn {
+            background: linear-gradient(to right, var(--warning-color), #d35400);
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #eaf7ff;
+            border-radius: 10px;
+            border-left: 5px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .result {
+            background-color: #2c3e50;
+            border-left: 5px solid #5dade2;
+        }
+
+        #copyBtn {
+            background: linear-gradient(to right, var(--success-color), #219653);
+            margin-top: 20px;
+        }
+
+        #copyFeeBtn {
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            margin-top: 10px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+
+        body.dark-mode .info-text {
+            color: #bdc3c7;
+        }
+
+        .highlight {
+            background-color: #fff8e1;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        body.dark-mode .highlight {
+            background-color: #34495e;
+            color: #f39c12;
+        }
+
+        .section-title {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ecf0f1;
+            text-align: center;
+        }
+
+        body.dark-mode .section-title {
+            color: #5dade2;
+            border-bottom: 1px solid #444;
+        }
+
+        .transaction-details {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .transaction-details {
+            background-color: #34495e;
+        }
+
+        .transaction-item {
+            padding: 10px;
+            border-bottom: 1px dashed var(--light-border);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        body.dark-mode .transaction-item {
+            border-bottom: 1px dashed var(--dark-border);
+        }
+
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+
+        .transaction-number {
+            font-weight: bold;
+            color: var(--light-text);
+        }
+
+        body.dark-mode .transaction-number {
+            color: var(--dark-text);
+        }
+
+        .transaction-amount {
+            color: var(--success-color);
+            font-weight: bold;
+        }
+
+        .max-badge {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .remainder-badge {
+            background-color: var(--danger-color);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 8px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .button-container button {
+            flex: 1;
+            margin-top: 0;
+        }
+
+        .placeholder {
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        body.dark-mode .placeholder {
+            color: #7f8c8d;
+        }
+
+        .toast {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 8px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .toast.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .calculating {
+            position: relative;
+        }
+
+        .calculating::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .calculating::after {
+            background: rgba(0, 0, 0, 0.7);
+            color: #5dade2;
+        }
+
+        .calculating::before {
+            content: "Menghitung...";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .calculating::before {
+            color: #5dade2;
+        }
+
+        @media (min-width: 768px) {
+            .calculator {
+                padding: 40px;
+            }
+            
+            .input-group {
+                margin-bottom: 25px;
+            }
+            
+            input {
+                padding: 16px;
+                font-size: 18px;
+            }
+            
+            button {
+                padding: 18px;
+                font-size: 20px;
+            }
+            
+            h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="header">
+            <h2>Kalkulator Transaksi</h2>
+            <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+        
+        <div class="input-group">
+            <label for="totalAmount">Jumlah Total:</label>
+            <input type="text" id="totalAmount" placeholder="Contoh: 250,000,000">
+            <p class="info-text">Masukkan jumlah total uang yang ingin Anda transfer (gunakan koma sebagai pemisah ribuan)</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="maxPerTransaction">Batas Maksimal per Transaksi:</label>
+            <input type="text" id="maxPerTransaction" placeholder="Contoh: 35,000,000">
+            <p class="info-text">Batas maksimal yang diizinkan per transaksi oleh sistem (gunakan koma sebagai pemisah ribuan)</p>
+        </div>
+        
+        <div class="input-group">
+            <label for="feePerTransaction">Biaya per Transaksi:</label>
+            <input type="text" id="feePerTransaction" placeholder="Contoh: 2,500">
+            <p class="info-text">Biaya yang dikenakan untuk setiap transaksi (gunakan koma sebagai pemisah ribuan)</p>
+        </div>
+        
+        <div class="button-group">
+            <button class="calculate-btn" onclick="calculate()">Hitung</button>
+            <button class="reset-btn" onclick="resetForm()">Reset</button>
+        </div>
+        
+        <div class="result" id="result">
+            <p class="placeholder">Hasil akan muncul di sini setelah dihitung.</p>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">Teks telah disalin!</div>
+
+    <script>
+        // Variabel global untuk menyimpan hasil terakhir
+        let lastCalculation = null;
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
+        
+        // Fungsi untuk mengatur mode gelap
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            document.body.classList.toggle('dark-mode', isDarkMode);
+            localStorage.setItem('darkMode', isDarkMode);
+            
+            // Ubah ikon tombol
+            const themeToggle = document.querySelector('.theme-toggle');
+            themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+        
+        // Fungsi untuk memformat angka dengan pemisah ribuan (koma)
+        function formatNumber(num, isInput = false) {
+            if (!num && num !== 0) return '';
+            
+            // Bersihkan angka dari format sebelumnya
+            let cleanNum = num.toString().replace(/,/g, '');
+            
+            // Jika digunakan untuk input, format dengan koma
+            if (isInput) {
+                return cleanNum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            // Jika digunakan untuk output, format dengan koma
+            return parseInt(cleanNum).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Fungsi untuk membersihkan angka dari format
+        function cleanNumber(numStr) {
+            if (!numStr) return 0;
+            return parseInt(numStr.replace(/,/g, '')) || 0;
+        }
+
+        // Fungsi untuk validasi input
+        function validateInputs() {
+            const totalAmount = cleanNumber(document.getElementById('totalAmount').value);
+            const maxPerTransaction = cleanNumber(document.getElementById('maxPerTransaction').value);
+            const feePerTransaction = cleanNumber(document.getElementById('feePerTransaction').value);
+            
+            if (totalAmount <= 0) {
+                showToast("Jumlah Total harus diisi dengan nilai yang valid!");
+                return false;
+            }
+            
+            if (maxPerTransaction <= 0) {
+                showToast("Batas Maksimal per Transaksi harus diisi dengan nilai yang valid!");
+                return false;
+            }
+            
+            if (feePerTransaction < 0) {
+                showToast("Biaya per Transaksi tidak boleh negatif!");
+                return false;
+            }
+            
+            if (maxPerTransaction > totalAmount) {
+                showToast("Batas Maksimal per Transaksi tidak boleh lebih besar dari Jumlah Total!");
+                return false;
+            }
+            
+            return true;
+        }
+
+        // Fungsi utama untuk kalkulasi
+        function calculate() {
+            if (!validateInputs()) return;
+            
+            // Tampilkan indikator penghitungan
+            const resultDiv = document.getElementById('result');
+            resultDiv.classList.add('calculating');
+            
+            // Simulasikan proses penghitungan (bisa dihapus jika tidak diperlukan)
+            setTimeout(() => {
+                // Ambil dan bersihkan nilai input
+                const totalAmount = cleanNumber(document.getElementById('totalAmount').value);
+                const maxPerTransaction = cleanNumber(document.getElementById('maxPerTransaction').value);
+                const feePerTransaction = cleanNumber(document.getElementById('feePerTransaction').value);
+                
+                // Hitung jumlah transaksi yang diperlukan
+                const numberOfFullTransactions = Math.floor(totalAmount / maxPerTransaction);
+                const remainder = totalAmount % maxPerTransaction;
+                const numberOfTransactions = remainder > 0 ? numberOfFullTransactions + 1 : numberOfFullTransactions;
+                
+                // Hitung total biaya
+                const totalFee = numberOfTransactions * feePerTransaction;
+                
+                // Simpan hasil untuk digunakan di fungsi copy
+                lastCalculation = {
+                    totalAmount,
+                    maxPerTransaction,
+                    feePerTransaction,
+                    numberOfTransactions,
+                    totalFee,
+                    numberOfFullTransactions,
+                    remainder
+                };
+                
+                // Buat detail transaksi
+                let transactionDetails = '';
+                
+                // Transaksi dengan nominal maksimal
+                for (let i = 0; i < numberOfFullTransactions; i++) {
+                    transactionDetails += `
+                        <div class="transaction-item">
+                            <span class="transaction-number">Transaksi ${i+1}:</span>
+                            <span class="transaction-amount">${formatNumber(maxPerTransaction)} <span class="max-badge">Maksimal</span></span>
+                        </div>`;
+                }
+                
+                // Transaksi terakhir dengan sisa
+                if (remainder > 0) {
+                    transactionDetails += `
+                        <div class="transaction-item">
+                            <span class="transaction-number">Transaksi ${numberOfFullTransactions + 1}:</span>
+                            <span class="transaction-amount">${formatNumber(remainder)} <span class="remainder-badge">Sisa</span></span>
+                        </div>`;
+                }
+                
+                // Tampilkan hasil
+                const resultHTML = `
+                    <div class="section-title">Hasil Perhitungan:</div>
+                    <p><strong>Jumlah Total:</strong> ${formatNumber(totalAmount)}</p>
+                    <p><strong>Batas Maksimal per Transaksi:</strong> ${formatNumber(maxPerTransaction)}</p>
+                    <p><strong>Biaya per Transaksi:</strong> ${formatNumber(feePerTransaction)}</p>
+                    <hr>
+                    <p><span class="highlight">Jumlah Transaksi yang Diperlukan:</span> <strong>${formatNumber(numberOfTransactions)} kali</strong></p>
+                    <p><span class="highlight">Total Biaya Transaksi:</span> <strong id="totalFeeValue">${formatNumber(totalFee)}</strong></p>
+                    
+                    <div class="transaction-details">
+                        <p><strong>Detail Transaksi:</strong></p>
+                        ${transactionDetails}
+                    </div>
+                    
+                    <div class="button-container">
+                        <button id="copyBtn" onclick="copyResults()">Salin Hasil Lengkap</button>
+                        <button id="copyFeeBtn" onclick="copyFee()">Salin Total Biaya</button>
+                    </div>
+                `;
+                
+                resultDiv.innerHTML = resultHTML;
+                resultDiv.classList.remove('calculating');
+            }, 800); // Delay untuk efek UI
+        }
+        
+        // Fungsi untuk mereset form
+        function resetForm() {
+            document.getElementById('totalAmount').value = '';
+            document.getElementById('maxPerTransaction').value = '';
+            document.getElementById('feePerTransaction').value = '';
+            document.getElementById('result').innerHTML = '<p class="placeholder">Hasil akan muncul di sini setelah dihitung.</p>';
+            lastCalculation = null;
+        }
+        
+        // Fungsi untuk menyalin hasil lengkap
+        function copyResults() {
+            if (!lastCalculation) return;
+            
+            const { totalAmount, maxPerTransaction, feePerTransaction, numberOfTransactions, totalFee, numberOfFullTransactions, remainder } = lastCalculation;
+            
+            let text = "HASIL PERHITUNGAN KALKULATOR TRANSAKSI\n";
+            text += "==========================================\n";
+            text += `Jumlah Total: ${formatNumber(totalAmount)}\n`;
+            text += `Batas Maksimal per Transaksi: ${formatNumber(maxPerTransaction)}\n`;
+            text += `Biaya per Transaksi: ${formatNumber(feePerTransaction)}\n`;
+            text += `Jumlah Transaksi yang Diperlukan: ${formatNumber(numberOfTransactions)} kali\n`;
+            text += `Total Biaya Transaksi: ${formatNumber(totalFee)}\n\n`;
+            text += "Detail Transaksi:\n";
+            
+            for (let i = 0; i < numberOfFullTransactions; i++) {
+                text += `Transaksi ${i+1}: ${formatNumber(maxPerTransaction)} (Maksimal)\n`;
+            }
+            
+            if (remainder > 0) {
+                text += `Transaksi ${numberOfFullTransactions + 1}: ${formatNumber(remainder)} (Sisa)\n`;
+            }
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Hasil lengkap telah disalin!');
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+                showToast('Gagal menyalin hasil.');
+            });
+        }
+        
+        // Fungsi untuk menyalin total biaya saja
+        function copyFee() {
+            if (!lastCalculation) return;
+            
+            const text = formatNumber(lastCalculation.totalFee);
+            
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Total biaya telah disalin: ' + text);
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+                showToast('Gagal menyalin total biaya.');
+            });
+        }
+        
+        // Fungsi untuk menampilkan toast notification
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            toast.textContent = message;
+            toast.className = "toast show";
+            
+            // Sembunyikan toast setelah 3 detik
+            setTimeout(function(){ toast.className = toast.className.replace("show", ""); }, 3000);
+        }
+        
+        // Format otomatis input saat halaman dimuat
+        window.onload = function() {
+            // Terapkan mode gelap jika sudah dipilih sebelumnya
+            if (isDarkMode) {
+                document.body.classList.add('dark-mode');
+                document.querySelector('.theme-toggle').textContent = '☀️';
+            }
+            
+            // Kosongkan nilai input
+            resetForm();
+            
+            // Tambahkan event listener untuk memformat input secara otomatis
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    this.value = formatNumber(this.value, true);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
