@@ -18,11 +18,11 @@
 	--warnabutton_hitung: #ffa200;
 	--shadowbutton_hitung: #ffd676;
 
-	--warnabutton_reset: #78b6ff;
-	--shadowbutton_reset: #c7e4ff;
+	--warnabutton_reset: #8e44ad;
+	--shadowbutton_reset: #c39bd3;
 
 	--warnaborder_card: #2d7fff;
-	--warnabackground_card: #0A1C47;
+	--warnabackground_card: #2c1370;
 
 	--borderbutton_atas: #ab8517;
 	}
@@ -192,8 +192,8 @@ cfg('KINGKONG',{prize:false,map:{
 
 ['BANGKOK','BRUNEI','CHELSEA','HONGKONG','HUAHIN','MAGNUM4D','NEVADA','POIPET','SYDNEY','TOTO CAMBODIA','TOTOMALI'].forEach(name=>{
  const base={
-  'DISKON 4D':{hadiah:3000,diskon:66},'DISKON 3D':{hadiah:400,diskon:59},'DISKON 2D':{hadiah:70,diskon:29},
-  'DISKON 2D DEPAN':{hadiah:65,diskon:29},'DISKON 2D TENGAH':{hadiah:65,diskon:29},
+  'DISKON 4D':{hadiah:3000,diskon:66.5},'DISKON 3D':{hadiah:400,diskon:59.5},'DISKON 2D':{hadiah:70,diskon:29.5},
+  'DISKON 2D DEPAN':{hadiah:65,diskon:29.5},'DISKON 2D TENGAH':{hadiah:65,diskon:29.5},
   'BET FULL 4D':{hadiah:10000,diskon:0},'BET FULL 3D':{hadiah:1000,diskon:0},'BET FULL 2D':{hadiah:100,diskon:0},
   '4D TEPAT':{hadiah:4000},'4D BB':{hadiah:200},
   '3D TEPAT':{hadiah:400},'3D BB':{hadiah:100},
@@ -225,22 +225,22 @@ cfg('KINGKONG',{prize:false,map:{
 ['BULLSEYE','CALIFORNIA','CAROLINA EVE','CAROLINA DAY','FLORIDA EVE','FLORIDA MID','KENTUCKY EVE','KENTUCKY MID','NEW YORK EVE','NEW YORK MID','OREGON','PCSO','HOKI DRAW','JAKARTA'].forEach(name=>{
  const isHoki=(name==='HOKI DRAW'),isJak=(name==='JAKARTA');
  const base={
-  'DISKON 4D':{hadiah:(isHoki?7000:3000),diskon:(isHoki?20:66)},
-  'DISKON 3D':{hadiah:(isHoki?750:400),diskon:(isHoki?20:59)},
-  'DISKON 2D':{hadiah:(isHoki?75:70),diskon:(isHoki?20:29)},
+  'DISKON 4D':{hadiah:(isHoki?7000:3000),diskon:(isHoki?20:66.5)},
+  'DISKON 3D':{hadiah:(isHoki?750:400),diskon:(isHoki?20:59.5)},
+  'DISKON 2D':{hadiah:(isHoki?75:70),diskon:(isHoki?20:29.5)},
   'BET FULL 4D':{hadiah:10000,diskon:0},'BET FULL 3D':{hadiah:1000,diskon:0},'BET FULL 2D':{hadiah:100,diskon:0},
   '4D TEPAT':{hadiah:(isHoki?5000:4000)},'4D BB':{hadiah:(isHoki?180:200)},
   '3D TEPAT':{hadiah:(isHoki?500:400)},'3D BB':{hadiah:(isHoki?75:100)},
   '2D TEPAT':{hadiah:(isHoki?80:70)},'2D BB':{hadiah:(isHoki?15:20)}
  };
- if(!isHoki&&!isJak){base['DISKON 2D DEPAN']={hadiah:65,diskon:29};base['DISKON 2D TENGAH']={hadiah:65,diskon:29};}
+ if(!isHoki&&!isJak){base['DISKON 2D DEPAN']={hadiah:65,diskon:29.5};base['DISKON 2D TENGAH']={hadiah:65,diskon:29.5};}
  const others=isHoki?{
   'COLOK BEBAS':{hadiah:0.9,diskon:6},'COLOK BEBAS ( 2 )':{hadiah:1.8,diskon:6},'COLOK BEBAS ( 3 )':{hadiah:2.7,diskon:6},'COLOK BEBAS ( 4 )':{hadiah:3.6,diskon:6},
-  'COLOK JITU':{hadiah:8,diskon:6},'MACAU SHIO':{hadiah:110,diskon:10},
+  'COLOK JITU':{hadiah:8,diskon:5},'MACAU SHIO':{hadiah:110,diskon:10},
   'COLOK BEBAS 2D ( 2 )':{hadiah:4,diskon:10},'COLOK BEBAS 2D (  3 )':{hadiah:6,diskon:10},'COLOK BEBAS 2D ( 4 )':{hadiah:20,diskon:10},
   'COLOK NAGA ( 3 )':{hadiah:12},'COLOK NAGA ( 4 )':{hadiah:30},
-  'SHIO':{hadiah:10,diskon:5},'50 - 50':{kei:-2.2,diskon:2},'TENGAH TEPI':{kei:-2.2,diskon:2},'SILANG HOMO':{kei:-3,diskon:2},'KEMBANG - KEMPIS - KEMBAR':{kei:-3,diskon:2},
-  'KOMBINASI':{hadiah:2.7,diskon:8},'DASAR GANJIL - BESAR':{kei:-25,diskon:2},'DASAR GENAP - KECIL':{kei:10,diskon:2}
+  'SHIO':{hadiah:10,diskon:8},'50 - 50':{kei:-2.2,diskon:2},'TENGAH TEPI':{kei:-2.2,diskon:2},'SILANG HOMO':{kei:-3,diskon:2},'KEMBANG - KEMPIS - KEMBAR':{kei:-3,diskon:2},
+  'KOMBINASI':{hadiah:2.7,diskon:2},'DASAR GANJIL - BESAR':{kei:-25,diskon:2},'DASAR GENAP - KECIL':{kei:10,diskon:2}
  }:(isJak?{
   'COLOK BEBAS':{hadiah:1.6,diskon:6},'COLOK BEBAS ( 2 )':{hadiah:3.2,diskon:6},'COLOK BEBAS ( 3 )':{hadiah:4.8,diskon:6},'COLOK BEBAS ( 4 )':{hadiah:6.4,diskon:6},
   'COLOK JITU':{hadiah:8.3,diskon:6},'MACAU SHIO':{hadiah:110,diskon:10},
@@ -260,8 +260,8 @@ cfg('KINGKONG',{prize:false,map:{
 });
 
 cfg('SINGAPORE',{prize:true,map:(()=>{const base={
- 'DISKON 4D':{hadiah:3000,diskon:66},'DISKON 3D':{hadiah:400,diskon:59},'DISKON 2D':{hadiah:70,diskon:29},
- 'DISKON 2D DEPAN':{hadiah:65,diskon:29},'DISKON 2D TENGAH':{hadiah:65,diskon:29},
+ 'DISKON 4D':{hadiah:3000,diskon:66.5},'DISKON 3D':{hadiah:400,diskon:59.5},'DISKON 2D':{hadiah:70,diskon:29.5},
+ 'DISKON 2D DEPAN':{hadiah:65,diskon:29.5},'DISKON 2D TENGAH':{hadiah:65,diskon:29.5},
  'BET FULL 4D':{hadiah:10000,diskon:0},'BET FULL 3D':{hadiah:1000,diskon:0},'BET FULL 2D':{hadiah:100,diskon:0},
  '4D TEPAT':{hadiah:4000},'4D BB':{hadiah:200},'3D TEPAT':{hadiah:400},'3D BB':{hadiah:100},'2D TEPAT':{hadiah:70},'2D BB':{hadiah:20},
  'COLOK BEBAS':{hadiah:1.5,diskon:6},'COLOK BEBAS ( 2 )':{hadiah:3,diskon:6},'COLOK BEBAS ( 3 )':{hadiah:4.5,diskon:6},'COLOK BEBAS ( 4 )':{hadiah:6,diskon:6},
@@ -336,4 +336,5 @@ if(current)sel.value=current;render();
 
 }catch(err){fatal(err&&(err.message||err))}
 })();
+
 </script>
