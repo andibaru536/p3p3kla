@@ -183,6 +183,10 @@
             font-size: 14px;
         }
 
+        .card-input {
+            position: relative;
+        }
+
         .card-input input {
             width: 100%;
             padding: 12px;
@@ -203,6 +207,19 @@
 
         .card-input input::placeholder {
             color: #a0a0a0;
+        }
+
+        .input-hint {
+            font-size: 12px;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 5px;
+            min-height: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .input-hint.show {
+            color: var(--accent);
         }
 
         .card-actions {
@@ -621,7 +638,7 @@
                 'SHIO': { hadiah: 10, diskon: 5 }, '50 - 50': { kei: -5, diskon: 2 }, 'TENGAH TEPI': { kei: -2.2, diskon: 2 }, 'SILANG HOMO': { kei: -2.2, diskon: 2 }, 'KEMBANG - KEMPIS - KEMBAR': { kei: -2.2, diskon: 2 },
                 'KOMBINASI': { hadiah: 2.8, diskon: 8 }, 'DASAR GANJIL - BESAR': { kei: -25, diskon: 2 }, 'DASAR GENAP - KECIL': { kei: 10, diskon: 2 }
             } : {
-                'COLOK BEBAS': { hadiah: 1.5, diskon: 6 }, 'COLOK BEBAS ( 2 )': { hadiah: 3, diskon: 6 }, 'COLOK BEBAS ( 3 )': { hadiah: 4.5, diskon: 6 }, 'COLOK BEBAS ( 4 )': { hadiah: 6, diskon: 6 },
+                'COLOK BEBAS': { hadiah: 1.5, diskon: 6 }, 'COLOK BEBAS ( 2 )': { hadiah: 3, diskon: 6 }, 'COLOK BEBas ( 3 )': { hadiah: 4.5, diskon: 6 }, 'COLOK BEBAS ( 4 )': { hadiah: 6, diskon: 6 },
                 'COLOK JITU': { hadiah: 8, diskon: 6 }, 'MACAU SHIO': { hadiah: 110, diskon: 10 },
                 'COLOK BEBAS 2D ( 2 )': { hadiah: 7, diskon: 10 }, 'COLOK BEBAS 2D (  3 )': { hadiah: 11, diskon: 10 }, 'COLOK BEBAS 2D ( 4 )': { hadiah: 18, diskon: 10 },
                 'COLOK NAGA ( 3 )': { hadiah: 23, diskon: 10 }, 'COLOK NAGA ( 4 )': { hadiah: 35, diskon: 10 },
@@ -657,6 +674,23 @@
             }
         });
 
+        // Fungsi untuk memformat angka dengan pemisah ribuan
+        function formatNumber(input) {
+            return input.replace(/\D/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        // Fungsi untuk menampilkan hint
+        function showInputHint(inputElement, hintElement) {
+            const value = inputElement.value;
+            if (value) {
+                hintElement.textContent = formatNumber(value);
+                hintElement.classList.add('show');
+            } else {
+                hintElement.textContent = 'Contoh: 1000';
+                hintElement.classList.remove('show');
+            }
+        }
+
         // Fungsi untuk merender kartu
         function renderCard(item) {
             const card = document.createElement('div');
@@ -677,7 +711,8 @@
                     ${isKei ? `Diskon: ${diskon}% | Kei: ${kei >= 0 ? '+' : ''}${kei}%` : `Diskon: ${diskon}% | Hadiah: x${hadiah}`}
                 </div>
                 <div class="card-input">
-                    <input type="number" placeholder="Input Nominal Taruhan" min="0">
+                    <input type="text" placeholder="Input Nominal Taruhan" min="0" inputmode="numeric">
+                    <div class="input-hint">Contoh: 1000</div>
                 </div>
                 <div class="card-actions">
                     <button class="card-btn calculate">Hitung</button>
@@ -693,6 +728,7 @@
             
             // Tambahkan event listeners
             const input = card.querySelector('input');
+            const hint = card.querySelector('.input-hint');
             const calculateBtn = card.querySelector('.calculate');
             const resetBtn = card.querySelector('.reset');
             const output = card.querySelector('.card-output');
@@ -701,11 +737,30 @@
             const totalPill = card.querySelector('.total');
             const minPill = card.querySelector('.min');
             
+            // Event listener untuk input
+            input.addEventListener('input', function() {
+                // Format input dengan pemisah ribuan
+                this.value = formatNumber(this.value);
+                showInputHint(this, hint);
+            });
+            
+            input.addEventListener('focus', function() {
+                showInputHint(this, hint);
+            });
+            
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    hint.textContent = 'Contoh: 1000';
+                    hint.classList.remove('show');
+                }
+            });
+            
             calculateBtn.addEventListener('click', () => {
-                const value = parseFloat(input.value);
+                // Hapus titik sebelum perhitungan
+                const numericValue = parseInt(input.value.replace(/\./g, ''));
                 const minBet = isMin1000(title) ? 1000 : 100;
                 
-                if (isNaN(value) || value <= 0 || value < minBet) {
+                if (isNaN(numericValue) || numericValue <= 0 || numericValue < minBet) {
                     output.classList.add('show');
                     minPill.style.display = 'block';
                     paymentPill.style.display = 'none';
@@ -721,12 +776,12 @@
                     const isMinus = ['SILANG HOMO', '50 - 50', 'TENGAH TEPI', 'KEMBANG - KEMPIS - KEMBAR', 'DASAR GANJIL - BESAR'].includes(title) || kei < 0;
                     
                     if (isMinus) {
-                        const preBayar = value + value * Math.abs(kei) / 100;
+                        const preBayar = numericValue + numericValue * Math.abs(kei) / 100;
                         bayar = Math.ceil(preBayar * (1 - diskon / 100));
-                        menang = Math.round(value);
+                        menang = Math.round(numericValue);
                     } else {
-                        bayar = Math.round(value * (1 - diskon / 100));
-                        menang = Math.round(value + value * (kei / 100));
+                        bayar = Math.round(numericValue * (1 - diskon / 100));
+                        menang = Math.round(numericValue + numericValue * (kei / 100));
                     }
                     
                     total = bayar + menang;
@@ -740,8 +795,8 @@
                     winPill.textContent = `MENANG : ${formatRupiah(menang)}`;
                     totalPill.textContent = `TOTAL : ${formatRupiah(total)}`;
                 } else {
-                    bayar = Math.round(value * (1 - diskon / 100));
-                    menang = Math.round(value * hadiah);
+                    bayar = Math.round(numericValue * (1 - diskon / 100));
+                    menang = Math.round(numericValue * hadiah);
                     total = bayar + menang;
                     
                     output.classList.add('show');
@@ -757,6 +812,8 @@
             
             resetBtn.addEventListener('click', () => {
                 input.value = '';
+                hint.textContent = 'Contoh: 1000';
+                hint.classList.remove('show');
                 output.classList.remove('show');
             });
             
