@@ -717,6 +717,67 @@
             background: var(--primary-light);
         }
 
+        /* Upload Section - NEW */
+        .upload-section {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: rgba(30, 46, 40, 0.3);
+            border-radius: 10px;
+            border: 1px dashed var(--border-dark);
+        }
+
+        .upload-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #e0ffe0;
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .upload-btn {
+            padding: 10px 15px;
+            background: var(--primary-green);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .upload-btn:hover {
+            background: var(--primary-light);
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .upload-hint {
+            font-size: 12px;
+            color: rgba(200, 255, 220, 0.7);
+            margin-top: 8px;
+            text-align: center;
+        }
+
         .settings {
             margin: 25px 0;
         }
@@ -808,6 +869,7 @@
 
         .preview-container {
             margin-top: 20px;
+            position: relative;
         }
 
         .counter {
@@ -1026,6 +1088,7 @@
 
         .toast-icon {
             font-size: 18px;
+            color: var(--text-light);
         }
 
         .toast.success {
@@ -1436,6 +1499,25 @@
                     </div>
                 </div>
                 
+                <!-- Upload Section - NEW -->
+                <div class="upload-section">
+                    <div class="upload-header">
+                        <i class="fas fa-upload"></i>
+                        <h3>Unggah Gambar</h3>
+                    </div>
+                    
+                    <div class="upload-btn-wrapper">
+                        <button class="upload-btn">
+                            <i class="fas fa-cloud-upload-alt"></i> Pilih File Gambar
+                        </button>
+                        <input type="file" id="fileUpload" accept="image/*" multiple>
+                    </div>
+                    
+                    <p class="upload-hint">
+                        <i class="fas fa-info-circle"></i> Maksimal 10 gambar (URL + Unggahan)
+                    </p>
+                </div>
+                
                 <div class="settings">
                     <h2 class="panel-title">
                         <i class="fas fa-sliders-h"></i> Pengaturan Gabungan
@@ -1611,12 +1693,6 @@
             }, 3000);
         }
 
-        // Show loading indicator
-        function showCyberLoader(show) {
-            const loader = document.getElementById('cyberLoader');
-            if (loader) loader.style.display = show ? 'flex' : 'none';
-        }
-
         // ================ WD ANALYSIS FUNCTIONS ================ //
         // Auto analyze when data is pasted
         document.getElementById('cyberData').addEventListener('paste', function(e) {
@@ -1664,8 +1740,6 @@
             
             // Update UI to show current filter
             document.getElementById('cyberFilter').textContent = 'Rp ' + minAmount.toLocaleString('id-ID').replace(/,/g, '.');
-            
-            showCyberLoader(true);
             
             // Simulate processing delay
             setTimeout(() => {
@@ -1717,8 +1791,6 @@
                 } catch (error) {
                     console.error('Error analyzing data:', error);
                     showCyberToast('Error saat menganalisis data!', 'error');
-                } finally {
-                    showCyberLoader(false);
                 }
             }, 800);
         }
@@ -1877,6 +1949,7 @@
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const closeBtn = document.querySelector('.close-btn');
+        const fileUpload = document.getElementById('fileUpload');
         
         // Array untuk menyimpan gambar
         let images = [];
@@ -1900,6 +1973,9 @@
         qualitySlider.addEventListener('input', () => {
             qualityValue.textContent = `${qualitySlider.value}%`;
         });
+        
+        // Event listener untuk upload file
+        fileUpload.addEventListener('change', handleFileUpload);
         
         // Event listener untuk lightbox
         resultImage.addEventListener('click', () => {
@@ -1977,79 +2053,105 @@
             }
         }
         
-        // Fungsi untuk mengekstrak URL gambar sebenarnya dari berbagai layanan (DIPERBAIKI)
+        // Fungsi untuk menangani upload file
+        function handleFileUpload(e) {
+            const files = e.target.files;
+            if (!files || files.length === 0) return;
+            
+            if (images.length + files.length > 10) {
+                showCyberToast('Maksimal 10 gambar!', 'warning');
+                return;
+            }
+            
+            // Tampilkan loader
+            loader.style.display = 'block';
+            
+            let processed = 0;
+            const totalFiles = files.length;
+            
+            Array.from(files).forEach(file => {
+                if (!file.type.match('image.*')) {
+                    processed++;
+                    if (processed === totalFiles) loader.style.display = 'none';
+                    showCyberToast('Hanya file gambar yang diizinkan!', 'error');
+                    return;
+                }
+                
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        
+                        const imageData = {
+                            src: canvas.toDataURL('image/png'),
+                            name: file.name,
+                            type: 'upload',
+                            file: file
+                        };
+                        
+                        images.push(imageData);
+                        processed++;
+                        
+                        if (processed === totalFiles) {
+                            updatePreviews();
+                            loader.style.display = 'none';
+                            showCyberToast(`${totalFiles} gambar berhasil diunggah!`, 'success');
+                        }
+                    };
+                    img.src = event.target.result;
+                };
+                
+                reader.onerror = function() {
+                    processed++;
+                    if (processed === totalFiles) loader.style.display = 'none';
+                    showCyberToast('Gagal membaca file!', 'error');
+                };
+                
+                reader.readAsDataURL(file);
+            });
+            
+            // Reset input file
+            fileUpload.value = '';
+        }
+        
+        // Fungsi untuk mengekstrak URL gambar sebenarnya dari berbagai layanan
         async function extractImageUrl(url) {
             try {
                 // Untuk layanan prnt.sc
                 if (url.includes('prnt.sc')) {
                     // Coba ambil dari meta og:image
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-                    const data = await response.json();
-                    const html = data.contents;
-                    
-                    // Metode 1: Cari meta property og:image
-                    const ogImageRegex = /<meta\s+property="og:image"\s+content="([^"]+)"/i;
-                    const ogMatch = ogImageRegex.exec(html);
-                    if (ogMatch && ogMatch[1]) {
-                        return ogMatch[1].replace(/&amp;/g, '&');
-                    }
-                    
-                    // Metode 2: Cari gambar dengan class khusus
-                    const classRegex = /<img[^>]+class="[^"]*screenshot-image[^"]*"[^>]+src="([^">]+)"/i;
-                    const classMatches = classRegex.exec(html);
-                    if (classMatches && classMatches[1]) {
-                        return classMatches[1].startsWith('//') ? 'https:' + classMatches[1] : classMatches[1];
-                    }
-                    
-                    return url;
-                }
-                
-                // Untuk layanan sleekshot.app
-                if (url.includes('sleekshot.app')) {
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-                    const data = await response.json();
-                    const html = data.contents;
-                    const ogImageRegex = /<meta\s+property="og:image"\s+content="([^">]+)"/i;
-                    const matches = ogImageRegex.exec(html);
-                    if (matches && matches[1]) {
-                        return matches[1];
-                    }
-                    return url;
-                }
-                
-                // Untuk layanan imghostr.com
-                if (url.includes('imghostr.com')) {
-                    // Coba ekstrak ID gambar dari URL (contoh: https://imghostr.com/66e5d9_wl61 -> ID:66e5d9)
-                    const idMatch = url.match(/imghostr\.com\/([a-zA-Z0-9]+)_/);
-                    if (idMatch && idMatch[1]) {
-                        return `https://img.imghostr.com/${idMatch[1]}.png`;
-                    }
-                    
-                    // Jika tidak berhasil, coba parsing HTML
-                    const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-                    const data = await response.json();
-                    const html = data.contents;
-                    const imgRegex = /<img[^>]+id="image-view"[^>]+src="([^">]+)"/i;
-                    const matches = imgRegex.exec(html);
-                    if (matches && matches[1]) {
-                        return matches[1];
-                    }
-                    return url;
-                }
-                
-                // Untuk imgur.com
-                if (url.includes('imgur.com')) {
-                    // Konversi URL gallery ke direct image
-                    if (url.includes('/gallery/') || url.includes('/a/')) {
-                        const idMatch = url.match(/\/([a-zA-Z0-9]+)$/);
-                        if (idMatch && idMatch[1]) {
-                            return `https://i.imgur.com/${idMatch[1]}.jpg`;
+                    try {
+                        const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+                        const data = await response.json();
+                        const html = data.contents;
+                        
+                        // Metode 1: Cari meta property og:image
+                        const ogImageRegex = /<meta\s+property="og:image"\s+content="([^"]+)"/i;
+                        const ogMatch = ogImageRegex.exec(html);
+                        if (ogMatch && ogMatch[1]) {
+                            return ogMatch[1].replace(/&amp;/g, '&');
                         }
+                        
+                        // Metode 2: Cari gambar dengan class khusus
+                        const classRegex = /<img[^>]+class="[^"]*screenshot-image[^"]*"[^>]+src="([^">]+)"/i;
+                        const classMatches = classRegex.exec(html);
+                        if (classMatches && classMatches[1]) {
+                            return classMatches[1].startsWith('//') ? 'https:' + classMatches[1] : classMatches[1];
+                        }
+                    } catch (e) {
+                        console.error('Error extracting image URL:', e);
                     }
+                    
                     return url;
                 }
                 
-                // Untuk URL langsung
+                // Untuk layanan lainnya, kembalikan URL asli
                 return url;
             } catch (error) {
                 console.error('Extraction error:', error);
@@ -2278,6 +2380,7 @@
             if (placeholder) placeholder.style.display = 'block';
             mergeBtn.disabled = true;
             imageUrl.value = '';
+            fileUpload.value = '';
             
             showCyberToast('Semua gambar telah direset', 'info');
         }
