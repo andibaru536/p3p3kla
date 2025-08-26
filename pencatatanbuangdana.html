@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parser Data Pengembalian Dana - Dark Deluxe Pro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0c0e14 0%, #1a1d29 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(18, 21, 33, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            flex: 1;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #ffd700, #ffb700, #ffd700);
+            z-index: 10;
+        }
+        header {
+            background: linear-gradient(135deg, #1a1f35 0%, #131724 100%);
+            color: #fff;
+            padding: 25px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.05"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle fill="%23FFFFFF" cx="25" cy="25" r="1"/><circle fill="%23FFFFFF" cx="75" cy="75" r="1"/><circle fill="%23FFFFFF" cx="75" cy="25" r="1.5"/><circle fill="%23FFFFFF" cx="25" cy="75" r="1.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            z-index: 1;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+        header p {
+            font-size: 18px;
+            color: #b8b8b8;
+            position: relative;
+            z-index: 2;
+        }
+        .content {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .input-section, .output-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: 600;
+            color: #ffd700;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        textarea {
+            width: 100%;
+            padding: 20px;
+            background: rgba(15, 18, 28, 0.8);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 8px;
+            font-size: 16px;
+            min-height: 220px;
+            resize: vertical;
+            font-family: 'Courier New', monospace;
+            line-height: 1.5;
+            transition: all 0.3s;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3), inset 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        button {
+            background: linear-gradient(to right, #2c3e50, #1a2530);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button.process {
+            background: linear-gradient(to right, #2c3e50, #1a2530);
+        }
+        button.process:hover {
+            background: linear-gradient(to right, #34495e, #1e2a38);
+        }
+        button.reset {
+            background: linear-gradient(to right, #c0392b, #922b21);
+        }
+        button.reset:hover {
+            background: linear-gradient(to right, #d35439, #a23526);
+        }
+        button.copy {
+            background: linear-gradient(to right, #27ae60, #219653);
+        }
+        button.copy:hover {
+            background: linear-gradient(to right, #2ecc71, #239b56);
+        }
+        .output-text {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            padding: 20px;
+            background: rgba(15, 18, 28, 0.8);
+            color: #e0e0e0;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            min-height: 80px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+        .output-container {
+            position: relative;
+        }
+        .instructions {
+            background: rgba(25, 30, 45, 0.6);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-top: 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .instructions h3 {
+            margin-bottom: 15px;
+            color: #ffd700;
+            font-size: 20px;
+        }
+        .instructions ul {
+            padding-left: 25px;
+            margin-bottom: 15px;
+        }
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        .example {
+            background: rgba(15, 20, 35, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #a0a0a0;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding: 25px;
+            background: rgba(15, 18, 28, 0.8);
+            border-radius: 8px;
+            font-size: 14px;
+            color: #8c8c8c;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .copied-notification {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #27ae60;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 1000;
+            animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards;
+            font-weight: 600;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-20px); }
+        }
+        .error-message {
+            color: #e74c3c;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid #e74c3c;
+        }
+        .success-message {
+            color: #2ecc71;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            background: rgba(46, 204, 113, 0.1);
+            border-radius: 5px;
+            border-left: 4px solid #2ecc71;
+        }
+        .results-count {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #ffd700;
+            font-size: 16px;
+            padding: 10px;
+            background: rgba(255, 215, 0, 0.1);
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .decorative-element {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, rgba(255,215,0,0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .decoration-1 {
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+        }
+        .decoration-2 {
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+        }
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            textarea {
+                min-height: 180px;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            h1 {
+                font-size: 26px;
+            }
+            header p {
+                font-size: 16px;
+            }
+        }
+        .gold-accent {
+            color: #ffd700;
+        }
+        .logo {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorative-element decoration-1"></div>
+        <div class="decorative-element decoration-2"></div>
+        
+        <header>
+            <div class="logo">
+                <i class="fas fa-crown gold-accent"></i>
+            </div>
+            <h1>Parser Data Pengembalian Dana</h1>
+            <p>Dark Deluxe Pro Edition</p>
+        </header>
+        
+        <div class="content">
+            <div class="input-section">
+                <label for="rawData"><i class="fas fa-pen"></i> Masukkan Data Mentah (Banyak Format):</label>
+                <textarea id="rawData" placeholder="Contoh:
+Info : Goltogel
+Perihal : Pengembalian Dana
+Dari Situs : Linetogel
+
+Bank Danamon ( BERSIH )
+Nama Rekening : ZINTIYA AMELYA MBATU
+Nomor Rekening : 3692383056
+Nominal : Rp. 50,000,000,-
+
+Atau format lainnya...
+
+Bank BCA
+Nama: JOHN DOE
+No. Rek: 1234567890
+Jumlah: Rp 1.500.000"></textarea>
+                <div class="error-message" id="errorMessage"></div>
+                <div class="success-message" id="successMessage"></div>
+            </div>
+            
+            <div class="button-group">
+                <button class="process" onclick="processData()">
+                    <i class="fas fa-cogs"></i> Proses Data
+                </button>
+                <button class="reset" onclick="resetData()">
+                    <i class="fas fa-trash"></i> Hapus/Reset
+                </button>
+            </div>
+            
+            <div class="output-section">
+                <label><i class="fas fa-file-export"></i> Hasil Output:</label>
+                <div class="output-container">
+                    <div class="output-text" id="outputResult">
+                        Hasil akan ditampilkan di sini...
+                    </div>
+                    <div class="button-group">
+                        <button class="copy" onclick="copyOutput()">
+                            <i class="fas fa-copy"></i> Salin Hasil
+                        </button>
+                    </div>
+                </div>
+                <div class="results-count" id="resultsCount"></div>
+            </div>
+            
+            <div class="instructions">
+                <h3><i class="fas fa-info-circle"></i> Cara Penggunaan:</h3>
+                <ul>
+                    <li>Tempel atau ketik data mentah di area input (bisa beberapa data sekaligus)</li>
+                    <li>Klik tombol "Proses Data"</li>
+                    <li>Output akan ditampilkan di bagian bawah</li>
+                    <li>Klik tombol "Salin Hasil" untuk menyalin data</li>
+                    <li>Gunakan tombol "Hapus/Reset" untuk mengosongkan semua data</li>
+                </ul>
+                
+                <div class="example">Contoh format input (beberapa data sekaligus):
+Data 1:
+Info : Goltogel
+Perihal : Pengembalian Dana
+Dari Situs : Linetogel
+
+Bank Danamon ( BERSIH )
+Nama Rekening : ZINTIYA AMELYA MBATU
+Nomor Rekening : 3692383056
+Nominal : Rp. 50,000,000,-
+
+Data 2:
+Bank BCA
+Nama: JOHN DOE
+No. Rek: 1234567890
+Jumlah: Rp 1.500.000
+
+Data 3:
+BANK MANDIRI
+NAMA: JANE SMITH
+NOMOR REKENING: 9876543210
+NOMINAL: RP 2.750.000</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Data Parser • Dark Deluxe Pro Edition • Format Output: Bank [TAB] No.Rekening [TAB] Nama [TAB] [TAB] Nominal</p>
+        </div>
+    </div>
+
+    <div class="copied-notification" id="copiedNotification">
+        <i class="fas fa-check-circle"></i> Teks disalin! Data siap ditempel ke Excel/Sheets.
+    </div>
+
+    <script>
+        // Fungsi untuk memproses data
+        function processData() {
+            const rawData = document.getElementById('rawData').value;
+            const errorElement = document.getElementById('errorMessage');
+            const successElement = document.getElementById('successMessage');
+            const resultsCountElement = document.getElementById('resultsCount');
+            
+            // Sembunyikan pesan error dan sukses
+            errorElement.style.display = 'none';
+            successElement.style.display = 'none';
+            resultsCountElement.textContent = '';
+            
+            if (!rawData.trim()) {
+                showError('Harap masukkan data mentah!');
+                return;
+            }
+            
+            // Pisahkan data berdasarkan baris kosong ganda (double newline)
+            const dataBlocks = rawData.split(/\n\s*\n/);
+            let results = [];
+            let displayResults = [];
+            
+            for (let i = 0; i < dataBlocks.length; i++) {
+                const block = dataBlocks[i].trim();
+                if (!block) continue;
+                
+                // Parsing data dari setiap blok
+                const lines = block.split('\n');
+                let bank = '';
+                let accountName = '';
+                let accountNumber = '';
+                let amount = '';
+                let displayAmount = '';
+                
+                // Pattern matching untuk berbagai format
+                for (const line of lines) {
+                    const trimmedLine = line.trim();
+                    
+                    // Cari informasi bank
+                    if (!bank && /bank/i.test(trimmedLine)) {
+                        bank = extractValue(trimmedLine, /bank[\s:]*([^(\(|\))]+)/i);
+                        if (!bank) bank = trimmedLine.replace(/\(.*\)/, '').replace('Bank', '').trim();
+                    }
+                    
+                    // Cari nama rekening
+                    if (!accountName && /nama/i.test(trimmedLine)) {
+                        accountName = extractValue(trimmedLine, /nama[\s\w]*:?\s*(.+)/i);
+                    }
+                    
+                    // Cari nomor rekening
+                    if (!accountNumber && /nomor|no\.?/i.test(trimmedLine) && /rekening/i.test(trimmedLine)) {
+                        accountNumber = extractValue(trimmedLine, /nomor[\s\w]*:?\s*([\d\s\-\.]+)/i);
+                        if (!accountNumber) accountNumber = extractValue(trimmedLine, /no\.?[\s\w]*:?\s*([\d\s\-\.]+)/i);
+                    }
+                    
+                    // Cari nominal
+                    if (!amount && /nominal|jumlah|rp|rupiah/i.test(trimmedLine)) {
+                        amount = extractValue(trimmedLine, /nominal[\s\w]*:?\s*([\d\.,]+)/i);
+                        if (!amount) amount = extractValue(trimmedLine, /rp\.?[\s]*([\d\.,]+)/i);
+                        
+                        // Bersihkan nominal dari karakter non-digit
+                        if (amount) {
+                            // Simpan nilai tanpa koma untuk disalin
+                            amount = amount.replace(/[^\d,]/g, '').replace(/,/g, '');
+                            
+                            // Format tampilan dengan koma
+                            displayAmount = formatNumberWithCommas(amount);
+                        }
+                    }
+                }
+                
+                // Jika semua data ditemukan, tambahkan ke hasil
+                if (bank && accountName && accountNumber && amount) {
+                    // Format output dengan karakter tab untuk pemisah kolom
+                    const output = `${bank}\t${accountNumber}\t${accountName}\t\t${amount}`;
+                    results.push(output);
+                    
+                    // Format untuk tampilan dengan koma pada nominal
+                    const displayOutput = `${bank}\t${accountNumber}\t${accountName}\t\t${displayAmount}`;
+                    displayResults.push(displayOutput);
+                }
+            }
+            
+            // Validasi hasil
+            if (results.length === 0) {
+                showError('Tidak ada data yang berhasil diproses! Pastikan data mengandung informasi Bank, Nama Rekening, Nomor Rekening, dan Nominal.');
+                return;
+            }
+            
+            // Gabungkan semua hasil dengan newline
+            const outputText = results.join('\n');
+            const displayText = displayResults.join('\n');
+            
+            document.getElementById('outputResult').textContent = displayText;
+            document.getElementById('outputResult').setAttribute('data-output', outputText);
+            
+            // Tampilkan jumlah hasil yang berhasil diproses
+            resultsCountElement.textContent = `Berhasil memproses ${results.length} data.`;
+            
+            showSuccess('Data berhasil diproses! Klik tombol "Salin Hasil" untuk menyalin.');
+        }
+        
+        // Fungsi untuk memformat angka dengan koma
+        function formatNumberWithCommas(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        // Fungsi untuk mengekstrak nilai berdasarkan pola
+        function extractValue(line, pattern) {
+            const match = line.match(pattern);
+            if (match && match[1]) {
+                return match[1].trim();
+            }
+            return '';
+        }
+        
+        // Fungsi untuk menampilkan error
+        function showError(message) {
+            const errorElement = document.getElementById('errorMessage');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        // Fungsi untuk menampilkan sukses
+        function showSuccess(message) {
+            const successElement = document.getElementById('successMessage');
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+        }
+        
+        // Fungsi untuk reset data
+        function resetData() {
+            document.getElementById('rawData').value = '';
+            document.getElementById('outputResult').textContent = 'Hasil akan ditampilkan di sini...';
+            document.getElementById('outputResult').removeAttribute('data-output');
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('resultsCount').textContent = '';
+        }
+        
+        // Fungsi untuk menyalin output
+        function copyOutput() {
+            const text = document.getElementById('outputResult').getAttribute('data-output');
+            if (text && text !== 'Hasil akan ditampilkan di sini...') {
+                // Menggunakan Clipboard API untuk menyalin teks dengan karakter tab
+                navigator.clipboard.writeText(text).then(function() {
+                    // Tampilkan notifikasi
+                    const notification = document.getElementById('copiedNotification');
+                    notification.style.display = 'block';
+                    setTimeout(function() {
+                        notification.style.display = 'none';
+                    }, 3000);
+                }).catch(function(err) {
+                    console.error('Gagal menyalin teks: ', err);
+                    showError('Gagal menyalin teks. Silakan coba lagi.');
+                });
+            } else {
+                showError('Tidak ada data untuk disalin. Silakan proses data terlebih dahulu.');
+            }
+        }
+        
+        // Auto-focus pada textarea saat halaman dimuat
+        window.onload = function() {
+            document.getElementById('rawData').focus();
+        }
+    </script>
+</body>
+</html>
