@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Analisis Batasan Line Togel</title>
+    <title>Analisis Batasan Line - Togel</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -264,6 +264,7 @@
             color: var(--lighter);
             position: relative;
             display: inline-block;
+            letter-spacing: 1px;
         }
         
         .result-value::after {
@@ -282,6 +283,46 @@
             font-weight: 500;
             opacity: 0.8;
             margin-bottom: 10px;
+        }
+        
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+            color: var(--primary-light);
+        }
+        
+        .copy-notification {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--success);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        
+        .copy-notification.show {
+            opacity: 1;
         }
         
         .status-bar {
@@ -436,6 +477,10 @@
                     </div>
                     <div id="4dResult" class="result-value">0</div>
                     <div class="result-limit">Batasan Line: 4,069 angka</div>
+                    <button class="copy-btn" data-type="4d">
+                        <i class="fas fa-copy"></i>
+                        Salin Hasil
+                    </button>
                 </div>
                 
                 <div class="result-card result-card-3d">
@@ -445,6 +490,10 @@
                     </div>
                     <div id="3dResult" class="result-value">0</div>
                     <div class="result-limit">Batasan Line: 900 angka</div>
+                    <button class="copy-btn" data-type="3d">
+                        <i class="fas fa-copy"></i>
+                        Salin Hasil
+                    </button>
                 </div>
                 
                 <div class="result-card result-card-2d">
@@ -454,6 +503,10 @@
                     </div>
                     <div id="2dResult" class="result-value">0</div>
                     <div class="result-limit">Batasan Line: 60 angka</div>
+                    <button class="copy-btn" data-type="2d">
+                        <i class="fas fa-copy"></i>
+                        Salin Hasil
+                    </button>
                 </div>
             </div>
             
@@ -480,6 +533,11 @@
         </div>
     </div>
 
+    <div id="copyNotification" class="copy-notification">
+        <i class="fas fa-check-circle"></i>
+        <span>Hasil berhasil disalin!</span>
+    </div>
+
     <script>
         const dataInput = document.getElementById('dataInput');
         const deleteData = document.getElementById('deleteData');
@@ -495,6 +553,8 @@
         };
         const statusMessage = document.getElementById('statusMessage');
         const statusInfo = statusMessage.querySelector('.status-info span');
+        const copyButtons = document.querySelectorAll('.copy-btn');
+        const copyNotification = document.getElementById('copyNotification');
         
         // Kolom "Tebakan" berada di index 1 (kolom kedua)
         const TEBAK_COLUMN_INDEX = 1;
@@ -505,6 +565,34 @@
         });
         
         deleteData.addEventListener('click', clearAllData);
+        
+        // Tambahkan event listener untuk tombol copy
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const type = this.getAttribute('data-type');
+                copyToClipboard(type);
+            });
+        });
+
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function copyToClipboard(type) {
+            // Dapatkan nilai asli tanpa format
+            const rawValue = results[type].getAttribute('data-raw') || '0';
+            
+            // Salin ke clipboard
+            navigator.clipboard.writeText(rawValue).then(() => {
+                // Tampilkan notifikasi
+                copyNotification.classList.add('show');
+                setTimeout(() => {
+                    copyNotification.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+            });
+        }
 
         function processTebak() {
             const input = dataInput.value.trim();
@@ -567,8 +655,12 @@
             
             for (const type in counts) {
                 const count = counts[type];
-                results[type].textContent = count;
-                badges[type].textContent = `${count} ${type.toUpperCase()}`;
+                
+                // Simpan nilai asli dan tampilkan dengan format
+                results[type].setAttribute('data-raw', count);
+                results[type].textContent = formatNumber(count);
+                
+                badges[type].textContent = `${formatNumber(count)} ${type.toUpperCase()}`;
                 
                 const cardElement = document.querySelector(`.result-card-${type}`);
                 const badgeElement = badges[type];
@@ -588,7 +680,7 @@
                 }
             }
             
-            statusInfo.textContent = `Telah menganalisis ${totalNumbers} angka dari data Anda`;
+            statusInfo.textContent = `Telah menganalisis ${formatNumber(totalNumbers)} angka dari data Anda`;
         }
         
         function clearAllData() {
@@ -600,6 +692,7 @@
         function resetCounts() {
             for (const type in results) {
                 results[type].textContent = '0';
+                results[type].setAttribute('data-raw', '0');
                 badges[type].textContent = `0 ${type.toUpperCase()}`;
                 document.querySelector(`.result-card-${type}`).classList.remove('over-limit');
                 
