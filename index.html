@@ -23,6 +23,7 @@
             --transition: all 0.3s ease;
             --bg-overlay-light: rgba(255, 255, 255, 0.7);
             --bg-overlay-dark: rgba(18, 18, 18, 0.85);
+            --scale-factor: 0.95; /* Faktor skala 5% lebih kecil */
         }
 
         .dark-mode {
@@ -47,6 +48,14 @@
             transition: var(--transition);
         }
 
+        html {
+            transform: scale(var(--scale-factor));
+            transform-origin: top center;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background: url('https://cdn.areabermain.club/assets/cdn/az6/2025/04/01/20250401/5dc9d083e18085eef7c0cd7fcf52bd46/linetogel-bg-new.jpg') no-repeat center center fixed;
@@ -58,6 +67,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            width: calc(100% / var(--scale-factor));
+            transform: scale(var(--scale-factor));
+            transform-origin: top center;
         }
 
         .bg-overlay {
@@ -169,6 +181,7 @@
             width: 100%;
             padding: 16px 25px;
             padding-left: 55px;
+            padding-right: 50px;
             border: none;
             border-radius: 50px;
             font-size: 1rem;
@@ -190,6 +203,21 @@
             transform: translateY(-50%);
             color: var(--primary);
             font-size: 1.2rem;
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        .clear-search:hover {
+            color: var(--primary);
         }
 
         .suggestions {
@@ -354,6 +382,115 @@
             opacity: 0.7;
         }
 
+        /* Login Modal */
+        .login-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-container {
+            background: var(--card-bg-light);
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: var(--shadow);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .password-container {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #777;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-message {
+            text-align: center;
+            margin-top: 15px;
+            color: #e74c3c;
+            font-size: 0.9rem;
+        }
+
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 65px;
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            transform: rotate(15deg);
+        }
+
         @media (max-width: 1100px) {
             .shortcut-grid {
                 grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -390,6 +527,12 @@
             .shortcut-name {
                 font-size: 0.9rem;
             }
+
+            .logout-btn {
+                right: 60px;
+                width: 40px;
+                height: 40px;
+            }
         }
 
         /* Animations */
@@ -423,9 +566,31 @@
     </style>
 </head>
 <body>
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-container">
+            <h2>Login Required</h2>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="userId">User ID</label>
+                    <input type="text" id="userId" placeholder="Masukkan User ID">
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" placeholder="Masukkan Password">
+                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <p id="loginMessage" class="login-message"></p>
+        </div>
+    </div>
+    
     <div class="bg-overlay"></div>
     
-    <div class="container">
+    <div class="container" id="mainContainer" style="display: none;">
         <header>
             <h1>ALL SHORCUT</h1>
             <p class="subtitle">Akses cepat ke semua tool dan aplikasi dengan satu klik</p>
@@ -441,6 +606,10 @@
                 </div>
             </div>
             
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fas fa-sign-out-alt"></i>
+            </button>
+            
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-moon"></i>
             </button>
@@ -451,6 +620,9 @@
                 <i class="fas fa-search"></i>
             </div>
             <input type="text" id="search" placeholder="Cari shortcut...">
+            <div class="clear-search" id="clearSearch">
+                <i class="fas fa-times"></i>
+            </div>
             <div class="suggestions" id="suggestions"></div>
         </div>
         
@@ -625,12 +797,70 @@
         ];
 
         // DOM Elements
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('loginForm');
+        const userIdInput = document.getElementById('userId');
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+        const loginMessage = document.getElementById('loginMessage');
+        const mainContainer = document.getElementById('mainContainer');
+        const logoutBtn = document.getElementById('logoutBtn');
         const shortcutGrid = document.getElementById('shortcutGrid');
         const searchInput = document.getElementById('search');
+        const clearSearch = document.getElementById('clearSearch');
         const suggestionsContainer = document.getElementById('suggestions');
         const themeToggle = document.getElementById('themeToggle');
         const datetimeElement = document.getElementById('datetime');
         const ipAddressElement = document.getElementById('ip-address');
+
+        // Check if user is logged in
+        function checkLogin() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                loginModal.style.display = 'none';
+                mainContainer.style.display = 'block';
+            } else {
+                loginModal.style.display = 'flex';
+                mainContainer.style.display = 'none';
+            }
+        }
+
+        // Login function
+        function login(userId, password) {
+            // Case insensitive check for userId
+            if (userId.toLowerCase() === 'andi' && password === 'Aa112233') {
+                localStorage.setItem('isLoggedIn', 'true');
+                loginModal.style.display = 'none';
+                mainContainer.style.display = 'block';
+                return true;
+            } else {
+                loginMessage.textContent = 'User ID atau Password salah!';
+                return false;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            loginModal.style.display = 'flex';
+            mainContainer.style.display = 'none';
+            userIdInput.value = '';
+            passwordInput.value = '';
+            loginMessage.textContent = '';
+        }
+
+        // Toggle password visibility
+        function togglePasswordVisibility() {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.classList.remove('fa-eye');
+                togglePassword.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.classList.remove('fa-eye-slash');
+                togglePassword.classList.add('fa-eye');
+            }
+        }
 
         // Update datetime
         function updateDateTime() {
@@ -762,6 +992,14 @@
             }
         }
 
+        // Clear search input
+        function clearSearchInput() {
+            searchInput.value = '';
+            clearSearch.style.display = 'none';
+            renderShortcuts(shortcutData);
+            suggestionsContainer.style.display = 'none';
+        }
+
         // Toggle dark/light mode
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
@@ -772,16 +1010,39 @@
 
         // Initialize the page
         function init() {
+            // Check login status
+            checkLogin();
+            
+            // Set up login form
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                login(userIdInput.value, passwordInput.value);
+            });
+            
+            // Set up password toggle
+            togglePassword.addEventListener('click', togglePasswordVisibility);
+            
+            // Set up logout button
+            logoutBtn.addEventListener('click', logout);
+            
             // Render all shortcuts initially
             renderShortcuts(shortcutData);
             
             // Set up search functionality
             searchInput.addEventListener('input', () => {
                 const query = searchInput.value.trim();
+                if (query) {
+                    clearSearch.style.display = 'block';
+                } else {
+                    clearSearch.style.display = 'none';
+                }
                 const filtered = filterShortcuts(query);
                 renderShortcuts(filtered);
                 showSuggestions(query);
             });
+            
+            // Set up clear search button
+            clearSearch.addEventListener('click', clearSearchInput);
             
             // Hide suggestions when clicking outside
             document.addEventListener('click', (e) => {
