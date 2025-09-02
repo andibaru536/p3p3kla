@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator Eksklusif</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background: url('https://cdn.areabermain.club/assets/cdn/az6/2025/04/01/20250401/5dc9d083e18085eef7c0cd7fcf52bd46/linetogel-bg-new.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+        }
+        
+        .logo-container {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1;
+            text-align: center;
+        }
+        
+        .logo-container img {
+            height: 70px;
+            width: auto;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
+        }
+        
+        .logo-container h1 {
+            color: #fff;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+        }
+        
+        .container {
+            background: rgba(15, 15, 35, 0.9);
+            border: 2px solid #d4af37;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.5), 0 0 50px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.2);
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            margin-top: 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #f8f8ff, #ffd700, #d4af37);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: glowing 20s ease infinite;
+            filter: blur(15px);
+            opacity: 0.4;
+        }
+        
+        @keyframes glowing {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        h2 {
+            text-align: center;
+            color: #d4af37;
+            margin-bottom: 25px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+        
+        .password-display {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        #password {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            background-color: rgba(20, 20, 40, 0.8);
+            color: #fff;
+            text-align: center;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+        
+        .copy-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.2);
+            border: 1px solid #d4af37;
+            color: #d4af37;
+            cursor: pointer;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(212, 175, 55, 0.4);
+            box-shadow: 0 0 15px #d4af37;
+        }
+        
+        .settings {
+            margin-bottom: 25px;
+        }
+        
+        .setting {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #fff;
+            letter-spacing: 1px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            margin-bottom: 5px;
+            -webkit-appearance: none;
+            height: 8px;
+            border-radius: 5px;
+            background: rgba(212, 175, 55, 0.2);
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #d4af37;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.7);
+        }
+        
+        .length-value {
+            text-align: center;
+            font-weight: 600;
+            color: #d4af37;
+            font-size: 20px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .checkbox-item input {
+            width: 20px;
+            height: 20px;
+            accent-color: #d4af37;
+        }
+        
+        .checkbox-item label {
+            margin-bottom: 0;
+            color: #e0e0ff;
+        }
+        
+        .strength-meter {
+            height: 12px;
+            background-color: rgba(212, 175, 55, 0.2);
+            border-radius: 10px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+        
+        .strength-fill {
+            height: 100%;
+            width: 0;
+            transition: width 0.5s, background-color 0.5s;
+            border-radius: 10px;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #d4af37 0%, #ffd700 100%);
+            color: #1a1a2e;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            letter-spacing: 1.5px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.8);
+        }
+        
+        .generate-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background: rgba(15, 15, 35, 0.95);
+            color: #d4af37;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            border: 1px solid #d4af37;
+            transition: opacity 0.3s, transform 0.3s;
+            opacity: 0;
+            transform: translateY(-20px);
+            z-index: 1000;
+            font-weight: 500;
+        }
+        
+        .notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin-top: 120px;
+            }
+            
+            h2 {
+                font-size: 20px;
+            }
+            
+            #password {
+                font-size: 16px;
+                padding: 15px;
+            }
+            
+            .checkbox-group {
+                gap: 15px;
+            }
+            
+            .logo-container img {
+                height: 60px;
+            }
+            
+            .logo-container h1 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="https://line33635.com/assets/img/ei/logo.png?v=bdah7gioobioulxypcil" alt="Logo">
+        <h1>PASSWORD GENERATOR</h1>
+    </div>
+    
+    <div class="container">
+        <h2><i class="fas fa-lock"></i> Generator Password Eksklusif</h2>
+        
+        <div class="password-display">
+            <input type="text" id="password" readonly>
+            <button class="copy-btn" id="copy-btn" title="Salin password">
+                <i class="far fa-copy"></i>
+            </button>
+        </div>
+        
+        <div class="settings">
+            <div class="setting">
+                <label for="length">Panjang Password: <span id="length-value" class="length-value">12</span></label>
+                <input type="range" id="length" min="6" max="30" value="12">
+            </div>
+            
+            <div class="setting">
+                <label>Jenis Karakter:</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="uppercase" checked>
+                        <label for="uppercase">A-Z</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lowercase" checked>
+                        <label for="lowercase">a-z</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="numbers" checked>
+                        <label for="numbers">0-9</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="symbols">
+                        <label for="symbols">!@#$%</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="strength-meter">
+            <div class="strength-fill" id="strength-fill"></div>
+        </div>
+        
+        <button class="generate-btn" id="generate-btn">
+            <i class="fas fa-sync-alt"></i> Generate Password
+        </button>
+    </div>
+    
+    <div class="notification" id="notification">Password berhasil disalin!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const lengthSlider = document.getElementById('length');
+            const lengthValue = document.getElementById('length-value');
+            const uppercaseCheckbox = document.getElementById('uppercase');
+            const lowercaseCheckbox = document.getElementById('lowercase');
+            const numbersCheckbox = document.getElementById('numbers');
+            const symbolsCheckbox = document.getElementById('symbols');
+            const generateBtn = document.getElementById('generate-btn');
+            const passwordInput = document.getElementById('password');
+            const copyBtn = document.getElementById('copy-btn');
+            const notification = document.getElementById('notification');
+            const strengthFill = document.getElementById('strength-fill');
+            
+            // Fungsi untuk menyimpan data ke localStorage
+            function saveSettings() {
+                const settings = {
+                    length: lengthSlider.value,
+                    uppercase: uppercaseCheckbox.checked,
+                    lowercase: lowercaseCheckbox.checked,
+                    numbers: numbersCheckbox.checked,
+                    symbols: symbolsCheckbox.checked,
+                    password: passwordInput.value
+                };
+                localStorage.setItem('passwordGeneratorSettings', JSON.stringify(settings));
+            }
+            
+            // Fungsi untuk memuat data dari localStorage
+            function loadSettings() {
+                const savedSettings = localStorage.getItem('passwordGeneratorSettings');
+                if (savedSettings) {
+                    const settings = JSON.parse(savedSettings);
+                    
+                    lengthSlider.value = settings.length;
+                    lengthValue.textContent = settings.length;
+                    uppercaseCheckbox.checked = settings.uppercase;
+                    lowercaseCheckbox.checked = settings.lowercase;
+                    numbersCheckbox.checked = settings.numbers;
+                    symbolsCheckbox.checked = settings.symbols;
+                    
+                    // Jika ada password yang disimpan, gunakan password tersebut
+                    if (settings.password && settings.password !== "Pilih setidaknya satu opsi") {
+                        passwordInput.value = settings.password;
+                        updateStrengthMeter(calculatePasswordStrength(settings.password));
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
+            // Coba muat pengaturan yang disimpan
+            const hasSavedPassword = loadSettings();
+            
+            // Update panjang password saat slider digerakkan
+            lengthSlider.addEventListener('input', function() {
+                lengthValue.textContent = this.value;
+                generatePassword();
+                saveSettings();
+            });
+            
+            // Generate password saat pengaturan diubah
+            [uppercaseCheckbox, lowercaseCheckbox, numbersCheckbox, symbolsCheckbox].forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    generatePassword();
+                    saveSettings();
+                });
+            });
+            
+            // Generate password saat tombol diklik
+            generateBtn.addEventListener('click', function() {
+                generatePassword();
+                saveSettings();
+            });
+            
+            // Salin password ke clipboard
+            copyBtn.addEventListener('click', function() {
+                passwordInput.select();
+                document.execCommand('copy');
+                
+                // Tampilkan notifikasi
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+            
+            // Fungsi untuk menghasilkan password
+            function generatePassword() {
+                const length = lengthSlider.value;
+                const uppercase = uppercaseCheckbox.checked;
+                const lowercase = lowercaseCheckbox.checked;
+                const numbers = numbersCheckbox.checked;
+                const symbols = symbolsCheckbox.checked;
+                
+                // Validasi: setidaknya satu opsi dipilih
+                if (!uppercase && !lowercase && !numbers && !symbols) {
+                    lowercaseCheckbox.checked = true;
+                    passwordInput.value = "Pilih setidaknya satu opsi";
+                    updateStrengthMeter(0);
+                    return;
+                }
+                
+                let charset = '';
+                if (uppercase) charset += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                if (lowercase) charset += 'abcdefghijklmnopqrstuvwxyz';
+                if (numbers) charset += '0123456789';
+                if (symbols) charset += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                
+                let password = '';
+                for (let i = 0; i < length; i++) {
+                    const randomIndex = Math.floor(Math.random() * charset.length);
+                    password += charset[randomIndex];
+                }
+                
+                passwordInput.value = password;
+                updateStrengthMeter(calculatePasswordStrength(password));
+            }
+            
+            // Fungsi untuk menghitung kekuatan password
+            function calculatePasswordStrength(password) {
+                let strength = 0;
+                
+                // Panjang password
+                if (password.length >= 12) strength += 30;
+                else if (password.length >= 8) strength += 20;
+                else if (password.length >= 6) strength += 10;
+                
+                // Variasi karakter
+                const hasUppercase = /[A-Z]/.test(password);
+                const hasLowercase = /[a-z]/.test(password);
+                const hasNumbers = /[0-9]/.test(password);
+                const hasSymbols = /[^A-Za-z0-9]/.test(password);
+                
+                const charTypes = [hasUppercase, hasLowercase, hasNumbers, hasSymbols].filter(Boolean).length;
+                
+                if (charTypes === 4) strength += 60;
+                else if (charTypes === 3) strength += 40;
+                else if (charTypes === 2) strength += 20;
+                
+                // Normalisasi ke rentang 0-100
+                strength = Math.min(strength, 100);
+                
+                return strength;
+            }
+            
+            // Fungsi untuk memperbarui tampilan meter kekuatan
+            function updateStrengthMeter(strength) {
+                strengthFill.style.width = strength + '%';
+                
+                if (strength < 40) {
+                    strengthFill.style.backgroundColor = '#ff4d4d';
+                    strengthFill.style.boxShadow = '0 0 10px #ff4d4d';
+                } else if (strength < 70) {
+                    strengthFill.style.backgroundColor = '#ffcc00';
+                    strengthFill.style.boxShadow = '0 0 10px #ffcc00';
+                } else {
+                    strengthFill.style.backgroundColor = '#4CAF50';
+                    strengthFill.style.boxShadow = '0 0 10px #4CAF50';
+                }
+            }
+            
+            // Generate password pertama kali saat halaman dimuat hanya jika tidak ada password yang disimpan
+            if (!hasSavedPassword) {
+                generatePassword();
+                saveSettings();
+            }
+        });
+    </script>
+</body>
+</html>
