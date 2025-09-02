@@ -22,8 +22,7 @@
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
             --bg-overlay-light: rgba(255, 255, 255, 0.7);
-            --bg-overlay-dark: rgba(18, 18, 18, 0.85);
-            --scale-factor: 0.95; /* Faktor skala 5% lebih kecil */
+            --bg-overlay-dark: rgba(18, 18, 18, 0.9); /* Diperbarui untuk gelap yang lebih baik */
         }
 
         .dark-mode {
@@ -36,9 +35,9 @@
             --card-bg-dark: rgba(40, 40, 40, 0.95);
             --text-light: #f8f9fa;
             --text-dark: #f8f9fa;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
             --bg-overlay-light: rgba(18, 18, 18, 0.85);
-            --bg-overlay-dark: rgba(18, 18, 18, 0.85);
+            --bg-overlay-dark: rgba(10, 10, 10, 0.92); /* Diperbarui untuk gelap yang lebih baik */
         }
 
         * {
@@ -48,9 +47,7 @@
             transition: var(--transition);
         }
 
-        html {
-            transform: scale(var(--scale-factor));
-            transform-origin: top center;
+        html, body {
             width: 100%;
             height: 100%;
             overflow-x: hidden;
@@ -63,13 +60,10 @@
             color: var(--text-light);
             line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
+            padding: 15px; /* Diperkecil 5% */
             display: flex;
             justify-content: center;
             align-items: center;
-            width: calc(100% / var(--scale-factor));
-            transform: scale(var(--scale-factor));
-            transform-origin: top center;
         }
 
         .bg-overlay {
@@ -88,37 +82,37 @@
 
         .container {
             width: 100%;
-            max-width: 1300px;
+            max-width: 1235px; /* Diperkecil 5% dari 1300px */
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 28px; /* Diperkecil 5% */
             box-shadow: var(--shadow);
         }
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 28px; /* Diperkecil 5% */
             position: relative;
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.375rem; /* Diperkecil 5% */
             background: linear-gradient(45deg, var(--primary), var(--accent));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 15px;
+            margin-bottom: 14px; /* Diperkecil 5% */
             font-weight: 800;
             letter-spacing: 0.5px;
         }
 
         .subtitle {
             color: var(--text-light);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
+            font-size: 1.045rem; /* Diperkecil 5% */
+            margin-bottom: 24px; /* Diperkecil 5% */
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 570px; /* Diperkecil 5% */
             margin-left: auto;
             margin-right: auto;
         }
@@ -127,11 +121,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            padding: 12px 20px;
+            margin-bottom: 24px; /* Diperkecil 5% */
+            padding: 11px 19px; /* Diperkecil 5% */
             background: var(--card-bg-light);
             border-radius: 15px;
-            font-size: 0.9rem;
+            font-size: 0.855rem; /* Diperkecil 5% */
             box-shadow: var(--shadow);
         }
 
@@ -153,14 +147,14 @@
             background: linear-gradient(45deg, var(--primary), var(--accent));
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 43px; /* Diperkecil 5% */
+            height: 43px; /* Diperkecil 5% */
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.14rem; /* Diperkecil 5% */
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
@@ -171,20 +165,20 @@
 
         .search-container {
             position: relative;
-            margin-bottom: 30px;
-            max-width: 650px;
+            margin-bottom: 28px; /* Diperkecil 5% */
+            max-width: 618px; /* Diperkecil 5% */
             margin-left: auto;
             margin-right: auto;
         }
 
         #search {
             width: 100%;
-            padding: 16px 25px;
-            padding-left: 55px;
-            padding-right: 50px;
+            padding: 15px 24px; /* Diperkecil 5% */
+            padding-left: 52px; /* Diperkecil 5% */
+            padding-right: 48px; /* Diperkecil 5% */
             border: none;
             border-radius: 50px;
-            font-size: 1rem;
+            font-size: 0.95rem; /* Diperkecil 5% */
             box-shadow: var(--shadow);
             background: var(--card-bg-light);
             color: var(--text-light);
@@ -198,20 +192,20 @@
 
         .search-icon {
             position: absolute;
-            left: 25px;
+            left: 24px; /* Diperkecil 5% */
             top: 50%;
             transform: translateY(-50%);
             color: var(--primary);
-            font-size: 1.2rem;
+            font-size: 1.14rem; /* Diperkecil 5% */
         }
 
         .clear-search {
             position: absolute;
-            right: 25px;
+            right: 24px; /* Diperkecil 5% */
             top: 50%;
             transform: translateY(-50%);
             color: #aaa;
-            font-size: 1.2rem;
+            font-size: 1.14rem; /* Diperkecil 5% */
             cursor: pointer;
             display: none;
         }
@@ -257,8 +251,8 @@
 
         .shortcut-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); /* Diperkecil 5% */
+            gap: 21px; /* Diperkecil 5% */
         }
 
         .shortcut-card {
@@ -274,7 +268,7 @@
             justify-content: center;
             text-decoration: none;
             color: inherit;
-            padding: 25px 20px;
+            padding: 24px 19px; /* Diperkecil 5% */
             position: relative;
             text-align: center;
             border: 2px solid transparent;
@@ -306,16 +300,16 @@
         }
 
         .icon-container {
-            width: 65px;
-            height: 65px;
+            width: 62px; /* Diperkecil 5% */
+            height: 62px; /* Diperkecil 5% */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 18px;
+            margin-bottom: 17px; /* Diperkecil 5% */
             background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
-            font-size: 1.6rem;
+            font-size: 1.52rem; /* Diperkecil 5% */
             animation: pulse 2s infinite;
             transition: transform 0.3s ease;
         }
@@ -349,7 +343,7 @@
 
         .shortcut-name {
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.902rem; /* Diperkecil 5% */
             color: var(--text-light);
             line-height: 1.4;
             transition: color 0.3s ease;
@@ -363,21 +357,21 @@
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 50px 40px;
+            padding: 48px 38px; /* Diperkecil 5% */
             background: var(--card-bg-light);
             border-radius: 18px;
             box-shadow: var(--shadow);
         }
 
         .no-results i {
-            font-size: 3rem;
+            font-size: 2.85rem; /* Diperkecil 5% */
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 19px; /* Diperkecil 5% */
             opacity: 0.5;
         }
 
         .no-results p {
-            font-size: 1.2rem;
+            font-size: 1.14rem; /* Diperkecil 5% */
             color: var(--text-light);
             opacity: 0.7;
         }
@@ -398,21 +392,21 @@
 
         .login-container {
             background: var(--card-bg-light);
-            padding: 30px;
+            padding: 28px; /* Diperkecil 5% */
             border-radius: 20px;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px; /* Diperkecil 5% */
             box-shadow: var(--shadow);
         }
 
         .login-container h2 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 19px; /* Diperkecil 5% */
             color: var(--primary);
         }
 
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 19px; /* Diperkecil 5% */
         }
 
         .input-group label {
@@ -423,10 +417,10 @@
 
         .input-group input {
             width: 100%;
-            padding: 12px 15px;
+            padding: 11px 14px; /* Diperkecil 5% */
             border: 1px solid #ddd;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem; /* Diperkecil 5% */
             font-family: 'Poppins', sans-serif;
         }
 
@@ -436,7 +430,7 @@
 
         .toggle-password {
             position: absolute;
-            right: 15px;
+            right: 14px; /* Diperkecil 5% */
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
@@ -445,12 +439,12 @@
 
         .login-btn {
             width: 100%;
-            padding: 12px;
+            padding: 11px; /* Diperkecil 5% */
             background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 0.95rem; /* Diperkecil 5% */
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -463,26 +457,26 @@
 
         .login-message {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 14px; /* Diperkecil 5% */
             color: #e74c3c;
-            font-size: 0.9rem;
+            font-size: 0.855rem; /* Diperkecil 5% */
         }
 
         .logout-btn {
             position: absolute;
             top: 10px;
-            right: 65px;
+            right: 62px; /* Diperkecil 5% */
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             border: none;
             border-radius: 50%;
-            width: 45px;
-            height: 45px;
+            width: 43px; /* Diperkecil 5% */
+            height: 43px; /* Diperkecil 5% */
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.14rem; /* Diperkecil 5% */
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
         }
@@ -493,18 +487,18 @@
 
         @media (max-width: 1100px) {
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-                gap: 20px;
+                grid-template-columns: repeat(auto-fill, minmax(171px, 1fr)); /* Diperkecil 5% */
+                gap: 19px; /* Diperkecil 5% */
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 25px 20px;
+                padding: 24px 19px; /* Diperkecil 5% */
             }
             
             h1 {
-                font-size: 2rem;
+                font-size: 1.9rem; /* Diperkecil 5% */
             }
             
             .info-bar {
@@ -514,24 +508,24 @@
             }
             
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 18px;
+                grid-template-columns: repeat(auto-fill, minmax(152px, 1fr)); /* Diperkecil 5% */
+                gap: 17px; /* Diperkecil 5% */
             }
             
             .icon-container {
-                width: 55px;
-                height: 55px;
-                font-size: 1.4rem;
+                width: 52px; /* Diperkecil 5% */
+                height: 52px; /* Diperkecil 5% */
+                font-size: 1.33rem; /* Diperkecil 5% */
             }
             
             .shortcut-name {
-                font-size: 0.9rem;
+                font-size: 0.855rem; /* Diperkecil 5% */
             }
 
             .logout-btn {
-                right: 60px;
-                width: 40px;
-                height: 40px;
+                right: 57px; /* Diperkecil 5% */
+                width: 38px; /* Diperkecil 5% */
+                height: 38px; /* Diperkecil 5% */
             }
         }
 
