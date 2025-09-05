@@ -452,6 +452,14 @@
                         <select id="country">
                             <option value="indonesia">Indonesia</option>
                             <option value="inggris">Inggris</option>
+                            <option value="india">India</option>
+                            <option value="jepang">Jepang</option>
+                            <option value="korea">Korea Selatan</option>
+                            <option value="jerman">Jerman</option>
+                            <option value="perancis">Perancis</option>
+                            <option value="spanyol">Spanyol</option>
+                            <option value="italia">Italia</option>
+                            <option value="brasil">Brasil</option>
                         </select>
                     </div>
                     
@@ -529,6 +537,36 @@
             const nameInput = document.getElementById('name');
             const copyNameBtn = document.getElementById('copy-name-btn');
             
+            // Fungsi untuk menyimpan pengaturan name generator ke localStorage
+            function saveNameSettings() {
+                const nameSettings = {
+                    country: countrySelect.value,
+                    gender: document.querySelector('input[name="gender"]:checked').value,
+                    wordCount: wordCountSelect.value,
+                    name: nameInput.value
+                };
+                localStorage.setItem('nameGeneratorSettings', JSON.stringify(nameSettings));
+            }
+            
+            // Fungsi untuk memuat pengaturan name generator dari localStorage
+            function loadNameSettings() {
+                const savedNameSettings = localStorage.getItem('nameGeneratorSettings');
+                if (savedNameSettings) {
+                    const settings = JSON.parse(savedNameSettings);
+                    
+                    countrySelect.value = settings.country;
+                    wordCountSelect.value = settings.wordCount;
+                    document.querySelector(`input[name="gender"][value="${settings.gender}"]`).checked = true;
+                    
+                    // Jika ada nama yang disimpan, gunakan nama tersebut
+                    if (settings.name) {
+                        nameInput.value = settings.name;
+                        return true;
+                    }
+                }
+                return false;
+            }
+            
             // AI-powered name generation without database
             function generateName() {
                 const country = countrySelect.value;
@@ -540,11 +578,28 @@
                 // Generate name based on country, gender and word count
                 if (country === 'indonesia') {
                     name = generateIndonesianName(gender, wordCount);
-                } else {
+                } else if (country === 'inggris') {
                     name = generateEnglishName(gender, wordCount);
+                } else if (country === 'india') {
+                    name = generateIndianName(gender, wordCount);
+                } else if (country === 'jepang') {
+                    name = generateJapaneseName(gender, wordCount);
+                } else if (country === 'korea') {
+                    name = generateKoreanName(gender, wordCount);
+                } else if (country === 'jerman') {
+                    name = generateGermanName(gender, wordCount);
+                } else if (country === 'perancis') {
+                    name = generateFrenchName(gender, wordCount);
+                } else if (country === 'spanyol') {
+                    name = generateSpanishName(gender, wordCount);
+                } else if (country === 'italia') {
+                    name = generateItalianName(gender, wordCount);
+                } else if (country === 'brasil') {
+                    name = generateBrazilianName(gender, wordCount);
                 }
                 
                 nameInput.value = name;
+                saveNameSettings();
             }
             
             function generateIndonesianName(gender, wordCount) {
@@ -622,8 +677,298 @@
                 return nameParts.join(' ');
             }
             
+            function generateIndianName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Aarav', 'Vihaan', 'Vivaan', 'Ananth', 'Aryan', 'Advik', 'Dhruv', 'Dev', 'Shivansh', 'Reyansh'] : 
+                    ['Aadhya', 'Diya', 'Ananya', 'Aanya', 'Pari', 'Anika', 'Navya', 'Angel', 'Aditi', 'Aarya'];
+                
+                const lastNames = ['Patel', 'Kumar', 'Singh', 'Sharma', 'Gupta', 'Malhotra', 'Mehta', 'Reddy', 'Rao', 'Choudhury'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Krishna', 'Rama', 'Shiva', 'Ganesha', 'Vishnu', 'Hanuman', 'Arjun', 'Karan', 'Bharat', 'Lakshman'] : 
+                    ['Lakshmi', 'Saraswati', 'Parvati', 'Durga', 'Kali', 'Sita', 'Radha', 'Draupadi', 'Ganga', 'Yamuna'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add second last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateJapaneseName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Haruto', 'Riku', 'Yuto', 'Sota', 'Yuki', 'Sora', 'Ryo', 'Ren', 'Kaito', 'Hinata'] : 
+                    ['Yui', 'Aoi', 'Sakura', 'Mao', 'Hina', 'Mei', 'Rin', 'Yuna', 'Koharu', 'Saki'];
+                
+                const lastNames = ['Sato', 'Suzuki', 'Takahashi', 'Tanaka', 'Watanabe', 'Ito', 'Yamamoto', 'Nakamura', 'Kobayashi', 'Kato'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Daichi', 'Hiroshi', 'Kenji', 'Makoto', 'Noboru', 'Takashi', 'Taro', 'Yuji', 'Sho', 'Kazuki'] : 
+                    ['Akari', 'Emi', 'Hana', 'Kaori', 'Miyuki', 'Naoko', 'Rei', 'Shizuka', 'Tomoko', 'Yoko'];
+                
+                let nameParts = [];
+                
+                // Japanese names typically start with last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add honorific for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(gender === 'male' ? 'San' : 'Chan');
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateKoreanName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Min-jun', 'Seo-jun', 'Ji-ho', 'Do-yun', 'Eun-woo', 'Si-woo', 'Ha-joon', 'Ji-hoon', 'Jun-seo', 'Ye-jun'] : 
+                    ['Seo-yeon', 'Ha-yoon', 'Ji-woo', 'Seo-yun', 'Ji-min', 'Ha-eun', 'Seo-hyun', 'Su-bin', 'Ji-yoo', 'Chae-won'];
+                
+                const lastNames = ['Kim', 'Lee', 'Park', 'Choi', 'Jung', 'Kang', 'Cho', 'Yoon', 'Jang', 'Lim'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Min', 'Seok', 'Hyun', 'Jae', 'Woo', 'Sung', 'Kyung', 'Tae', 'Bin', 'Jin'] : 
+                    ['Mi', 'Hye', 'Kyung', 'So', 'Na', 'Eun', 'Hee', 'Young', 'Jin', 'Sun'];
+                
+                let nameParts = [];
+                
+                // Korean names typically start with last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add generational name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(gender === 'male' ? 'Hyung' : 'Nuna');
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateGermanName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Ben', 'Paul', 'Leon', 'Finn', 'Jonas', 'Luis', 'Lukas', 'Max', 'Felix', 'Tim'] : 
+                    ['Emma', 'Hannah', 'Mia', 'Sophia', 'Anna', 'Lea', 'Lina', 'Lena', 'Emilia', 'Marie'];
+                
+                const lastNames = ['Müller', 'Schmidt', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Schulz', 'Hoffmann'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Alexander', 'Andreas', 'Christian', 'Daniel', 'Florian', 'Jan', 'Markus', 'Michael', 'Niklas', 'Stefan'] : 
+                    ['Alexandra', 'Christina', 'Julia', 'Katharina', 'Laura', 'Melanie', 'Nicole', 'Sabine', 'Stefanie', 'Vanessa'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add second last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateFrenchName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Louis', 'Gabriel', 'Jules', 'Arthur', 'Raphaël', 'Lucas', 'Adam', 'Hugo', 'Léo', 'Noah'] : 
+                    ['Emma', 'Jade', 'Louise', 'Alice', 'Chloé', 'Léa', 'Manon', 'Camille', 'Sarah', 'Inès'];
+                
+                const lastNames = ['Martin', 'Bernard', 'Dubois', 'Thomas', 'Robert', 'Richard', 'Petit', 'Durand', 'Leroy', 'Moreau'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Jean', 'Pierre', 'Michel', 'Philippe', 'André', 'Christophe', 'Nicolas', 'François', 'David', 'Antoine'] : 
+                    ['Marie', 'Anne', 'Claire', 'Sophie', 'Céline', 'Isabelle', 'Nathalie', 'Monique', 'Sylvie', 'Élise'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add second last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateSpanishName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Antonio', 'Manuel', 'José', 'Francisco', 'David', 'Juan', 'Javier', 'Daniel', 'José Luis', 'Carlos'] : 
+                    ['María', 'Carmen', 'Ana', 'Isabel', 'Dolores', 'Pilar', 'Joséfa', 'Teresa', 'Rosa', 'Antonia'];
+                
+                const lastNames = ['García', 'Fernández', 'González', 'Rodríguez', 'López', 'Martínez', 'Sánchez', 'Pérez', 'Martín', 'Gómez'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Jesús', 'Miguel', 'Ángel', 'Pedro', 'Rafael', 'Luis', 'Alejandro', 'Jorge', 'Sergio', 'Alberto'] : 
+                    ['Elena', 'Beatriz', 'Raquel', 'Rocío', 'Victoria', 'Patricia', 'Nuria', 'Silvia', 'Cristina', 'Marta'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add mother's last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateItalianName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Francesco', 'Alessandro', 'Leonardo', 'Lorenzo', 'Mattia', 'Andrea', 'Gabriele', 'Matteo', 'Tommaso', 'Riccardo'] : 
+                    ['Giulia', 'Sofia', 'Aurora', 'Alice', 'Ginevra', 'Emma', 'Giorgia', 'Martina', 'Beatrice', 'Anna'];
+                
+                const lastNames = ['Rossi', 'Russo', 'Ferrari', 'Esposito', 'Bianchi', 'Romano', 'Colombo', 'Bruno', 'Ricci', 'Marino'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['Giovanni', 'Mario', 'Luigi', 'Vincenzo', 'Giuseppe', 'Antonio', 'Marco', 'Paolo', 'Stefano', 'Salvatore'] : 
+                    ['Maria', 'Anna', 'Rosa', 'Angela', 'Giuseppina', 'Teresa', 'Lucia', 'Carla', 'Elena', 'Paola'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add second last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateBrazilianName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['Miguel', 'Davi', 'Gabriel', 'Arthur', 'Lucas', 'Matheus', 'Pedro', 'Guilherme', 'Gustavo', 'Rafael'] : 
+                    ['Maria', 'Ana', 'Julia', 'Laura', 'Isabella', 'Manuela', 'Sophia', 'Helena', 'Valentina', 'Alice'];
+                
+                const lastNames = ['Silva', 'Santos', 'Oliveira', 'Souza', 'Rodrigues', 'Ferreira', 'Alves', 'Pereira', 'Lima', 'Costa'];
+                
+                const middleNames = gender === 'male' ? 
+                    ['José', 'Antônio', 'João', 'Francisco', 'Carlos', 'Paulo', 'Marcos', 'Luiz', 'Fernando', 'Eduardo'] : 
+                    ['Cláudia', 'Patrícia', 'Sandra', 'Camila', 'Aline', 'Mariana', 'Fernanda', 'Adriana', 'Carolina', 'Beatriz'];
+                
+                let nameParts = [];
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add mother's last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
             // Event listeners for name generator
             generateNameBtn.addEventListener('click', generateName);
+            
+            // Event listeners for name settings changes
+            countrySelect.addEventListener('change', function() {
+                generateName();
+                saveNameSettings();
+            });
+            
+            wordCountSelect.addEventListener('change', function() {
+                generateName();
+                saveNameSettings();
+            });
+            
+            genderRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    generateName();
+                    saveNameSettings();
+                });
+            });
             
             copyNameBtn.addEventListener('click', function() {
                 nameInput.select();
@@ -637,8 +982,11 @@
                 }, 2000);
             });
             
-            // Generate a name on page load for the name generator
-            generateName();
+            // Load name settings and generate name if settings exist
+            const hasSavedName = loadNameSettings();
+            if (!hasSavedName) {
+                generateName();
+            }
             
             // Password Generator Functions
             // Fungsi untuk menyimpan data ke localStorage
