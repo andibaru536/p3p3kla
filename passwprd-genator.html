@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password Generator Eksklusif</title>
+    <title>Password & Name Generator Eksklusif</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔒</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -15,50 +15,68 @@
         }
         
         body {
-            background: url('https://cdn.areabermain.club/assets/cdn/az6/2025/04/01/20250401/5dc9d083e18085eef7c0cd7fcf52bd46/linetogel-bg-new.jpg') no-repeat center center fixed;
-            background-size: cover;
+            background: linear-gradient(135deg, #0c0c2d, #1e1e40);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-        }
-        
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: -1;
-        }
-        
-        .logo-container {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1;
-            text-align: center;
-        }
-        
-        .logo-container img {
-            height: 70px;
-            width: auto;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5));
-        }
-        
-        .logo-container h1 {
             color: #fff;
-            font-size: 24px;
-            font-weight: 700;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #d4af37, #ffd700, #f8f8ff, #ffd700, #d4af37);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+        }
+        
+        .header p {
+            color: #e0e0ff;
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+        
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            background: rgba(15, 15, 35, 0.7);
+            border-radius: 12px;
+            padding: 5px;
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        .tab-btn {
+            padding: 12px 25px;
+            background: transparent;
+            color: #d4af37;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex: 1;
+            font-size: 1rem;
+        }
+        
+        .tab-btn.active {
+            background: rgba(212, 175, 55, 0.2);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
         }
         
         .container {
@@ -69,7 +87,6 @@
             width: 100%;
             max-width: 500px;
             padding: 30px;
-            margin-top: 100px;
             position: relative;
             overflow: hidden;
         }
@@ -103,14 +120,15 @@
             font-weight: 600;
             letter-spacing: 1px;
             text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+            font-size: 1.5rem;
         }
         
-        .password-display {
+        .display-container {
             position: relative;
             margin-bottom: 25px;
         }
         
-        #password {
+        .display-input {
             width: 100%;
             padding: 18px;
             font-size: 18px;
@@ -193,27 +211,48 @@
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
         
-        .checkbox-group {
+        .checkbox-group, .radio-group {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
         
-        .checkbox-item {
+        .checkbox-item, .radio-item {
             display: flex;
             align-items: center;
             gap: 8px;
+            background: rgba(212, 175, 55, 0.1);
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
         }
         
-        .checkbox-item input {
+        .checkbox-item input, .radio-item input {
             width: 20px;
             height: 20px;
             accent-color: #d4af37;
         }
         
-        .checkbox-item label {
+        .checkbox-item label, .radio-item label {
             margin-bottom: 0;
             color: #e0e0ff;
+        }
+        
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background: rgba(20, 20, 40, 0.8);
+            color: #fff;
+            border: 2px solid #d4af37;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        
+        select option {
+            background: rgba(20, 20, 40, 0.9);
+            color: #fff;
         }
         
         .strength-meter {
@@ -245,6 +284,10 @@
             transition: transform 0.3s, box-shadow 0.3s;
             letter-spacing: 1.5px;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
         
         .generate-btn:hover {
@@ -278,93 +321,194 @@
             transform: translateY(0);
         }
         
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .name-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .name-options .setting {
+            margin-bottom: 0;
+        }
+        
         @media (max-width: 600px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
             .container {
                 padding: 20px;
-                margin-top: 120px;
             }
             
             h2 {
-                font-size: 20px;
+                font-size: 1.3rem;
             }
             
-            #password {
+            .display-input {
                 font-size: 16px;
                 padding: 15px;
             }
             
-            .checkbox-group {
-                gap: 15px;
+            .checkbox-group, .radio-group {
+                gap: 10px;
             }
             
-            .logo-container img {
-                height: 60px;
+            .name-options {
+                grid-template-columns: 1fr;
             }
             
-            .logo-container h1 {
-                font-size: 20px;
+            .tab-btn {
+                padding: 10px 15px;
+                font-size: 14px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="logo-container">
-        <img src="https://line33635.com/assets/img/ei/logo.png?v=bdah7gioobioulxypcil" alt="Logo">
-        <h1>PASSWORD GENERATOR</h1>
+    <div class="header">
+        <h1>PASSWORD & NAME GENERATOR</h1>
+        <p>Alat canggih untuk menghasilkan password kuat dan nama unik dengan teknologi AI</p>
+    </div>
+    
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="password-generator">Password Generator</button>
+        <button class="tab-btn" data-tab="name-generator">Name Generator</button>
     </div>
     
     <div class="container">
-        <h2><i class="fas fa-lock"></i> Generator Password Eksklusif</h2>
-        
-        <div class="password-display">
-            <input type="text" id="password" readonly>
-            <button class="copy-btn" id="copy-btn" title="Salin password">
-                <i class="far fa-copy"></i>
-            </button>
-        </div>
-        
-        <div class="settings">
-            <div class="setting">
-                <label for="length">Panjang Password: <span id="length-value" class="length-value">12</span></label>
-                <input type="range" id="length" min="6" max="30" value="12">
+        <!-- Password Generator Tab -->
+        <div class="tab-content active" id="password-generator">
+            <h2><i class="fas fa-lock"></i> Generator Password Eksklusif</h2>
+            
+            <div class="display-container">
+                <input type="text" class="display-input" id="password" readonly>
+                <button class="copy-btn" id="copy-btn" title="Salin password">
+                    <i class="far fa-copy"></i>
+                </button>
             </div>
             
-            <div class="setting">
-                <label>Jenis Karakter:</label>
-                <div class="checkbox-group">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="uppercase" checked>
-                        <label for="uppercase">A-Z</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="lowercase" checked>
-                        <label for="lowercase">a-z</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="numbers" checked>
-                        <label for="numbers">0-9</label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="symbols">
-                        <label for="symbols">!@#$%</label>
+            <div class="settings">
+                <div class="setting">
+                    <label for="length">Panjang Password: <span id="length-value" class="length-value">12</span></label>
+                    <input type="range" id="length" min="6" max="30" value="12">
+                </div>
+                
+                <div class="setting">
+                    <label>Jenis Karakter:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="uppercase" checked>
+                            <label for="uppercase">A-Z</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="lowercase" checked>
+                            <label for="lowercase">a-z</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="numbers" checked>
+                            <label for="numbers">0-9</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="symbols">
+                            <label for="symbols">!@#$%</label>
+                        </div>
                     </div>
                 </div>
             </div>
+            
+            <div class="strength-meter">
+                <div class="strength-fill" id="strength-fill"></div>
+            </div>
+            
+            <button class="generate-btn" id="generate-btn">
+                <i class="fas fa-sync-alt"></i> Generate Password
+            </button>
         </div>
         
-        <div class="strength-meter">
-            <div class="strength-fill" id="strength-fill"></div>
+        <!-- Name Generator Tab -->
+        <div class="tab-content" id="name-generator">
+            <h2><i class="fas fa-user"></i> Generator Nama Eksklusif</h2>
+            
+            <div class="display-container">
+                <input type="text" class="display-input" id="name" readonly>
+                <button class="copy-btn" id="copy-name-btn" title="Salin nama">
+                    <i class="far fa-copy"></i>
+                </button>
+            </div>
+            
+            <div class="settings">
+                <div class="name-options">
+                    <div class="setting">
+                        <label for="country">Negara:</label>
+                        <select id="country">
+                            <option value="indonesia">Indonesia</option>
+                            <option value="inggris">Inggris</option>
+                        </select>
+                    </div>
+                    
+                    <div class="setting">
+                        <label for="word-count">Jumlah Kata:</label>
+                        <select id="word-count">
+                            <option value="2">2 Kata</option>
+                            <option value="3">3 Kata</option>
+                            <option value="4">4 Kata</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="setting">
+                    <label>Gender:</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" id="male" name="gender" value="male" checked>
+                            <label for="male">Laki-laki</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" id="female" name="gender" value="female">
+                            <label for="female">Perempuan</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="generate-btn" id="generate-name-btn">
+                <i class="fas fa-sync-alt"></i> Generate Name
+            </button>
         </div>
-        
-        <button class="generate-btn" id="generate-btn">
-            <i class="fas fa-sync-alt"></i> Generate Password
-        </button>
     </div>
     
-    <div class="notification" id="notification">Password berhasil disalin!</div>
+    <div class="notification" id="notification">Teks berhasil disalin!</div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Tab functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current button and content
+                    btn.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Password Generator Code
             const lengthSlider = document.getElementById('length');
             const lengthValue = document.getElementById('length-value');
             const uppercaseCheckbox = document.getElementById('uppercase');
@@ -377,6 +521,126 @@
             const notification = document.getElementById('notification');
             const strengthFill = document.getElementById('strength-fill');
             
+            // Name Generator Elements
+            const countrySelect = document.getElementById('country');
+            const genderRadios = document.querySelectorAll('input[name="gender"]');
+            const wordCountSelect = document.getElementById('word-count');
+            const generateNameBtn = document.getElementById('generate-name-btn');
+            const nameInput = document.getElementById('name');
+            const copyNameBtn = document.getElementById('copy-name-btn');
+            
+            // AI-powered name generation without database
+            function generateName() {
+                const country = countrySelect.value;
+                const gender = document.querySelector('input[name="gender"]:checked').value;
+                const wordCount = parseInt(wordCountSelect.value);
+                
+                let name = '';
+                
+                // Generate name based on country, gender and word count
+                if (country === 'indonesia') {
+                    name = generateIndonesianName(gender, wordCount);
+                } else {
+                    name = generateEnglishName(gender, wordCount);
+                }
+                
+                nameInput.value = name;
+            }
+            
+            function generateIndonesianName(gender, wordCount) {
+                const prefixes = gender === 'male' ? 
+                    ['Ari', 'Budi', 'Cahya', 'Dedi', 'Eko', 'Fajar', 'Guntur', 'Hadi', 'Indra', 'Joko'] : 
+                    ['Ani', 'Bunga', 'Citra', 'Dewi', 'Erni', 'Fitri', 'Gita', 'Hani', 'Intan', 'Juli'];
+                
+                const middles = gender === 'male' ? 
+                    ['Prasetyo', 'Santoso', 'Wijaya', 'Kusuma', 'Setiawan', 'Halim', 'Siregar', 'Nasution'] : 
+                    ['Kusuma', 'Wulandari', 'Sari', 'Ningsih', 'Rahayu', 'Lestari', 'Pertiwi', 'Anggraini'];
+                
+                const suffixes = gender === 'male' ? 
+                    ['Putra', 'Wibowo', 'Nugroho', 'Prabowo', 'Saputra', 'Maulana', 'Pratama', 'Wicaksono'] : 
+                    ['Putri', 'Sari', 'Wati', 'Lestari', 'Permatasari', 'Utami', 'Handayani', 'Kusumawati'];
+                
+                const prefixes2 = ['Adi', 'Bayu', 'Candra', 'Dwi', 'Eka', 'Tri', 'Jaya', 'Mega', 'Nova', 'Surya'];
+                
+                let nameParts = [];
+                
+                // Always start with a prefix
+                nameParts.push(prefixes[Math.floor(Math.random() * prefixes.length)]);
+                
+                // Add more parts based on word count
+                if (wordCount >= 2) {
+                    nameParts.push(middles[Math.floor(Math.random() * middles.length)]);
+                }
+                
+                if (wordCount >= 3) {
+                    nameParts.push(suffixes[Math.floor(Math.random() * suffixes.length)]);
+                }
+                
+                if (wordCount >= 4) {
+                    nameParts.push(prefixes2[Math.floor(Math.random() * prefixes2.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            function generateEnglishName(gender, wordCount) {
+                const firstNames = gender === 'male' ? 
+                    ['James', 'John', 'Robert', 'Michael', 'William', 'David', 'Richard', 'Joseph', 'Thomas', 'Charles'] : 
+                    ['Mary', 'Patricia', 'Jennifer', 'Linda', 'Elizabeth', 'Barbara', 'Susan', 'Jessica', 'Sarah', 'Karen'];
+                
+                const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+                
+                const middleNames = ['Alexander', 'Benjamin', 'Christopher', 'Daniel', 'Edward', 'Francis', 'George', 'Henry', 'Isaac', 'Jacob'];
+                
+                const prefixes = ['Dr.', 'Prof.', 'Mr.', 'Mrs.', 'Ms.', 'Sir', 'Lady', 'Lord', 'Captain', 'Major'];
+                
+                let nameParts = [];
+                
+                // Add prefix for longer names
+                if (wordCount >= 3 && Math.random() > 0.7) {
+                    nameParts.push(prefixes[Math.floor(Math.random() * prefixes.length)]);
+                }
+                
+                // Always include first name
+                nameParts.push(firstNames[Math.floor(Math.random() * firstNames.length)]);
+                
+                // Add middle name for longer names
+                if (wordCount >= 3) {
+                    nameParts.push(middleNames[Math.floor(Math.random() * middleNames.length)]);
+                }
+                
+                // Add last name
+                if (wordCount >= 2) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                // Add second last name for 4-word names
+                if (wordCount >= 4) {
+                    nameParts.push(lastNames[Math.floor(Math.random() * lastNames.length)]);
+                }
+                
+                return nameParts.join(' ');
+            }
+            
+            // Event listeners for name generator
+            generateNameBtn.addEventListener('click', generateName);
+            
+            copyNameBtn.addEventListener('click', function() {
+                nameInput.select();
+                document.execCommand('copy');
+                
+                // Show notification
+                notification.textContent = "Nama berhasil disalin!";
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+            
+            // Generate a name on page load for the name generator
+            generateName();
+            
+            // Password Generator Functions
             // Fungsi untuk menyimpan data ke localStorage
             function saveSettings() {
                 const settings = {
@@ -443,6 +707,7 @@
                 document.execCommand('copy');
                 
                 // Tampilkan notifikasi
+                notification.textContent = "Password berhasil disalin!";
                 notification.classList.add('show');
                 setTimeout(() => {
                     notification.classList.remove('show');
