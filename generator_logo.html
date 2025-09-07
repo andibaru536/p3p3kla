@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logo Pasaran Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto Mono', monospace;
+            background: url('https://cdn.areabermain.club/assets/cdn/az6/2025/04/01/20250401/5dc9d083e18085eef7c0cd7fcf52bd46/linetogel-bg-new.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 15px;
+            line-height: 1.5;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 22, 0.85);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid rgba(0, 217, 255, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+            background: rgba(10, 15, 30, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px #00d9ff;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #00d9ff, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: #a0e6ff;
+        }
+        
+        .card {
+            background: rgba(10, 15, 30, 0.7);
+            border: 1px solid rgba(0, 217, 255, 0.4);
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .search-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .search-box {
+            position: relative;
+        }
+        
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00d9ff;
+            z-index: 1;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 14px 15px 14px 45px;
+            background: rgba(0, 20, 40, 0.7);
+            border: 1px solid rgba(0, 217, 255, 0.5);
+            border-radius: 8px;
+            font-size: 15px;
+            color: #ffffff;
+            font-family: 'Roboto Mono', monospace;
+            transition: all 0.3s;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+            background: rgba(0, 25, 50, 0.8);
+        }
+        
+        .search-box input::placeholder {
+            color: #66c2ff;
+        }
+        
+        .dropdown select {
+            width: 100%;
+            padding: 14px;
+            background: rgba(0, 20, 40, 0.7);
+            border: 1px solid rgba(0, 217, 255, 0.5);
+            border-radius: 8px;
+            font-size: 15px;
+            color: #ffffff;
+            font-family: 'Roboto Mono', monospace;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2300d9ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            transition: all 0.3s;
+        }
+        
+        .dropdown select:focus {
+            outline: none;
+            border-color: #00d9ff;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+            background: rgba(0, 25, 50, 0.8);
+        }
+        
+        .preview-section {
+            text-align: center;
+        }
+        
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .preview-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            background: linear-gradient(to right, #00d9ff, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+        }
+        
+        .logo-container {
+            background: rgba(0, 15, 30, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(0, 217, 255, 0.4);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .logo-preview {
+            max-width: 100%;
+            max-height: 160px;
+            object-fit: contain;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+            cursor: pointer;
+        }
+        
+        .logo-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #00d9ff, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            text-shadow: 0 0 8px rgba(0, 217, 255, 0.5);
+            padding: 8px 15px;
+            border-radius: 6px;
+            background-color: rgba(0, 20, 40, 0.5);
+        }
+        
+        .placeholder-text {
+            color: #88d4ff;
+            font-size: 1rem;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .placeholder-text i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #00d9ff;
+            text-shadow: 0 0 10px rgba(0, 217, 255, 0.7);
+        }
+        
+        .alternative-download {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 25, 50, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 217, 255, 0.4);
+        }
+        
+        .alternative-download h3 {
+            margin-bottom: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(to right, #00d9ff, #00ff95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .alternative-download p {
+            margin-bottom: 15px;
+            color: #a0e6ff;
+            font-size: 0.95rem;
+        }
+        
+        .right-click-hint {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 20, 40, 0.8);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            color: #00d9ff;
+            border: 1px solid rgba(0, 217, 255, 0.4);
+            display: none;
+        }
+        
+        .logo-container:hover .right-click-hint {
+            display: block;
+        }
+        
+        footer {
+            text-align: center;
+            color: #88d4ff;
+            margin-top: 30px;
+            font-size: 0.85rem;
+            text-shadow: 0 0 5px rgba(0, 160, 255, 0.5);
+        }
+        
+        @media (min-width: 768px) {
+            .search-section {
+                flex-direction: row;
+            }
+            
+            .search-box, .dropdown {
+                flex: 1;
+            }
+        }
+        
+        .scan-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00d9ff, transparent);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            animation: scan 3s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes scan {
+            0% {
+                top: 0%;
+            }
+            100% {
+                top: 100%;
+            }
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: rgba(0, 217, 255, 0.7);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px);
+                opacity: 0;
+            }
+        }
+        
+        .context-menu {
+            display: none;
+            position: absolute;
+            background: rgba(10, 20, 40, 0.9);
+            border: 1px solid rgba(0, 217, 255, 0.5);
+            border-radius: 8px;
+            padding: 10px 0;
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.4);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .context-menu ul {
+            list-style: none;
+        }
+        
+        .context-menu li {
+            padding: 8px 20px;
+            cursor: pointer;
+            color: #00d9ff;
+            font-size: 0.9rem;
+        }
+        
+        .context-menu li:hover {
+            background: rgba(0, 160, 255, 0.2);
+        }
+        
+        .context-menu i {
+            margin-right: 8px;
+            width: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="scan-line"></div>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <header>
+            <h1>LOGO PASARAN GENERATOR</h1>
+            <p class="subtitle">Temukan dan preview logo pasaran togel</p>
+        </header>
+        
+        <div class="card search-section">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Cari nama pasaran...">
+            </div>
+            <div class="dropdown">
+                <select id="marketDropdown">
+                    <option value="">Pilih Pasaran</option>
+                    <option value="HOKIDRAW">HOKIDRAW</option>
+                    <option value="TOTO MACAU">TOTO MACAU</option>
+                    <option value="KENTUCKY">KENTUCKY</option>
+                    <option value="FLORIDA">FLORIDA</option>
+                    <option value="HUAHIN">HUAHIN</option>
+                    <option value="BANGKOK">BANGKOK</option>
+                    <option value="NEW YORK">NEW YORK</option>
+                    <option value="BRUNEI">BRUNEI</option>
+                    <option value="OREGON">OREGON</option>
+                    <option value="CAROLINA">CAROLINA</option>
+                    <option value="TOTOCAMBODIA">TOTOCAMBODIA</option>
+                    <option value="CHELSEA">CHELSEA</option>
+                    <option value="POIPET">POIPET</option>
+                    <option value="BULLSEYE">BULLSEYE</option>
+                    <option value="SYDNEY">SYDNEY</option>
+                    <option value="JAKARTA">JAKARTA</option>
+                    <option value="TOTOMALI">TOTOMALI</option>
+                    <option value="KINGKONG 4D">KINGKONG 4D</option>
+                    <option value="SINGAPORE">SINGAPORE</option>
+                    <option value="MAGNUM4D">MAGNUM4D</option>
+                    <option value="PCSO">PCSO</option>
+                    <option value="NEVADA">NEVADA</option>
+                    <option value="HONGKONG">HONGKONG</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="card preview-section">
+            <div class="preview-header">
+                <h2 class="preview-title">PREVIEW LOGO</h2>
+            </div>
+            
+            <div class="logo-container">
+                <div class="placeholder-text" id="placeholder">
+                    <i class="fas fa-image"></i>
+                    <p>Pilih pasaran dari dropdown atau ketikkan nama pasaran</p>
+                </div>
+                <img id="logoPreview" class="logo-preview" style="display: none;" alt="Preview Logo">
+                <div id="logoName" class="logo-name"></div>
+                <div class="right-click-hint">
+                    <i class="fas fa-mouse-pointer"></i> Klik kanan untuk menyimpan
+                </div>
+            </div>
+            
+            <div class="alternative-download">
+                <h3><i class="fas fa-info-circle"></i> METODE DOWNLOAD</h3>
+                <p>Klik kanan pada gambar dan pilih "Simpan Gambar Sebagai" untuk menyimpan logo</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2023 LOGO PASARAN GENERATOR | SYSTEM READY</p>
+    </footer>
+
+    <div class="context-menu" id="contextMenu">
+        <ul>
+            <li onclick="saveImage()"><i class="fas fa-download"></i> Simpan Gambar</li>
+            <li onclick="openInNewTab()"><i class="fas fa-external-link-alt"></i> Buka di Tab Baru</li>
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const marketDropdown = document.getElementById('marketDropdown');
+            const searchInput = document.getElementById('searchInput');
+            const logoPreview = document.getElementById('logoPreview');
+            const logoName = document.getElementById('logoName');
+            const placeholder = document.getElementById('placeholder');
+            const contextMenu = document.getElementById('contextMenu');
+            
+            let currentLogoUrl = null;
+            
+            // Data pasaran dan URL logo
+            const marketData = {
+                "HOKIDRAW": "https://hokidraw.com/assets/img/logo.png",
+                "TOTO MACAU": "https://saka69.dataklmsad903.site/images/lottery-market/7/eYFHx8tXWr4CcVsI.png",
+                "KENTUCKY": "https://play.kylottery.com/content/dam/interactive/ilottery/images/logo/ky-logo.png",
+                "FLORIDA": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/0901b2c0022074bbd458ff6471f00a95/florida.png",
+                "HUAHIN": "https://huahinlottery.com/assets/img/logo.png",
+                "BANGKOK": "https://bangkokpoolstoday.com/assets/img/bangkokpools_logo.png",
+                "NEW YORK": "https://edit.nylottery.ny.gov/sites/default/files/logo-2179655b4229a219a9305b3f0e734bd0.png",
+                "BRUNEI": "https://bruneipools.com/assets/img/brunei-logo.png",
+                "OREGON": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/e9f6ec79cbb5d65bc9c37fdd16ef7d2c/screenshot-1.png",
+                "CAROLINA": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/740b727453ea03cdcd9cf057abbc631b/carolina.png",
+                "TOTOCAMBODIA": "https://totocambodialive.com/assets/img/logo.png",
+                "CHELSEA": "https://chelseapools.co.uk/assets/img/chelseaPools_logo.png",
+                "POIPET": "https://poipetlottery.com/img/logo.png",
+                "BULLSEYE": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/9acd9822ff6ddccc183e102ac2e2071c/43f2e106-8738-11ee-a2d8-005056af723d-removebg-preview.png",
+                "SYDNEY": "https://lottosydney.fun/assets/image/logo_sydney.png",
+                "JAKARTA": "https://jakartapool.com/images/logo.png",
+                "TOTOMALI": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/350cdbae8be28dfa1e8ea5a71ddd810e/totomali.png",
+                "KINGKONG 4D": "https://kingkongpools.id/image/logo.png",
+                "SINGAPORE": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/691279d6f5af75cbb3ab2b30bd31cd23/singapore.png",
+                "MAGNUM4D": "https://www.magnum4d.my/Magnum4d/media/images/logo-magnum.png",
+                "PCSO": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/cdff9e13116036c6aacccf93f1260e98/pcso.png",
+                "NEVADA": "https://cdn.areabermain.club/assets/cdn/az6/2025/09/07/20250907/2e16d499ba1ab2b8e8fcc8672d643c3b/nevada.png",
+                "HONGKONG": "https://titik6.hongkonglotto-official.today/assets/images/hongkong-lotto-1.png"
+            };
+            
+            // Fungsi untuk menampilkan preview logo
+            function showLogo(marketName) {
+                if (marketData[marketName]) {
+                    currentLogoUrl = marketData[marketName];
+                    
+                    logoPreview.onload = function() {
+                        logoPreview.style.display = 'block';
+                        placeholder.style.display = 'none';
+                        logoName.textContent = marketName;
+                    };
+                    
+                    logoPreview.onerror = function() {
+                        placeholder.style.display = 'block';
+                        logoPreview.style.display = 'none';
+                        placeholder.innerHTML = '<i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 10px; color: #ff0066;"></i><p>Gagal memuat gambar. URL mungkin tidak valid.</p>';
+                    };
+                    
+                    logoPreview.src = currentLogoUrl;
+                }
+            }
+            
+            // Event listener untuk dropdown
+            marketDropdown.addEventListener('change', function() {
+                if (this.value) {
+                    searchInput.value = this.value;
+                    showLogo(this.value);
+                }
+            });
+            
+            // Event listener untuk search input
+            searchInput.addEventListener('input', function() {
+                const value = this.value.toUpperCase();
+                const options = marketDropdown.options;
+                
+                // Cari opsi yang sesuai
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].value.toUpperCase().includes(value)) {
+                        marketDropdown.value = options[i].value;
+                        showLogo(options[i].value);
+                        break;
+                    }
+                }
+            });
+            
+            // Event listener untuk klik kanan pada gambar
+            logoPreview.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = e.pageX + 'px';
+                contextMenu.style.top = e.pageY + 'px';
+            });
+            
+            // Sembunyikan context menu ketika klik di luar
+            document.addEventListener('click', function() {
+                contextMenu.style.display = 'none';
+            });
+            
+            // Fungsi untuk menyimpan gambar
+            window.saveImage = function() {
+                if (currentLogoUrl) {
+                    const link = document.createElement('a');
+                    link.href = currentLogoUrl;
+                    link.download = 'logo-pasaran.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                }
+            };
+            
+            // Fungsi untuk membuka di tab baru
+            window.openInNewTab = function() {
+                if (currentLogoUrl) {
+                    window.open(currentLogoUrl, '_blank');
+                }
+            };
+            
+            // Tambahkan efek ketik pada judul
+            const title = document.querySelector('h1');
+            const originalTitle = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            const typeWriter = () => {
+                if (i < originalTitle.length) {
+                    title.textContent += originalTitle.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            };
+            
+            typeWriter();
+            
+            // Tambahkan partikel efek
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 30;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Posisi acak
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const size = Math.random() * 3 + 1;
+                    const duration = Math.random() * 15 + 10;
+                    
+                    particle.style.left = `${posX}vw`;
+                    particle.style.top = `${posY}vh`;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+        });
+    </script>
+</body>
+</html>
