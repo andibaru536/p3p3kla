@@ -13,8 +13,10 @@
             padding: 0;
         }
         body {
-            background: #0a0a1a;
-            padding: 15px;
+            background: #0a0a1a url('https://images.unsplash.com/photo-1598153346810-860daa814c4b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            padding: 20px;
             color: #e0e0e0;
             line-height: 1.6;
             min-height: 100vh;
@@ -23,7 +25,7 @@
             align-items: center;
             font-family: 'Cinzel', serif;
             position: relative;
-            overflow: hidden;
+            overflow-x: hidden;
         }
         body::before {
             content: '';
@@ -32,203 +34,151 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(rgba(10, 10, 26, 0.85), rgba(20, 15, 35, 0.9));
-            z-index: -2;
-        }
-        /* Animated Background Elements */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            pointer-events: none;
-        }
-        .star {
-            position: absolute;
-            background-color: #fff;
-            border-radius: 50%;
-            animation: twinkle linear infinite;
-        }
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-        .floating-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        .shape {
-            position: absolute;
-            background: rgba(139, 0, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.2);
-            animation: float 15s infinite linear;
-        }
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 10%;
-            left: 10%;
-            border-radius: 50%;
-            animation-duration: 25s;
-        }
-        .shape:nth-child(2) {
-            width: 100px;
-            height: 100px;
-            top: 70%;
-            left: 80%;
-            animation-duration: 30s;
-        }
-        .shape:nth-child(3) {
-            width: 120px;
-            height: 120px;
-            top: 40%;
-            left: 70%;
-            border-radius: 50%;
-            animation-duration: 35s;
-        }
-        .shape:nth-child(4) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-duration: 20s;
-        }
-        @keyframes float {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(20px, 40px) rotate(90deg); }
-            50% { transform: translate(40px, 0) rotate(180deg); }
-            75% { transform: translate(0, 40px) rotate(270deg); }
-            100% { transform: translate(0, 0) rotate(360deg); }
+            background: rgba(10, 10, 26, 0.85);
+            z-index: -1;
         }
         .container {
             width: 100%;
-            max-width: 700px;
-            background: rgba(26, 23, 43, 0.95);
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
-            padding: 20px;
-            animation: fadeIn 1s ease, floating 6s infinite ease-in-out;
-            border: 1px solid #8b0000;
+            max-width: 900px;
+            background: rgba(26, 23, 43, 0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4);
+            padding: 30px;
+            animation: fadeIn 1.5s ease;
+            border: 2px solid #8b0000;
             position: relative;
             overflow: hidden;
+            z-index: 1;
+        }
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(139, 0, 0, 0.1), rgba(255, 215, 0, 0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 8s infinite linear;
+            z-index: -1;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(-30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
-        @keyframes floating {
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px #ffd700, 0 0 10px #ffd700; }
+            50% { text-shadow: 0 0 15px #ffd700, 0 0 20px #ffd700, 0 0 25px #ffd700; }
+        }
+        @keyframes sparkle {
+            0% { opacity: 0; transform: translate(0, 0) rotate(0); }
+            50% { opacity: 1; }
+            100% { opacity: 0; transform: translate(var(--tx), var(--ty)) rotate(360deg); }
+        }
         header {
             text-align: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #8b0000;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #8b0000;
             position: relative;
+            z-index: 1;
         }
         h1 {
             color: #ffd700;
-            margin-bottom: 10px;
-            font-size: 28px;
+            margin-bottom: 15px;
+            font-size: 36px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             animation: glow 3s infinite;
             font-family: 'MedievalSharp', cursive;
             position: relative;
             display: inline-block;
         }
-        @keyframes glow {
-            0%, 100% { text-shadow: 0 0 5px #ffd700; }
-            50% { text-shadow: 0 0 10px #ffd700, 0 0 15px #ffd700; }
-        }
         h1::before, h1::after {
             content: '⚡';
+            position: relative;
             display: inline-block;
-            margin: 0 10px;
-            animation: pulse 1.5s infinite alternate;
-        }
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.2); }
+            margin: 0 15px;
+            animation: float 3s infinite ease-in-out;
         }
         .description {
             color: #d3d3d3;
-            font-size: 16px;
-            max-width: 500px;
+            font-size: 18px;
+            max-width: 600px;
             margin: 0 auto;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
         }
-        .input-section, .result-section, .summary {
-            margin-bottom: 20px;
+        .input-section {
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
         }
         .section-title {
-            font-size: 18px;
+            font-size: 22px;
             color: #ffd700;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-family: 'MedievalSharp', cursive;
-            animation: slideIn 0.5s ease;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-20px); }
-            to { opacity: 1; transform: translateX(0); }
         }
         .section-title i {
-            margin-right: 10px;
+            margin-right: 15px;
             color: #8b0000;
-            font-size: 20px;
+            font-size: 28px;
         }
         textarea {
             width: 100%;
-            padding: 15px;
+            padding: 20px;
             background: rgba(35, 30, 50, 0.8);
-            border: 1px solid #8b0000;
-            border-radius: 8px;
-            font-size: 14px;
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            font-size: 16px;
             resize: vertical;
             transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.4);
             color: #e0e0e0;
             font-family: 'Cinzel', serif;
-            min-height: 150px;
-            animation: fadeIn 0.5s ease;
+            min-height: 180px;
+            position: relative;
         }
         textarea:focus {
             border-color: #ffd700;
             outline: none;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
         }
         .buttons-container {
             display: flex;
             justify-content: flex-end;
-            margin-top: 15px;
-            gap: 10px;
+            margin-top: 20px;
         }
         button {
             background: linear-gradient(135deg, #8b0000, #5a0000);
             color: #ffd700;
-            border: 1px solid #ffd700;
-            padding: 10px 15px;
-            border-radius: 5px;
+            border: 2px solid #ffd700;
+            padding: 14px 25px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 18px;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'MedievalSharp', cursive;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
             overflow: hidden;
+            font-family: 'MedievalSharp', cursive;
         }
         button::before {
             content: '';
@@ -244,94 +194,185 @@
             left: 100%;
         }
         button i {
-            margin-right: 8px;
-            font-size: 16px;
+            margin-right: 10px;
+            font-size: 20px;
         }
         button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+        button:active {
+            transform: translateY(2px);
+        }
+        .result-section {
+            margin-top: 35px;
+            position: relative;
+            z-index: 1;
+        }
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            padding: 15px;
+            background: rgba(35, 30, 50, 0.8);
+            border-radius: 10px;
+            border: 2px solid #8b0000;
+            transition: all 0.3s;
+        }
+        .result-header:hover {
+            background: rgba(45, 40, 60, 0.8);
+            border-color: #ffd700;
         }
         .result-box {
             background: rgba(35, 30, 50, 0.8);
-            border: 1px solid #8b0000;
-            border-radius: 8px;
-            padding: 15px;
+            border: 2px solid #8b0000;
+            border-radius: 10px;
+            padding: 25px;
             white-space: pre-line;
             font-family: 'Cinzel', serif;
-            line-height: 1.6;
-            min-height: 200px;
-            max-height: 300px;
+            line-height: 1.8;
+            min-height: 280px;
+            max-height: 450px;
             overflow-y: auto;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             color: #e0e0e0;
-            font-size: 14px;
-            animation: fadeIn 0.5s ease;
+            position: relative;
+            font-size: 16px;
         }
         .hidden {
             display: none;
         }
         .summary {
-            padding: 15px;
-            border-radius: 8px;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
             background: rgba(35, 30, 50, 0.8);
-            border-left: 3px solid #8b0000;
+            border-left: 5px solid #8b0000;
             animation: pulse 4s infinite;
+            position: relative;
+            z-index: 1;
         }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 rgba(139, 0, 0, 0.3); }
-            50% { box-shadow: 0 0 10px rgba(139, 0, 0, 0.6); }
+            50% { box-shadow: 0 0 20px rgba(139, 0, 0, 0.6); }
             100% { box-shadow: 0 0 0 rgba(139, 0, 0, 0.3); }
         }
         .blocked {
             color: #ff6b6b;
             font-weight: bold;
+            text-shadow: 0 0 5px rgba(255, 107, 107, 0.7);
         }
         .safe {
             color: #90ee90;
+            text-shadow: 0 0 5px rgba(144, 238, 144, 0.7);
         }
-        .auto-filter-info {
-            color: #ffd700;
-            font-size: 14px;
-            margin-top: 10px;
+        .copy-btn-container {
             text-align: center;
-            animation: flicker 2s infinite;
-        }
-        @keyframes flicker {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+            margin-top: 25px;
         }
         .toggle-btn {
             background: transparent;
             color: #ffd700;
             border: none;
             cursor: pointer;
-            font-size: 20px;
-            transition: all 0.2s;
+            font-size: 24px;
+            transition: all 0.3s;
+            animation: float 3s infinite ease-in-out;
         }
         .toggle-btn:hover {
             color: #8b0000;
-            transform: scale(1.1);
+            transform: scale(1.2);
+        }
+        .auto-filter-info {
+            color: #ffd700;
+            font-size: 16px;
+            margin-top: 15px;
+            text-align: center;
+            animation: flicker 2s infinite;
+            text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .clear-btn {
+            background: linear-gradient(135deg, #8b0000, #5a0000);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+        }
+        .clear-btn:hover {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+        }
+        .sparkle {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ffd700;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkle 1.5s linear forwards;
+            z-index: 2;
+        }
+        .hogwarts-crest {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Hogwarts_Crest.svg/800px-Hogwarts_Crest.svg.png') center/contain no-repeat;
+            opacity: 0.7;
+            z-index: 0;
+            animation: float 6s infinite ease-in-out;
+        }
+        .magic-wand {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            font-size: 40px;
+            color: #ffd700;
+            animation: float 4s infinite ease-in-out;
+            transform-origin: center;
+            z-index: 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .section-title {
+                font-size: 20px;
+            }
+            .hogwarts-crest {
+                width: 60px;
+                height: 60px;
+                top: 15px;
+                right: 15px;
+            }
         }
         .notification {
             position: fixed;
-            top: 15px;
-            right: 15px;
-            padding: 10px 15px;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
             background: linear-gradient(135deg, #8b0000, #5a0000);
             color: #ffd700;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.6);
             transform: translateX(100%);
-            transition: transform 0.3s ease-out;
+            transition: transform 0.5s ease-out;
             z-index: 1000;
             display: flex;
             align-items: center;
-            border: 1px solid #ffd700;
+            border: 2px solid #ffd700;
             font-family: 'MedievalSharp', cursive;
-            font-size: 14px;
         }
         .notification i {
-            margin-right: 8px;
+            margin-right: 10px;
+            font-size: 20px;
         }
         .notification.show {
             transform: translateX(0);
@@ -352,32 +393,11 @@
             0% { opacity: 1; transform: scale(0); }
             100% { opacity: 0; transform: scale(2); }
         }
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            h1 {
-                font-size: 24px;
-            }
-            .section-title {
-                font-size: 16px;
-            }
-            button {
-                padding: 8px 12px;
-                font-size: 13px;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Animated Background Elements -->
-    <div class="stars" id="stars"></div>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+    <div class="hogwarts-crest"></div>
+    <div class="magic-wand">⚡</div>
     
     <div class="container">
         <header>
@@ -416,15 +436,18 @@
                 </div>
             </div>
             
-            <div class="result-box hidden" id="result">
-                <!-- Hasil akan ditampilkan di sini setelah data diproses -->
+            <div class="result-box" id="result">
+                Hasil akan ditampilkan di sini setelah data diproses...
+            </div>
+            
+            <div class="copy-btn-container">
+                <button class="secondary" onclick="copyToClipboard()">
+                    <i class="fas fa-copy"></i> Salin Hasil
+                </button>
             </div>
             
             <div class="buttons-container">
-                <button onclick="copyToClipboard()">
-                    <i class="fas fa-copy"></i> Salin Hasil
-                </button>
-                <button onclick="toggleEdit()">
+                <button class="outline" onclick="toggleEdit()">
                     <i class="fas fa-edit"></i> Edit Hasil
                 </button>
             </div>
@@ -436,54 +459,54 @@
     </div>
 
     <script>
-        let isResultVisible = false;
+        let isResultVisible = true;
         
-        // Create stars for background
-        function createStars() {
-            const stars = document.getElementById('stars');
-            const starsCount = 150;
+        // Fungsi untuk membuat efek sparkle
+        function createSparkle(x, y) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.style.left = `${x}px`;
+            sparkle.style.top = `${y}px`;
+            sparkle.style.setProperty('--tx', `${Math.random() * 100 - 50}px`);
+            sparkle.style.setProperty('--ty', `${Math.random() * 100 - 50}px`);
             
-            for (let i = 0; i < starsCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                const size = Math.random() * 3;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                star.style.animationDuration = `${5 + Math.random() * 10}s`;
-                star.style.animationDelay = `${Math.random() * 5}s`;
-                
-                stars.appendChild(star);
-            }
+            document.body.appendChild(sparkle);
+            
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                sparkle.remove();
+            }, 1500);
         }
         
-        // Create spell effect
+        // Fungsi untuk membuat efek spell
         function castSpell() {
             const spellEffect = document.createElement('div');
             spellEffect.className = 'spell-effect';
             document.body.appendChild(spellEffect);
             
-            // Remove element after animation
+            // Hapus elemen setelah animasi selesai
             setTimeout(() => {
                 spellEffect.remove();
             }, 500);
         }
         
-        // Initialize stars on load
-        window.addEventListener('load', createStars);
+        // Tambahkan event listener untuk sparkle pada klik
+        document.addEventListener('click', (e) => {
+            createSparkle(e.clientX, e.clientY);
+        });
         
-        // Auto filter when data is pasted
+        // Auto filter ketika data di paste
         document.getElementById('rawData').addEventListener('paste', function(e) {
+            // Tunggu hingga data benar-benar tertempel
             setTimeout(function() {
                 filterLinks();
                 castSpell();
             }, 100);
         });
         
-        // Also filter when input changes
+        // Juga filter ketika ada perubahan input (untuk berjaga-jaga)
         document.getElementById('rawData').addEventListener('input', function() {
+            // Hanya filter jika textarea tidak kosong
             if (this.value.trim() !== '') {
                 filterLinks();
             }
@@ -512,6 +535,7 @@
                     blockedCount++;
                     // Extract the link
                     const parts = line.split(' ');
+                    // Find the part that contains the link (not empty, not ✅/❌, not AMAN/BLOKIR)
                     for (let i = 0; i < parts.length; i++) {
                         if (parts[i] && parts[i] !== '✅' && parts[i] !== '❌' && 
                             parts[i] !== 'AMAN' && parts[i] !== 'BLOKIR') {
@@ -547,18 +571,19 @@ ${blockedLinks.join('\n')}
 Lampiran : 
 `;
             
-            const resultElement = document.getElementById('result');
-            resultElement.textContent = result;
+            document.getElementById('result').textContent = result;
             
-            // Show result box if it was hidden
-            if (!isResultVisible) {
-                resultElement.classList.remove('hidden');
-                document.getElementById('toggleIcon').classList.remove('fa-chevron-down');
-                document.getElementById('toggleIcon').classList.add('fa-chevron-up');
-                isResultVisible = true;
-            }
-            
+            // Tampilkan notifikasi
             showNotification('Data berhasil diproses dengan sihir!');
+            
+            // Tambahkan efek sparkle
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const x = Math.random() * window.innerWidth;
+                    const y = Math.random() * window.innerHeight;
+                    createSparkle(x, y);
+                }, i * 100);
+            }
         }
         
         function copyToClipboard() {
@@ -589,16 +614,9 @@ Lampiran :
         
         function clearData() {
             document.getElementById('rawData').value = '';
-            document.getElementById('result').textContent = '';
+            document.getElementById('result').textContent = 'Hasil akan ditampilkan di sini setelah data diproses...';
             document.getElementById('summaryText').textContent = 'Data belum diproses';
             document.getElementById('result').setAttribute('contenteditable', 'false');
-            
-            // Hide result box
-            document.getElementById('result').classList.add('hidden');
-            document.getElementById('toggleIcon').classList.remove('fa-chevron-up');
-            document.getElementById('toggleIcon').classList.add('fa-chevron-down');
-            isResultVisible = false;
-            
             showNotification('Data telah dibersihkan dengan sihir!');
             castSpell();
         }
@@ -609,11 +627,11 @@ Lampiran :
             
             if (isEditable) {
                 resultElement.setAttribute('contenteditable', 'false');
-                resultElement.style.border = '1px solid #8b0000';
+                resultElement.style.border = '2px solid #8b0000';
                 showNotification('Edit mode dinonaktifkan');
             } else {
                 resultElement.setAttribute('contenteditable', 'true');
-                resultElement.style.border = '1px solid #ffd700';
+                resultElement.style.border = '2px solid #ffd700';
                 resultElement.focus();
                 showNotification('Edit mode diaktifkan - Anda dapat mengedit teks langsung');
             }
@@ -623,15 +641,21 @@ Lampiran :
         function toggleResult() {
             const resultBox = document.getElementById('result');
             const toggleIcon = document.getElementById('toggleIcon');
+            const copyButton = document.querySelector('.copy-btn-container');
+            const editButton = document.querySelector('.buttons-container');
             
             if (isResultVisible) {
                 resultBox.classList.add('hidden');
-                toggleIcon.classList.remove('fa-chevron-up');
-                toggleIcon.classList.add('fa-chevron-down');
-            } else {
-                resultBox.classList.remove('hidden');
+                copyButton.classList.add('hidden');
+                editButton.classList.add('hidden');
                 toggleIcon.classList.remove('fa-chevron-down');
                 toggleIcon.classList.add('fa-chevron-up');
+            } else {
+                resultBox.classList.remove('hidden');
+                copyButton.classList.remove('hidden');
+                editButton.classList.remove('hidden');
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
             }
             
             isResultVisible = !isResultVisible;
