@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Filter Link Terblokir</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* CSS yang sama seperti sebelumnya */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -393,6 +395,14 @@
             0% { opacity: 1; transform: scale(0); }
             100% { opacity: 0; transform: scale(2); }
         }
+        .no-results {
+            text-align: center;
+            color: #ffd700;
+            font-size: 24px;
+            padding: 50px 20px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            animation: glow 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -509,6 +519,10 @@
             // Hanya filter jika textarea tidak kosong
             if (this.value.trim() !== '') {
                 filterLinks();
+            } else {
+                // Jika textarea kosong, reset hasil
+                document.getElementById('result').innerHTML = '';
+                document.getElementById('summaryText').textContent = 'Data belum diproses';
             }
         });
         
@@ -560,7 +574,15 @@
             `;
             
             // Format result
-            let result = `Info : Linetogel
+            let result;
+            if (blockedLinks.length === 0) {
+                result = `<div class="no-results">
+                    <i class="fas fa-check-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <br>
+                    TIDAK ADA LINK YANG TERBLOKIR
+                </div>`;
+            } else {
+                result = `Info : Linetogel
 Perihal : Link terkena nawala
 
 Keterangan : Untuk saat ini pada saat di lakukan pengecekan pada link dibawah ini terjadi Nawala ya ko/ci, Perihal tersebut mohon dibantu pengecekannya ya ko/ci.
@@ -570,8 +592,9 @@ ${blockedLinks.join('\n')}
 
 Lampiran : 
 `;
+            }
             
-            document.getElementById('result').textContent = result;
+            document.getElementById('result').innerHTML = result;
             
             // Tampilkan notifikasi
             showNotification('Data berhasil diproses dengan sihir!');
@@ -587,7 +610,19 @@ Lampiran :
         }
         
         function copyToClipboard() {
-            const resultText = document.getElementById('result').textContent;
+            const resultElement = document.getElementById('result');
+            let resultText = '';
+            
+            // Jika tidak ada link yang terblokir, jangan menyalin teks "TIDAK ADA LINK YANG TERBLOKIR"
+            if (!resultElement.querySelector('.no-results')) {
+                resultText = resultElement.textContent;
+            }
+            
+            if (!resultText.trim()) {
+                showNotification('Tidak ada hasil untuk disalin', true);
+                return;
+            }
+            
             navigator.clipboard.writeText(resultText)
                 .then(() => {
                     showNotification('Teks berhasil disalin!');
@@ -614,7 +649,7 @@ Lampiran :
         
         function clearData() {
             document.getElementById('rawData').value = '';
-            document.getElementById('result').textContent = 'Hasil akan ditampilkan di sini setelah data diproses...';
+            document.getElementById('result').innerHTML = '';
             document.getElementById('summaryText').textContent = 'Data belum diproses';
             document.getElementById('result').setAttribute('contenteditable', 'false');
             showNotification('Data telah dibersihkan dengan sihir!');
@@ -623,6 +658,12 @@ Lampiran :
         
         function toggleEdit() {
             const resultElement = document.getElementById('result');
+            // Hanya izinkan edit jika ada hasil
+            if (resultElement.querySelector('.no-results')) {
+                showNotification('Tidak ada hasil untuk diedit', true);
+                return;
+            }
+            
             const isEditable = resultElement.getAttribute('contenteditable') === 'true';
             
             if (isEditable) {
@@ -664,4 +705,3 @@ Lampiran :
     </script>
 </body>
 </html>
-
