@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filter Link Terblokir - Tema Harry Potter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: #0a0a1a;
+            padding: 15px;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Cinzel', serif;
+            position: relative;
+            overflow: hidden;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(10, 10, 26, 0.85), rgba(20, 15, 35, 0.9));
+            z-index: -2;
+        }
+        /* Animated Background Elements */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            pointer-events: none;
+        }
+        .star {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            animation: twinkle linear infinite;
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        .floating-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .shape {
+            position: absolute;
+            background: rgba(139, 0, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            animation: float 15s infinite linear;
+        }
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            border-radius: 50%;
+            animation-duration: 25s;
+        }
+        .shape:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 70%;
+            left: 80%;
+            animation-duration: 30s;
+        }
+        .shape:nth-child(3) {
+            width: 120px;
+            height: 120px;
+            top: 40%;
+            left: 70%;
+            border-radius: 50%;
+            animation-duration: 35s;
+        }
+        .shape:nth-child(4) {
+            width: 60px;
+            height: 60px;
+            top: 80%;
+            left: 20%;
+            animation-duration: 20s;
+        }
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, 40px) rotate(90deg); }
+            50% { transform: translate(40px, 0) rotate(180deg); }
+            75% { transform: translate(0, 40px) rotate(270deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(26, 23, 43, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.5), 0 0 30px rgba(255, 215, 0, 0.3);
+            padding: 20px;
+            animation: fadeIn 1s ease, floating 6s infinite ease-in-out;
+            border: 1px solid #8b0000;
+            position: relative;
+            overflow: hidden;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #8b0000;
+            position: relative;
+        }
+        h1 {
+            color: #ffd700;
+            margin-bottom: 10px;
+            font-size: 28px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            animation: glow 3s infinite;
+            font-family: 'MedievalSharp', cursive;
+            position: relative;
+            display: inline-block;
+        }
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 5px #ffd700; }
+            50% { text-shadow: 0 0 10px #ffd700, 0 0 15px #ffd700; }
+        }
+        h1::before, h1::after {
+            content: '⚡';
+            display: inline-block;
+            margin: 0 10px;
+            animation: pulse 1.5s infinite alternate;
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.2); }
+        }
+        .description {
+            color: #d3d3d3;
+            font-size: 16px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .input-section, .result-section, .summary {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            color: #ffd700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'MedievalSharp', cursive;
+            animation: slideIn 0.5s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .section-title i {
+            margin-right: 10px;
+            color: #8b0000;
+            font-size: 20px;
+        }
+        textarea {
+            width: 100%;
+            padding: 15px;
+            background: rgba(35, 30, 50, 0.8);
+            border: 1px solid #8b0000;
+            border-radius: 8px;
+            font-size: 14px;
+            resize: vertical;
+            transition: all 0.3s;
+            color: #e0e0e0;
+            font-family: 'Cinzel', serif;
+            min-height: 150px;
+            animation: fadeIn 0.5s ease;
+        }
+        textarea:focus {
+            border-color: #ffd700;
+            outline: none;
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+        }
+        .buttons-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 15px;
+            gap: 10px;
+        }
+        button {
+            background: linear-gradient(135deg, #8b0000, #5a0000);
+            color: #ffd700;
+            border: 1px solid #ffd700;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'MedievalSharp', cursive;
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+            transition: 0.5s;
+        }
+        button:hover::before {
+            left: 100%;
+        }
+        button i {
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+        }
+        .result-box {
+            background: rgba(35, 30, 50, 0.8);
+            border: 1px solid #8b0000;
+            border-radius: 8px;
+            padding: 15px;
+            white-space: pre-line;
+            font-family: 'Cinzel', serif;
+            line-height: 1.6;
+            min-height: 200px;
+            max-height: 300px;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            color: #e0e0e0;
+            font-size: 14px;
+            animation: fadeIn 0.5s ease;
+        }
+        .hidden {
+            display: none;
+        }
+        .summary {
+            padding: 15px;
+            border-radius: 8px;
+            background: rgba(35, 30, 50, 0.8);
+            border-left: 3px solid #8b0000;
+            animation: pulse 4s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 rgba(139, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 10px rgba(139, 0, 0, 0.6); }
+            100% { box-shadow: 0 0 0 rgba(139, 0, 0, 0.3); }
+        }
+        .blocked {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        .safe {
+            color: #90ee90;
+        }
+        .auto-filter-info {
+            color: #ffd700;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            animation: flicker 2s infinite;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .toggle-btn {
+            background: transparent;
+            color: #ffd700;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s;
+        }
+        .toggle-btn:hover {
+            color: #8b0000;
+            transform: scale(1.1);
+        }
+        .notification {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #8b0000, #5a0000);
+            color: #ffd700;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-out;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border: 1px solid #ffd700;
+            font-family: 'MedievalSharp', cursive;
+            font-size: 14px;
+        }
+        .notification i {
+            margin-right: 8px;
+        }
+        .notification.show {
+            transform: translateX(0);
+        }
+        .spell-effect {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0;
+            background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+            animation: spellCast 0.5s ease-out;
+        }
+        @keyframes spellCast {
+            0% { opacity: 1; transform: scale(0); }
+            100% { opacity: 0; transform: scale(2); }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .section-title {
+                font-size: 16px;
+            }
+            button {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="stars" id="stars"></div>
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Filter Link Terblokir</h1>
+            <p class="description">Alat ajaib untuk menemukan link yang terblokir seperti menemukan horcrux</p>
+        </header>
+        
+        <div class="input-section">
+            <div class="section-title">
+                <i class="fas fa-scroll"></i> Data Mentah
+            </div>
+            <textarea id="rawData" placeholder="Tempel data mentah di sini... (Data akan diproses secara otomatis)"></textarea>
+            <p class="auto-filter-info"><i class="fas fa-wand-magic-sparkles"></i> Sihir Auto Filter Aktif - Tempel data untuk memproses</p>
+            
+            <div class="buttons-container">
+                <button class="clear-btn" onclick="clearData()">
+                    <i class="fas fa-broom"></i> Bersihkan
+                </button>
+            </div>
+        </div>
+        
+        <div class="summary">
+            <div class="section-title">
+                <i class="fas fa-chart-bar"></i> Summary
+            </div>
+            <div id="summaryText">Data belum diproses</div>
+        </div>
+        
+        <div class="result-section">
+            <div class="result-header" onclick="toggleResult()">
+                <div class="section-title">
+                    <i class="fas fa-file-code"></i> Hasil Filter
+                </div>
+                <div class="toggle-btn">
+                    <i class="fas fa-chevron-down" id="toggleIcon"></i>
+                </div>
+            </div>
+            
+            <div class="result-box hidden" id="result">
+                <!-- Hasil akan ditampilkan di sini setelah data diproses -->
+            </div>
+            
+            <div class="buttons-container">
+                <button onclick="copyToClipboard()">
+                    <i class="fas fa-copy"></i> Salin Hasil
+                </button>
+                <button onclick="toggleEdit()">
+                    <i class="fas fa-edit"></i> Edit Hasil
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i> Teks berhasil disalin!
+    </div>
+
+    <script>
+        let isResultVisible = false;
+        
+        // Create stars for background
+        function createStars() {
+            const stars = document.getElementById('stars');
+            const starsCount = 150;
+            
+            for (let i = 0; i < starsCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${5 + Math.random() * 10}s`;
+                star.style.animationDelay = `${Math.random() * 5}s`;
+                
+                stars.appendChild(star);
+            }
+        }
+        
+        // Create spell effect
+        function castSpell() {
+            const spellEffect = document.createElement('div');
+            spellEffect.className = 'spell-effect';
+            document.body.appendChild(spellEffect);
+            
+            // Remove element after animation
+            setTimeout(() => {
+                spellEffect.remove();
+            }, 500);
+        }
+        
+        // Initialize stars on load
+        window.addEventListener('load', createStars);
+        
+        // Auto filter when data is pasted
+        document.getElementById('rawData').addEventListener('paste', function(e) {
+            setTimeout(function() {
+                filterLinks();
+                castSpell();
+            }, 100);
+        });
+        
+        // Also filter when input changes
+        document.getElementById('rawData').addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                filterLinks();
+            }
+        });
+        
+        function filterLinks() {
+            const rawData = document.getElementById('rawData').value;
+            if (!rawData.trim()) {
+                showNotification('Data mentah kosong. Silakan tempel data terlebih dahulu.', true);
+                return;
+            }
+            
+            const lines = rawData.split('\n');
+            let blockedLinks = [];
+            let safeCount = 0;
+            let blockedCount = 0;
+            
+            // Parse data
+            for (let line of lines) {
+                line = line.trim();
+                if (!line) continue;
+                
+                if (line.includes('✅') && line.includes('AMAN')) {
+                    safeCount++;
+                } else if (line.includes('❌') && line.includes('BLOKIR')) {
+                    blockedCount++;
+                    // Extract the link
+                    const parts = line.split(' ');
+                    for (let i = 0; i < parts.length; i++) {
+                        if (parts[i] && parts[i] !== '✅' && parts[i] !== '❌' && 
+                            parts[i] !== 'AMAN' && parts[i] !== 'BLOKIR') {
+                            blockedLinks.push(parts[i]);
+                            break;
+                        }
+                    }
+                } else if (line.includes('Summary')) {
+                    // Try to get counts from summary if available
+                    const amanMatch = line.match(/AMAN\s*:\s*(\d+)/);
+                    const blockedMatch = line.match(/BLOKIR\s*:\s*(\d+)/);
+                    
+                    if (amanMatch) safeCount = parseInt(amanMatch[1]);
+                    if (blockedMatch) blockedCount = parseInt(blockedMatch[1]);
+                }
+            }
+            
+            // Update summary
+            document.getElementById('summaryText').innerHTML = `
+                <span class="safe">AMAN: ${safeCount}</span> | 
+                <span class="blocked">BLOKIR: ${blockedCount}</span>
+            `;
+            
+            // Format result
+            let result = `Info : Linetogel
+Perihal : Link terkena nawala
+
+Keterangan : Untuk saat ini pada saat di lakukan pengecekan pada link dibawah ini terjadi Nawala ya ko/ci, Perihal tersebut mohon dibantu pengecekannya ya ko/ci.
+
+Link Berkendala : 
+${blockedLinks.join('\n')}
+
+Lampiran : 
+`;
+            
+            const resultElement = document.getElementById('result');
+            resultElement.textContent = result;
+            
+            // Show result box if it was hidden
+            if (!isResultVisible) {
+                resultElement.classList.remove('hidden');
+                document.getElementById('toggleIcon').classList.remove('fa-chevron-down');
+                document.getElementById('toggleIcon').classList.add('fa-chevron-up');
+                isResultVisible = true;
+            }
+            
+            showNotification('Data berhasil diproses dengan sihir!');
+        }
+        
+        function copyToClipboard() {
+            const resultText = document.getElementById('result').textContent;
+            navigator.clipboard.writeText(resultText)
+                .then(() => {
+                    showNotification('Teks berhasil disalin!');
+                    castSpell();
+                })
+                .catch(err => {
+                    console.error('Gagal menyalin teks: ', err);
+                    showNotification('Gagal menyalin teks', true);
+                });
+        }
+        
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.innerHTML = `<i class="fas fa-${isError ? 'exclamation-circle' : 'check-circle'}"></i> ${message}`;
+            notification.style.background = isError ? 
+                'linear-gradient(135deg, #5a0000, #8b0000)' : 
+                'linear-gradient(135deg, #8b0000, #5a0000)';
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function clearData() {
+            document.getElementById('rawData').value = '';
+            document.getElementById('result').textContent = '';
+            document.getElementById('summaryText').textContent = 'Data belum diproses';
+            document.getElementById('result').setAttribute('contenteditable', 'false');
+            
+            // Hide result box
+            document.getElementById('result').classList.add('hidden');
+            document.getElementById('toggleIcon').classList.remove('fa-chevron-up');
+            document.getElementById('toggleIcon').classList.add('fa-chevron-down');
+            isResultVisible = false;
+            
+            showNotification('Data telah dibersihkan dengan sihir!');
+            castSpell();
+        }
+        
+        function toggleEdit() {
+            const resultElement = document.getElementById('result');
+            const isEditable = resultElement.getAttribute('contenteditable') === 'true';
+            
+            if (isEditable) {
+                resultElement.setAttribute('contenteditable', 'false');
+                resultElement.style.border = '1px solid #8b0000';
+                showNotification('Edit mode dinonaktifkan');
+            } else {
+                resultElement.setAttribute('contenteditable', 'true');
+                resultElement.style.border = '1px solid #ffd700';
+                resultElement.focus();
+                showNotification('Edit mode diaktifkan - Anda dapat mengedit teks langsung');
+            }
+            castSpell();
+        }
+        
+        function toggleResult() {
+            const resultBox = document.getElementById('result');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (isResultVisible) {
+                resultBox.classList.add('hidden');
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+            } else {
+                resultBox.classList.remove('hidden');
+                toggleIcon.classList.remove('fa-chevron-down');
+                toggleIcon.classList.add('fa-chevron-up');
+            }
+            
+            isResultVisible = !isResultVisible;
+            castSpell();
+        }
+    </script>
+</body>
+</html>
