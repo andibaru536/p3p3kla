@@ -23,7 +23,7 @@
             --transition: all 0.3s ease;
             --bg-overlay-light: rgba(255, 255, 255, 0.7);
             --bg-overlay-dark: rgba(18, 18, 18, 0.85);
-            --scale-factor: 0.95; /* Faktor skala 5% lebih kecil */
+            --scale-factor: 0.95;
         }
 
         .dark-mode {
@@ -70,6 +70,7 @@
             width: calc(100% / var(--scale-factor));
             transform: scale(var(--scale-factor));
             transform-origin: top center;
+            overflow-x: hidden;
         }
 
         .bg-overlay {
@@ -90,16 +91,37 @@
             width: 100%;
             max-width: 1300px;
             background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-radius: 20px;
             padding: 30px;
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 8s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         header {
             text-align: center;
             margin-bottom: 30px;
             position: relative;
+            z-index: 1;
         }
 
         h1 {
@@ -111,6 +133,13 @@
             margin-bottom: 15px;
             font-weight: 800;
             letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(67, 97, 238, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { text-shadow: 0 2px 10px rgba(67, 97, 238, 0.3); }
+            100% { text-shadow: 0 2px 20px rgba(67, 97, 238, 0.6), 0 0 30px rgba(114, 9, 183, 0.4); }
         }
 
         .subtitle {
@@ -121,6 +150,17 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            position: relative;
+        }
+
+        .subtitle::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            margin: 10px auto;
+            border-radius: 3px;
         }
 
         .info-bar {
@@ -133,6 +173,9 @@
             border-radius: 15px;
             font-size: 0.9rem;
             box-shadow: var(--shadow);
+            z-index: 1;
+            position: relative;
+            backdrop-filter: blur(5px);
         }
 
         .info-item {
@@ -163,10 +206,11 @@
             font-size: 1.2rem;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
+            z-index: 2;
         }
 
         .theme-toggle:hover {
-            transform: rotate(15deg);
+            transform: rotate(15deg) scale(1.1);
         }
 
         .search-container {
@@ -175,6 +219,7 @@
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
+            z-index: 1;
         }
 
         #search {
@@ -189,11 +234,15 @@
             background: var(--card-bg-light);
             color: var(--text-light);
             font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            z-index: 1;
+            position: relative;
         }
 
         #search:focus {
             outline: none;
-            box-shadow: 0 0 0 3px var(--primary);
+            box-shadow: 0 0 0 3px var(--primary), 0 10px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
         }
 
         .search-icon {
@@ -203,6 +252,7 @@
             transform: translateY(-50%);
             color: var(--primary);
             font-size: 1.2rem;
+            z-index: 2;
         }
 
         .clear-search {
@@ -214,10 +264,13 @@
             font-size: 1.2rem;
             cursor: pointer;
             display: none;
+            z-index: 2;
+            transition: all 0.2s ease;
         }
 
         .clear-search:hover {
             color: var(--primary);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .suggestions {
@@ -234,6 +287,8 @@
             z-index: 100;
             margin-top: 10px;
             padding: 10px 0;
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
         }
 
         .suggestion-item {
@@ -242,7 +297,7 @@
             display: flex;
             align-items: center;
             font-size: 0.95rem;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease;
         }
 
         .suggestion-item i {
@@ -253,12 +308,15 @@
 
         .suggestion-item:hover {
             background: rgba(67, 97, 238, 0.15);
+            transform: translateX(5px);
         }
 
         .shortcut-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: 22px;
+            position: relative;
+            z-index: 1;
         }
 
         .shortcut-card {
@@ -266,7 +324,7 @@
             border-radius: 18px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -278,11 +336,20 @@
             position: relative;
             text-align: center;
             border: 2px solid transparent;
+            z-index: 1;
+            animation: cardAppear 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes cardAppear {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .shortcut-card:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             border-color: var(--primary);
             background: linear-gradient(135deg, var(--card-bg-light), rgba(67, 97, 238, 0.1));
         }
@@ -297,7 +364,7 @@
             background: linear-gradient(135deg, var(--primary), var(--accent));
             opacity: 0;
             z-index: -1;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
             border-radius: 16px;
         }
 
@@ -317,12 +384,36 @@
             color: white;
             font-size: 1.6rem;
             animation: pulse 2s infinite;
-            transition: transform 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .icon-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg);
+            transition: all 0.6s;
         }
 
         .shortcut-card:hover .icon-container {
             transform: scale(1.15) rotate(5deg);
             animation: none;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+        }
+
+        .shortcut-card:hover .icon-container::after {
+            animation: shine 1.5s ease forwards;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .togel-dice {
@@ -352,12 +443,14 @@
             font-size: 0.95rem;
             color: var(--text-light);
             line-height: 1.4;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .shortcut-card:hover .shortcut-name {
             color: var(--primary);
             font-weight: 700;
+            transform: translateY(2px);
         }
 
         .no-results {
@@ -367,6 +460,7 @@
             background: var(--card-bg-light);
             border-radius: 18px;
             box-shadow: var(--shadow);
+            animation: fadeIn 0.5s ease;
         }
 
         .no-results i {
@@ -394,6 +488,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            animation: fadeIn 0.5s ease;
         }
 
         .login-container {
@@ -403,6 +498,14 @@
             width: 90%;
             max-width: 400px;
             box-shadow: var(--shadow);
+            animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        @keyframes modalAppear {
+            0% { transform: scale(0.9); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .login-container h2 {
@@ -428,6 +531,13 @@
             border-radius: 10px;
             font-size: 1rem;
             font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
         .password-container {
@@ -441,6 +551,12 @@
             transform: translateY(-50%);
             cursor: pointer;
             color: #777;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-password:hover {
+            color: var(--primary);
+            transform: translateY(-50%) scale(1.1);
         }
 
         .login-btn {
@@ -454,6 +570,20 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(45deg);
+            transition: all 0.6s;
         }
 
         .login-btn:hover {
@@ -461,11 +591,16 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
+        .login-btn:hover::after {
+            animation: shine 1.5s ease forwards;
+        }
+
         .login-message {
             text-align: center;
             margin-top: 15px;
             color: #e74c3c;
             font-size: 0.9rem;
+            animation: shake 0.5s ease;
         }
 
         .logout-btn {
@@ -485,10 +620,35 @@
             font-size: 1.2rem;
             box-shadow: var(--shadow);
             transition: transform 0.3s ease;
+            z-index: 2;
         }
 
         .logout-btn:hover {
-            transform: rotate(15deg);
+            transform: rotate(15deg) scale(1.1);
+        }
+
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            opacity: 0.3;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-100vh) rotate(360deg); }
         }
 
         @media (max-width: 1100px) {
@@ -537,12 +697,8 @@
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .shortcut-card {
-            animation: fadeIn 0.5s ease forwards;
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         /* Scrollbar styling */
@@ -566,6 +722,9 @@
     </style>
 </head>
 <body>
+    <!-- Particles Background -->
+    <div class="particles" id="particles"></div>
+    
     <!-- Login Modal -->
     <div class="login-modal" id="loginModal">
         <div class="login-container">
@@ -730,6 +889,11 @@
                 icon: "fas fa-list"
             },
             { 
+                name: "LINK PASARAN TOGEL 2", 
+                url: "https://symphonny.vercel.app/Jadwal_Togel.html", 
+                icon: "fas fa-list-alt"
+            },
+            { 
                 name: "FORMAT ANGKA", 
                 url: "https://formatangka01.onecompiler.app/", 
                 icon: "fas fa-sort-numeric-down"
@@ -758,6 +922,16 @@
                 name: "KALKULATOR TOGEL 3", 
                 url: "https://tinyurl.com/2bjzbxue", 
                 icon: "fas fa-dice togel-dice"
+            },
+            { 
+                name: "PASSWORD GENERATOR", 
+                url: "https://p3p3kcrot-ssf3.vercel.app/passwprd-genator.html", 
+                icon: "fas fa-key"
+            },
+            { 
+                name: "LOGO GENERATOR", 
+                url: "https://p3p3kcrot-ssf3.vercel.app/generator_logo.html", 
+                icon: "fas fa-paint-brush"
             },
             { 
                 name: "SHORT LINK", 
@@ -812,6 +986,32 @@
         const themeToggle = document.getElementById('themeToggle');
         const datetimeElement = document.getElementById('datetime');
         const ipAddressElement = document.getElementById('ip-address');
+        const particlesContainer = document.getElementById('particles');
+
+        // Create floating particles
+        function createParticles() {
+            const colors = ['#4361ee', '#3a0ca3', '#7209b7', '#4cc9f0'];
+            const count = Math.floor(window.innerWidth / 20);
+            
+            for (let i = 0; i < count; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * 15 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                particle.style.animationDuration = `${Math.random() * 15 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
 
         // Check if user is logged in
         function checkLogin() {
@@ -902,11 +1102,12 @@
                 return;
             }
             
-            shortcuts.forEach(shortcut => {
+            shortcuts.forEach((shortcut, index) => {
                 const card = document.createElement('a');
                 card.className = 'shortcut-card';
                 card.href = shortcut.url;
                 card.target = '_blank';
+                card.style.animationDelay = `${index * 0.05}s`;
                 
                 // Gunakan kelas khusus untuk animasi dadu togel
                 const iconClass = shortcut.name.includes('KALKULATOR TOGEL') ? 
@@ -978,10 +1179,12 @@
                     // Add hover effect to suggestions
                     div.addEventListener('mouseenter', () => {
                         div.style.backgroundColor = 'rgba(67, 97, 238, 0.15)';
+                        div.style.transform = 'translateX(5px)';
                     });
                     
                     div.addEventListener('mouseleave', () => {
                         div.style.backgroundColor = '';
+                        div.style.transform = '';
                     });
                     
                     suggestionsContainer.appendChild(div);
@@ -1010,6 +1213,9 @@
 
         // Initialize the page
         function init() {
+            // Create particles background
+            createParticles();
+            
             // Check login status
             checkLogin();
             
@@ -1071,6 +1277,3 @@
     </script>
 </body>
 </html>
-
-
-
