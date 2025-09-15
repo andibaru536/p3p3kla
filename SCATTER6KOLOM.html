@@ -787,6 +787,84 @@
             position: relative;
         }
 
+        /* Toggle TS Styles */
+        .ts-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            background: var(--bg-secondary);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ts-toggle-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .ts-toggle {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .ts-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .ts-toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--bg-card);
+            transition: .4s;
+            border-radius: 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .ts-toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 2px;
+            background-color: var(--text-secondary);
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .ts-toggle-slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .ts-toggle-slider:before {
+            transform: translateX(26px);
+            background-color: white;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .result-header h2 {
+            margin-bottom: 0;
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -890,6 +968,12 @@
                 height: 35px;
                 font-size: 0.9rem;
             }
+
+            .result-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
         }
     </style>
 </head>
@@ -991,7 +1075,16 @@
             </div>
             
             <div class="result-container">
-                <h2>Hasil Format Scatter</h2>
+                <div class="result-header">
+                    <h2>Hasil Format Scatter</h2>
+                    <div class="ts-toggle-container">
+                        <span class="ts-toggle-label">TS Mode:</span>
+                        <label class="ts-toggle">
+                            <input type="checkbox" id="tsToggle">
+                            <span class="ts-toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
                 <div class="six-columns-result" id="scatter6Results">
                     <!-- Hasil akan diisi oleh JavaScript -->
                 </div>
@@ -1087,6 +1180,7 @@
             const modalColumnNavigator = document.getElementById('modalColumnNavigator');
             const modalColumnBtns = modalColumnNavigator.querySelectorAll('.column-nav-btn');
             const clearColBtns = document.querySelectorAll('.clear-col-btn');
+            const tsToggle = document.getElementById('tsToggle');
             
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
@@ -1157,6 +1251,11 @@
                         showNextImage();
                     }
                 }
+            });
+            
+            // Event listener untuk toggle TS
+            tsToggle.addEventListener('change', function() {
+                updateResultsWithTS();
             });
             
             // Event listener untuk setiap kolom input
@@ -1300,12 +1399,16 @@
                     colDiv.classList.add('has-data');
                 }
                 
+                // Format user ID dengan TS jika toggle aktif
+                const displayUserId = tsToggle.checked && result.userId !== '-' ? 
+                    `${result.userId} TS` : result.userId;
+                
                 colDiv.innerHTML = `
                     <h4>Kolom ${colIndex}</h4>
                     <div class="column-result-item">
                         <div class="column-result-label">User ID :</div>
-                        <div class="column-result-value">${result.userId}</div>
-                        <button class="column-btn-copy" data-value="${result.userId}" title="Salin User ID">
+                        <div class="column-result-value">${displayUserId}</div>
+                        <button class="column-btn-copy" data-value="${displayUserId}" title="Salin User ID">
                             <i class="far fa-copy"></i>
                         </button>
                     </div>
@@ -1345,6 +1448,36 @@
                 `;
                 
                 scatter6Results.appendChild(colDiv);
+            }
+            
+            // Fungsi untuk memperbarui hasil dengan TS jika toggle aktif
+            function updateResultsWithTS() {
+                const isTSToggled = tsToggle.checked;
+                
+                // Perbarui semua kolom hasil
+                scatterResults.forEach((result, index) => {
+                    if (result) {
+                        const colIndex = index + 1;
+                        const colElement = document.getElementById(`result-col${colIndex}`);
+                        if (colElement) {
+                            // Format user ID dengan TS jika toggle aktif
+                            const displayUserId = isTSToggled && result.userId !== '-' ? 
+                                `${result.userId} TS` : result.userId;
+                            
+                            // Perbarui nilai User ID
+                            const userIdElement = colElement.querySelector('.column-result-value');
+                            if (userIdElement && colElement.querySelector('.column-result-label').textContent.includes('User ID')) {
+                                userIdElement.textContent = displayUserId;
+                                
+                                // Perbarui juga nilai data untuk tombol salin
+                                const copyButton = colElement.querySelector('.column-btn-copy[data-value]');
+                                if (copyButton) {
+                                    copyButton.setAttribute('data-value', displayUserId);
+                                }
+                            }
+                        }
+                    }
+                });
             }
             
             // Event delegation untuk tombol salin di hasil 6 kolom
@@ -1598,4 +1731,3 @@
     </script>
 </body>
 </html>
-
