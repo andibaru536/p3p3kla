@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALL SHORCUT</title>
+    <title>ALL SHORTCUT</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🚀</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -137,9 +137,20 @@
 
         header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 25px; /* Dikurangi dari 40px */
             position: relative;
-            padding: 20px 0;
+            padding: 15px 0; /* Dikurangi dari 20px */
+        }
+
+        .header-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 0 10px;
         }
 
         h1 {
@@ -183,7 +194,7 @@
         .subtitle {
             color: var(--text-light);
             font-size: 1.3rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Dikurangi dari 25px */
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
@@ -197,7 +208,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 25px; /* Dikurangi dari 35px */
             padding: 15px 25px;
             background: var(--card-bg);
             border-radius: 12px;
@@ -221,9 +232,6 @@
         }
 
         .theme-toggle {
-            position: absolute;
-            top: 20px;
-            right: 20px;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             border: none;
             border-radius: 50%;
@@ -247,7 +255,7 @@
 
         .search-container {
             position: relative;
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* Dikurangi dari 40px */
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -696,9 +704,6 @@
         }
 
         .logout-btn {
-            position: absolute;
-            top: 20px;
-            right: 80px;
             background: linear-gradient(45deg, #ff3860, #ff2b56);
             border: none;
             border-radius: 50%;
@@ -783,17 +788,17 @@
                 font-size: 0.9rem;
             }
 
-            .logout-btn {
-                right: 70px;
-                width: 45px;
-                height: 45px;
+            .header-controls {
+                position: relative;
+                margin-bottom: 15px;
+                justify-content: center;
+                gap: 15px;
             }
             
-            .theme-toggle {
-                top: 15px;
-                right: 15px;
+            .theme-toggle, .logout-btn {
                 width: 45px;
                 height: 45px;
+                position: static;
             }
         }
 
@@ -807,7 +812,7 @@
             }
             
             .search-container {
-                margin-bottom: 30px;
+                margin-bottom: 25px;
             }
             
             #search {
@@ -830,6 +835,10 @@
             
             .info-item i {
                 font-size: 1rem;
+            }
+
+            .header-controls {
+                justify-content: space-between;
             }
         }
 
@@ -891,6 +900,15 @@
     
     <div class="container" id="mainContainer" style="display: none;">
         <header>
+            <div class="header-controls">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+            
             <h1>All SHORTCUT</h1>
             <p class="subtitle">Access all tools and applications with a single click in our cyber network</p>
             
@@ -904,14 +922,6 @@
                     <span id="ip-address">Loading IP...</span>
                 </div>
             </div>
-            
-            <button class="logout-btn" id="logoutBtn">
-                <i class="fas fa-sign-out-alt"></i>
-            </button>
-            
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
         </header>
         
         <div class="search-container">
@@ -1418,5 +1428,3 @@
     </script>
 </body>
 </html>
-
-
