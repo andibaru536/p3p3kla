@@ -105,7 +105,7 @@
             background: rgba(10, 10, 22, 0.7);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 30px;
+            padding: 25px; /* Reduced padding */
             box-shadow: 
                 0 0 25px rgba(0, 255, 255, 0.2),
                 0 0 50px rgba(148, 97, 251, 0.2),
@@ -137,20 +137,16 @@
 
         header {
             text-align: center;
-            margin-bottom: 25px; /* Dikurangi dari 40px */
+            margin-bottom: 20px; /* Reduced margin */
             position: relative;
-            padding: 15px 0; /* Dikurangi dari 20px */
+            padding: 10px 0; /* Reduced padding */
         }
 
-        .header-controls {
+        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 0 10px;
+            margin-bottom: 15px; /* Space between controls and title */
         }
 
         h1 {
@@ -161,7 +157,7 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced margin */
             text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             letter-spacing: 2px;
             animation: titleGlow 2s ease-in-out infinite alternate;
@@ -194,7 +190,7 @@
         .subtitle {
             color: var(--text-light);
             font-size: 1.3rem;
-            margin-bottom: 20px; /* Dikurangi dari 25px */
+            margin-bottom: 15px; /* Reduced margin */
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
@@ -208,8 +204,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px; /* Dikurangi dari 35px */
-            padding: 15px 25px;
+            margin-bottom: 20px; /* Reduced margin */
+            padding: 12px 20px; /* Reduced padding */
             background: var(--card-bg);
             border-radius: 12px;
             font-size: 1rem;
@@ -255,7 +251,7 @@
 
         .search-container {
             position: relative;
-            margin-bottom: 30px; /* Dikurangi dari 40px */
+            margin-bottom: 25px; /* Reduced margin */
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
@@ -264,9 +260,9 @@
 
         #search {
             width: 100%;
-            padding: 18px 30px;
-            padding-left: 60px;
-            padding-right: 60px;
+            padding: 16px 25px; /* Reduced padding */
+            padding-left: 55px; /* Reduced padding */
+            padding-right: 55px; /* Reduced padding */
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
@@ -291,7 +287,7 @@
 
         .search-icon {
             position: absolute;
-            left: 30px;
+            left: 25px; /* Adjusted position */
             top: 50%;
             transform: translateY(-50%);
             color: var(--neon-cyan);
@@ -302,7 +298,7 @@
 
         .clear-search {
             position: absolute;
-            right: 30px;
+            right: 25px; /* Adjusted position */
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.5);
@@ -331,15 +327,15 @@
             overflow-y: auto;
             display: none;
             z-index: 100;
-            margin-top: 15px;
-            padding: 15px 0;
+            margin-top: 10px; /* Reduced margin */
+            padding: 12px 0; /* Reduced padding */
             backdrop-filter: blur(10px);
             border: 1px solid rgba(0, 255, 255, 0.2);
             animation: fadeIn 0.3s ease;
         }
 
         .suggestion-item {
-            padding: 15px 30px;
+            padding: 12px 25px; /* Reduced padding */
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -349,7 +345,7 @@
         }
 
         .suggestion-item i {
-            margin-right: 15px;
+            margin-right: 12px; /* Reduced margin */
             color: var(--neon-cyan);
             font-size: 1.2rem;
             text-shadow: 0 0 8px var(--neon-cyan);
@@ -363,7 +359,7 @@
         .shortcut-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 25px;
+            gap: 20px; /* Reduced gap */
             position: relative;
             z-index: 1;
         }
@@ -381,7 +377,7 @@
             justify-content: center;
             text-decoration: none;
             color: inherit;
-            padding: 30px 20px;
+            padding: 25px 15px; /* Reduced padding */
             position: relative;
             text-align: center;
             border: 1px solid rgba(0, 255, 255, 0.2);
@@ -431,16 +427,16 @@
         }
 
         .icon-container {
-            width: 70px;
-            height: 70px;
+            width: 65px; /* Slightly smaller */
+            height: 65px; /* Slightly smaller */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reduced margin */
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.7rem; /* Slightly smaller */
             animation: pulse 3s infinite ease-in-out;
             transition: var(--transition);
             position: relative;
@@ -498,7 +494,7 @@
 
         .shortcut-name {
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.95rem; /* Slightly smaller */
             color: var(--text-light);
             line-height: 1.4;
             transition: var(--transition);
@@ -515,7 +511,7 @@
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 60px 40px;
+            padding: 50px 30px; /* Reduced padding */
             background: rgba(15, 15, 35, 0.7);
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
@@ -524,15 +520,15 @@
         }
 
         .no-results i {
-            font-size: 3.5rem;
+            font-size: 3rem; /* Smaller */
             color: var(--neon-cyan);
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* Reduced margin */
             opacity: 0.7;
             text-shadow: 0 0 15px var(--neon-cyan);
         }
 
         .no-results p {
-            font-size: 1.3rem;
+            font-size: 1.2rem; /* Smaller */
             color: var(--text-light);
             opacity: 0.8;
         }
@@ -555,7 +551,7 @@
 
         .login-container {
             background: rgba(15, 15, 35, 0.9);
-            padding: 40px;
+            padding: 35px; /* Reduced padding */
             border-radius: 20px;
             width: 90%;
             max-width: 450px;
@@ -591,21 +587,21 @@
 
         .login-container h2 {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduced margin */
             color: var(--neon-cyan);
             font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
+            font-size: 1.8rem; /* Slightly smaller */
             text-shadow: 0 0 10px var(--neon-cyan);
             letter-spacing: 1px;
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px; /* Reduced margin */
         }
 
         .input-group label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px; /* Reduced margin */
             font-weight: 500;
             color: var(--text-light);
             letter-spacing: 0.5px;
@@ -613,7 +609,7 @@
 
         .input-group input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 14px 18px; /* Reduced padding */
             border: 1px solid rgba(0, 255, 255, 0.3);
             border-radius: 10px;
             font-size: 1rem;
@@ -640,7 +636,7 @@
 
         .toggle-password {
             position: absolute;
-            right: 20px;
+            right: 18px; /* Adjusted position */
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
@@ -656,7 +652,7 @@
 
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 14px; /* Reduced padding */
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: white;
             border: none;
@@ -696,7 +692,7 @@
 
         .login-message {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px; /* Reduced margin */
             color: #ff3860;
             font-size: 1rem;
             animation: shake 0.5s ease;
@@ -754,90 +750,86 @@
         @media (max-width: 1200px) {
             .shortcut-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 20px;
+                gap: 18px; /* Reduced gap */
             }
         }
 
         @media (max-width: 768px) {
             .container {
-                padding: 20px 15px;
+                padding: 18px 12px; /* Reduced padding */
             }
             
             h1 {
-                font-size: 2.5rem;
+                font-size: 2.3rem; /* Slightly smaller */
             }
             
             .info-bar {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px; /* Reduced gap */
                 align-items: flex-start;
             }
             
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusted */
+                gap: 15px; /* Reduced gap */
             }
             
             .icon-container {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
+                width: 55px; /* Smaller */
+                height: 55px; /* Smaller */
+                font-size: 1.4rem; /* Smaller */
             }
             
             .shortcut-name {
-                font-size: 0.9rem;
+                font-size: 0.85rem; /* Smaller */
             }
 
-            .header-controls {
-                position: relative;
-                margin-bottom: 15px;
-                justify-content: center;
-                gap: 15px;
+            .header-top {
+                margin-bottom: 12px; /* Reduced margin */
             }
             
             .theme-toggle, .logout-btn {
-                width: 45px;
-                height: 45px;
-                position: static;
+                width: 45px; /* Smaller */
+                height: 45px; /* Smaller */
             }
         }
 
         @media (max-width: 480px) {
             h1 {
-                font-size: 2rem;
+                font-size: 1.8rem; /* Smaller */
             }
             
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1.1rem; /* Smaller */
             }
             
             .search-container {
-                margin-bottom: 25px;
+                margin-bottom: 20px; /* Reduced margin */
             }
             
             #search {
-                padding: 15px 20px;
-                padding-left: 50px;
-                padding-right: 50px;
+                padding: 14px 18px; /* Reduced padding */
+                padding-left: 45px; /* Reduced padding */
+                padding-right: 45px; /* Reduced padding */
             }
             
             .search-icon {
-                left: 20px;
+                left: 18px; /* Adjusted position */
             }
             
             .clear-search {
-                right: 20px;
+                right: 18px; /* Adjusted position */
             }
             
             .info-item {
-                font-size: 0.9rem;
+                font-size: 0.9rem; /* Smaller */
             }
             
             .info-item i {
-                font-size: 1rem;
+                font-size: 1rem; /* Smaller */
             }
 
-            .header-controls {
+            .header-top {
                 justify-content: space-between;
             }
         }
@@ -900,7 +892,7 @@
     
     <div class="container" id="mainContainer" style="display: none;">
         <header>
-            <div class="header-controls">
+            <div class="header-top">
                 <button class="logout-btn" id="logoutBtn">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
@@ -1104,7 +1096,7 @@
                 icon: "fas fa-calculator"
             },
             { 
-                name: "PENCATATAN BUANG DANA", 
+                name: "PENCATATAN BUang DANA", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/pencatatanbuangdana.html", 
                 icon: "fas fa-money-bill-wave"
             },
