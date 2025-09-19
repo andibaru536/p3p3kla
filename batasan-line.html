@@ -204,26 +204,6 @@
             font-size: 12px;
         }
         
-        .example-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            color: var(--gray);
-            cursor: pointer;
-            transition: var(--transition);
-            background: none;
-            border: none;
-            font-family: inherit;
-            padding: 8px 16px;
-            border-radius: 8px;
-        }
-        
-        .example-btn:hover {
-            color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
-        
         .results-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -613,10 +593,6 @@
                         <i class="fas fa-trash-alt"></i>
                         Hapus semua data
                     </button>
-                    <button id="exampleData" class="example-btn">
-                        <i class="fas fa-lightbulb"></i>
-                        Tampilkan contoh data
-                    </button>
                 </div>
             </div>
             
@@ -708,7 +684,6 @@
     <script>
         const dataInput = document.getElementById('dataInput');
         const deleteData = document.getElementById('deleteData');
-        const exampleData = document.getElementById('exampleData');
         const results = {
             '2d': document.getElementById('2dResult'),
             '3d': document.getElementById('3dResult'),
@@ -740,16 +715,12 @@
         // Batasan line untuk masing-masing tipe
         const limits = { '2d': 60, '3d': 900, '4d': 4069 };
         
-        // Contoh data untuk demo
-        const exampleDataText = "No\tTebakan\tStatus\n1\t1234\tAktif\n2\t567\tAktif\n3\t89\tAktif\n4\t1234\tAktif\n5\t567\tAktif\n6\t12\tAktif\n7\t3456\tAktif\n8\t789\tAktif\n9\t01\tAktif\n10\t2345\tAktif";
-        
         dataInput.addEventListener('input', processTebak);
         dataInput.addEventListener('paste', function() {
             setTimeout(processTebak, 10);
         });
         
         deleteData.addEventListener('click', clearAllData);
-        exampleData.addEventListener('click', loadExampleData);
         
         // Tambahkan event listener untuk tombol copy
         copyButtons.forEach(button => {
@@ -761,6 +732,10 @@
 
         // Cek jika ada data yang disimpan di localStorage
         window.addEventListener('DOMContentLoaded', function() {
+            // Pastikan kolom input kosong saat pertama kali dibuka
+            dataInput.value = '';
+            resetCounts();
+            
             const savedData = localStorage.getItem('togelData');
             if (savedData) {
                 dataInput.value = savedData;
@@ -906,11 +881,6 @@
             statusInfo.textContent = "Siap menganalisis. Tempel data togel Anda (dengan header).";
         }
         
-        function loadExampleData() {
-            dataInput.value = exampleDataText;
-            processTebak();
-        }
-        
         function resetCounts() {
             for (const type in results) {
                 results[type].textContent = '0';
@@ -936,4 +906,3 @@
     </script>
 </body>
 </html>
-
