@@ -9,24 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-cyan: #0ff;
-            --neon-pink: #f0f;
-            --neon-purple: #9461fb;
+            --neon-cyan: #00f5ff;
+            --neon-purple: #9d50ff;
+            --neon-pink: #ff64cb;
             --neon-blue: #4361ee;
             --dark-bg: #0a0a16;
             --darker-bg: #050510;
-            --card-bg: rgba(15, 15, 35, 0.8);
+            --card-bg: rgba(15, 15, 35, 0.7);
             --text-light: #ffffff;
             --text-glow: rgba(255, 255, 255, 0.8);
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
         }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Rajdhani', sans-serif;
             background: var(--darker-bg);
@@ -40,7 +40,6 @@
             overflow-x: hidden;
             position: relative;
         }
-
         body::before {
             content: '';
             position: fixed;
@@ -54,7 +53,6 @@
                 radial-gradient(circle at 50% 80%, rgba(55, 17, 55, 0.6) 0%, transparent 25%);
             z-index: -3;
         }
-
         .cyber-grid {
             position: fixed;
             top: 0;
@@ -62,22 +60,20 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(10, 217, 255, 0.07) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(10, 217, 255, 0.07) 1px, transparent 1px);
-            background-size: 30px 30px;
+                linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
             z-index: -2;
-            opacity: 0.4;
+            opacity: 0.3;
             perspective: 100px;
             transform-style: preserve-3d;
             transform: rotateX(60deg) translateZ(-20px);
-            animation: gridMove 20s infinite linear;
+            animation: gridMove 30s infinite linear;
         }
-
         @keyframes gridMove {
             0% { background-position: 0 0; }
-            100% { background-position: 0 30px; }
+            100% { background-position: 0 40px; }
         }
-
         .cyber-lines {
             position: fixed;
             top: 0;
@@ -85,112 +81,95 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.1), transparent),
-                linear-gradient(transparent, rgba(255, 0, 255, 0.1), transparent);
+                linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.05), transparent),
+                linear-gradient(transparent, rgba(255, 0, 255, 0.05), transparent);
             background-size: 200% 200%;
             z-index: -1;
-            animation: scanLines 15s infinite linear;
-            opacity: 0.1;
+            animation: scanLines 20s infinite linear;
+            opacity: 0.05;
             pointer-events: none;
         }
-
         @keyframes scanLines {
             0% { background-position: 0 0; }
             100% { background-position: 100% 100%; }
         }
-
         .container {
             width: 100%;
             max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
             background: rgba(10, 10, 22, 0.7);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 25px; /* Reduced padding */
+            border-radius: 25px;
+            padding: 30px;
             box-shadow: 
-                0 0 25px rgba(0, 255, 255, 0.2),
-                0 0 50px rgba(148, 97, 251, 0.2),
+                0 0 30px rgba(0, 255, 255, 0.2),
+                0 0 60px rgba(148, 97, 251, 0.2),
                 inset 0 0 15px rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(0, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
             z-index: 1;
         }
-
         .container::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
             background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
             z-index: -1;
-            border-radius: 25px;
-            animation: borderGlow 3s infinite alternate;
-            opacity: 0.5;
+            border-radius: 30px;
+            animation: borderGlow 4s infinite alternate;
+            opacity: 0.4;
         }
-
         @keyframes borderGlow {
             0% { opacity: 0.3; }
             100% { opacity: 0.7; }
         }
-
         header {
-            text-align: center;
-            margin-bottom: 20px; /* Reduced margin */
             position: relative;
-            padding: 10px 0; /* Reduced padding */
+            margin-bottom: 15px;
         }
-
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 15px; /* Space between controls and title */
+            margin-bottom: 15px;
         }
-
-        h1 {
+        .logo {
             font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
             background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 10px; /* Reduced margin */
             text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             letter-spacing: 2px;
-            animation: titleGlow 2s ease-in-out infinite alternate;
-            position: relative;
-            display: inline-block;
         }
-
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 10%;
-            width: 80%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-pink), transparent);
-            border-radius: 100%;
-            animation: linePulse 3s infinite;
+        .controls {
+            display: flex;
+            gap: 15px;
         }
-
-        @keyframes titleGlow {
-            0% { text-shadow: 0 0 15px rgba(0, 255, 255, 0.5); }
-            100% { text-shadow: 0 0 25px rgba(0, 255, 255, 0.8), 0 0 40px rgba(240, 0, 255, 0.6); }
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            transition: var(--transition);
         }
-
-        @keyframes linePulse {
-            0%, 100% { opacity: 0.5; height: 2px; }
-            50% { opacity: 1; height: 4px; }
+        .hamburger-menu:hover {
+            transform: rotate(90deg);
         }
-
         .subtitle {
             color: var(--text-light);
-            font-size: 1.3rem;
-            margin-bottom: 15px; /* Reduced margin */
+            font-size: 1.2rem;
             opacity: 0.9;
             max-width: 700px;
             margin-left: auto;
@@ -198,96 +177,66 @@
             position: relative;
             font-weight: 300;
             letter-spacing: 1px;
+            text-align: center;
         }
-
         .info-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px; /* Reduced margin */
-            padding: 12px 20px; /* Reduced padding */
-            background: var(--card-bg);
-            border-radius: 12px;
+            padding: 15px 25px;
+            background: var(--glass-bg);
+            border-radius: 15px;
             font-size: 1rem;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
             backdrop-filter: blur(5px);
         }
-
         .info-item {
             display: flex;
             align-items: center;
             font-weight: 500;
         }
-
         .info-item i {
             margin-right: 12px;
             color: var(--neon-cyan);
             font-size: 1.2rem;
             text-shadow: 0 0 10px var(--neon-cyan);
         }
-
-        .theme-toggle {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-            transition: var(--transition);
-            z-index: 10;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(180deg) scale(1.1);
-            box-shadow: 0 0 20px rgba(67, 97, 238, 0.8);
-        }
-
         .search-container {
             position: relative;
-            margin-bottom: 25px; /* Reduced margin */
+            margin-bottom: 25px;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             z-index: 2;
         }
-
         #search {
             width: 100%;
-            padding: 16px 25px; /* Reduced padding */
-            padding-left: 55px; /* Reduced padding */
-            padding-right: 55px; /* Reduced padding */
+            padding: 18px 30px;
+            padding-left: 60px;
+            padding-right: 60px;
             border: none;
             border-radius: 50px;
             font-size: 1.1rem;
-            background: rgba(15, 15, 35, 0.7);
+            background: var(--glass-bg);
             color: var(--text-light);
             font-family: 'Rajdhani', sans-serif;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
             transition: var(--transition);
         }
-
         #search:focus {
             outline: none;
             box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
             border-color: var(--neon-cyan);
             background: rgba(15, 15, 35, 0.9);
         }
-
         #search::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
-
         .search-icon {
             position: absolute;
-            left: 25px; /* Adjusted position */
+            left: 30px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--neon-cyan);
@@ -295,10 +244,9 @@
             z-index: 3;
             text-shadow: 0 0 10px var(--neon-cyan);
         }
-
         .clear-search {
             position: absolute;
-            right: 25px; /* Adjusted position */
+            right: 30px;
             top: 50%;
             transform: translateY(-50%);
             color: rgba(255, 255, 255, 0.5);
@@ -308,34 +256,31 @@
             z-index: 3;
             transition: var(--transition);
         }
-
         .clear-search:hover {
             color: var(--neon-pink);
             transform: translateY(-50%) scale(1.2);
             text-shadow: 0 0 10px var(--neon-pink);
         }
-
         .suggestions {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: rgba(15, 15, 35, 0.95);
+            background: var(--glass-bg);
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             max-height: 300px;
             overflow-y: auto;
             display: none;
             z-index: 100;
-            margin-top: 10px; /* Reduced margin */
-            padding: 12px 0; /* Reduced padding */
+            margin-top: 10px;
+            padding: 15px 0;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
             animation: fadeIn 0.3s ease;
         }
-
         .suggestion-item {
-            padding: 12px 25px; /* Reduced padding */
+            padding: 14px 25px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -343,32 +288,29 @@
             transition: var(--transition);
             color: var(--text-light);
         }
-
         .suggestion-item i {
-            margin-right: 12px; /* Reduced margin */
+            margin-right: 12px;
             color: var(--neon-cyan);
             font-size: 1.2rem;
             text-shadow: 0 0 8px var(--neon-cyan);
         }
-
         .suggestion-item:hover {
             background: rgba(0, 255, 255, 0.1);
             transform: translateX(10px);
         }
-
         .shortcut-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px; /* Reduced gap */
+            gap: 20px;
             position: relative;
             z-index: 1;
         }
-
         .shortcut-card {
-            background: rgba(15, 15, 35, 0.7);
-            border-radius: 15px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: var(--transition);
             height: 100%;
             display: flex;
@@ -377,21 +319,19 @@
             justify-content: center;
             text-decoration: none;
             color: inherit;
-            padding: 25px 15px; /* Reduced padding */
+            padding: 25px 15px;
             position: relative;
             text-align: center;
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid var(--glass-border);
             z-index: 1;
             animation: cardAppear 0.6s ease forwards;
             opacity: 0;
             transform: translateY(30px);
         }
-
         @keyframes cardAppear {
             0% { opacity: 0; transform: translateY(30px) rotateX(30deg); }
             100% { opacity: 1; transform: translateY(0) rotateX(0); }
         }
-
         .shortcut-card::before {
             content: '';
             position: absolute;
@@ -401,49 +341,43 @@
             bottom: -2px;
             background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
             z-index: -1;
-            border-radius: 17px;
+            border-radius: 20px;
             animation: borderRotate 3s linear infinite;
             opacity: 0;
             transition: var(--transition);
         }
-
         @keyframes borderRotate {
             0% { background-position: 0% 0%; }
             100% { background-position: 200% 200%; }
         }
-
         .shortcut-card:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 
-                0 10px 30px rgba(0, 0, 0, 0.3),
-                0 0 20px rgba(0, 255, 255, 0.3),
-                0 0 30px rgba(240, 0, 255, 0.2);
+                0 15px 40px rgba(0, 0, 0, 0.3),
+                0 0 25px rgba(0, 255, 255, 0.3),
+                0 0 35px rgba(255, 100, 203, 0.2);
             border-color: var(--neon-cyan);
-            background: rgba(20, 20, 45, 0.9);
         }
-
         .shortcut-card:hover::before {
             opacity: 1;
         }
-
         .icon-container {
-            width: 65px; /* Slightly smaller */
-            height: 65px; /* Slightly smaller */
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 15px; /* Reduced margin */
+            margin-bottom: 15px;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: white;
-            font-size: 1.7rem; /* Slightly smaller */
+            font-size: 1.8rem;
             animation: pulse 3s infinite ease-in-out;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
         }
-
         .icon-container::after {
             content: '';
             position: absolute;
@@ -455,35 +389,28 @@
             transform: rotate(45deg);
             transition: all 0.6s;
         }
-
         .shortcut-card:hover .icon-container {
             transform: scale(1.15) rotate(5deg);
             animation: none;
             box-shadow: 0 0 25px rgba(67, 97, 238, 0.8);
         }
-
         .shortcut-card:hover .icon-container::after {
             animation: shine 1.5s ease forwards;
         }
-
         @keyframes shine {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
-
         .togel-dice {
             animation: shake 3s ease infinite;
         }
-
         .shortcut-card:hover .togel-dice {
             animation: shake 0.8s ease infinite;
         }
-
         @keyframes pulse {
             0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(67, 97, 238, 0.5); }
             50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(67, 97, 238, 0.7); }
         }
-
         @keyframes shake {
             0% { transform: rotate(0deg) scale(1); }
             25% { transform: rotate(-10deg) scale(1.1); }
@@ -491,48 +418,42 @@
             75% { transform: rotate(-5deg) scale(1.05); }
             100% { transform: rotate(0deg) scale(1); }
         }
-
         .shortcut-name {
             font-weight: 600;
-            font-size: 0.95rem; /* Slightly smaller */
+            font-size: 0.95rem;
             color: var(--text-light);
             line-height: 1.4;
             transition: var(--transition);
             position: relative;
             letter-spacing: 0.5px;
         }
-
         .shortcut-card:hover .shortcut-name {
             color: var(--neon-cyan);
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
         }
-
         .no-results {
             grid-column: 1 / -1;
             text-align: center;
-            padding: 50px 30px; /* Reduced padding */
-            background: rgba(15, 15, 35, 0.7);
+            padding: 50px 30px;
+            background: var(--glass-bg);
             border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
             animation: fadeIn 0.5s ease;
         }
-
         .no-results i {
-            font-size: 3rem; /* Smaller */
+            font-size: 3rem;
             color: var(--neon-cyan);
-            margin-bottom: 15px; /* Reduced margin */
+            margin-bottom: 15px;
             opacity: 0.7;
             text-shadow: 0 0 15px var(--neon-cyan);
         }
-
         .no-results p {
-            font-size: 1.2rem; /* Smaller */
+            font-size: 1.2rem;
             color: var(--text-light);
             opacity: 0.8;
         }
-
         /* Login Modal */
         .login-modal {
             position: fixed;
@@ -540,7 +461,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(5, 5, 15, 0.95);
+            background: linear-gradient(135deg, #0a0a16, #1a1a3a);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -548,115 +469,115 @@
             animation: fadeIn 0.5s ease;
             backdrop-filter: blur(10px);
         }
-
         .login-container {
-            background: rgba(15, 15, 35, 0.9);
-            padding: 35px; /* Reduced padding */
-            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 25px;
             width: 90%;
             max-width: 450px;
             box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.2),
-                0 0 50px rgba(148, 97, 251, 0.2);
-            border: 1px solid rgba(0, 255, 255, 0.3);
+                0 0 40px rgba(0, 255, 255, 0.2),
+                0 0 60px rgba(148, 97, 251, 0.2);
+            border: 1px solid var(--glass-border);
             animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
             transform: scale(0.9);
             opacity: 0;
             position: relative;
             overflow: hidden;
         }
-
         .login-container::before {
             content: '';
             position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
+            top: -15px;
+            left: -15px;
+            right: -15px;
+            bottom: -15px;
             background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
             z-index: -1;
-            border-radius: 25px;
-            animation: borderGlow 3s infinite alternate;
-            opacity: 0.5;
+            border-radius: 30px;
+            animation: borderGlow 4s infinite alternate;
+            opacity: 0.4;
         }
-
         @keyframes modalAppear {
             0% { transform: scale(0.9); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-
         .login-container h2 {
             text-align: center;
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 25px;
             color: var(--neon-cyan);
             font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem; /* Slightly smaller */
-            text-shadow: 0 0 10px var(--neon-cyan);
+            font-size: 2rem;
+            text-shadow: 0 0 15px var(--neon-cyan);
             letter-spacing: 1px;
+            position: relative;
         }
-
+        .login-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-pink), transparent);
+            border-radius: 100%;
+        }
         .input-group {
-            margin-bottom: 20px; /* Reduced margin */
+            margin-bottom: 25px;
         }
-
         .input-group label {
             display: block;
-            margin-bottom: 8px; /* Reduced margin */
+            margin-bottom: 10px;
             font-weight: 500;
             color: var(--text-light);
             letter-spacing: 0.5px;
         }
-
         .input-group input {
             width: 100%;
-            padding: 14px 18px; /* Reduced padding */
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 10px;
+            padding: 16px 20px;
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
             font-size: 1rem;
             font-family: 'Rajdhani', sans-serif;
             background: rgba(10, 10, 25, 0.7);
             color: var(--text-light);
             transition: var(--transition);
         }
-
         .input-group input:focus {
             outline: none;
             border-color: var(--neon-cyan);
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
             background: rgba(10, 10, 25, 0.9);
         }
-
         .input-group input::placeholder {
             color: rgba(255, 255, 255, 0.5);
         }
-
         .password-container {
             position: relative;
         }
-
         .toggle-password {
             position: absolute;
-            right: 18px; /* Adjusted position */
+            right: 20px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             color: rgba(255, 255, 255, 0.5);
             transition: var(--transition);
         }
-
         .toggle-password:hover {
             color: var(--neon-cyan);
             transform: translateY(-50%) scale(1.2);
             text-shadow: 0 0 10px var(--neon-cyan);
         }
-
         .login-btn {
             width: 100%;
-            padding: 14px; /* Reduced padding */
+            padding: 16px;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
@@ -668,7 +589,6 @@
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
             box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
         }
-
         .login-btn::after {
             content: '';
             position: absolute;
@@ -680,25 +600,21 @@
             transform: rotate(45deg);
             transition: all 0.6s;
         }
-
         .login-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 0 25px rgba(67, 97, 238, 0.8);
         }
-
         .login-btn:hover::after {
             animation: shine 1.5s ease forwards;
         }
-
         .login-message {
             text-align: center;
-            margin-top: 15px; /* Reduced margin */
+            margin-top: 15px;
             color: #ff3860;
             font-size: 1rem;
             animation: shake 0.5s ease;
             text-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
         }
-
         .logout-btn {
             background: linear-gradient(45deg, #ff3860, #ff2b56);
             border: none;
@@ -715,12 +631,10 @@
             transition: var(--transition);
             z-index: 10;
         }
-
         .logout-btn:hover {
             transform: rotate(15deg) scale(1.1);
             box-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
         }
-
         /* Floating particles */
         .particles {
             position: fixed;
@@ -731,7 +645,6 @@
             z-index: -2;
             overflow: hidden;
         }
-
         .particle {
             position: absolute;
             border-radius: 50%;
@@ -740,121 +653,102 @@
             animation: float 20s infinite linear;
             filter: blur(2px);
         }
-
         @keyframes float {
             0% { transform: translateY(0) rotate(0deg); }
             100% { transform: translateY(-100vh) rotate(360deg); }
         }
-
         /* Responsive adjustments */
         @media (max-width: 1200px) {
             .shortcut-grid {
                 grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 18px; /* Reduced gap */
+                gap: 18px;
             }
         }
-
         @media (max-width: 768px) {
             .container {
-                padding: 18px 12px; /* Reduced padding */
-            }
-            
-            h1 {
-                font-size: 2.3rem; /* Slightly smaller */
-            }
-            
-            .info-bar {
                 flex-direction: column;
-                gap: 12px; /* Reduced gap */
-                align-items: flex-start;
+                gap: 15px;
             }
-            
+            .hamburger-menu {
+                display: block;
+            }
             .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusted */
-                gap: 15px; /* Reduced gap */
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
             }
-            
             .icon-container {
-                width: 55px; /* Smaller */
-                height: 55px; /* Smaller */
-                font-size: 1.4rem; /* Smaller */
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
             }
-            
             .shortcut-name {
-                font-size: 0.85rem; /* Smaller */
+                font-size: 0.85rem;
             }
-
             .header-top {
-                margin-bottom: 12px; /* Reduced margin */
+                margin-bottom: 12px;
             }
-            
             .theme-toggle, .logout-btn {
-                width: 45px; /* Smaller */
-                height: 45px; /* Smaller */
+                width: 45px;
+                height: 45px;
             }
         }
-
         @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
             h1 {
-                font-size: 1.8rem; /* Smaller */
+                font-size: 2rem;
             }
-            
             .subtitle {
-                font-size: 1.1rem; /* Smaller */
+                font-size: 1rem;
             }
-            
             .search-container {
-                margin-bottom: 20px; /* Reduced margin */
+                margin-bottom: 15px;
             }
-            
             #search {
-                padding: 14px 18px; /* Reduced padding */
-                padding-left: 45px; /* Reduced padding */
-                padding-right: 45px; /* Reduced padding */
+                padding: 14px 18px;
+                padding-left: 45px;
+                padding-right: 45px;
             }
-            
             .search-icon {
-                left: 18px; /* Adjusted position */
+                left: 18px;
             }
-            
             .clear-search {
-                right: 18px; /* Adjusted position */
+                right: 18px;
             }
-            
             .info-item {
-                font-size: 0.9rem; /* Smaller */
+                font-size: 0.9rem;
             }
-            
             .info-item i {
-                font-size: 1rem; /* Smaller */
+                font-size: 1rem;
             }
-
             .header-top {
                 justify-content: space-between;
             }
+            .login-container {
+                padding: 30px;
+            }
+            .login-container h2 {
+                font-size: 1.6rem;
+            }
         }
-
         /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         /* Scrollbar styling */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.1);
             border-radius: 8px;
         }
-
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
             border-radius: 8px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
         }
@@ -864,10 +758,8 @@
     <!-- Cyber Grid Background -->
     <div class="cyber-grid"></div>
     <div class="cyber-lines"></div>
-    
     <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
-    
     <!-- Login Modal -->
     <div class="login-modal" id="loginModal">
         <div class="login-container">
@@ -889,21 +781,23 @@
             <p id="loginMessage" class="login-message"></p>
         </div>
     </div>
-    
     <div class="container" id="mainContainer" style="display: none;">
         <header>
             <div class="header-top">
-                <button class="logout-btn" id="logoutBtn">
-                    <i class="fas fa-sign-out-alt"></i>
+                <button class="hamburger-menu" id="hamburgerBtn">
+                    <i class="fas fa-bars"></i>
                 </button>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
+                <div class="logo">ALL SHORTCUT</div>
+                <div class="controls">
+                    <button class="logout-btn" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                    <button class="theme-toggle" id="themeToggle">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                </div>
             </div>
-            
-            <h1>All SHORTCUT</h1>
             <p class="subtitle">Access all tools and applications with a single click in our cyber network</p>
-            
             <div class="info-bar">
                 <div class="info-item">
                     <i class="fas fa-clock"></i>
@@ -915,7 +809,6 @@
                 </div>
             </div>
         </header>
-        
         <div class="search-container">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
@@ -926,197 +819,231 @@
             </div>
             <div class="suggestions" id="suggestions"></div>
         </div>
-        
         <div class="shortcut-grid" id="shortcutGrid">
             <!-- Shortcut cards will be generated here -->
         </div>
     </div>
-
     <script>
-        // Data shortcut dengan ikon yang telah diupdate
+        // Data shortcut dengan ikon yang telah diupdate dan dikategorikan
         const shortcutData = [
             { 
                 name: "JAM IZIN TERBARU", 
                 url: "https://rebrand.ly/IzinLineTgl", 
-                icon: "fas fa-clock"
+                icon: "fas fa-clock",
+                category: "tools"
             },
             { 
                 name: "KEPERLUAN MEMO DAN REPORT", 
                 url: "https://rebrand.ly/untuk-report", 
-                icon: "fas fa-file-alt"
+                icon: "fas fa-file-alt",
+                category: "reports"
             },
             { 
                 name: "CEK KTP", 
                 url: "https://ktpku.com/", 
-                icon: "fas fa-id-card"
+                icon: "fas fa-id-card",
+                category: "tools"
             },
             { 
                 name: "CHAT TEAM LINETOGEL", 
                 url: "https://linetogel.hokibgs.com/login.php", 
-                icon: "fas fa-users"
+                icon: "fas fa-users",
+                category: "chat"
             },
             { 
                 name: "KEPERLUAN PK CHAT 1", 
                 url: "https://script.google.com/macros/s/AKfycbw_1_Xj-_uvTpaO3_0uekUn9lpxOiHmP3yfIlrw9iRWngHTT_6p6Q_TbhQcStjA6LLo/exec", 
-                icon: "fas fa-comment"
+                icon: "fas fa-comment",
+                category: "chat"
             },
             { 
                 name: "KEPERLUAN PK CHAT 2", 
                 url: "https://script.google.com/macros/s/AKfycbzFfzpsjXbw9Z1qXzFOcncmiK4QyDex5hvbXQ-JQE41KkOPzCOt_pA0GGXFUdr2YprtXw/exec", 
-                icon: "fas fa-comments"
+                icon: "fas fa-comments",
+                category: "chat"
             },
             { 
                 name: "KEPERLUAN PK CHAT 3", 
                 url: "https://blvckline.page.gd", 
-                icon: "fas fa-comment-dots"
+                icon: "fas fa-comment-dots",
+                category: "chat"
             },
             { 
                 name: "KHUSUS PREDIKSI TOGEL", 
                 url: "https://tinyurl.com/29866jvo", 
-                icon: "fas fa-hat-wizard"
+                icon: "fas fa-hat-wizard",
+                category: "togel"
             },
             { 
                 name: "SHORCUT SCATTER 1", 
                 url: "https://rebrand.ly/shorcut-htng", 
-                icon: "fas fa-dice"
+                icon: "fas fa-dice",
+                category: "scatter"
             },
             { 
                 name: "SHORCUT SCATTER 2", 
                 url: "https://shortcutscatter2.onecompiler.app/", 
-                icon: "fas fa-dice-d20"
+                icon: "fas fa-dice-d20",
+                category: "scatter"
             },
             { 
                 name: "SHORCUT SCATTER 3", 
                 url: "https://tinyurl.com/233dm6bd", 
-                icon: "fas fa-dice-five"
+                icon: "fas fa-dice-five",
+                category: "scatter"
             },
             { 
                 name: "HITUNG FREESPIN PGSOFT", 
                 url: "https://rebrand.ly/pgsoftaudit", 
-                icon: "fas fa-chess-knight"
+                icon: "fas fa-chess-knight",
+                category: "tools"
             },
             { 
                 name: "GAMBAR LINE", 
                 url: "https://gambarline.onecompiler.app/", 
-                icon: "fas fa-image"
+                icon: "fas fa-image",
+                category: "images"
             },
             { 
                 name: "SHORCUT CARI WD BESAR", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/WDBESAR.html", 
-                icon: "fas fa-search-dollar"
+                icon: "fas fa-search-dollar",
+                category: "tools"
             },
             { 
                 name: "REBRANDLY", 
                 url: "https://app.rebrandly.com/", 
-                icon: "fas fa-link"
+                icon: "fas fa-link",
+                category: "tools"
             },
             { 
                 name: "REPORT BUKTI P2MIH", 
                 url: "https://rebrand.ly/reportbukti", 
-                icon: "fas fa-flag"
+                icon: "fas fa-flag",
+                category: "reports"
             },
             { 
                 name: "KALKULATOR HARI", 
                 url: "https://kalkulatorhari.onecompiler.app/", 
-                icon: "fas fa-calendar"
+                icon: "fas fa-calendar",
+                category: "tools"
             },
             { 
                 name: "SHORCUT SELISIH QRIS", 
                 url: "https://rebrand.ly/QRISSELISIH", 
-                icon: "fas fa-money-bill-wave"
+                icon: "fas fa-money-bill-wave",
+                category: "tools"
             },
             { 
                 name: "LINK PASARAN TOGEL", 
                 url: "https://rebrand.ly/pasarantogel1", 
-                icon: "fas fa-moon"
+                icon: "fas fa-moon",
+                category: "togel"
             },
             { 
                 name: "LINK PASARAN TOGEL 2", 
                 url: "https://symphonny.vercel.app/Jadwal_Togel.html", 
-                icon: "fas fa-bullseye"
+                icon: "fas fa-bullseye",
+                category: "togel"
             },
             { 
                 name: "FORMAT ANGKA", 
                 url: "https://formatangka01.onecompiler.app/", 
-                icon: "fas fa-sort-numeric-down"
+                icon: "fas fa-sort-numeric-down",
+                category: "tools"
             },
             { 
                 name: "SHORCUT SELISIH QRIS VIP", 
                 url: "https://shorcutselisihqrisvip.onecompiler.app/", 
-                icon: "fas fa-qrcode"
+                icon: "fas fa-qrcode",
+                category: "tools"
             },
             { 
                 name: "OCR Data", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/OCRBUKTIQRISVIP.html", 
-                icon: "fas fa-file-image"
+                icon: "fas fa-file-image",
+                category: "tools"
             },
             { 
                 name: "KALKULATOR TOGEL", 
                 url: "https://shortcutpro.vercel.app/togel-idn.html", 
-                icon: "fas fa-dice togel-dice"
+                icon: "fas fa-dice togel-dice",
+                category: "togel"
             },
             { 
                 name: "KALKULATOR TOGEL 2", 
                 url: "https://kalkulatortogel.page.gd/?i=1", 
-                icon: "fas fa-dice togel-dice"
+                icon: "fas fa-dice togel-dice",
+                category: "togel"
             },
             { 
                 name: "KALKULATOR TOGEL 3", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/kalkulatortogel3.html", 
-                icon: "fas fa-dice togel-dice"
+                icon: "fas fa-dice togel-dice",
+                category: "togel"
             },
             { 
                 name: "PASSWORD GENERATOR", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/passwprd-genator.html", 
-                icon: "fas fa-key"
+                icon: "fas fa-key",
+                category: "utilities"
             },
             { 
                 name: "LOGO & SHIO GENERATOR", 
                 url: "https://shotcurtperiode.vercel.app/POST%20SHIO.html", 
-                icon: "fas fa-paint-brush"
+                icon: "fas fa-paint-brush",
+                category: "tools"
             },
             { 
                 name: "SHORT LINK", 
                 url: "https://tinyurl.com/", 
-                icon: "fas fa-external-link-alt"
+                icon: "fas fa-external-link-alt",
+                category: "tools"
             },
             { 
                 name: "SHORT LINK 2", 
                 url: "https://tinyurl.com/2d38lul7", 
-                icon: "fas fa-external-link-alt"
+                icon: "fas fa-external-link-alt",
+                category: "tools"
             },
             { 
                 name: "KALKULATOR TRANSAKSI", 
                 url: "https://tinyurl.com/2blemsqd", 
-                icon: "fas fa-calculator"
+                icon: "fas fa-calculator",
+                category: "tools"
             },
             { 
                 name: "KALKULATOR TRANSAKSI 2", 
                 url: "https://tinyurl.com/2d679gpr", 
-                icon: "fas fa-calculator"
+                icon: "fas fa-calculator",
+                category: "tools"
             },
             { 
-                name: "PENCATATAN BUang DANA", 
+                name: "PENCATATAN BUANG DANA", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/pencatatanbuangdana.html", 
-                icon: "fas fa-money-bill-wave"
+                icon: "fas fa-money-bill-wave",
+                category: "tools"
             },
             { 
                 name: "INPUT LINK LC", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/linkterhubunglc.html", 
-                icon: "fas fa-link"
+                icon: "fas fa-link",
+                category: "tools"
             },
             { 
                 name: "BATASAN LINE", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/batasan-line.html", 
-                icon: "fas fa-ban"
+                icon: "fas fa-ban",
+                category: "tools"
             },
             { 
                 name: "REPORT LINK NAWALA", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/report-nawala.html", 
-                icon: "fas fa-bomb"
+                icon: "fas fa-bomb",
+                category: "reports"
             }
         ];
-
+        
         // DOM Elements
         const loginModal = document.getElementById('loginModal');
         const loginForm = document.getElementById('loginForm');
@@ -1134,32 +1061,27 @@
         const datetimeElement = document.getElementById('datetime');
         const ipAddressElement = document.getElementById('ip-address');
         const particlesContainer = document.getElementById('particles');
-
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        
         // Create floating particles
         function createParticles() {
-            const colors = ['#0ff', '#f0f', '#9461fb', '#4361ee'];
-            const count = Math.floor(window.innerWidth / 15);
-            
+            const colors = ['#00f5ff', '#ff64cb', '#9d50ff', '#4361ee'];
+            const count = Math.floor(window.innerWidth / 25);
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                
-                const size = Math.random() * 20 + 5;
+                const size = Math.random() * 15 + 3;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                
                 particle.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
-                
                 particle.style.left = `${Math.random() * 100}%`;
                 particle.style.top = `${Math.random() * 100}%`;
-                
-                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDuration = `${Math.random() * 30 + 15}s`;
                 particle.style.animationDelay = `${Math.random() * 5}s`;
-                
                 particlesContainer.appendChild(particle);
             }
         }
-
+        
         // Check if user is logged in
         function checkLogin() {
             const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -1171,7 +1093,7 @@
                 mainContainer.style.display = 'none';
             }
         }
-
+        
         // Login function
         function login(userId, password) {
             // Case insensitive check for userId
@@ -1185,7 +1107,7 @@
                 return false;
             }
         }
-
+        
         // Logout function
         function logout() {
             localStorage.removeItem('isLoggedIn');
@@ -1195,7 +1117,7 @@
             passwordInput.value = '';
             loginMessage.textContent = '';
         }
-
+        
         // Toggle password visibility
         function togglePasswordVisibility() {
             if (passwordInput.type === 'password') {
@@ -1208,7 +1130,7 @@
                 togglePassword.classList.add('fa-eye');
             }
         }
-
+        
         // Update datetime
         function updateDateTime() {
             const now = new Date();
@@ -1223,7 +1145,7 @@
             };
             datetimeElement.textContent = now.toLocaleDateString('id-ID', options);
         }
-
+        
         // Get IP Address
         async function getIPAddress() {
             try {
@@ -1234,11 +1156,10 @@
                 ipAddressElement.textContent = 'Tidak tersedia';
             }
         }
-
+        
         // Generate all shortcut cards
         function renderShortcuts(shortcuts) {
             shortcutGrid.innerHTML = '';
-            
             if (shortcuts.length === 0) {
                 shortcutGrid.innerHTML = `
                     <div class="no-results">
@@ -1248,56 +1169,52 @@
                 `;
                 return;
             }
-            
             shortcuts.forEach((shortcut, index) => {
                 const card = document.createElement('a');
                 card.className = 'shortcut-card';
                 card.href = shortcut.url;
                 card.target = '_blank';
                 card.style.animationDelay = `${index * 0.05}s`;
-                
-                // Gunakan kelas khusus untuk animasi dadu togel
-                const iconClass = shortcut.name.includes('KALKULATOR TOGEL') ? 
-                    `${shortcut.icon} togel-dice` : shortcut.icon;
-                
                 card.innerHTML = `
                     <div class="icon-container">
-                        <i class="${iconClass}"></i>
+                        <i class="${shortcut.icon}"></i>
                     </div>
                     <div class="shortcut-name">${shortcut.name}</div>
                 `;
-                
                 // Add mouseenter and mouseleave effects
                 card.addEventListener('mouseenter', () => {
                     card.style.transform = 'translateY(-10px) scale(1.03)';
                 });
-                
                 card.addEventListener('mouseleave', () => {
                     card.style.transform = '';
                 });
-                
                 shortcutGrid.appendChild(card);
             });
         }
-
+        
         // Filter shortcuts based on search query
         function filterShortcuts(query) {
-            const lowerCaseQuery = query.toLowerCase();
-            return shortcutData.filter(shortcut => 
-                shortcut.name.toLowerCase().includes(lowerCaseQuery)
-            );
+            let filtered = shortcutData;
+            
+            // Filter by search query
+            if (query) {
+                const lowerCaseQuery = query.toLowerCase();
+                filtered = filtered.filter(shortcut => 
+                    shortcut.name.toLowerCase().includes(lowerCaseQuery)
+                );
+            }
+            
+            return filtered;
         }
-
+        
         // Generate search suggestions
         function showSuggestions(query) {
             if (!query) {
                 suggestionsContainer.style.display = 'none';
                 return;
             }
-            
             const lowerCaseQuery = query.toLowerCase();
             const matchedSuggestions = [];
-            
             // Add name matches
             shortcutData.forEach(shortcut => {
                 if (shortcut.name.toLowerCase().includes(lowerCaseQuery) && 
@@ -1322,18 +1239,15 @@
                         const filtered = filterShortcuts(shortcut.name);
                         renderShortcuts(filtered);
                     });
-                    
                     // Add hover effect to suggestions
                     div.addEventListener('mouseenter', () => {
                         div.style.backgroundColor = 'rgba(0, 255, 255, 0.1)';
                         div.style.transform = 'translateX(10px)';
                     });
-                    
                     div.addEventListener('mouseleave', () => {
                         div.style.backgroundColor = '';
                         div.style.transform = '';
                     });
-                    
                     suggestionsContainer.appendChild(div);
                 });
                 suggestionsContainer.style.display = 'block';
@@ -1341,15 +1255,15 @@
                 suggestionsContainer.style.display = 'none';
             }
         }
-
+        
         // Clear search input
         function clearSearchInput() {
             searchInput.value = '';
             clearSearch.style.display = 'none';
-            renderShortcuts(shortcutData);
+            renderShortcuts(filterShortcuts(''));
             suggestionsContainer.style.display = 'none';
         }
-
+        
         // Toggle dark/light mode
         function toggleTheme() {
             // For cyber theme, we'll just toggle between different neon colors
@@ -1358,7 +1272,12 @@
             themeToggle.innerHTML = isLightCyber ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
             localStorage.setItem('cyberTheme', isLightCyber ? 'light' : 'dark');
         }
-
+        
+        // Toggle sidebar on mobile
+        function toggleSidebar() {
+            // Since we removed the sidebar, this function is no longer needed
+        }
+        
         // Initialize the page
         function init() {
             // Create particles background
@@ -1380,7 +1299,7 @@
             logoutBtn.addEventListener('click', logout);
             
             // Render all shortcuts initially
-            renderShortcuts(shortcutData);
+            renderShortcuts(filterShortcuts(''));
             
             // Set up search functionality
             searchInput.addEventListener('input', () => {
@@ -1411,27 +1330,19 @@
                 document.body.classList.add('light-cyber');
                 themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
             }
-            
             themeToggle.addEventListener('click', toggleTheme);
+            
+            // Set up hamburger menu (no sidebar to toggle)
+            hamburgerBtn.style.display = 'none';
             
             // Initialize date/time and IP address
             updateDateTime();
             setInterval(updateDateTime, 1000);
             getIPAddress();
         }
-
+        
         // Run initialization when DOM is loaded
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
