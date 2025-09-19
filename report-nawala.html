@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS yang sama seperti sebelumnya */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -412,7 +411,7 @@
     <div class="container">
         <header>
             <h1>Filter Link Terblokir</h1>
-            <p class="description">Shorcut untuk menemukan link yang terblokir</p>
+            <p class="description">Alat untuk menemukan dan memformat link yang terblokir</p>
         </header>
         
         <div class="input-section">
@@ -420,7 +419,7 @@
                 <i class="fas fa-scroll"></i> Data Mentah
             </div>
             <textarea id="rawData" placeholder="Tempel data mentah di sini... (Data akan diproses secara otomatis)"></textarea>
-            <p class="auto-filter-info"><i class="fas fa-wand-magic-sparkles"></i>Tempel data untuk memproses</p>
+            <p class="auto-filter-info"><i class="fas fa-wand-magic-sparkles"></i> Tempel data untuk memproses</p>
             
             <div class="buttons-container">
                 <button class="clear-btn" onclick="clearData()">
@@ -431,7 +430,7 @@
         
         <div class="summary">
             <div class="section-title">
-                <i class="fas fa-chart-bar"></i> Summary
+                <i class="fas fa-chart-bar"></i> Ringkasan
             </div>
             <div id="summaryText">Data belum diproses</div>
         </div>
@@ -447,7 +446,7 @@
             </div>
             
             <div class="result-box" id="result">
-                
+                <!-- Hasil akan ditampilkan di sini -->
             </div>
             
             <div class="copy-btn-container">
@@ -573,7 +572,7 @@
                 <span class="blocked">BLOKIR: ${blockedCount}</span>
             `;
             
-            // Format result
+            // Format result dengan tanda strip di depan setiap link
             let result;
             if (blockedLinks.length === 0) {
                 result = `<div class="no-results">
@@ -582,13 +581,16 @@
                     TIDAK ADA LINK YANG TERBLOKIR
                 </div>`;
             } else {
+                // Tambahkan tanda strip (-) di depan setiap link
+                const formattedLinks = blockedLinks.map(link => `- ${link}`).join('\n');
+                
                 result = `Info : Linetogel
 Perihal : Link terkena nawala
 
 Keterangan : Untuk saat ini pada saat di lakukan pengecekan pada link dibawah ini terjadi Nawala ya ko/ci, Perihal tersebut mohon dibantu pengecekannya ya ko/ci.
 
 Link Berkendala : 
-${blockedLinks.join('\n')}
+${formattedLinks}
 
 Lampiran : 
 `;
