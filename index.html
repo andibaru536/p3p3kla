@@ -138,6 +138,7 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            position: relative;
         }
         .logo {
             font-family: 'Orbitron', sans-serif;
@@ -149,10 +150,14 @@
             color: transparent;
             text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
             letter-spacing: 2px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .controls {
             display: flex;
             gap: 15px;
+            margin-left: auto;
         }
         .hamburger-menu {
             display: none;
@@ -178,6 +183,7 @@
             font-weight: 300;
             letter-spacing: 1px;
             text-align: center;
+            margin-top: 40px;
         }
         .info-bar {
             display: flex;
@@ -691,13 +697,35 @@
                 width: 45px;
                 height: 45px;
             }
+            .logo {
+                position: static;
+                transform: none;
+                margin: 0 auto;
+                order: 2;
+                font-size: 1.8rem;
+            }
+            .header-top {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .hamburger-menu {
+                order: 1;
+            }
+            .controls {
+                order: 3;
+                margin-left: 0;
+            }
+            .subtitle {
+                margin-top: 20px;
+            }
         }
         @media (max-width: 480px) {
             .container {
                 padding: 15px;
             }
-            h1 {
-                font-size: 2rem;
+            .logo {
+                font-size: 1.6rem;
             }
             .subtitle {
                 font-size: 1rem;
