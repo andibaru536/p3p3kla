@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parser Data Pengembalian Dana - Neon Calculator Edition</title>
+    <title>Parser Data Pengembalian Dana - Cyberpunk Edition</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔮</text></svg>">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segment LCD', 'Courier New', monospace;
+            font-family: 'Courier New', 'Segment LCD', monospace;
         }
         body {
-            background: linear-gradient(135deg, #0a0a12 0%, #151523 100%);
+            background: #000000;
             color: #e0e0e0;
             line-height: 1.6;
             padding: 20px;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(100, 0, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 70%, rgba(255, 0, 200, 0.1) 0%, transparent 30%),
+                linear-gradient(0deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%),
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000000'/%3E%3Cpath d='M0 0v100M100 0v100M20 0v100M40 0v100M60 0v100M80 0v100M0 20h100M0 40h100M0 60h100M0 80h100' stroke='%2300ffcc' stroke-width='0.5' stroke-opacity='0.2' fill='none'/%3E%3C/svg%3E");
         }
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: rgba(10, 12, 20, 0.95);
+            background: rgba(0, 0, 0, 0.8);
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 247, 255, 0.3), 
-                        0 0 40px rgba(0, 255, 191, 0.2),
-                        inset 0 0 15px rgba(0, 247, 255, 0.1);
+            box-shadow: 
+                0 0 15px rgba(0, 255, 204, 0.3),
+                0 0 30px rgba(100, 0, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 204, 0.1);
             overflow: hidden;
             flex: 1;
-            border: 1px solid rgba(0, 247, 255, 0.3);
+            border: 1px solid rgba(0, 255, 204, 0.3);
             position: relative;
+            animation: containerGlow 3s infinite alternate;
+        }
+        @keyframes containerGlow {
+            0% { box-shadow: 0 0 15px rgba(0, 255, 204, 0.3), 0 0 30px rgba(100, 0, 255, 0.2), inset 0 0 20px rgba(0, 255, 204, 0.1); }
+            100% { box-shadow: 0 0 20px rgba(0, 255, 204, 0.4), 0 0 40px rgba(100, 0, 255, 0.3), inset 0 0 25px rgba(0, 255, 204, 0.2); }
         }
         .container::before {
             content: '';
@@ -40,17 +53,22 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px;
-            background: linear-gradient(90deg, #00f7ff, #00ffbf, #00f7ff);
-            box-shadow: 0 0 10px #00f7ff;
+            height: 3px;
+            background: linear-gradient(90deg, #ff00cc, #00ffcc, #ff00cc);
+            box-shadow: 0 0 10px #ff00cc;
             z-index: 10;
+            animation: scanline 3s linear infinite;
+        }
+        @keyframes scanline {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
         header {
-            background: linear-gradient(135deg, #121528 0%, #0d0f1d 100%);
+            background: linear-gradient(135deg, rgba(10, 10, 20, 0.9) 0%, rgba(20, 5, 40, 0.9) 100%);
             color: #fff;
             padding: 25px;
             text-align: center;
-            border-bottom: 1px solid rgba(0, 247, 255, 0.3);
+            border-bottom: 1px solid rgba(0, 255, 204, 0.3);
             position: relative;
             overflow: hidden;
         }
@@ -61,24 +79,33 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle fill="%2300f7ff" cx="25" cy="25" r="1"/><circle fill="%2300f7ff" cx="75" cy="75" r="1"/><circle fill="%2300ffbf" cx="75" cy="25" r="1.5"/><circle fill="%2300ffbf" cx="25" cy="75" r="1.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            background: 
+                url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0h100v100H0z' fill='%23000000'/%3E%3Cpath d='M0 0v100M100 0v100M20 0v100M40 0v100M60 0v100M80 0v100M0 20h100M0 40h100M0 60h100M0 80h100' stroke='%23ff00cc' stroke-width='0.5' stroke-opacity='0.1' fill='none'/%3E%3C/svg%3E"),
+                linear-gradient(135deg, rgba(100, 0, 255, 0.1) 0%, rgba(255, 0, 200, 0.1) 100%);
             z-index: 1;
         }
         h1 {
             font-size: 32px;
             margin-bottom: 10px;
-            color: #00ffbf;
-            text-shadow: 0 0 10px rgba(0, 255, 191, 0.7);
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.7);
             position: relative;
             z-index: 2;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            animation: textGlitch 5s infinite;
+        }
+        @keyframes textGlitch {
+            0%, 100% { transform: translateX(0) skew(0); }
+            5% { transform: translateX(-2px) skew(-2deg); text-shadow: 2px 0 0 #ff00cc, -2px 0 0 #00ffcc; }
+            10% { transform: translateX(2px) skew(2deg); }
+            15% { transform: translateX(0) skew(0); }
         }
         header p {
             font-size: 18px;
-            color: #a0f6ff;
+            color: #ff00cc;
             position: relative;
             z-index: 2;
-            text-shadow: 0 0 5px rgba(0, 247, 255, 0.7);
+            text-shadow: 0 0 5px rgba(255, 0, 204, 0.7);
         }
         .content {
             padding: 30px;
@@ -93,19 +120,19 @@
         }
         label {
             font-weight: 600;
-            color: #00f7ff;
+            color: #00ffcc;
             font-size: 18px;
             display: flex;
             align-items: center;
             gap: 10px;
-            text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
         }
         textarea {
             width: 100%;
             padding: 20px;
-            background: rgba(8, 10, 18, 0.8);
-            color: #00ffbf;
-            border: 1px solid rgba(0, 247, 255, 0.3);
+            background: rgba(0, 10, 20, 0.8);
+            color: #00ffcc;
+            border: 1px solid rgba(0, 255, 204, 0.3);
             border-radius: 8px;
             font-size: 16px;
             min-height: 220px;
@@ -113,15 +140,17 @@
             font-family: 'Courier New', monospace;
             line-height: 1.5;
             transition: all 0.3s;
-            box-shadow: inset 0 0 10px rgba(0, 247, 255, 0.1), 
-                        0 0 5px rgba(0, 247, 255, 0.2);
-            text-shadow: 0 0 5px rgba(0, 255, 191, 0.3);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 255, 204, 0.1), 
+                0 0 5px rgba(0, 255, 204, 0.2);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
         }
         textarea:focus {
             outline: none;
-            border-color: #00ffbf;
-            box-shadow: 0 0 15px rgba(0, 255, 191, 0.4), 
-                        inset 0 0 10px rgba(0, 247, 255, 0.2);
+            border-color: #ff00cc;
+            box-shadow: 
+                0 0 15px rgba(255, 0, 204, 0.4), 
+                inset 0 0 10px rgba(255, 0, 204, 0.2);
         }
         .button-group {
             display: flex;
@@ -130,9 +159,9 @@
             flex-wrap: wrap;
         }
         button {
-            background: linear-gradient(to right, #121528, #0d0f1d);
-            color: #00ffbf;
-            border: 1px solid rgba(0, 247, 255, 0.3);
+            background: linear-gradient(to right, rgba(10, 10, 20, 0.8), rgba(20, 5, 40, 0.8));
+            color: #00ffcc;
+            border: 1px solid rgba(0, 255, 204, 0.3);
             padding: 15px 25px;
             border-radius: 8px;
             cursor: pointer;
@@ -142,120 +171,102 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.2), 
-                        inset 0 0 5px rgba(0, 247, 255, 0.1);
-            text-shadow: 0 0 5px rgba(0, 255, 191, 0.5);
+            box-shadow: 
+                0 0 10px rgba(0, 255, 204, 0.2), 
+                inset 0 0 5px rgba(0, 255, 204, 0.1);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 204, 0.2), transparent);
+            transition: 0.5s;
+        }
+        button:hover::before {
+            left: 100%;
         }
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 15px rgba(0, 247, 255, 0.4), 
-                        0 5px 15px rgba(0, 0, 0, 0.4);
-            color: #00f7ff;
+            box-shadow: 
+                0 0 15px rgba(0, 255, 204, 0.4), 
+                0 5px 15px rgba(0, 0, 0, 0.4);
+            color: #ff00cc;
         }
         button:active {
             transform: translateY(0);
         }
         button.process {
-            background: linear-gradient(to right, #0d2b42, #091c2d);
+            background: linear-gradient(to right, rgba(10, 30, 50, 0.8), rgba(5, 20, 40, 0.8));
         }
         button.process:hover {
-            background: linear-gradient(to right, #0e3450, #0a2338);
+            background: linear-gradient(to right, rgba(15, 40, 60, 0.8), rgba(10, 25, 45, 0.8));
             box-shadow: 0 0 15px rgba(0, 162, 255, 0.4);
         }
         button.reset {
-            background: linear-gradient(to right, #2b0d42, #1c092d);
+            background: linear-gradient(to right, rgba(50, 10, 60, 0.8), rgba(30, 5, 40, 0.8));
         }
         button.reset:hover {
-            background: linear-gradient(to right, #3a1059, #260c3d);
+            background: linear-gradient(to right, rgba(60, 15, 70, 0.8), rgba(40, 10, 50, 0.8));
             box-shadow: 0 0 15px rgba(162, 0, 255, 0.4);
         }
         button.copy {
-            background: linear-gradient(to right, #0d422b, #092d1c);
+            background: linear-gradient(to right, rgba(10, 50, 30, 0.8), rgba(5, 40, 20, 0.8));
         }
         button.copy:hover {
-            background: linear-gradient(to right, #105936, #0c3d26);
+            background: linear-gradient(to right, rgba(15, 60, 35, 0.8), rgba(10, 50, 25, 0.8));
             box-shadow: 0 0 15px rgba(0, 255, 162, 0.4);
         }
         .output-text {
             font-family: 'Courier New', monospace;
             font-size: 16px;
             padding: 20px;
-            background: rgba(8, 10, 18, 0.8);
-            color: #00ffbf;
+            background: rgba(0, 10, 20, 0.8);
+            color: #00ffcc;
             border-radius: 8px;
             overflow-x: auto;
             white-space: pre-wrap;
             min-height: 80px;
-            border: 1px solid rgba(0, 247, 255, 0.2);
-            box-shadow: inset 0 0 10px rgba(0, 247, 255, 0.1);
-            text-shadow: 0 0 5px rgba(0, 255, 191, 0.3);
+            border: 1px solid rgba(0, 255, 204, 0.2);
+            box-shadow: inset 0 0 10px rgba(0, 255, 204, 0.1);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
         }
         .output-container {
             position: relative;
-        }
-        .instructions {
-            background: rgba(15, 18, 35, 0.6);
-            padding: 20px;
-            border-radius: 8px;
-            font-size: 15px;
-            margin-top: 20px;
-            border: 1px solid rgba(0, 247, 255, 0.2);
-            color: #a0f6ff;
-            box-shadow: inset 0 0 10px rgba(0, 247, 255, 0.1);
-        }
-        .instructions h3 {
-            margin-bottom: 15px;
-            color: #00f7ff;
-            font-size: 20px;
-            text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-        }
-        .instructions ul {
-            padding-left: 25px;
-            margin-bottom: 15px;
-        }
-        .instructions li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        .example {
-            background: rgba(10, 15, 30, 0.8);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 15px;
-            font-family: 'Courier New', monospace;
-            white-space: pre-wrap;
-            font-size: 14px;
-            line-height: 1.5;
-            color: #70e4ff;
-            border: 1px solid rgba(0, 247, 255, 0.1);
-            text-shadow: 0 0 3px rgba(0, 247, 255, 0.3);
         }
         .footer {
             text-align: center;
             margin-top: 30px;
             padding: 25px;
-            background: rgba(8, 10, 18, 0.8);
+            background: rgba(0, 10, 20, 0.8);
             border-radius: 8px;
             font-size: 14px;
             color: #70c5d3;
-            border-top: 1px solid rgba(0, 247, 255, 0.2);
-            text-shadow: 0 0 2px rgba(0, 247, 255, 0.3);
+            border-top: 1px solid rgba(0, 255, 204, 0.2);
+            text-shadow: 0 0 2px rgba(0, 255, 204, 0.3);
         }
         .copied-notification {
             position: fixed;
             top: 30px;
             right: 30px;
-            background: rgba(0, 60, 40, 0.9);
-            color: #00ffbf;
+            background: rgba(0, 40, 30, 0.9);
+            color: #00ffcc;
             padding: 15px 20px;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 191, 0.5);
+            box-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.3), 
+                0 0 10px rgba(0, 255, 204, 0.5);
             display: none;
             z-index: 1000;
             animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards;
             font-weight: 600;
-            border: 1px solid rgba(0, 255, 191, 0.3);
-            text-shadow: 0 0 5px rgba(0, 255, 191, 0.5);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-20px); }
@@ -273,39 +284,39 @@
             padding: 10px;
             background: rgba(255, 41, 105, 0.1);
             border-radius: 5px;
-            border-left: 4px solid #ff2969;
+            border-left: 4px solid #ff00cc;
             text-shadow: 0 0 5px rgba(255, 41, 105, 0.3);
             box-shadow: 0 0 5px rgba(255, 41, 105, 0.2);
         }
         .success-message {
-            color: #00ffbf;
+            color: #00ffcc;
             font-weight: 600;
             margin-top: 10px;
             display: none;
             padding: 10px;
-            background: rgba(0, 255, 191, 0.1);
+            background: rgba(0, 255, 204, 0.1);
             border-radius: 5px;
-            border-left: 4px solid #00ffbf;
-            text-shadow: 0 0 5px rgba(0, 255, 191, 0.3);
-            box-shadow: 0 0 5px rgba(0, 255, 191, 0.2);
+            border-left: 4px solid #00ffcc;
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.3);
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.2);
         }
         .results-count {
             margin-top: 15px;
             font-weight: 600;
-            color: #00f7ff;
+            color: #00ffcc;
             font-size: 16px;
             padding: 10px;
-            background: rgba(0, 247, 255, 0.1);
+            background: rgba(0, 255, 204, 0.1);
             border-radius: 5px;
             display: inline-block;
-            text-shadow: 0 0 5px rgba(0, 247, 255, 0.5);
-            box-shadow: 0 0 5px rgba(0, 247, 255, 0.2);
+            text-shadow: 0 0 5px rgba(0, 255, 204, 0.5);
+            box-shadow: 0 0 5px rgba(0, 255, 204, 0.2);
         }
         .decorative-element {
             position: absolute;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, rgba(0,247,255,0.1) 0%, rgba(0,247,255,0) 70%);
+            background: radial-gradient(circle, rgba(0,255,204,0.1) 0%, rgba(0,255,204,0) 70%);
             border-radius: 50%;
             z-index: 0;
         }
@@ -314,6 +325,7 @@
             right: -100px;
             width: 300px;
             height: 300px;
+            background: radial-gradient(circle, rgba(255,0,204,0.1) 0%, rgba(255,0,204,0) 70%);
         }
         .decoration-2 {
             bottom: -50px;
@@ -322,15 +334,36 @@
             height: 200px;
         }
         .calculator-style-display {
-            background: rgba(5, 10, 15, 0.9);
-            border: 2px solid rgba(0, 247, 255, 0.4);
-            box-shadow: inset 0 0 20px rgba(0, 247, 255, 0.2),
-                        0 0 10px rgba(0, 247, 255, 0.3);
-            color: #00ffbf;
-            text-shadow: 0 0 7px #00ffbf;
+            background: rgba(0, 5, 10, 0.9);
+            border: 2px solid rgba(0, 255, 204, 0.4);
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 204, 0.2),
+                0 0 10px rgba(0, 255, 204, 0.3);
+            color: #00ffcc;
+            text-shadow: 0 0 7px #00ffcc;
             padding: 15px;
             border-radius: 10px;
             font-family: 'Segment LCD', 'Courier New', monospace;
+        }
+        .cyberpunk-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                linear-gradient(rgba(0, 255, 204, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 204, 0.05) 1px, transparent 1px);
+            background-size: 30px 30px;
+            perspective: 500px;
+            transform-style: preserve-3d;
+            animation: gridMove 20s infinite linear;
+        }
+        @keyframes gridMove {
+            0% { transform: translateY(0) translateX(0); }
+            100% { transform: translateY(30px) translateX(30px); }
         }
         @media (max-width: 768px) {
             .content {
@@ -350,31 +383,82 @@
             }
         }
         .neon-accent {
-            color: #00f7ff;
-            text-shadow: 0 0 5px #00f7ff;
+            color: #00ffcc;
+            text-shadow: 0 0 5px #00ffcc;
         }
         .logo {
             font-size: 24px;
             margin-bottom: 10px;
         }
-        .led-border {
-            border: 1px solid rgba(0, 247, 255, 0.5);
-            box-shadow: 0 0 10px rgba(0, 247, 255, 0.3),
-                        inset 0 0 10px rgba(0, 247, 255, 0.1);
+        .binary-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.2;
+        }
+        .binary-digit {
+            position: absolute;
+            color: #00ffcc;
+            font-size: 14px;
+            animation: fall linear infinite;
+            text-shadow: 0 0 5px #00ffcc;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh); }
+        }
+        .glitch-effect {
+            position: relative;
+        }
+        .glitch-effect::before,
+        .glitch-effect::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        .glitch-effect::before {
+            animation: glitch-animation 2s infinite linear alternate-reverse;
+            color: #ff00cc;
+            z-index: -1;
+            left: 2px;
+        }
+        .glitch-effect::after {
+            animation: glitch-animation 3s infinite linear alternate-reverse;
+            color: #00ffcc;
+            z-index: -2;
+            left: -2px;
+        }
+        @keyframes glitch-animation {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
     </style>
 </head>
 <body>
+    <div class="cyberpunk-grid"></div>
+    <div class="binary-rain" id="binaryRain"></div>
+    
     <div class="container">
         <div class="decorative-element decoration-1"></div>
         <div class="decorative-element decoration-2"></div>
         
         <header>
             <div class="logo">
-                <i class="fas fa-calculator neon-accent"></i>
+                <i class="fas fa-brain neon-accent"></i>
             </div>
-            <h1>Parser Data Pengembalian Dana</h1>
-            <p>Neon Calculator Edition</p>
+            <h1 class="glitch-effect" data-text="Parser Data Pengembalian Dana">Parser Data Pengembalian Dana</h1>
+            <p>Cyberpunk Dark Edition</p>
         </header>
         
         <div class="content">
@@ -423,44 +507,10 @@ Jumlah: Rp 1.500.000"></textarea>
                 </div>
                 <div class="results-count" id="resultsCount"></div>
             </div>
-            
-            <div class="instructions">
-                <h3><i class="fas fa-info-circle"></i> Cara Penggunaan:</h3>
-                <ul>
-                    <li>Tempel atau ketik data mentah di area input (bisa beberapa data sekaligus)</li>
-                    <li>Klik tombol "Proses Data"</li>
-                    <li>Output akan ditampilkan di bagian bawah</li>
-                    <li>Klik tombol "Salin Hasil" untuk menyalin data</li>
-                    <li>Gunakan tombol "Hapus/Reset" untuk mengosongkan semua data</li>
-                </ul>
-                
-                <div class="example">Contoh format input (beberapa data sekaligus):
-Data 1:
-Info : Goltogel
-Perihal : Pengembalian Dana
-Dari Situs : Linetogel
-
-Bank Danamon ( BERSIH )
-Nama Rekening : ZINTIYA AMELYA MBATU
-Nomor Rekening : 3692383056
-Nominal : Rp. 50,000,000,-
-
-Data 2:
-Bank BCA
-Nama: JOHN DOE
-No. Rek: 1234567890
-Jumlah: Rp 1.500.000
-
-Data 3:
-BANK MANDIRI
-NAMA: JANE SMITH
-NOMOR REKENING: 9876543210
-NOMINAL: RP 2.750.000</div>
-            </div>
         </div>
         
         <div class="footer">
-            <p>© 2023 Data Parser • Neon Calculator Edition • Format Output: Bank [TAB] No.Rekening [TAB] Nama [TAB] [TAB] Nominal</p>
+            <p>© 2023 Data Parser • Cyberpunk Dark Edition • Format Output: Bank [TAB] No.Rekening [TAB] Nama [TAB] [TAB] Nominal</p>
         </div>
     </div>
 
@@ -469,6 +519,29 @@ NOMINAL: RP 2.750.000</div>
     </div>
 
     <script>
+        // Membuat efek hujan kode biner (seperti Matrix)
+        function createBinaryRain() {
+            const container = document.getElementById('binaryRain');
+            const characters = '01010101010101010101010101';
+            const fontSize = 14;
+            const columns = Math.floor(window.innerWidth / fontSize);
+            
+            for (let i = 0; i < columns; i++) {
+                const x = i * fontSize;
+                const delay = Math.random() * 10;
+                const duration = 10 + Math.random() * 20;
+                
+                const digit = document.createElement('div');
+                digit.className = 'binary-digit';
+                digit.style.left = `${x}px`;
+                digit.style.animationDelay = `${delay}s`;
+                digit.style.animationDuration = `${duration}s`;
+                digit.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+                
+                container.appendChild(digit);
+            }
+        }
+        
         // Fungsi untuk memproses data
         function processData() {
             const rawData = document.getElementById('rawData').value;
@@ -633,6 +706,7 @@ NOMINAL: RP 2.750.000</div>
         // Auto-focus pada textarea saat halaman dimuat
         window.onload = function() {
             document.getElementById('rawData').focus();
+            createBinaryRain();
         }
     </script>
 </body>
