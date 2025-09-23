@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%233498db'/><path d='M50 20 L65 40 L75 35 L70 55 L85 60 L65 65 L70 85 L50 75 L30 85 L35 65 L15 60 L30 55 L25 35 L35 40 Z' fill='%23FFD700'/><text x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dominant-baseline='middle'>PS</text></svg>">
     <style>
+        /* Kode CSS sebelumnya tetap sama */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -612,7 +613,7 @@
             color: #81c784;
         }
         
-        /* STYLE UNTUK MK, NAGA DAN KARAKTER BINATANG */
+        /* STYLE UNTUK MK, NAGA DAN KARAKTER BINATANG - DIPERBAIKI */
         .prediction-boxes {
             display: flex;
             gap: 15px;
@@ -656,15 +657,16 @@
             color: #c8e6c9;
         }
         
-        .copy-buttons {
+        /* TOMBOL YANG LEBIH KOMPAK */
+        .compact-buttons {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             margin-top: 15px;
             justify-content: center;
         }
         
-        .copy-small-btn {
-            padding: 8px 15px;
+        .compact-btn {
+            padding: 8px 12px;
             border: none;
             border-radius: 6px;
             font-weight: 500;
@@ -672,49 +674,54 @@
             font-size: 14px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
             transition: all 0.3s;
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+        
+        .compact-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .compact-btn::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0,0,0,0.8);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        
+        .compact-btn:hover::after {
+            opacity: 1;
+        }
+        
+        .generate-compact-btn {
+            background: #ff9800;
+            color: white;
+        }
+        
+        .generate-compact-btn:hover {
+            background: #f57c00;
+        }
+        
+        .copy-compact-btn {
             background: #4caf50;
             color: white;
         }
         
-        .copy-small-btn:hover {
+        .copy-compact-btn:hover {
             background: #388e3c;
-        }
-        
-        .dark-mode .copy-small-btn {
-            background: #43a047;
-        }
-        
-        .dark-mode .copy-small-btn:hover {
-            background: #2e7d32;
-        }
-        
-        .generate-small-btn {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s;
-            background: #ff9800;
-            color: white;
-        }
-        
-        .generate-small-btn:hover {
-            background: #f57c00;
-        }
-        
-        .dark-mode .generate-small-btn {
-            background: #ff9800;
-        }
-        
-        .dark-mode .generate-small-btn:hover {
-            background: #f57c00;
         }
         
         /* Kotak Karakter Binatang */
@@ -1096,24 +1103,24 @@
                 <div class="prediction-box">
                     <div class="prediction-title-small">MK (Mimpi Kunci)</div>
                     <div class="prediction-value" id="mkValue">5 / 6</div>
-                    <div class="copy-buttons">
-                        <button class="generate-small-btn" id="generateMkBtn">
-                            <i class="fas fa-sync-alt"></i> Generate MK
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateMkBtn" data-tooltip="Generate MK">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
-                        <button class="copy-small-btn" id="copyMkBtn">
-                            <i class="fas fa-copy"></i> Salin MK
+                        <button class="compact-btn copy-compact-btn" id="copyMkBtn" data-tooltip="Salin MK">
+                            <i class="fas fa-copy"></i>
                         </button>
                     </div>
                 </div>
                 <div class="prediction-box">
                     <div class="prediction-title-small">Naga</div>
                     <div class="prediction-value" id="nagaValue">1 - 5 - 7</div>
-                    <div class="copy-buttons">
-                        <button class="generate-small-btn" id="generateNagaBtn">
-                            <i class="fas fa-sync-alt"></i> Generate Naga
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateNagaBtn" data-tooltip="Generate Naga">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
-                        <button class="copy-small-btn" id="copyNagaBtn">
-                            <i class="fas fa-copy"></i> Salin Naga
+                        <button class="compact-btn copy-compact-btn" id="copyNagaBtn" data-tooltip="Salin Naga">
+                            <i class="fas fa-copy"></i>
                         </button>
                     </div>
                 </div>
@@ -1124,12 +1131,12 @@
                 <div class="character-box">
                     <div class="character-title">Karakter Binatang</div>
                     <div class="character-value" id="binatangValue">Pemberontak</div>
-                    <div class="copy-buttons">
-                        <button class="generate-small-btn" id="generateBinatangBtn">
-                            <i class="fas fa-sync-alt"></i> Generate Karakter
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateBinatangBtn" data-tooltip="Generate Karakter">
+                            <i class="fas fa-sync-alt"></i>
                         </button>
-                        <button class="copy-small-btn" id="copyBinatangBtn">
-                            <i class="fas fa-copy"></i> Salin Karakter
+                        <button class="compact-btn copy-compact-btn" id="copyBinatangBtn" data-tooltip="Salin Karakter">
+                            <i class="fas fa-copy"></i>
                         </button>
                     </div>
                 </div>
@@ -1183,7 +1190,7 @@
                 });
             });
             
-            // Fungsi untuk generator syair dengan jaminan unik
+            // Fungsi untuk generator syair dengan algoritma canggih
             function setupSyairGenerator() {
                 const baris1 = document.getElementById('baris1');
                 const baris2 = document.getElementById('baris2');
@@ -1204,282 +1211,22 @@
                 const copySuccess = document.getElementById('copy-success');
                 const kataOptions = document.querySelectorAll('.kata-option');
                 
-                // Database baris syair yang lebih besar (dikelompokkan berdasarkan jumlah kata)
-                const barisPendek = {
-                    kata3: [
-                        "Petunjuk alam menanti",
-                        "Angka tersembunyi rahasia",
-                        "Keberuntungan menyapa hati",
-                        "Mimpi indah terwujud",
-                        "Bulan bersinar terang",
-                        "Bintang memberi petunjuk",
-                        "Nasib baik datang",
-                        "Harapan tak terputus",
-                        "Angin berbisik lembut",
-                        "Sungai mengalir deras",
-                        "Gunung menjulang tinggi",
-                        "Lautan membentang luas",
-                        "Hutan penuh misteri",
-                        "Burung terbang bebas",
-                        "Kupu menari indah",
-                        "Harimau mengaum kencang",
-                        "Naga terbang tinggi",
-                        "Pelangi muncul indah",
-                        "Hujan turun deras",
-                        "Matahari bersinar cerah",
-                        "Malam sunyi senyap",
-                        "Fajar menyingsing perlahan",
-                        "Embun pagi menetes",
-                        "Kabut turun menyelimuti",
-                        "Daun berguguran jatuh",
-                        "Ombak memecah pantai",
-                        "Pasir halus berkilau",
-                        "Batu karang kokoh",
-                        "Api unggun berkobar",
-                        "Asap mengepul tinggi",
-                        "Awan berarak indah",
-                        "Guntur menggelegar keras",
-                        "Kilat menyambar cepat",
-                        "Embun beku membeku",
-                        "Salju turun lembut",
-                        "Es mencair perlahan",
-                        "Kabut tebal menyelimuti",
-                        "Angin topan berhembus",
-                        "Badai datang tiba-tiba",
-                        "Panas terik menyengat",
-                        "Dingin menusuk tulang",
-                        "Gerimis turun pelan",
-                        "Hujan deras mengguyur",
-                        "Petir menyambar tiba-tiba",
-                        "Gelombang pasang datang",
-                        "Air terjun deras",
-                        "Sungai dalam mengalir",
-                        "Danau tenang jernih",
-                        "Kolam kecil beriak",
-                        "Sumur tua dalam",
-                        "Mata air mengalir",
-                        "Embun pagi basah",
-                        "Kabut pagi tebal",
-                        "Embun malam dingin",
-                        "Kabut malam pekat",
-                        "Embun senja redup",
-                        "Kabut senja tipis",
-                        "Embun subuh segar",
-                        "Kabut subuh lembut",
-                        "Embun siang hangat",
-                        "Kabut siang cerah",
-                        "Embun sore redup",
-                        "Kabut sore lembut",
-                        "Embun malam dingin",
-                        "Kabut malam pekat",
-                        "Embun pagi basah",
-                        "Kabut pagi tebal",
-                        "Embun siang hangat",
-                        "Kabut siang cerah",
-                        "Embun sore redup",
-                        "Kabut sore lembut",
-                        "Embun malam dingin",
-                        "Kabut malam pekat",
-                        "Embun pagi basah",
-                        "Kabut pagi tebal",
-                        "Embun siang hangat",
-                        "Kabut siang cerah",
-                        "Embun sore redup",
-                        "Kabut sore lembut",
-                        "Embun malam dingin",
-                        "Kabut malam pekat",
-                        "Embun pagi basah",
-                        "Kabut pagi tebal",
-                        "Embun siang hangat",
-                        "Kabut siang cerah",
-                        "Embun sore redup",
-                        "Kabut sore lembut",
-                        "Embun malam dingin",
-                        "Kabut malam pekat"
-                    ],
-                    kata4: [
-                        "Angka tersembunyi dalam mimpi",
-                        "Petunjuk alam menanti hadir",
-                        "Keberuntungan menyapa hati bersih",
-                        "Rahasia angka terungkap nanti",
-                        "Bulan bersinar penuh arti",
-                        "Bintang memberi isyarat hati",
-                        "Nasib baik segera datang",
-                        "Mimpi indah menjadi nyata",
-                        "Angin berbisik lembut tenang",
-                        "Sungai mengalir deras jernih",
-                        "Gunung menjulang tinggi megah",
-                        "Lautan luas membentang indah",
-                        "Hutan rimba penuh misteri",
-                        "Burung terbang bebas tinggi",
-                        "Kupu-kupu menari indah",
-                        "Harimau mengaum kencang kuat",
-                        "Naga terbang tinggi langit",
-                        "Pelangi muncul indah sempurna",
-                        "Hujan turun deras membasahi",
-                        "Matahari bersinar cerah terang",
-                        "Malam sunyi senyap gelap",
-                        "Fajar menyingsing perlahan lembut",
-                        "Embun pagi menetes segar",
-                        "Kabut turun menyelimuti bumi",
-                        "Daun berguguran jatuh perlahan",
-                        "Ombak memecah pantai berdebur",
-                        "Pasir halus berkilau emas",
-                        "Batu karang kokoh teguh",
-                        "Api unggun berkobar tinggi",
-                        "Asap mengepul tinggi langit",
-                        "Awan berarak indah putih",
-                        "Guntur menggelegar keras memekakkan",
-                        "Kilat menyambar cepat tiba-tiba",
-                        "Embun beku membeku dingin",
-                        "Salju turun lembut halus",
-                        "Es mencair perlahan lambat",
-                        "Kabut tebal menyelimuti lembah",
-                        "Angin topan berhembus kencang",
-                        "Badai datang tiba-tiba dahsyat",
-                        "Panas terik menyengat kulit",
-                        "Dingin menusuk tulang dalam",
-                        "Gerimis turun pelan lembut",
-                        "Hujan deras mengguyur bumi",
-                        "Petir menyambar tiba-tiba cepat",
-                        "Gelombang pasang datang besar",
-                        "Air terjun deras mengalir",
-                        "Sungai dalam mengalir tenang",
-                        "Danau tenang jernih bening",
-                        "Kolam kecil beriak lembut",
-                        "Sumur tua dalam gelap",
-                        "Mata air mengalir jernih",
-                        "Embun pagi basah segar",
-                        "Kabut pagi tebal pekat",
-                        "Embun malam dingin menusuk",
-                        "Kabut malam pekat gelap",
-                        "Embun senja redup lembut",
-                        "Kabut senja tipis halus",
-                        "Embun subuh segar dingin",
-                        "Kabut subuh lembut tipis",
-                        "Embun siang hangat terik",
-                        "Kabut siang cerah terang",
-                        "Embun sore redup senja",
-                        "Kabut sore lembut tipis",
-                        "Embun malam dingin menusuk",
-                        "Kabut malam pekat gelap",
-                        "Embun pagi basah segar",
-                        "Kabut pagi tebal pekat",
-                        "Embun siang hangat terik",
-                        "Kabut siang cerah terang",
-                        "Embun sore redup senja",
-                        "Kabut sore lembut tipis",
-                        "Embun malam dingin menusuk",
-                        "Kabut malam pekat gelap",
-                        "Embun pagi basah segar",
-                        "Kabut pagi tebal pekat",
-                        "Embun siang hangat terik",
-                        "Kabut siang cerah terang",
-                        "Embun sore redup senja",
-                        "Kabut sore lembut tipis",
-                        "Embun malam dingin menusuk",
-                        "Kabut malam pekat gelap",
-                        "Embun pagi basah segar",
-                        "Kabut pagi tebal pekat",
-                        "Embun siang hangat terik",
-                        "Kabut siang cerah terang",
-                        "Embun sore redup senja",
-                        "Kabut sore lembut tipis",
-                        "Embun malam dingin menusuk",
-                        "Kabut malam pekat gelap"
-                    ],
-                    kata5: [
-                        "Angka tersembunyi dalam mimpi kubur",
-                        "Petunjuk alam menanti di depan mata",
-                        "Keberuntungan menyapa hati yang bersih",
-                        "Rahasia angka terungkap seketika nanti",
-                        "Bulan bersinar penuh arti kehidupan",
-                        "Bintang memberi isyarat di malam hari",
-                        "Nasib baik segera datang menghampiri",
-                        "Mimpi indah menjadi nyata sempurna",
-                        "Angin berbisik lembut di telinga",
-                        "Sungai mengalir deras menuju lautan",
-                        "Gunung menjulang tinggi ke angkasa",
-                        "Lautan luas membentang tak berujung",
-                        "Hutan rimba lebat penuh misteri",
-                        "Burung terbang bebas di angkasa luas",
-                        "Kupu-kupu menari indah di taman",
-                        "Harimau mengaum kencang di hutan rimba",
-                        "Naga terbang tinggi di awan putih",
-                        "Pelangi muncul indah setelah hujan reda",
-                        "Hujan turun deras membasahi bumi",
-                        "Matahari bersinar cerah di pagi hari",
-                        "Malam sunyi senyap gelap gulita",
-                        "Fajar menyingsing perlahan lembut halus",
-                        "Embun pagi menetes segar dingin",
-                        "Kabut turun menyelimuti bumi perlahan",
-                        "Daun berguguran jatuh perlahan lembut",
-                        "Ombak memecah pantai berdebur keras",
-                        "Pasir halus berkilau emas terang",
-                        "Batu karang kokoh teguh abadi",
-                        "Api unggun berkobar tinggi menjilat",
-                        "Asap mengepul tinggi ke langit",
-                        "Awan berarak indah putih bersih",
-                        "Guntur menggelegar keras memekakkan telinga",
-                        "Kilat menyambar cepat tiba-tiba dahsyat",
-                        "Embun beku membeku dingin menusuk",
-                        "Salju turun lembut halus seperti kapas",
-                        "Es mencair perlahan lambat tetapi pasti",
-                        "Kabut tebal menyelimuti lembah dalam",
-                        "Angin topan berhembus kencang menghancurkan",
-                        "Badai datang tiba-tiba dahsyat mengerikan",
-                        "Panas terik menyengat kulit membakar",
-                        "Dingin menusuk tulang dalam menggigil",
-                        "Gerimis turun pelan lembut membasahi",
-                        "Hujan deras mengguyur bumi tanpa henti",
-                        "Petir menyambar tiba-tiba cepat kilat",
-                        "Gelombang pasang datang besar menghantam",
-                        "Air terjun deras mengalir tak henti",
-                        "Sungai dalam mengalir tenang sunyi",
-                        "Danau tenang jernih bening seperti kaca",
-                        "Kolam kecil beriak lembut tenang",
-                        "Sumur tua dalam gelap misterius",
-                        "Mata air mengalir jernih segar",
-                        "Embun pagi basah segar menyegarkan",
-                        "Kabut pagi tebal pekat menyelimuti",
-                        "Embun malam dingin menusuk tulang",
-                        "Kabut malam pekat gelap gulita",
-                        "Embun senja redup lembut memudar",
-                        "Kabut senja tipis halus melayang",
-                        "Embun subuh segar dingin membekukan",
-                        "Kabut subuh lembut tipis menghilang",
-                        "Embun siang hangat terik membakar",
-                        "Kabut siang cerah terang menyilaukan",
-                        "Embun sore redup senja memudar",
-                        "Kabut sore lembut tipis melayang",
-                        "Embun malam dingin menusuk tulang",
-                        "Kabut malam pekat gelap gulita",
-                        "Embun pagi basah segar menyegarkan",
-                        "Kabut pagi tebal pekat menyelimuti",
-                        "Embun siang hangat terik membakar",
-                        "Kabut siang cerah terang menyilaukan",
-                        "Embun sore redup senja memudar",
-                        "Kabut sore lembut tipis melayang",
-                        "Embun malam dingin menusuk tulang",
-                        "Kabut malam pekat gelap gulita",
-                        "Embun pagi basah segar menyegarkan",
-                        "Kabut pagi tebal pekat menyelimuti",
-                        "Embun siang hangat terik membakar",
-                        "Kabut siang cerah terang menyilaukan",
-                        "Embun sore redup senja memudar",
-                        "Kabut sore lembut tipis melayang",
-                        "Embun malam dingin menusuk tulang",
-                        "Kabut malam pekat gelap gulita",
-                        "Embun pagi basah segar menyegarkan",
-                        "Kabut pagi tebal pekat menyelimuti",
-                        "Embun siang hangat terik membakar",
-                        "Kabut siang cerah terang menyilaukan",
-                        "Embun sore redup senja memudar",
-                        "Kabut sore lembut tipis melayang",
-                        "Embun malam dingin menusuk tulang",
-                        "Kabut malam pekat gelap gulita"
-                    ]
+                // Kumpulan kata untuk membangun syair secara dinamis
+                const kataKunci = {
+                    subjek: ["Angka", "Mimpi", "Nasib", "Keberuntungan", "Petunjuk", "Rahasia", "Alam", "Hati", "Firasat", "Tanda"],
+                    predikat: ["tersembunyi", "menanti", "menyapa", "terungkap", "berbicara", "menuntun", "menghampiri", "membisik", "menjelma", "menghilang"],
+                    objek: ["dalam mimpi", "di hati", "pada firasat", "dengan bijak", "secara halus", "dengan tiba-tiba", "dengan pasti", "dalam diam", "pada waktunya", "di ujung senja"],
+                    keterangan: ["yang dalam", "yang abadi", "penuh makna", "tak terduga", "misterius", "penuh harapan", "menakjubkan", "tak terlupakan", "penuh arti", "menyenangkan"],
+                    penghubung: ["namun", "tetapi", "oleh karena", "sehingga", "maka", "akhirnya", "kemudian", "selanjutnya", "sementara", "walaupun"]
                 };
+                
+                // Tema untuk syair yang koheren
+                const temaSyair = [
+                    {nama: "Alam", kata: ["angin", "bumi", "langit", "sungai", "gunung", "laut", "hutan", "matahari", "bulan", "bintang"]},
+                    {nama: "Kehidupan", kata: ["jalan", "waktu", "harapan", "cinta", "perjuangan", "kesabaran", "kebahagiaan", "kesedihan", "kejujuran", "pengorbanan"]},
+                    {nama: "Misteri", kata: ["rahasia", "petunjuk", "firasat", "isyarat", "tanda", "ramalan", "nubuat", "wahyu", "ilham", "bisikan"]},
+                    {nama: "Angka", kata: ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "nol"]}
+                ];
                 
                 // Pola rima yang mungkin
                 const polaRima = [
@@ -1503,18 +1250,21 @@
                     "Petualang", "Bijaksana", "Penuh semangat", "Tenang", "Gigih", "Lembut", "Kuat", "Cerdas", "Setia", "Berani"
                 ];
                 
-                // Fungsi hash sederhana untuk menghasilkan seed unik
-                function generateUniqueSeed() {
+                // Algoritma hash yang lebih kompleks untuk keunikan maksimal
+                function generateAdvancedHash() {
                     const timestamp = Date.now().toString();
                     const random = Math.random().toString();
                     const userAgent = navigator.userAgent;
                     const language = navigator.language;
                     const timezone = new Date().getTimezoneOffset().toString();
+                    const screenRes = `${screen.width}x${screen.height}`;
+                    const colorDepth = screen.colorDepth.toString();
+                    const memory = performance.memory ? performance.memory.usedJSHeapSize.toString() : "0";
                     
-                    // Kombinasi semua faktor untuk seed yang unik
-                    const seedString = timestamp + random + userAgent + language + timezone;
+                    // Kombinasi semua faktor untuk hash yang sangat unik
+                    const seedString = timestamp + random + userAgent + language + timezone + screenRes + colorDepth + memory;
                     
-                    // Hash sederhana menggunakan XOR
+                    // Algoritma hash yang lebih kompleks
                     let hash = 0;
                     for (let i = 0; i < seedString.length; i++) {
                         const char = seedString.charCodeAt(i);
@@ -1522,84 +1272,108 @@
                         hash = hash & hash; // Convert to 32-bit integer
                     }
                     
+                    // Tambahkan faktor acak tambahan
+                    hash = (hash * 9301 + 49297) % 233280;
+                    
                     return Math.abs(hash);
                 }
                 
-                // Fungsi PRNG yang dapat di-seed
-                function seededRandom(seed) {
-                    const x = Math.sin(seed++) * 10000;
-                    return x - Math.floor(x);
+                // Fungsi PRNG yang dapat di-seed dengan algoritma yang lebih baik
+                function advancedSeededRandom(seed) {
+                    seed = (seed * 9301 + 49297) % 233280;
+                    return seed / 233280;
                 }
                 
-                // Fungsi untuk menghasilkan angka unik
-                function generateUniqueNumbers(count, min, max, seed) {
+                // Fungsi untuk menghasilkan angka unik dengan algoritma yang lebih baik
+                function generateAdvancedUniqueNumbers(count, min, max, seed) {
                     let numbers = [];
                     let attempts = 0;
-                    const maxAttempts = 100;
+                    const maxAttempts = 1000; // Meningkatkan batas percobaan
                     
                     while(numbers.length < count && attempts < maxAttempts) {
-                        const num = Math.floor(seededRandom(seed + attempts) * (max - min + 1)) + min;
+                        const num = Math.floor(advancedSeededRandom(seed + attempts * 7) * (max - min + 1)) + min;
                         if (!numbers.includes(num)) {
                             numbers.push(num);
                         }
                         attempts++;
                     }
+                    
+                    // Jika masih belum cukup, tambahkan angka berurutan
+                    if (numbers.length < count) {
+                        for (let i = min; i <= max && numbers.length < count; i++) {
+                            if (!numbers.includes(i)) {
+                                numbers.push(i);
+                            }
+                        }
+                    }
+                    
                     return numbers;
                 }
                 
                 // Fungsi untuk menghasilkan karakter binatang acak
                 function generateKarakterBinatang(seed) {
-                    const randomIndex = Math.floor(seededRandom(seed) * karakterBinatang.length);
+                    const randomIndex = Math.floor(advancedSeededRandom(seed) * karakterBinatang.length);
                     return karakterBinatang[randomIndex];
-                }
-                
-                // Fungsi untuk memastikan keunikan syair dengan hash
-                function generateSyairHash(lines) {
-                    return lines.join('|').split('').reduce((a, b) => {
-                        a = ((a << 5) - a) + b.charCodeAt(0);
-                        return a & a;
-                    }, 0);
                 }
                 
                 // Fungsi untuk memilih kata secara acak dari array dengan seed
                 function acakKata(array, seed) {
-                    const randomIndex = Math.floor(seededRandom(seed) * array.length);
+                    const randomIndex = Math.floor(advancedSeededRandom(seed) * array.length);
                     return array[randomIndex];
                 }
                 
-                // Fungsi untuk menghasilkan syair baru yang unik
+                // Fungsi untuk membangun baris syair yang koheren
+                function bangunBarisSyair(jumlahKata, tema, seed) {
+                    let baris = "";
+                    
+                    // Pilih struktur kalimat berdasarkan jumlah kata
+                    if (jumlahKata === 3) {
+                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)}`;
+                    } else if (jumlahKata === 4) {
+                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)} ${acakKata(kataKunci.keterangan, seed+3)}`;
+                    } else if (jumlahKata === 5) {
+                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)} ${acakKata(kataKunci.penghubung, seed+3)} ${acakKata(kataKunci.objek, seed+4)}`;
+                    }
+                    
+                    return baris;
+                }
+                
+                // Fungsi untuk menghasilkan syair baru yang unik dan koheren
                 function buatSyair() {
-                    // Generate seed unik berdasarkan waktu dan faktor browser
-                    const baseSeed = generateUniqueSeed();
+                    // Generate hash yang sangat unik
+                    const baseSeed = generateAdvancedHash();
                     
                     // Ambil jumlah kata yang dipilih
                     const selectedKata = document.querySelector('input[name="kataOption"]:checked').value;
-                    const barisCollection = barisPendek[`kata${selectedKata}`];
+                    
+                    // Pilih tema secara acak untuk koherensi
+                    const temaSeed = baseSeed + 100;
+                    const temaTerpilih = acakKata(temaSyair, temaSeed);
                     
                     // Pilih pola rima secara acak
-                    const polaSeed = baseSeed + 1;
+                    const polaSeed = baseSeed + 200;
                     const polaTerpilih = acakKata(polaRima, polaSeed);
-                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh})`;
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh}) | Tema: ${temaTerpilih.nama}`;
                     
-                    // Buat empat baris syair pendek yang unik
+                    // Buat empat baris syair yang koheren
                     const newSyair = [];
                     for (let i = 0; i < 4; i++) {
-                        const lineSeed = baseSeed + i + 100;
-                        newSyair.push(acakKata(barisCollection, lineSeed));
+                        const lineSeed = baseSeed + i * 1000;
+                        newSyair.push(bangunBarisSyair(parseInt(selectedKata), temaTerpilih, lineSeed));
                     }
                     
                     // Generate MK (2 angka unik 0-9)
-                    const mkSeed = baseSeed + 200;
-                    const mkNumbers = generateUniqueNumbers(2, 0, 9, mkSeed);
+                    const mkSeed = baseSeed + 5000;
+                    const mkNumbers = generateAdvancedUniqueNumbers(2, 0, 9, mkSeed);
                     mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
                     
                     // Generate Naga (3 angka unik 0-9)
-                    const nagaSeed = baseSeed + 300;
-                    const nagaNumbers = generateUniqueNumbers(3, 0, 9, nagaSeed);
+                    const nagaSeed = baseSeed + 6000;
+                    const nagaNumbers = generateAdvancedUniqueNumbers(3, 0, 9, nagaSeed);
                     nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
                     
                     // Generate karakter binatang
-                    const binatangSeed = baseSeed + 400;
+                    const binatangSeed = baseSeed + 7000;
                     binatangValue.textContent = generateKarakterBinatang(binatangSeed);
                     
                     // Terapkan efek animasi
@@ -1631,8 +1405,8 @@
                 
                 // Fungsi untuk generate MK saja
                 function generateMk() {
-                    const seed = generateUniqueSeed() + 500;
-                    const mkNumbers = generateUniqueNumbers(2, 0, 9, seed);
+                    const seed = generateAdvancedHash() + 10000;
+                    const mkNumbers = generateAdvancedUniqueNumbers(2, 0, 9, seed);
                     mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
                     
                     copySuccess.textContent = "✓ MK berhasil di-generate!";
@@ -1645,8 +1419,8 @@
                 
                 // Fungsi untuk generate Naga saja
                 function generateNaga() {
-                    const seed = generateUniqueSeed() + 600;
-                    const nagaNumbers = generateUniqueNumbers(3, 0, 9, seed);
+                    const seed = generateAdvancedHash() + 11000;
+                    const nagaNumbers = generateAdvancedUniqueNumbers(3, 0, 9, seed);
                     nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
                     
                     copySuccess.textContent = "✓ Naga berhasil di-generate!";
@@ -1659,7 +1433,7 @@
                 
                 // Fungsi untuk generate Karakter Binatang saja
                 function generateBinatang() {
-                    const seed = generateUniqueSeed() + 700;
+                    const seed = generateAdvancedHash() + 12000;
                     binatangValue.textContent = generateKarakterBinatang(seed);
                     
                     copySuccess.textContent = "✓ Karakter Binatang berhasil di-generate!";
