@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --neon-cyan: #00f5ff;
+            --neon-green: #0aff9d;
+            --neon-green-dark: #08cc80;
+            --neon-green-light: #4dffc3;
             --neon-purple: #9d50ff;
-            --neon-pink: #ff64cb;
-            --neon-blue: #4361ee;
             --dark-bg: #0a0a16;
             --darker-bg: #050510;
             --card-bg: rgba(15, 15, 35, 0.7);
@@ -21,58 +21,6 @@
             --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
-            
-            /* Light mode variables */
-            --light-bg: #f0f2f5;
-            --light-card-bg: rgba(255, 255, 255, 0.8);
-            --light-text: #2d3748;
-            --light-glass-bg: rgba(0, 0, 0, 0.05);
-            --light-glass-border: rgba(0, 0, 0, 0.1);
-        }
-
-        /* Light mode styles */
-        body.light-cyber {
-            --dark-bg: var(--light-bg);
-            --darker-bg: #e1e5eb;
-            --card-bg: var(--light-card-bg);
-            --text-light: var(--light-text);
-            --text-glow: rgba(0, 0, 0, 0.8);
-            --glass-bg: var(--light-glass-bg);
-            --glass-border: var(--light-glass-border);
-        }
-
-        body.light-cyber .cyber-grid {
-            background-image: 
-                linear-gradient(rgba(0, 100, 120, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 100, 120, 0.1) 1px, transparent 1px);
-            opacity: 0.5;
-        }
-
-        body.light-cyber .cyber-lines {
-            background: 
-                linear-gradient(90deg, transparent, rgba(0, 120, 150, 0.1), transparent),
-                linear-gradient(transparent, rgba(150, 0, 120, 0.1), transparent);
-        }
-
-        body.light-cyber .info-item i,
-        body.light-cyber .search-icon,
-        body.light-cyber .suggestion-item i {
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
-        }
-
-        body.light-cyber .no-results i {
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-        }
-
-        body.light-cyber .logout-btn {
-            background: linear-gradient(45deg, #4361ee, #3a56d4);
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-        }
-
-        body.light-cyber .logout-btn:hover {
-            box-shadow: 0 0 20px rgba(67, 97, 238, 0.8);
         }
 
         * {
@@ -93,7 +41,6 @@
             align-items: center;
             overflow-x: hidden;
             position: relative;
-            transition: var(--transition);
         }
 
         body::before {
@@ -105,17 +52,9 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 15% 50%, rgba(17, 17, 55, 0.7) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(68, 31, 148, 0.5) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(10, 80, 50, 0.5) 0%, transparent 25%),
                 radial-gradient(circle at 50% 80%, rgba(55, 17, 55, 0.6) 0%, transparent 25%);
             z-index: -3;
-            transition: var(--transition);
-        }
-
-        body.light-cyber::before {
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(200, 220, 255, 0.5) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(180, 160, 255, 0.4) 0%, transparent 25%),
-                radial-gradient(circle at 50% 80%, rgba(255, 180, 230, 0.4) 0%, transparent 25%);
         }
 
         .cyber-grid {
@@ -125,8 +64,8 @@
             width: 100%;
             height: 100%;
             background-image: 
-                linear-gradient(rgba(0, 245, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 245, 255, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(10, 255, 157, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(10, 255, 157, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -2;
             opacity: 0.3;
@@ -148,8 +87,8 @@
             width: 100%;
             height: 100%;
             background: 
-                linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.05), transparent),
-                linear-gradient(transparent, rgba(255, 0, 255, 0.05), transparent);
+                linear-gradient(90deg, transparent, rgba(10, 255, 157, 0.05), transparent),
+                linear-gradient(transparent, rgba(157, 80, 255, 0.05), transparent);
             background-size: 200% 200%;
             z-index: -1;
             animation: scanLines 20s infinite linear;
@@ -173,23 +112,13 @@
             border-radius: 25px;
             padding: 30px;
             box-shadow: 
-                0 0 30px rgba(0, 255, 255, 0.2),
-                0 0 60px rgba(148, 97, 251, 0.2),
+                0 0 30px rgba(10, 255, 157, 0.2),
+                0 0 60px rgba(157, 97, 251, 0.2),
                 inset 0 0 15px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(10, 255, 157, 0.2);
             position: relative;
             overflow: hidden;
             z-index: 1;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .container {
-            background: rgba(240, 242, 245, 0.8);
-            box-shadow: 
-                0 0 30px rgba(67, 97, 238, 0.2),
-                0 0 60px rgba(157, 80, 255, 0.2),
-                inset 0 0 15px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(67, 97, 238, 0.2);
         }
 
         .container::before {
@@ -199,16 +128,11 @@
             left: -15px;
             right: -15px;
             bottom: -15px;
-            background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
+            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
             z-index: -1;
             border-radius: 30px;
             animation: borderGlow 4s infinite alternate;
             opacity: 0.4;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .container::before {
-            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-purple), transparent);
         }
 
         @keyframes borderGlow {
@@ -233,21 +157,15 @@
             font-family: 'Orbitron', sans-serif;
             font-size: 2.2rem;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
             letter-spacing: 2px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            transition: var(--transition);
-        }
-
-        body.light-cyber .logo {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            text-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
         }
 
         .controls {
@@ -283,11 +201,6 @@
             letter-spacing: 1px;
             text-align: center;
             margin-top: 40px;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .subtitle {
-            color: var(--light-text);
         }
 
         .info-bar {
@@ -301,26 +214,19 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--glass-border);
             backdrop-filter: blur(5px);
-            transition: var(--transition);
-        }
-
-        body.light-cyber .info-bar {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .info-item {
             display: flex;
             align-items: center;
             font-weight: 500;
-            transition: var(--transition);
         }
 
         .info-item i {
             margin-right: 12px;
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             font-size: 1.2rem;
-            text-shadow: 0 0 10px var(--neon-cyan);
-            transition: var(--transition);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         .search-container {
@@ -350,29 +256,13 @@
 
         #search:focus {
             outline: none;
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
-            border-color: var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(10, 255, 157, 0.3);
+            border-color: var(--neon-green);
             background: rgba(15, 15, 35, 0.9);
-        }
-
-        body.light-cyber #search {
-            color: var(--light-text);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-cyber #search:focus {
-            box-shadow: 0 0 25px rgba(67, 97, 238, 0.3);
-            border-color: var(--neon-blue);
-            background: rgba(255, 255, 255, 0.9);
         }
 
         #search::placeholder {
             color: rgba(255, 255, 255, 0.6);
-            transition: var(--transition);
-        }
-
-        body.light-cyber #search::placeholder {
-            color: rgba(0, 0, 0, 0.6);
         }
 
         .search-icon {
@@ -380,11 +270,10 @@
             left: 30px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             font-size: 1.3rem;
             z-index: 3;
-            text-shadow: 0 0 10px var(--neon-cyan);
-            transition: var(--transition);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         .clear-search {
@@ -401,17 +290,8 @@
         }
 
         .clear-search:hover {
-            color: var(--neon-pink);
-            transform: translateY(-50%) scale(1.2);
-            text-shadow: 0 0 10px var(--neon-pink);
-        }
-
-        body.light-cyber .clear-search {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        body.light-cyber .clear-search:hover {
             color: var(--neon-purple);
+            transform: translateY(-50%) scale(1.2);
             text-shadow: 0 0 10px var(--neon-purple);
         }
 
@@ -432,11 +312,6 @@
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             animation: fadeIn 0.3s ease;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .suggestions {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         }
 
         .suggestion-item {
@@ -449,25 +324,16 @@
             color: var(--text-light);
         }
 
-        body.light-cyber .suggestion-item {
-            color: var(--light-text);
-        }
-
         .suggestion-item i {
             margin-right: 12px;
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             font-size: 1.2rem;
-            text-shadow: 0 0 8px var(--neon-cyan);
-            transition: var(--transition);
+            text-shadow: 0 0 8px var(--neon-green);
         }
 
         .suggestion-item:hover {
-            background: rgba(0, 255, 255, 0.1);
+            background: rgba(10, 255, 157, 0.1);
             transform: translateX(10px);
-        }
-
-        body.light-cyber .suggestion-item:hover {
-            background: rgba(67, 97, 238, 0.1);
         }
 
         .shortcut-grid {
@@ -502,10 +368,6 @@
             transform: translateY(30px);
         }
 
-        body.light-cyber .shortcut-card {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
         @keyframes cardAppear {
             0% { opacity: 0; transform: translateY(30px) rotateX(30deg); }
             100% { opacity: 1; transform: translateY(0) rotateX(0); }
@@ -518,16 +380,12 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
+            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
             z-index: -1;
             border-radius: 20px;
             animation: borderRotate 3s linear infinite;
             opacity: 0;
             transition: var(--transition);
-        }
-
-        body.light-cyber .shortcut-card::before {
-            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-purple), transparent);
         }
 
         @keyframes borderRotate {
@@ -539,17 +397,9 @@
             transform: translateY(-10px) scale(1.03);
             box-shadow: 
                 0 15px 40px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(0, 255, 255, 0.3),
-                0 0 35px rgba(255, 100, 203, 0.2);
-            border-color: var(--neon-cyan);
-        }
-
-        body.light-cyber .shortcut-card:hover {
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.1),
-                0 0 25px rgba(67, 97, 238, 0.3),
+                0 0 25px rgba(10, 255, 157, 0.3),
                 0 0 35px rgba(157, 80, 255, 0.2);
-            border-color: var(--neon-blue);
+            border-color: var(--neon-green);
         }
 
         .shortcut-card:hover::before {
@@ -564,14 +414,14 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
             color: white;
             font-size: 1.8rem;
             animation: pulse 3s infinite ease-in-out;
             transition: var(--transition);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
+            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
         }
 
         .icon-container::after {
@@ -589,7 +439,7 @@
         .shortcut-card:hover .icon-container {
             transform: scale(1.15) rotate(5deg);
             animation: none;
-            box-shadow: 0 0 25px rgba(67, 97, 238, 0.8);
+            box-shadow: 0 0 25px rgba(10, 255, 157, 0.8);
         }
 
         .shortcut-card:hover .icon-container::after {
@@ -610,8 +460,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(67, 97, 238, 0.5); }
-            50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(67, 97, 238, 0.7); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(10, 255, 157, 0.5); }
+            50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(10, 255, 157, 0.7); }
         }
 
         @keyframes shake {
@@ -632,19 +482,10 @@
             letter-spacing: 0.5px;
         }
 
-        body.light-cyber .shortcut-name {
-            color: var(--light-text);
-        }
-
         .shortcut-card:hover .shortcut-name {
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
-        }
-
-        body.light-cyber .shortcut-card:hover .shortcut-name {
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
+            text-shadow: 0 0 10px rgba(10, 255, 157, 0.5);
         }
 
         .no-results {
@@ -656,31 +497,20 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
             border: 1px solid var(--glass-border);
             animation: fadeIn 0.5s ease;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .no-results {
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
         .no-results i {
             font-size: 3rem;
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             margin-bottom: 15px;
             opacity: 0.7;
-            text-shadow: 0 0 15px var(--neon-cyan);
-            transition: var(--transition);
+            text-shadow: 0 0 15px var(--neon-green);
         }
 
         .no-results p {
             font-size: 1.2rem;
             color: var(--text-light);
             opacity: 0.8;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .no-results p {
-            color: var(--light-text);
         }
 
         /* Login Modal */
@@ -697,11 +527,6 @@
             z-index: 1000;
             animation: fadeIn 0.5s ease;
             backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        body.light-cyber .login-modal {
-            background: linear-gradient(135deg, #f0f2f5, #d0d5e0);
         }
 
         .login-container {
@@ -712,7 +537,7 @@
             width: 90%;
             max-width: 450px;
             box-shadow: 
-                0 0 40px rgba(0, 255, 255, 0.2),
+                0 0 40px rgba(10, 255, 157, 0.2),
                 0 0 60px rgba(148, 97, 251, 0.2);
             border: 1px solid var(--glass-border);
             animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -720,14 +545,6 @@
             opacity: 0;
             position: relative;
             overflow: hidden;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .login-container {
-            background: var(--light-card-bg);
-            box-shadow: 
-                0 0 40px rgba(67, 97, 238, 0.2),
-                0 0 60px rgba(157, 80, 255, 0.2);
         }
 
         .login-container::before {
@@ -737,16 +554,11 @@
             left: -15px;
             right: -15px;
             bottom: -15px;
-            background: linear-gradient(45deg, var(--neon-cyan), transparent, var(--neon-pink), transparent);
+            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
             z-index: -1;
             border-radius: 30px;
             animation: borderGlow 4s infinite alternate;
             opacity: 0.4;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .login-container::before {
-            background: linear-gradient(45deg, var(--neon-blue), transparent, var(--neon-purple), transparent);
         }
 
         @keyframes modalAppear {
@@ -757,18 +569,12 @@
         .login-container h2 {
             text-align: center;
             margin-bottom: 25px;
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             font-family: 'Orbitron', sans-serif;
             font-size: 2rem;
-            text-shadow: 0 0 15px var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-green);
             letter-spacing: 1px;
             position: relative;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .login-container h2 {
-            color: var(--neon-blue);
-            text-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
         }
 
         .login-container h2::after {
@@ -779,13 +585,8 @@
             transform: translateX(-50%);
             width: 60%;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--neon-cyan), var(--neon-pink), transparent);
+            background: linear-gradient(90deg, transparent, var(--neon-green), var(--neon-purple), transparent);
             border-radius: 100%;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .login-container h2::after {
-            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
         }
 
         .input-group {
@@ -798,11 +599,6 @@
             font-weight: 500;
             color: var(--text-light);
             letter-spacing: 0.5px;
-            transition: var(--transition);
-        }
-
-        body.light-cyber .input-group label {
-            color: var(--light-text);
         }
 
         .input-group input {
@@ -819,30 +615,13 @@
 
         .input-group input:focus {
             outline: none;
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px rgba(10, 255, 157, 0.3);
             background: rgba(10, 10, 25, 0.9);
-        }
-
-        body.light-cyber .input-group input {
-            background: rgba(255, 255, 255, 0.8);
-            color: var(--light-text);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-cyber .input-group input:focus {
-            border-color: var(--neon-blue);
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.3);
-            background: rgba(255, 255, 255, 0.95);
         }
 
         .input-group input::placeholder {
             color: rgba(255, 255, 255, 0.5);
-            transition: var(--transition);
-        }
-
-        body.light-cyber .input-group input::placeholder {
-            color: rgba(0, 0, 0, 0.5);
         }
 
         .password-container {
@@ -860,24 +639,15 @@
         }
 
         .toggle-password:hover {
-            color: var(--neon-cyan);
+            color: var(--neon-green);
             transform: translateY(-50%) scale(1.2);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        body.light-cyber .toggle-password {
-            color: rgba(0, 0, 0, 0.5);
-        }
-
-        body.light-cyber .toggle-password:hover {
-            color: var(--neon-blue);
-            text-shadow: 0 0 10px rgba(67, 97, 238, 0.5);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         .login-btn {
             width: 100%;
             padding: 16px;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
             color: white;
             border: none;
             border-radius: 12px;
@@ -890,7 +660,7 @@
             font-family: 'Orbitron', sans-serif;
             letter-spacing: 1px;
             text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
+            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
         }
 
         .login-btn::after {
@@ -907,7 +677,7 @@
 
         .login-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(67, 97, 238, 0.8);
+            box-shadow: 0 0 25px rgba(10, 255, 157, 0.8);
         }
 
         .login-btn:hover::after {
@@ -945,28 +715,6 @@
             box-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
         }
 
-        .theme-toggle {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            box-shadow: 0 0 15px rgba(67, 97, 238, 0.5);
-            transition: var(--transition);
-            z-index: 10;
-        }
-
-        .theme-toggle:hover {
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 0 20px rgba(67, 97, 238, 0.8);
-        }
-
         /* Floating particles */
         .particles {
             position: fixed;
@@ -981,14 +729,10 @@
         .particle {
             position: absolute;
             border-radius: 50%;
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
-            opacity: 0.5;
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
+            opacity: 0.3;
             animation: float 20s infinite linear;
             filter: blur(2px);
-        }
-
-        body.light-cyber .particle {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
         }
 
         @keyframes float {
@@ -1027,7 +771,7 @@
             .header-top {
                 margin-bottom: 12px;
             }
-            .theme-toggle, .logout-btn {
+            .logout-btn {
                 width: 45px;
                 height: 45px;
             }
@@ -1113,20 +857,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--neon-cyan), var(--neon-pink));
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
             border-radius: 8px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan));
-        }
-
-        body.light-cyber ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
-        }
-
-        body.light-cyber ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-green));
         }
     </style>
 </head>
@@ -1167,9 +903,6 @@
                 <div class="controls">
                     <button class="logout-btn" id="logoutBtn">
                         <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                    <button class="theme-toggle" id="themeToggle">
-                        <i class="fas fa-moon"></i>
                     </button>
                 </div>
             </div>
@@ -1433,7 +1166,6 @@
         const searchInput = document.getElementById('search');
         const clearSearch = document.getElementById('clearSearch');
         const suggestionsContainer = document.getElementById('suggestions');
-        const themeToggle = document.getElementById('themeToggle');
         const datetimeElement = document.getElementById('datetime');
         const ipAddressElement = document.getElementById('ip-address');
         const particlesContainer = document.getElementById('particles');
@@ -1441,12 +1173,12 @@
         
         // Create floating particles
         function createParticles() {
-            const colors = ['#00f5ff', '#ff64cb', '#9d50ff', '#4361ee'];
+            const colors = ['#0aff9d', '#9d50ff', '#4dffc3'];
             const count = Math.floor(window.innerWidth / 25);
             for (let i = 0; i < count; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
-                const size = Math.random() * 15 + 3;
+                const size = Math.random() * 10 + 3;
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
@@ -1617,7 +1349,7 @@
                     });
                     // Add hover effect to suggestions
                     div.addEventListener('mouseenter', () => {
-                        div.style.backgroundColor = 'rgba(0, 255, 255, 0.1)';
+                        div.style.backgroundColor = 'rgba(10, 255, 157, 0.1)';
                         div.style.transform = 'translateX(10px)';
                     });
                     div.addEventListener('mouseleave', () => {
@@ -1638,25 +1370,6 @@
             clearSearch.style.display = 'none';
             renderShortcuts(filterShortcuts(''));
             suggestionsContainer.style.display = 'none';
-        }
-        
-        // Toggle dark/light mode
-        function toggleTheme() {
-            const body = document.body;
-            const isLightCyber = body.classList.toggle('light-cyber');
-            
-            // Update icon
-            const icon = themeToggle.querySelector('i');
-            if (isLightCyber) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-            
-            // Save preference to localStorage
-            localStorage.setItem('cyberTheme', isLightCyber ? 'light' : 'dark');
         }
         
         // Initialize the page
@@ -1704,16 +1417,6 @@
                     suggestionsContainer.style.display = 'none';
                 }
             });
-            
-            // Set up theme toggle
-            const savedTheme = localStorage.getItem('cyberTheme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-cyber');
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-            } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-            }
-            themeToggle.addEventListener('click', toggleTheme);
             
             // Set up hamburger menu (no sidebar to toggle)
             hamburgerBtn.style.display = 'none';
