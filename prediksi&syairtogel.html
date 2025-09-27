@@ -1211,16 +1211,16 @@
                 const copySuccess = document.getElementById('copy-success');
                 const kataOptions = document.querySelectorAll('.kata-option');
                 
-                // Kumpulan kata untuk membangun syair secara dinamis
+                // Kumpulan kata untuk membangun syair secara dinamis - DIUBAH MENJADI LEBIH SINGKAT
                 const kataKunci = {
-                    subjek: ["Angka", "Mimpi", "Nasib", "Keberuntungan", "Petunjuk", "Rahasia", "Alam", "Hati", "Firasat", "Tanda"],
-                    predikat: ["tersembunyi", "menanti", "menyapa", "terungkap", "berbicara", "menuntun", "menghampiri", "membisik", "menjelma", "menghilang"],
-                    objek: ["dalam mimpi", "di hati", "pada firasat", "dengan bijak", "secara halus", "dengan tiba-tiba", "dengan pasti", "dalam diam", "pada waktunya", "di ujung senja"],
-                    keterangan: ["yang dalam", "yang abadi", "penuh makna", "tak terduga", "misterius", "penuh harapan", "menakjubkan", "tak terlupakan", "penuh arti", "menyenangkan"],
-                    penghubung: ["namun", "tetapi", "oleh karena", "sehingga", "maka", "akhirnya", "kemudian", "selanjutnya", "sementara", "walaupun"]
+                    subjek: ["Angka", "Mimpi", "Nasib", "Hoki", "Tanda", "Alam", "Bintang", "Cahaya", "Bayang", "Suara"],
+                    predikat: ["tumbuh", "jatuh", "terbang", "menyelam", "berdiri", "berlari", "tersenyum", "menangis", "berbicara", "diam"],
+                    objek: ["di hati", "di mimpi", "dalam diam", "dengan senyum", "dengan air", "dengan api", "dengan angin", "dengan tanah", "dengan waktu", "dengan ruang"],
+                    keterangan: ["perlahan", "cepat", "indah", "misterius", "tenang", "gembira", "sedih", "bangga", "lapang", "sempit"],
+                    penghubung: ["lalu", "kemudian", "namun", "tetapi", "atau", "dan", "karena", "jika", "walaupun", "sambil"]
                 };
                 
-                // Tema untuk syair yang koheren
+                // Tema untuk syair yang koheren - DIUBAH MENJADI LEBIH SINGKAT
                 const temaSyair = [
                     {nama: "Alam", kata: ["angin", "bumi", "langit", "sungai", "gunung", "laut", "hutan", "matahari", "bulan", "bintang"]},
                     {nama: "Kehidupan", kata: ["jalan", "waktu", "harapan", "cinta", "perjuangan", "kesabaran", "kebahagiaan", "kesedihan", "kejujuran", "pengorbanan"]},
@@ -1322,7 +1322,7 @@
                     return array[randomIndex];
                 }
                 
-                // Fungsi untuk membangun baris syair yang koheren
+                // Fungsi untuk membangun baris syair yang koheren - DIUBAH AGAR LEBIH SINGKAT
                 function bangunBarisSyair(jumlahKata, tema, seed) {
                     let baris = "";
                     
