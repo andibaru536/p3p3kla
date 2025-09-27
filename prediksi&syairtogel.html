@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%233498db'/><path d='M50 20 L65 40 L75 35 L70 55 L85 60 L65 65 L70 85 L50 75 L30 85 L35 65 L15 60 L30 55 L25 35 L35 40 Z' fill='%23FFD700'/><text x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dominant-baseline='middle'>PS</text></svg>">
     <style>
-        /* Kode CSS sebelumnya tetap sama */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -561,37 +560,47 @@
             background-color: rgba(255, 255, 255, 0.1);
         }
         
+        /* Tombol syair yang dipindahkan ke atas */
+        .syair-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
         .syair-button-container {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
             flex-wrap: wrap;
+        }
+        
+        #generateSyairBtn, #copySyairBtn {
+            padding: 10px 20px;
+            font-size: 14px;
+            min-width: 140px;
         }
         
         #generateSyairBtn {
             background: linear-gradient(to right, #1a2a6c, #b21f1f);
             color: white;
-            flex: 1;
-            min-width: 200px;
         }
         
         #copySyairBtn {
             background: linear-gradient(to right, #2d6a4f, #1b5e20);
             color: white;
-            flex: 1;
-            min-width: 200px;
         }
         
         .pattern-info {
-            margin-top: 20px;
             font-size: 15px;
             color: #5d4037;
             background-color: rgba(141, 110, 99, 0.1);
-            padding: 12px 18px;
+            padding: 10px 15px;
             border-radius: 8px;
-            display: inline-block;
             text-align: center;
-            width: 100%;
+            flex: 1;
+            min-width: 250px;
         }
         
         .dark-mode .pattern-info {
@@ -657,7 +666,7 @@
             color: #c8e6c9;
         }
         
-        /* TOMBOL YANG LEBIH KOMPAK */
+        /* TOMBOL YANG LEBIH KOMPAK - DIKECILKAN */
         .compact-buttons {
             display: flex;
             gap: 8px;
@@ -881,6 +890,14 @@
             .kata-option {
                 width: 100%;
             }
+            
+            .syair-controls {
+                flex-direction: column;
+            }
+            
+            .pattern-info {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -1099,6 +1116,15 @@
                 <div class="baris" id="baris4">Rahasia angka terungkap nanti</div>
             </div>
             
+            <!-- Tombol syair dipindahkan ke atas -->
+            <div class="syair-controls">
+                <div class="syair-button-container">
+                    <button id="generateSyairBtn"><i class="fas fa-feather-alt"></i> Buat Syair Baru</button>
+                    <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
+                </div>
+                <div class="pattern-info" id="pattern-info">Pola rima: a-a-b-b (contoh: merah - merah - biru - biru)</div>
+            </div>
+            
             <div class="prediction-boxes">
                 <div class="prediction-box">
                     <div class="prediction-title-small">MK (Mimpi Kunci)</div>
@@ -1140,13 +1166,6 @@
                         </button>
                     </div>
                 </div>
-            </div>
-            
-            <div class="pattern-info" id="pattern-info">Pola rima: a-a-b-b (contoh: merah - merah - biru - biru)</div>
-            
-            <div class="syair-button-container">
-                <button id="generateSyairBtn"><i class="fas fa-feather-alt"></i> Buat Syair Baru</button>
-                <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
             </div>
             
             <div class="copy-success" id="copy-success"></div>
