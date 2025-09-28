@@ -1277,15 +1277,21 @@
                 // Tema untuk syair
                 const temaSyair = [
                     "Kehidupan", "Cinta", "Harapan", "Perjuangan", "Kebahagiaan", "Kesedihan", 
-                    "Waktu", "Alam", "Mimpi", "Nasib", "Persahabatan", "Keluaraga"
+                    "Waktu", "Alam", "Mimpi", "Nasib", "Persahabatan", "Keluaraga", "Kesabaran", "Kesuksesan",
+                    "Pengorbanan", "Kedamaian", "Perubahan", "Kebijaksanaan", "Kesetiaan", "Kebaikan"
                 ];
                 
                 // Pola rima
                 const polaRima = [
                     { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
                     { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" },
-                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" }
+                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
+                    { pola: "a-b-c-b", contoh: "merah - biru - hijau - biru" },
+                    { pola: "a-b-c-c", contoh: "merah - biru - hijau - hijau" }
                 ];
+                
+                // Variabel untuk melacak syair yang sudah digunakan
+                let usedSyairIndices = new Set();
                 
                 // Fungsi untuk memanggil AI (simulasi API call)
                 async function callAISyair(jumlahKata, tema) {
@@ -1298,7 +1304,7 @@
                 
                 // Fungsi untuk menghasilkan syair dengan AI yang lebih koheren
                 function generateAISyair(jumlahKata, tema) {
-                    // Database syair yang koheren
+                    // Database syair yang koheren - DIPERBESAR dengan lebih banyak variasi
                     const syairDatabase = {
                         "Kehidupan": [
                             [
@@ -1318,6 +1324,36 @@
                                 "Tumbuh menjulang ke angkasa",
                                 "Hidup harus penuh makna",
                                 "Berbuat baik tiada henti"
+                            ],
+                            [
+                                "Seperti ombak di lautan",
+                                "Bergulung tiada henti",
+                                "Hidup ini penuh gelombang",
+                                "Hadapi dengan ketabahan"
+                            ],
+                            [
+                                "Bagai burung yang terbang",
+                                "Mencari sarang di pohon tinggi",
+                                "Hidup adalah perjalanan",
+                                "Tujuan akhir adalah bahagia"
+                            ],
+                            [
+                                "Di bawah langit yang biru",
+                                "Hidup terus berputar",
+                                "Nikmati setiap detiknya",
+                                "Sebelum semuanya berlalu"
+                            ],
+                            [
+                                "Seperti kupu-kupu indah",
+                                "Keluar dari kepompong",
+                                "Hidup penuh transformasi",
+                                "Menjadi versi terbaik diri"
+                            ],
+                            [
+                                "Di tengah keramaian kota",
+                                "Hidup terus berdenyut",
+                                "Temukan arti sejati",
+                                "Di balik segala kesibukan"
                             ]
                         ],
                         "Cinta": [
@@ -1338,6 +1374,36 @@
                                 "Menerangi gelapnya malam",
                                 "Cinta yang tulus dan ikhlas",
                                 "Menghangatkan jiwa yang sepi"
+                            ],
+                            [
+                                "Seperti hujan di musim kemarau",
+                                "Menyegarkan bumi yang kering",
+                                "Cinta adalah anugerah",
+                                "Yang menyuburkan hati"
+                            ],
+                            [
+                                "Bagai pelangi setelah hujan",
+                                "Warnanya indah mempesona",
+                                "Cinta menghadirkan kebahagiaan",
+                                "Di tengah kesedihan hidup"
+                            ],
+                            [
+                                "Seperti angin yang berhembus",
+                                "Membelai daun-daun pepohonan",
+                                "Cinta adalah kelembutan",
+                                "Yang menenangkan jiwa"
+                            ],
+                            [
+                                "Bagai mutiara di dasar laut",
+                                "Berharga dan langka adanya",
+                                "Cinta sejati adalah harta",
+                                "Yang tak ternilai harganya"
+                            ],
+                            [
+                                "Seperti api unggun di malam hari",
+                                "Menghangatkan tubuh yang dingin",
+                                "Cinta memberikan kehangatan",
+                                "Di saat hati merasa sepi"
                             ]
                         ],
                         "Harapan": [
@@ -1358,6 +1424,36 @@
                                 "Menyegarkan jiwa yang lesu",
                                 "Harapan adalah penyemangat",
                                 "Dalam menjalani kehidupan"
+                            ],
+                            [
+                                "Bagai tunas di musim semi",
+                                "Tumbuh dengan penuh semangat",
+                                "Harapan adalah kehidupan",
+                                "Yang terus berkembang maju"
+                            ],
+                            [
+                                "Seperti pelita di kegelapan",
+                                "Menerangi jalan yang gelap",
+                                "Harapan adalah penuntun",
+                                "Menuju masa depan cerah"
+                            ],
+                            [
+                                "Bagai burung yang berkicau",
+                                "Menyambut pagi dengan riang",
+                                "Harapan adalah nyanyian",
+                                "Yang mengusir kesedihan"
+                            ],
+                            [
+                                "Seperti mata air di gurun",
+                                "Memberikan kehidupan baru",
+                                "Harapan adalah sumber",
+                                "Kekuatan dan semangat hidup"
+                            ],
+                            [
+                                "Bagai layar di tengah samudra",
+                                "Menangkap angin untuk berlayar",
+                                "Harapan adalah penggerak",
+                                "Menuju tujuan dan impian"
                             ]
                         ],
                         "Alam": [
@@ -1378,15 +1474,158 @@
                                 "Menyambut mentari yang terbit",
                                 "Alam memberikan kedamaian",
                                 "Bagi jiwa yang resah gelisah"
+                            ],
+                            [
+                                "Sungai mengalir tenang",
+                                "Membawa kehidupan baru",
+                                "Alam adalah guru terbaik",
+                                "Mengajarkan kesabaran tulus"
+                            ],
+                            [
+                                "Bunga bermekaran indah",
+                                "Warnanya memikat hati",
+                                "Alam menghadirkan keajaiban",
+                                "Di setiap sudut bumi"
+                            ],
+                            [
+                                "Hujan turun membasahi bumi",
+                                "Menyuburkan tanah yang kering",
+                                "Alam memberikan berkah",
+                                "Bagi semua makhluk hidup"
+                            ],
+                            [
+                                "Angin berhembus lembut",
+                                "Membelai pepohonan rindang",
+                                "Alam memberikan ketenangan",
+                                "Bagi jiwa yang gelisah"
+                            ],
+                            [
+                                "Bintang gemerlap di malam hari",
+                                "Menghiasi langit yang gelap",
+                                "Alam adalah karya agung",
+                                "Yang patut disyukuri"
+                            ]
+                        ],
+                        "Perjuangan": [
+                            [
+                                "Di medan perjuangan hidup",
+                                "Banyak rintangan menghadang",
+                                "Tapi jangan pernah menyerah",
+                                "Kemenangan akan tiba"
+                            ],
+                            [
+                                "Seperti batu karang di laut",
+                                "Tetap kokoh diterpa ombak",
+                                "Perjuangan menguatkan jiwa",
+                                "Membuat kita lebih tangguh"
+                            ],
+                            [
+                                "Bagai pelari di trek lari",
+                                "Terus maju tak kenal lelah",
+                                "Perjuangan adalah proses",
+                                "Menuju garis finish bahagia"
+                            ],
+                            [
+                                "Seperti pandai besi menempa",
+                                "Besi menjadi pedang tajam",
+                                "Perjuangan menempa karakter",
+                                "Menjadi pribadi yang kuat"
+                            ],
+                            [
+                                "Bagai pendaki gunung tinggi",
+                                "Melangkah dengan tekad bulat",
+                                "Perjuangan butuh ketekunan",
+                                "Untuk mencapai puncak impian"
+                            ],
+                            [
+                                "Seperti petani menanam padi",
+                                "Bersabar menunggu panen",
+                                "Perjuangan butuh kesabaran",
+                                "Hasil tak akan mengkhianati"
+                            ],
+                            [
+                                "Bagai nelayan di tengah laut",
+                                "Menghadang gelombang besar",
+                                "Perjuangan mengajarkan",
+                                "Artinya pantang menyerah"
+                            ],
+                            [
+                                "Seperti lebah membuat madu",
+                                "Bekerja keras tiada henti",
+                                "Perjuangan adalah kunci",
+                                "Menuju kesuksesan sejati"
+                            ]
+                        ],
+                        "Kesabaran": [
+                            [
+                                "Seperti pohon bambu tumbuh",
+                                "Perlahan namun pasti",
+                                "Kesabaran adalah kunci",
+                                "Menuju keberhasilan hidup"
+                            ],
+                            [
+                                "Bagai air menetes pelan",
+                                "Akhirnya melubangi batu",
+                                "Kesabaran adalah kekuatan",
+                                "Yang mengalahkan segalanya"
+                            ],
+                            [
+                                "Seperti petani menunggu",
+                                "Biji tumbuh menjadi tunas",
+                                "Kesabaran memberikan hasil",
+                                "Yang manis dan memuaskan"
+                            ],
+                            [
+                                "Bagai matahari terbit perlahan",
+                                "Menyinari bumi dengan sabar",
+                                "Kesabaran adalah cahaya",
+                                "Yang menerangi jalan hidup"
+                            ],
+                            [
+                                "Seperti sungai mengalir tenang",
+                                "Menuju laut yang luas",
+                                "Kesabaran mengajarkan",
+                                "Artinya proses yang indah"
+                            ],
+                            [
+                                "Bagai kupu-kupu dalam kepompong",
+                                "Menunggu saat terbaik",
+                                "Kesabaran adalah proses",
+                                "Menuju transformasi diri"
+                            ],
+                            [
+                                "Seperti embun di pagi hari",
+                                "Muncul perlahan di daun",
+                                "Kesabaran adalah keindahan",
+                                "Yang hadir dengan sendirinya"
+                            ],
+                            [
+                                "Bagai pelukis membuat karya",
+                                "Perlahan dengan penuh hati",
+                                "Kesabaran menciptakan",
+                                "Karya yang sempurna adanya"
                             ]
                         ]
                     };
                     
                     // Pilih syair berdasarkan tema
                     const syairTema = syairDatabase[tema] || syairDatabase["Kehidupan"];
-                    const randomSyair = syairTema[Math.floor(Math.random() * syairTema.length)];
                     
-                    return randomSyair;
+                    // Jika semua syair sudah digunakan, reset daftar yang sudah digunakan
+                    if (usedSyairIndices.size >= syairTema.length) {
+                        usedSyairIndices.clear();
+                    }
+                    
+                    // Pilih syair yang belum digunakan
+                    let randomIndex;
+                    do {
+                        randomIndex = Math.floor(Math.random() * syairTema.length);
+                    } while (usedSyairIndices.has(randomIndex));
+                    
+                    // Tandai syair ini sebagai sudah digunakan
+                    usedSyairIndices.add(randomIndex);
+                    
+                    return syairTema[randomIndex];
                 }
                 
                 // Fungsi untuk menghasilkan syair baru dengan AI
