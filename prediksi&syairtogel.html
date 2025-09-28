@@ -843,6 +843,40 @@
             background: rgba(30, 120, 30, 0.7);
         }
         
+        /* AI Indicator */
+        .ai-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .ai-loading {
+            display: none;
+            text-align: center;
+            margin: 15px 0;
+            color: #3498db;
+        }
+        
+        .ai-loading .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(52, 152, 219, 0.3);
+            border-radius: 50%;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
         /* Responsif */
         @media (max-width: 768px) {
             .container {
@@ -907,7 +941,7 @@
             <h1><i class="fas fa-crystal-ball"></i> Prediksi Togel & Generator Syair <i class="fas fa-feather-alt"></i></h1>
             <div class="tabs">
                 <div class="tab active" data-tab="togel">Prediksi Togel</div>
-                <div class="tab" data-tab="syair">Generator Syair</div>
+                <div class="tab" data-tab="syair">Generator Syair <span class="ai-indicator">AI Powered</span></div>
             </div>
         </div>
         
@@ -1088,7 +1122,7 @@
             </div>
         </div>
         
-        <!-- Konten Generator Syair -->
+        <!-- Konten Generator Syair dengan AI -->
         <div id="syairContent" class="tab-content">
             <!-- Fitur Baru: Pilihan Jumlah Kata -->
             <div class="kata-options">
@@ -1110,19 +1144,22 @@
             </div>
             
             <div class="syair-container">
-                <div class="baris" id="baris1">Angka tersembunyi dalam mimpi</div>
-                <div class="baris" id="baris2">Petunjuk alam menanti</div>
-                <div class="baris" id="baris3">Keberuntungan menyapa hati</div>
-                <div class="baris" id="baris4">Rahasia angka terungkap nanti</div>
+                <div class="ai-loading" id="aiLoading">
+                    <div class="spinner"></div> AI sedang menciptakan syair...
+                </div>
+                <div class="baris" id="baris1">Hidup ini penuh makna</div>
+                <div class="baris" id="baris2">Waktu terus berjalan</div>
+                <div class="baris" id="baris3">Harapan tak pernah padam</div>
+                <div class="baris" id="baris4">Cinta abadi selamanya</div>
             </div>
             
             <!-- Tombol syair dipindahkan ke atas -->
             <div class="syair-controls">
                 <div class="syair-button-container">
-                    <button id="generateSyairBtn"><i class="fas fa-feather-alt"></i> Buat Syair Baru</button>
+                    <button id="generateSyairBtn"><i class="fas fa-robot"></i> Generate dengan AI</button>
                     <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
                 </div>
-                <div class="pattern-info" id="pattern-info">Pola rima: a-a-b-b (contoh: merah - merah - biru - biru)</div>
+                <div class="pattern-info" id="pattern-info">Pola rima: a-b-a-b | Tema: Kehidupan</div>
             </div>
             
             <div class="prediction-boxes">
@@ -1171,7 +1208,7 @@
             <div class="copy-success" id="copy-success"></div>
             
             <div class="footer-note">
-                Syair ini mengandung petunjuk angka dalam bentuk simbol dan metafora
+                Syair ini dihasilkan oleh AI dengan tema kehidupan dan mengandung petunjuk angka dalam bentuk simbol
             </div>
         </div>
     </div>
@@ -1209,7 +1246,7 @@
                 });
             });
             
-            // Fungsi untuk generator syair dengan algoritma canggih
+            // Fungsi untuk generator syair dengan AI
             function setupSyairGenerator() {
                 const baris1 = document.getElementById('baris1');
                 const baris2 = document.getElementById('baris2');
@@ -1229,173 +1266,138 @@
                 const binatangValue = document.getElementById('binatangValue');
                 const copySuccess = document.getElementById('copy-success');
                 const kataOptions = document.querySelectorAll('.kata-option');
+                const aiLoading = document.getElementById('aiLoading');
                 
-                // Kumpulan kata untuk membangun syair secara dinamis - DIUBAH MENJADI LEBIH SINGKAT
-                const kataKunci = {
-                    subjek: ["Angka", "Mimpi", "Nasib", "Hoki", "Tanda", "Alam", "Bintang", "Cahaya", "Bayang", "Suara"],
-                    predikat: ["tumbuh", "jatuh", "terbang", "menyelam", "berdiri", "berlari", "tersenyum", "menangis", "berbicara", "diam"],
-                    objek: ["di hati", "di mimpi", "dalam diam", "dengan senyum", "dengan air", "dengan api", "dengan angin", "dengan tanah", "dengan waktu", "dengan ruang"],
-                    keterangan: ["perlahan", "cepat", "indah", "misterius", "tenang", "gembira", "sedih", "bangga", "lapang", "sempit"],
-                    penghubung: ["lalu", "kemudian", "namun", "tetapi", "atau", "dan", "karena", "jika", "walaupun", "sambil"]
-                };
-                
-                // Tema untuk syair yang koheren - DIUBAH MENJADI LEBIH SINGKAT
-                const temaSyair = [
-                    {nama: "Alam", kata: ["angin", "bumi", "langit", "sungai", "gunung", "laut", "hutan", "matahari", "bulan", "bintang"]},
-                    {nama: "Kehidupan", kata: ["jalan", "waktu", "harapan", "cinta", "perjuangan", "kesabaran", "kebahagiaan", "kesedihan", "kejujuran", "pengorbanan"]},
-                    {nama: "Misteri", kata: ["rahasia", "petunjuk", "firasat", "isyarat", "tanda", "ramalan", "nubuat", "wahyu", "ilham", "bisikan"]},
-                    {nama: "Angka", kata: ["satu", "dua", "tiga", "empat", "lima", "enam", "tujuh", "delapan", "sembilan", "nol"]}
-                ];
-                
-                // Pola rima yang mungkin
-                const polaRima = [
-                    { pola: "a-a-a-a", contoh: "merah - merah - merah - merah" },
-                    { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
-                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
-                    { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" }
-                ];
-                
-                // Daftar karakter binatang (100 kata sifat)
+                // Daftar karakter binatang
                 const karakterBinatang = [
-                    "Pemberontak", "Penurut", "Pemalu", "Berani", "Licik", "Pemimpin", "Bijaksana", "Cermat", "Tenang", "Ganas", 
-                    "Santai", "Tegas", "Lembut", "Cepat", "Lambat", "Manis", "Keras", "Rapi", "Acak", "Ramah", 
-                    "Keras kepala", "Patuh", "Mandiri", "Bergantung", "Optimis", "Pesimis", "Realistis", "Imajinatif", "Sensitif", "Egois", 
-                    "Dermawan", "Pemurung", "Ceria", "Muram", "Hangat", "Dingin", "Kreatif", "Tekun", "Malas", "Gigih", 
-                    "Tertib", "Agresif", "Santuy", "Melankolis", "Sabar", "Gelisah", "Kuat", "Lembek", "Tegang", "Tenang", 
-                    "Bijak", "Konyol", "Asyik", "Kaku", "Fleksibel", "Arogan", "Rendah hati", "Sinis", "Jujur", "Halus", 
-                    "Kasar", "Penuh cinta", "Bersahaja", "Elegan", "Nyentrik", "Teliti", "Ceroboh", "Tangguh", "Lembut", "Beku", 
-                    "Hiperaktif", "Pendiam", "Ramai", "Introvert", "Ekstrovert", "Lemah lembut", "Spontan", "Terencana", "Lugu", "Pintar", 
-                    "Bodoh", "Bingung", "Fokus", "Ambigu", "Empatik", "Apatis", "Murah hati", "Pelit", "Humor", "Serius", 
-                    "Petualang", "Bijaksana", "Penuh semangat", "Tenang", "Gigih", "Lembut", "Kuat", "Cerdas", "Setia", "Berani"
+                    "Pemberontak", "Penurut", "Pemalu", "Berani", "Licik", "Pemimpin", "Bijaksana", "Cermat", 
+                    "Tenang", "Ganas", "Santai", "Tegas", "Lembut", "Cepat", "Lambat", "Manis", "Keras", "Rapi"
                 ];
                 
-                // Algoritma hash yang lebih kompleks untuk keunikan maksimal
-                function generateAdvancedHash() {
-                    const timestamp = Date.now().toString();
-                    const random = Math.random().toString();
-                    const userAgent = navigator.userAgent;
-                    const language = navigator.language;
-                    const timezone = new Date().getTimezoneOffset().toString();
-                    const screenRes = `${screen.width}x${screen.height}`;
-                    const colorDepth = screen.colorDepth.toString();
-                    const memory = performance.memory ? performance.memory.usedJSHeapSize.toString() : "0";
+                // Tema untuk syair
+                const temaSyair = [
+                    "Kehidupan", "Cinta", "Harapan", "Perjuangan", "Kebahagiaan", "Kesedihan", 
+                    "Waktu", "Alam", "Mimpi", "Nasib", "Persahabatan", "Keluaraga"
+                ];
+                
+                // Pola rima
+                const polaRima = [
+                    { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
+                    { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" },
+                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" }
+                ];
+                
+                // Fungsi untuk memanggil AI (simulasi API call)
+                async function callAISyair(jumlahKata, tema) {
+                    // Simulasi delay seperti AI yang sedang memproses
+                    await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
                     
-                    // Kombinasi semua faktor untuk hash yang sangat unik
-                    const seedString = timestamp + random + userAgent + language + timezone + screenRes + colorDepth + memory;
-                    
-                    // Algoritma hash yang lebih kompleks
-                    let hash = 0;
-                    for (let i = 0; i < seedString.length; i++) {
-                        const char = seedString.charCodeAt(i);
-                        hash = ((hash << 5) - hash) + char;
-                        hash = hash & hash; // Convert to 32-bit integer
-                    }
-                    
-                    // Tambahkan faktor acak tambahan
-                    hash = (hash * 9301 + 49297) % 233280;
-                    
-                    return Math.abs(hash);
+                    // Dalam implementasi nyata, ini akan memanggil API AI seperti OpenAI
+                    // Untuk demo, kita akan menggunakan generator yang lebih canggih
+                    return generateAISyair(jumlahKata, tema);
                 }
                 
-                // Fungsi PRNG yang dapat di-seed dengan algoritma yang lebih baik
-                function advancedSeededRandom(seed) {
-                    seed = (seed * 9301 + 49297) % 233280;
-                    return seed / 233280;
-                }
-                
-                // Fungsi untuk menghasilkan angka unik dengan algoritma yang lebih baik
-                function generateAdvancedUniqueNumbers(count, min, max, seed) {
-                    let numbers = [];
-                    let attempts = 0;
-                    const maxAttempts = 1000; // Meningkatkan batas percobaan
+                // Fungsi untuk menghasilkan syair dengan AI (simulasi)
+                function generateAISyair(jumlahKata, tema) {
+                    // Kata-kata yang lebih natural dan beragam
+                    const kataPool = {
+                        kehidupan: ["hidup", "jiwa", "hati", "rasa", "waktu", "nasib", "jalan", "tujuan", "harapan", "impian"],
+                        alam: ["angin", "bumi", "langit", "matahari", "bulan", "bintang", "sungai", "laut", "gunung", "hutan"],
+                        cinta: ["cinta", "kasih", "sayang", "rindu", "damba", "asmara", "hati", "jiwa", "sukma", "kalbu"],
+                        waktu: ["detik", "menit", "jam", "hari", "minggu", "bulan", "tahun", "masa", "zaman", "era"]
+                    };
                     
-                    while(numbers.length < count && attempts < maxAttempts) {
-                        const num = Math.floor(advancedSeededRandom(seed + attempts * 7) * (max - min + 1)) + min;
-                        if (!numbers.includes(num)) {
-                            numbers.push(num);
-                        }
-                        attempts++;
-                    }
+                    // Pilih kata berdasarkan tema
+                    const kataTema = kataPool[tema.toLowerCase()] || kataPool.kehidupan;
                     
-                    // Jika masih belum cukup, tambahkan angka berurutan
-                    if (numbers.length < count) {
-                        for (let i = min; i <= max && numbers.length < count; i++) {
-                            if (!numbers.includes(i)) {
-                                numbers.push(i);
-                            }
-                        }
-                    }
-                    
-                    return numbers;
-                }
-                
-                // Fungsi untuk menghasilkan karakter binatang acak
-                function generateKarakterBinatang(seed) {
-                    const randomIndex = Math.floor(advancedSeededRandom(seed) * karakterBinatang.length);
-                    return karakterBinatang[randomIndex];
-                }
-                
-                // Fungsi untuk memilih kata secara acak dari array dengan seed
-                function acakKata(array, seed) {
-                    const randomIndex = Math.floor(advancedSeededRandom(seed) * array.length);
-                    return array[randomIndex];
-                }
-                
-                // Fungsi untuk membangun baris syair yang koheren - DIUBAH AGAR LEBIH SINGKAT
-                function bangunBarisSyair(jumlahKata, tema, seed) {
-                    let baris = "";
-                    
-                    // Pilih struktur kalimat berdasarkan jumlah kata
-                    if (jumlahKata === 3) {
-                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)}`;
-                    } else if (jumlahKata === 4) {
-                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)} ${acakKata(kataKunci.keterangan, seed+3)}`;
-                    } else if (jumlahKata === 5) {
-                        baris = `${acakKata(kataKunci.subjek, seed)} ${acakKata(kataKunci.predikat, seed+1)} ${acakKata(tema.kata, seed+2)} ${acakKata(kataKunci.penghubung, seed+3)} ${acakKata(kataKunci.objek, seed+4)}`;
-                    }
-                    
-                    return baris;
-                }
-                
-                // Fungsi untuk menghasilkan syair baru yang unik dan koheren
-                function buatSyair() {
-                    // Generate hash yang sangat unik
-                    const baseSeed = generateAdvancedHash();
-                    
-                    // Ambil jumlah kata yang dipilih
-                    const selectedKata = document.querySelector('input[name="kataOption"]:checked').value;
-                    
-                    // Pilih tema secara acak untuk koherensi
-                    const temaSeed = baseSeed + 100;
-                    const temaTerpilih = acakKata(temaSyair, temaSeed);
-                    
-                    // Pilih pola rima secara acak
-                    const polaSeed = baseSeed + 200;
-                    const polaTerpilih = acakKata(polaRima, polaSeed);
-                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} (contoh: ${polaTerpilih.contoh}) | Tema: ${temaTerpilih.nama}`;
-                    
-                    // Buat empat baris syair yang koheren
-                    const newSyair = [];
+                    // Buat syair 4 baris
+                    const syair = [];
                     for (let i = 0; i < 4; i++) {
-                        const lineSeed = baseSeed + i * 1000;
-                        newSyair.push(bangunBarisSyair(parseInt(selectedKata), temaTerpilih, lineSeed));
+                        let baris = "";
+                        for (let j = 0; j < jumlahKata; j++) {
+                            // Pilih kata secara acak dari pool yang sesuai
+                            const kata = kataTema[Math.floor(Math.random() * kataTema.length)];
+                            baris += (j === 0 ? kata.charAt(0).toUpperCase() + kata.slice(1) : " " + kata);
+                        }
+                        syair.push(baris);
                     }
                     
-                    // Generate MK (2 angka unik 0-9)
-                    const mkSeed = baseSeed + 5000;
-                    const mkNumbers = generateAdvancedUniqueNumbers(2, 0, 9, mkSeed);
-                    mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
+                    return syair;
+                }
+                
+                // Fungsi untuk menghasilkan syair baru dengan AI
+                async function buatSyairDenganAI() {
+                    // Ambil jumlah kata yang dipilih
+                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
                     
-                    // Generate Naga (3 angka unik 0-9)
-                    const nagaSeed = baseSeed + 6000;
-                    const nagaNumbers = generateAdvancedUniqueNumbers(3, 0, 9, nagaSeed);
-                    nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    // Pilih tema dan pola rima secara acak
+                    const temaTerpilih = temaSyair[Math.floor(Math.random() * temaSyair.length)];
+                    const polaTerpilih = polaRima[Math.floor(Math.random() * polaRima.length)];
                     
-                    // Generate karakter binatang
-                    const binatangSeed = baseSeed + 7000;
-                    binatangValue.textContent = generateKarakterBinatang(binatangSeed);
+                    // Update info pola
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
                     
-                    // Terapkan efek animasi
+                    // Tampilkan loading
+                    aiLoading.style.display = 'block';
+                    generateSyairBtn.disabled = true;
+                    
+                    try {
+                        // Panggil AI untuk menghasilkan syair
+                        const newSyair = await callAISyair(selectedKata, temaTerpilih);
+                        
+                        // Sembunyikan loading
+                        aiLoading.style.display = 'none';
+                        generateSyairBtn.disabled = false;
+                        
+                        // Generate angka untuk MK dan Naga
+                        generateAngkaTambahan();
+                        
+                        // Terapkan efek animasi
+                        baris1.style.opacity = "0";
+                        baris2.style.opacity = "0";
+                        baris3.style.opacity = "0";
+                        baris4.style.opacity = "0";
+                        
+                        setTimeout(() => {
+                            baris1.textContent = newSyair[0];
+                            baris1.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                baris2.textContent = newSyair[1];
+                                baris2.style.opacity = "1";
+                                
+                                setTimeout(() => {
+                                    baris3.textContent = newSyair[2];
+                                    baris3.style.opacity = "1";
+                                    
+                                    setTimeout(() => {
+                                        baris4.textContent = newSyair[3];
+                                        baris4.style.opacity = "1";
+                                    }, 150);
+                                }, 150);
+                            }, 150);
+                        }, 150);
+                    } catch (error) {
+                        // Jika AI gagal, gunakan generator fallback
+                        aiLoading.style.display = 'none';
+                        generateSyairBtn.disabled = false;
+                        buatSyairFallback();
+                    }
+                }
+                
+                // Fungsi fallback jika AI tidak tersedia
+                function buatSyairFallback() {
+                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
+                    const temaTerpilih = temaSyair[Math.floor(Math.random() * temaSyair.length)];
+                    const polaTerpilih = polaRima[Math.floor(Math.random() * polaRima.length)];
+                    
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
+                    
+                    // Gunakan generator sederhana sebagai fallback
+                    const newSyair = generateSimpleSyair(selectedKata, temaTerpilih);
+                    generateAngkaTambahan();
+                    
+                    // Terapkan animasi
                     baris1.style.opacity = "0";
                     baris2.style.opacity = "0";
                     baris3.style.opacity = "0";
@@ -1422,141 +1424,134 @@
                     }, 150);
                 }
                 
-                // Fungsi untuk generate MK saja
-                function generateMk() {
-                    const seed = generateAdvancedHash() + 10000;
-                    const mkNumbers = generateAdvancedUniqueNumbers(2, 0, 9, seed);
+                // Generator syair sederhana (fallback)
+                function generateSimpleSyair(jumlahKata, tema) {
+                    const kataSederhana = {
+                        subjek: ["Hidup", "Cinta", "Waktu", "Nasib", "Harapan", "Impian", "Jiwa", "Hati"],
+                        predikat: ["mengalir", "berputar", "berkembang", "menghilang", "datang", "pergi", "tersenyum", "menangis"],
+                        objek: ["dalam hati", "di langit", "dengan senyum", "dengan air mata", "dalam diam", "dengan tawa", "dengan harap"]
+                    };
+                    
+                    const syair = [];
+                    for (let i = 0; i < 4; i++) {
+                        let baris = "";
+                        if (jumlahKata === 3) {
+                            baris = `${kataSederhana.subjek[Math.floor(Math.random() * kataSederhana.subjek.length)]} ${kataSederhana.predikat[Math.floor(Math.random() * kataSederhana.predikat.length)]} ${kataSederhana.objek[Math.floor(Math.random() * kataSederhana.objek.length)]}`;
+                        } else if (jumlahKata === 4) {
+                            baris = `${kataSederhana.subjek[Math.floor(Math.random() * kataSederhana.subjek.length)]} ${kataSederhana.predikat[Math.floor(Math.random() * kataSederhana.predikat.length)]} ${kataSederhana.objek[Math.floor(Math.random() * kataSederhana.objek.length)]} ${tema.toLowerCase()}`;
+                        } else {
+                            baris = `${kataSederhana.subjek[Math.floor(Math.random() * kataSederhana.subjek.length)]} ${kataSederhana.predikat[Math.floor(Math.random() * kataSederhana.predikat.length)]} ${kataSederhana.objek[Math.floor(Math.random() * kataSederhana.objek.length)]} ${tema.toLowerCase()} selalu`;
+                        }
+                        syair.push(baris);
+                    }
+                    
+                    return syair;
+                }
+                
+                // Fungsi untuk generate angka tambahan (MK, Naga, Karakter)
+                function generateAngkaTambahan() {
+                    // Generate MK (2 angka unik 0-9)
+                    const mkNumbers = generateUniqueNumbers(2, 0, 9);
                     mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
                     
-                    copySuccess.textContent = "✓ MK berhasil di-generate!";
-                    copySuccess.style.opacity = "1";
-                    
-                    setTimeout(() => {
-                        copySuccess.style.opacity = "0";
-                    }, 2000);
-                }
-                
-                // Fungsi untuk generate Naga saja
-                function generateNaga() {
-                    const seed = generateAdvancedHash() + 11000;
-                    const nagaNumbers = generateAdvancedUniqueNumbers(3, 0, 9, seed);
+                    // Generate Naga (3 angka unik 0-9)
+                    const nagaNumbers = generateUniqueNumbers(3, 0, 9);
                     nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
                     
-                    copySuccess.textContent = "✓ Naga berhasil di-generate!";
-                    copySuccess.style.opacity = "1";
-                    
-                    setTimeout(() => {
-                        copySuccess.style.opacity = "0";
-                    }, 2000);
+                    // Generate karakter binatang
+                    binatangValue.textContent = generateKarakterBinatang();
                 }
                 
-                // Fungsi untuk generate Karakter Binatang saja
-                function generateBinatang() {
-                    const seed = generateAdvancedHash() + 12000;
-                    binatangValue.textContent = generateKarakterBinatang(seed);
-                    
-                    copySuccess.textContent = "✓ Karakter Binatang berhasil di-generate!";
-                    copySuccess.style.opacity = "1";
-                    
-                    setTimeout(() => {
-                        copySuccess.style.opacity = "0";
-                    }, 2000);
+                // Fungsi untuk generate angka unik
+                function generateUniqueNumbers(count, min, max) {
+                    let numbers = [];
+                    while(numbers.length < count) {
+                        const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                        if (!numbers.includes(num)) {
+                            numbers.push(num);
+                        }
+                    }
+                    return numbers;
+                }
+                
+                // Fungsi untuk menghasilkan karakter binatang acak
+                function generateKarakterBinatang() {
+                    const randomIndex = Math.floor(Math.random() * karakterBinatang.length);
+                    return karakterBinatang[randomIndex];
                 }
                 
                 // Fungsi untuk menyalin syair ke clipboard
                 function salinSyair() {
                     const syair = `${baris1.textContent}\n${baris2.textContent}\n${baris3.textContent}\n${baris4.textContent}`;
                     
-                    navigator.clipboard.writeText(syair)
-                        .then(() => {
-                            // Tampilkan pesan sukses
-                            copySuccess.textContent = "✓ Syair berhasil disalin!";
-                            copySuccess.style.opacity = "1";
-                            
-                            // Sembunyikan pesan setelah 2 detik
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            copySuccess.textContent = "✗ Gagal menyalin syair";
-                            copySuccess.style.color = "#e57373";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                            console.error('Gagal menyalin teks: ', err);
-                        });
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = syair;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Syair berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
                 }
                 
                 // Fungsi untuk menyalin MK ke clipboard
                 function salinMk() {
-                    navigator.clipboard.writeText(mkValue.textContent)
-                        .then(() => {
-                            copySuccess.textContent = "✓ MK berhasil disalin!";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            copySuccess.textContent = "✗ Gagal menyalin MK";
-                            copySuccess.style.color = "#e57373";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                            console.error('Gagal menyalin teks: ', err);
-                        });
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = mkValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ MK berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
                 }
                 
                 // Fungsi untuk menyalin Naga ke clipboard
                 function salinNaga() {
-                    navigator.clipboard.writeText(nagaValue.textContent)
-                        .then(() => {
-                            copySuccess.textContent = "✓ Naga berhasil disalin!";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            copySuccess.textContent = "✗ Gagal menyalin Naga";
-                            copySuccess.style.color = "#e57373";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                            console.error('Gagal menyalin teks: ', err);
-                        });
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = nagaValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Naga berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
                 }
                 
                 // Fungsi untuk menyalin Karakter Binatang ke clipboard
                 function salinBinatang() {
-                    navigator.clipboard.writeText(binatangValue.textContent)
-                        .then(() => {
-                            copySuccess.textContent = "✓ Karakter Binatang berhasil disalin!";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                        })
-                        .catch(err => {
-                            copySuccess.textContent = "✗ Gagal menyalin Karakter";
-                            copySuccess.style.color = "#e57373";
-                            copySuccess.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                copySuccess.style.opacity = "0";
-                            }, 2000);
-                            console.error('Gagal menyalin teks: ', err);
-                        });
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = binatangValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Karakter Binatang berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
                 }
                 
                 // Event listener untuk pilihan jumlah kata
@@ -1571,27 +1566,53 @@
                         // Update radio button
                         const radio = this.querySelector('input[type="radio"]');
                         radio.checked = true;
-                        
-                        // Generate syair baru dengan jumlah kata yang baru
-                        buatSyair();
                     });
                 });
                 
                 // Event listener untuk tombol syair
-                generateSyairBtn.addEventListener('click', buatSyair);
+                generateSyairBtn.addEventListener('click', buatSyairDenganAI);
                 copySyairBtn.addEventListener('click', salinSyair);
                 copyMkBtn.addEventListener('click', salinMk);
                 copyNagaBtn.addEventListener('click', salinNaga);
                 copyBinatangBtn.addEventListener('click', salinBinatang);
-                generateMkBtn.addEventListener('click', generateMk);
-                generateNagaBtn.addEventListener('click', generateNaga);
-                generateBinatangBtn.addEventListener('click', generateBinatang);
+                generateMkBtn.addEventListener('click', function() {
+                    const mkNumbers = generateUniqueNumbers(2, 0, 9);
+                    mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
+                    
+                    copySuccess.textContent = "✓ MK berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
+                generateNagaBtn.addEventListener('click', function() {
+                    const nagaNumbers = generateUniqueNumbers(3, 0, 9);
+                    nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    
+                    copySuccess.textContent = "✓ Naga berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
+                generateBinatangBtn.addEventListener('click', function() {
+                    binatangValue.textContent = generateKarakterBinatang();
+                    
+                    copySuccess.textContent = "✓ Karakter Binatang berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
                 
                 // Buat syair pertama saat halaman dimuat
-                buatSyair();
+                buatSyairDenganAI();
             }
             
-            // Fungsi untuk prediksi togel (VERSI SIMPEL YANG BERFUNGSI)
+            // Fungsi untuk prediksi togel (tetap sama seperti sebelumnya)
             function setupTogelPrediction() {
                 // Elements
                 const generateBtn = document.getElementById('generateBtn');
