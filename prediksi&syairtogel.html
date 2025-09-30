@@ -884,7 +884,7 @@
             }
             
             h1 {
-                font-size: 24px;
+                fontSize: 24px;
             }
             
             .tabs {
@@ -941,7 +941,7 @@
             <h1><i class="fas fa-crystal-ball"></i> Prediksi Togel & Generator Syair <i class="fas fa-feather-alt"></i></h1>
             <div class="tabs">
                 <div class="tab active" data-tab="togel">Prediksi Togel</div>
-                <div class="tab" data-tab="syair">Generator Syair <span class="ai-indicator">AI Powered</span></div>
+                <div class="tab" data-tab="syair">Generator Syair</div>
             </div>
         </div>
         
@@ -1144,9 +1144,6 @@
             </div>
             
             <div class="syair-container">
-                <div class="ai-loading" id="aiLoading">
-                    <div class="spinner"></div> AI sedang menciptakan syair...
-                </div>
                 <div class="baris" id="baris1">Hidup ini penuh makna</div>
                 <div class="baris" id="baris2">Waktu terus berjalan</div>
                 <div class="baris" id="baris3">Harapan tak pernah padam</div>
@@ -1156,7 +1153,7 @@
             <!-- Tombol syair dipindahkan ke atas -->
             <div class="syair-controls">
                 <div class="syair-button-container">
-                    <button id="generateSyairBtn"><i class="fas fa-robot"></i> Generate dengan AI</button>
+                    <button id="generateSyairBtn"><i class="fas fa-robot"></i> Generate Syair</button>
                     <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
                 </div>
                 <div class="pattern-info" id="pattern-info">Pola rima: a-b-a-b | Tema: Kehidupan</div>
@@ -1208,7 +1205,7 @@
             <div class="copy-success" id="copy-success"></div>
             
             <div class="footer-note">
-                Syair ini dihasilkan oleh AI dengan tema kehidupan dan mengandung petunjuk angka dalam bentuk simbol
+                Syair ini dihasilkan secara random dengan tema kehidupan dan mengandung petunjuk angka dalam bentuk simbol
             </div>
         </div>
     </div>
@@ -1246,7 +1243,7 @@
                 });
             });
             
-            // Fungsi untuk generator syair dengan AI
+            // Fungsi untuk generator syair random
             function setupSyairGenerator() {
                 const baris1 = document.getElementById('baris1');
                 const baris2 = document.getElementById('baris2');
@@ -1266,7 +1263,6 @@
                 const binatangValue = document.getElementById('binatangValue');
                 const copySuccess = document.getElementById('copy-success');
                 const kataOptions = document.querySelectorAll('.kata-option');
-                const aiLoading = document.getElementById('aiLoading');
                 
                 // Daftar karakter binatang
                 const karakterBinatang = [
@@ -1290,55 +1286,59 @@
                     { pola: "a-b-c-c", contoh: "merah - biru - hijau - hijau" }
                 ];
                 
-                // Daftar kata untuk syair random
+                // Kumpulan kata untuk syair
                 const kataBenda = [
-                    "cinta", "hati", "jiwa", "dunia", "hidup", "mimpi", "harapan", "nasib", "takdir", 
-                    "perasaan", "pikiran", "langkah", "jalan", "waktu", "kesempatan", "kehidupan", 
-                    "kenangan", "masa", "depan", "masa lalu", "senyuman", "air mata", "tawa", "tangis", 
-                    "derai", "rasa", "karya", "tangan", "kaki", "mata", "telinga", "mulut", "suara", 
-                    "kata", "cerita", "lagu", "nada", "irama", "melodi", "harmoni"
+                    "hidup", "cinta", "hati", "jiwa", "dunia", "alam", "matahari", "bulan", 
+                    "bintang", "laut", "sungai", "gunung", "angin", "hujan", "awan", "mimpi",
+                    "harapan", "nasib", "takdir", "waktu", "masa", "perjalanan", "cahaya", "bayangan",
+                    "kegelapan", "kebahagiaan", "kesedihan", "kehidupan", "kematian", "perjuangan",
+                    "perubahan", "kesetiaan", "pengorbanan", "kebaikan", "kebijaksanaan", "kedamaian"
                 ];
                 
                 const kataSifat = [
-                    "indah", "bahagia", "sedih", "pilu", "susah", "senang", "gembira", "cemas", "khawatir", 
-                    "tenang", "damai", "gelisah", "lapang", "sempit", "luas", "dalam", "tinggi", "rendah", 
-                    "keras", "lembut", "manis", "pahit", "asin", "getir", "sepi", "ramai", "sunyi", "hening", 
-                    "syahdu", "sendu", "lemah", "kuat", "besar", "kecil", "panjang", "pendek", "cepat", "lambat"
-                ];
-                
-                const kataDepan = [
-                    "di", "ke", "dari", "pada", "dalam", "atas", "bawah", "samping", "depan", "belakang", 
-                    "antara", "sekitar", "seberang", "sepanjang", "seputar", "seluruh", "setiap", "sebuah", 
-                    "seorang", "suatu", "para", "bagi", "untuk", "tentang", "dengan", "tanpa", "oleh", "karena"
-                ];
-                
-                const kataAwal = [
-                    "Hari", "Malam", "Siang", "Pagi", "Senja", "Fajar", "Sore", "Mentari", "Bulan", "Bintang", 
-                    "Embun", "Kabut", "Angin", "Hujan", "Pelangi", "Ombak", "Pasir", "Batu", "Pohon", "Bunga", 
-                    "Daun", "Akarnya", "Burung", "Kicau", "Sinar", "Cahaya", "Bayang", "Gelap", "Terang", "Suara"
-                ];
-                
-                const kataSambung = [
-                    "dan", "atau", "tapi", "namun", "karena", "jadi", "lalu", "kemudian", "sedangkan", "sementara", 
-                    "walaupun", "meskipun", "agar", "supaya", "jika", "kalau", "seandainya", "seolah", "sebagai", 
-                    "seperti", "bagaikan", "ibarat", "bahwa", "sehingga", "maka", "tetapi", "padahal", "sedang"
-                ];
-                
-                const kataGanti = [
-                    "aku", "kamu", "dia", "kita", "kami", "mereka", "ini", "itu", "saya", "engkau", 
-                    "beliau", "nya", "mu", "ku", "kami", "kalian", "mereka", "ini", "itu", "sana", 
-                    "sini", "situ", "begitu", "beginilah", "demikianlah", "sendiri", "bersama"
+                    "indah", "bahagia", "sedih", "susah", "senang", "gembira", "gelap", "terang",
+                    "besar", "kecil", "tinggi", "rendah", "dalam", "luas", "sempit", "panjang",
+                    "pendek", "kuat", "lemah", "keras", "lembut", "cepat", "lambat", "baru",
+                    "lama", "tua", "muda", "baik", "buruk", "benar", "salah", "pahit", "manis",
+                    "asam", "asin", "hangat", "dingin", "sejuk", "panas", "lelah", "segar"
                 ];
                 
                 const kataKerja = [
-                    "berjalan", "berlari", "terbang", "berenang", "menangis", "tertawa", "berbicara", "mendengar", 
-                    "melihat", "merasa", "memikir", "mengingin", "mengharap", "mencinta", "membenci", "menyayang", 
-                    "merindukan", "mengenang", "menunggu", "menemukan", "mencari", "mengejar", "mendapat", "kehilangan", 
-                    "memberi", "menerima", "mengambil", "melepaskan", "memegang", "menyentuh", "mencium", "memeluk", 
-                    "menyanyi", "menari", "bernyanyi", "berdansa", "bermain", "bekerja", "belajar", "mengajar"
+                    "berjalan", "berlari", "terbang", "berenang", "berbicara", "mendengar", "melihat",
+                    "merasa", "memikir", "mengingat", "melupakan", "mencintai", "membenci", "menyayangi",
+                    "menolong", "menghibur", "menyakit", "menyembuh", "mencipta", "menghancur", "membangun",
+                    "merusak", "menemukan", "kehilangan", "mendapat", "memberi", "menerima", "mengambil",
+                    "melepaskan", "memegang", "melepas", "memulai", "mengakhiri", "menunggu", "mengejar",
+                    "melarikan", "menghadapi", "menghindari", "menyelesaikan", "meninggalkan", "kembali"
                 ];
                 
-                // Fungsi untuk memilih elemen acak dari array
+                const kataDepan = [
+                    "di", "ke", "dari", "dalam", "pada", "untuk", "dengan", "tanpa", "atas", "bawah",
+                    "depan", "belakang", "samping", "antara", "sepanjang", "melalui", "selama", "setelah",
+                    "sebelum", "ketika", "sambil", "walau", "meski", "karena", "sebab", "agar", "supaya",
+                    "hingga", "sampai", "sejak", "selama", "ketika", "sementara", "begitu", "setelah"
+                ];
+                
+                const kataSambung = [
+                    "dan", "atau", "tetapi", "namun", "sedangkan", "sementara", "karena", "sebab",
+                    "jika", "apabila", "walau", "meskipun", "walaupun", "sehingga", "agar", "supaya",
+                    "bahwa", "yang", "seperti", "bagaikan", "ibarat", "laksana", "dengan", "tanpa",
+                    "untuk", "kepada", "pada", "dari", "ke", "di", "dalam", "atas", "bawah", "depan"
+                ];
+                
+                const kataGanti = [
+                    "aku", "kamu", "dia", "kami", "kita", "mereka", "ini", "itu", "sini", "situ",
+                    "sana", "yang", "siapa", "apa", "mana", "bagaimana", "mengapa", "kapan", "berapa",
+                    "semua", "segala", "setiap", "masing", "sendiri", "bersama", "saling", "satu"
+                ];
+                
+                const kataAwal = [
+                    "pagi", "siang", "sore", "malam", "senja", "fajar", "subuh", "dini", "tahun",
+                    "bulan", "minggu", "hari", "jam", "menit", "detik", "musim", "semi", "panas",
+                    "gugur", "dingin", "kemarau", "hujan", "angin", "badai", "topan", "gempa", "banjir"
+                ];
+                
+                // Fungsi untuk memilih item acak dari array
                 function randomFrom(array) {
                     return array[Math.floor(Math.random() * array.length)];
                 }
@@ -1350,64 +1350,47 @@
                 
                 // Generator syair yang benar-benar random
                 function generateRandomLine(jumlahKata) {
-                    const patterns = [
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataAwal)} hari`,
-                        () => `${capitalize(randomFrom(kataKerja))}lah ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)}${randomFrom(kataGanti)}`,
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataSambung)} ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataAwal))} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataSambung))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataGanti))} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataKerja))}lah ${randomFrom(kataSifat)} ${randomFrom(kataBenda)}${randomFrom(kataGanti)}`,
-                        () => `${capitalize(randomFrom(kataSifat))}lah ${randomFrom(kataBenda)} ${randomFrom(kataDepan)} ${randomFrom(kataAwal)}`,
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataKerja)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataAwal)} yang ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
+                    const patterns3 = [
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataGanti))} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`
                     ];
                     
-                    // Pilih pola acak
-                    let selectedPattern = randomFrom(patterns);
-                    let result = selectedPattern();
+                    const patterns4 = [
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)}`,
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`
+                    ];
                     
-                    // Sesuaikan dengan jumlah kata yang diminta
-                    const words = result.split(' ');
-                    if (words.length > jumlahKata) {
-                        result = words.slice(0, jumlahKata).join(' ');
-                    } else if (words.length < jumlahKata) {
-                        // Tambahkan kata jika kurang
-                        while (words.length < jumlahKata) {
-                            words.push(randomFrom(kataBenda));
-                        }
-                        result = words.join(' ');
+                    const patterns5 = [
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataGanti)}`,
+                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)}`
+                    ];
+                    
+                    let patterns;
+                    if (jumlahKata === 3) {
+                        patterns = patterns3;
+                    } else if (jumlahKata === 4) {
+                        patterns = patterns4;
+                    } else {
+                        patterns = patterns5;
                     }
                     
-                    return result;
+                    return randomFrom(patterns)();
                 }
                 
-                // Fungsi untuk memanggil AI (menggunakan API gratis)
-                async function callAISyair(jumlahKata, tema) {
-                    // Simulasi delay seperti AI yang sedang memproses
-                    await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
-                    
-                    // Gunakan generator syair yang lebih canggih dan koheren
-                    return generateAISyair(jumlahKata, tema);
-                }
-                
-                // Fungsi untuk menghasilkan syair dengan AI yang lebih koheren
-                function generateAISyair(jumlahKata, tema) {
-                    const baris1 = generateRandomLine(jumlahKata);
-                    const baris2 = generateRandomLine(jumlahKata);
-                    const baris3 = generateRandomLine(jumlahKata);
-                    const baris4 = generateRandomLine(jumlahKata);
-                    
-                    return [baris1, baris2, baris3, baris4];
-                }
-                
-                // Fungsi untuk menghasilkan syair baru dengan AI
-                async function buatSyairDenganAI() {
+                // Fungsi untuk menghasilkan syair baru
+                function buatSyairBaru() {
                     // Ambil jumlah kata yang dipilih
                     const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
                     
@@ -1418,92 +1401,29 @@
                     // Update info pola
                     patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
                     
-                    // Tampilkan loading
-                    aiLoading.style.display = 'block';
-                    generateSyairBtn.disabled = true;
-                    
-                    try {
-                        // Panggil AI untuk menghasilkan syair
-                        const newSyair = await callAISyair(selectedKata, temaTerpilih);
-                        
-                        // Sembunyikan loading
-                        aiLoading.style.display = 'none';
-                        generateSyairBtn.disabled = false;
-                        
-                        // Generate angka untuk MK dan Naga
-                        generateAngkaTambahan();
-                        
-                        // Terapkan efek animasi
-                        baris1.style.opacity = "0";
-                        baris2.style.opacity = "0";
-                        baris3.style.opacity = "0";
-                        baris4.style.opacity = "0";
-                        
-                        setTimeout(() => {
-                            baris1.textContent = newSyair[0];
-                            baris1.style.opacity = "1";
-                            
-                            setTimeout(() => {
-                                baris2.textContent = newSyair[1];
-                                baris2.style.opacity = "1";
-                                
-                                setTimeout(() => {
-                                    baris3.textContent = newSyair[2];
-                                    baris3.style.opacity = "1";
-                                    
-                                    setTimeout(() => {
-                                        baris4.textContent = newSyair[3];
-                                        baris4.style.opacity = "1";
-                                    }, 150);
-                                }, 150);
-                            }, 150);
-                        }, 150);
-                    } catch (error) {
-                        // Jika AI gagal, gunakan generator fallback
-                        aiLoading.style.display = 'none';
-                        generateSyairBtn.disabled = false;
-                        buatSyairFallback();
-                    }
-                }
-                
-                // Fungsi fallback jika AI tidak tersedia
-                function buatSyairFallback() {
-                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
-                    const temaTerpilih = temaSyair[Math.floor(Math.random() * temaSyair.length)];
-                    const polaTerpilih = polaRima[Math.floor(Math.random() * polaRima.length)];
-                    
-                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
-                    
-                    // Gunakan generator sederhana sebagai fallback
-                    const newSyair = [
-                        generateRandomLine(selectedKata),
-                        generateRandomLine(selectedKata),
-                        generateRandomLine(selectedKata),
-                        generateRandomLine(selectedKata)
-                    ];
-                    
+                    // Generate angka untuk MK dan Naga
                     generateAngkaTambahan();
                     
-                    // Terapkan animasi
+                    // Terapkan efek animasi
                     baris1.style.opacity = "0";
                     baris2.style.opacity = "0";
                     baris3.style.opacity = "0";
                     baris4.style.opacity = "0";
                     
                     setTimeout(() => {
-                        baris1.textContent = newSyair[0];
+                        baris1.textContent = generateRandomLine(selectedKata);
                         baris1.style.opacity = "1";
                         
                         setTimeout(() => {
-                            baris2.textContent = newSyair[1];
+                            baris2.textContent = generateRandomLine(selectedKata);
                             baris2.style.opacity = "1";
                             
                             setTimeout(() => {
-                                baris3.textContent = newSyair[2];
+                                baris3.textContent = generateRandomLine(selectedKata);
                                 baris3.style.opacity = "1";
                                 
                                 setTimeout(() => {
-                                    baris4.textContent = newSyair[3];
+                                    baris4.textContent = generateRandomLine(selectedKata);
                                     baris4.style.opacity = "1";
                                 }, 150);
                             }, 150);
@@ -1633,7 +1553,7 @@
                 });
                 
                 // Event listener untuk tombol syair
-                generateSyairBtn.addEventListener('click', buatSyairDenganAI);
+                generateSyairBtn.addEventListener('click', buatSyairBaru);
                 copySyairBtn.addEventListener('click', salinSyair);
                 copyMkBtn.addEventListener('click', salinMk);
                 copyNagaBtn.addEventListener('click', salinNaga);
@@ -1672,7 +1592,7 @@
                 });
                 
                 // Buat syair pertama saat halaman dimuat
-                buatSyairDenganAI();
+                buatSyairBaru();
             }
             
             // Fungsi untuk prediksi togel (tetap sama seperti sebelumnya)
