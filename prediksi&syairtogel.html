@@ -1290,8 +1290,102 @@
                     { pola: "a-b-c-c", contoh: "merah - biru - hijau - hijau" }
                 ];
                 
-                // Variabel untuk melacak syair yang sudah digunakan
-                let usedSyairIndices = new Set();
+                // Daftar kata untuk syair random
+                const kataBenda = [
+                    "cinta", "hati", "jiwa", "dunia", "hidup", "mimpi", "harapan", "nasib", "takdir", 
+                    "perasaan", "pikiran", "langkah", "jalan", "waktu", "kesempatan", "kehidupan", 
+                    "kenangan", "masa", "depan", "masa lalu", "senyuman", "air mata", "tawa", "tangis", 
+                    "derai", "rasa", "karya", "tangan", "kaki", "mata", "telinga", "mulut", "suara", 
+                    "kata", "cerita", "lagu", "nada", "irama", "melodi", "harmoni"
+                ];
+                
+                const kataSifat = [
+                    "indah", "bahagia", "sedih", "pilu", "susah", "senang", "gembira", "cemas", "khawatir", 
+                    "tenang", "damai", "gelisah", "lapang", "sempit", "luas", "dalam", "tinggi", "rendah", 
+                    "keras", "lembut", "manis", "pahit", "asin", "getir", "sepi", "ramai", "sunyi", "hening", 
+                    "syahdu", "sendu", "lemah", "kuat", "besar", "kecil", "panjang", "pendek", "cepat", "lambat"
+                ];
+                
+                const kataDepan = [
+                    "di", "ke", "dari", "pada", "dalam", "atas", "bawah", "samping", "depan", "belakang", 
+                    "antara", "sekitar", "seberang", "sepanjang", "seputar", "seluruh", "setiap", "sebuah", 
+                    "seorang", "suatu", "para", "bagi", "untuk", "tentang", "dengan", "tanpa", "oleh", "karena"
+                ];
+                
+                const kataAwal = [
+                    "Hari", "Malam", "Siang", "Pagi", "Senja", "Fajar", "Sore", "Mentari", "Bulan", "Bintang", 
+                    "Embun", "Kabut", "Angin", "Hujan", "Pelangi", "Ombak", "Pasir", "Batu", "Pohon", "Bunga", 
+                    "Daun", "Akarnya", "Burung", "Kicau", "Sinar", "Cahaya", "Bayang", "Gelap", "Terang", "Suara"
+                ];
+                
+                const kataSambung = [
+                    "dan", "atau", "tapi", "namun", "karena", "jadi", "lalu", "kemudian", "sedangkan", "sementara", 
+                    "walaupun", "meskipun", "agar", "supaya", "jika", "kalau", "seandainya", "seolah", "sebagai", 
+                    "seperti", "bagaikan", "ibarat", "bahwa", "sehingga", "maka", "tetapi", "padahal", "sedang"
+                ];
+                
+                const kataGanti = [
+                    "aku", "kamu", "dia", "kita", "kami", "mereka", "ini", "itu", "saya", "engkau", 
+                    "beliau", "nya", "mu", "ku", "kami", "kalian", "mereka", "ini", "itu", "sana", 
+                    "sini", "situ", "begitu", "beginilah", "demikianlah", "sendiri", "bersama"
+                ];
+                
+                const kataKerja = [
+                    "berjalan", "berlari", "terbang", "berenang", "menangis", "tertawa", "berbicara", "mendengar", 
+                    "melihat", "merasa", "memikir", "mengingin", "mengharap", "mencinta", "membenci", "menyayang", 
+                    "merindukan", "mengenang", "menunggu", "menemukan", "mencari", "mengejar", "mendapat", "kehilangan", 
+                    "memberi", "menerima", "mengambil", "melepaskan", "memegang", "menyentuh", "mencium", "memeluk", 
+                    "menyanyi", "menari", "bernyanyi", "berdansa", "bermain", "bekerja", "belajar", "mengajar"
+                ];
+                
+                // Fungsi untuk memilih elemen acak dari array
+                function randomFrom(array) {
+                    return array[Math.floor(Math.random() * array.length)];
+                }
+                
+                // Fungsi untuk mengkapitalisasi huruf pertama
+                function capitalize(str) {
+                    return str.charAt(0).toUpperCase() + str.slice(1);
+                }
+                
+                // Generator syair yang benar-benar random
+                function generateRandomLine(jumlahKata) {
+                    const patterns = [
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataAwal)} hari`,
+                        () => `${capitalize(randomFrom(kataKerja))}lah ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)}${randomFrom(kataGanti)}`,
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataSambung)} ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataAwal))} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
+                        () => `${capitalize(randomFrom(kataSambung))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataGanti))} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataKerja))}lah ${randomFrom(kataSifat)} ${randomFrom(kataBenda)}${randomFrom(kataGanti)}`,
+                        () => `${capitalize(randomFrom(kataSifat))}lah ${randomFrom(kataBenda)} ${randomFrom(kataDepan)} ${randomFrom(kataAwal)}`,
+                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataKerja)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)}`,
+                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataAwal)} yang ${randomFrom(kataSifat)}`,
+                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
+                    ];
+                    
+                    // Pilih pola acak
+                    let selectedPattern = randomFrom(patterns);
+                    let result = selectedPattern();
+                    
+                    // Sesuaikan dengan jumlah kata yang diminta
+                    const words = result.split(' ');
+                    if (words.length > jumlahKata) {
+                        result = words.slice(0, jumlahKata).join(' ');
+                    } else if (words.length < jumlahKata) {
+                        // Tambahkan kata jika kurang
+                        while (words.length < jumlahKata) {
+                            words.push(randomFrom(kataBenda));
+                        }
+                        result = words.join(' ');
+                    }
+                    
+                    return result;
+                }
                 
                 // Fungsi untuk memanggil AI (menggunakan API gratis)
                 async function callAISyair(jumlahKata, tema) {
@@ -1304,98 +1398,12 @@
                 
                 // Fungsi untuk menghasilkan syair dengan AI yang lebih koheren
                 function generateAISyair(jumlahKata, tema) {
-                    // Template untuk setiap jumlah kata
-                    const syairTemplates = {
-                        3: {
-                            "Kehidupan": [
-                                ["Hidup bagai sungai", "Membawa harapan indah", "Tak selamanya jernih", "Teruslah berjuang"],
-                                ["Di kala senja", "Mentari tenggelam perlahan", "Hidup penuh perjuangan", "Jangan menyerah"],
-                                ["Seperti pohon rindang", "Tumbuh menjulang tinggi", "Hidup penuh makna", "Berbuat baiklah"],
-                                ["Waktu terus berjalan", "Tak pernah berhenti", "Hargai setiap detik", "Sebelum terlambat"],
-                                ["Di ujung jalan", "Ada cahaya terang", "Terus melangkah", "Raih impianmu"]
-                            ],
-                            "Cinta": [
-                                ["Cinta bagai mentari", "Hangatkan hati semua", "Takkan pernah padam", "Selamanya bersinar"],
-                                ["Bunga mawar indah", "Harum semerbak wangi", "Cinta sejati abadi", "Takkan pernah layu"],
-                                ["Bagai bulan purnama", "Bersinar terang benderang", "Cinta tulus ikhlas", "Menghangatkan jiwa"],
-                                ["Hati saling terpaut", "Tak terpisahkan lagi", "Cinta mengikat erat", "Selamanya bersama"],
-                                ["Di dalam kalbu", "Ada cinta mendalam", "Tak tergantikan oleh", "Siapa pun juga"]
-                            ],
-                            "Harapan": [
-                                ["Di ufuk timur", "Fajar menyingsing cerah", "Membawa harapan baru", "Jangan putus asa"],
-                                ["Seperti bintang", "Bersinar di malam", "Harapan adalah kekuatan", "Menuju kesuksesan"],
-                                ["Embun pagi hari", "Menyegarkan jiwa lesu", "Harapan penyemangat", "Dalam kehidupan"],
-                                ["Di tengah gelap", "Ada secercah cahaya", "Harapan menuntun", "Ke jalan terang"],
-                                ["Angin berhembus", "Membawa kabar baik", "Harapan tak pernah", "Pudar selamanya"]
-                            ]
-                        },
-                        4: {
-                            "Kehidupan": [
-                                ["Hidup bagai sungai mengalir", "Membawa harapan dan impian", "Tak selamanya airnya jernih", "Tapi teruslah berjuang dan berjalan"],
-                                ["Di kala senja menjelang", "Mentari tenggelam di ufuk barat", "Hidup ini penuh perjuangan", "Jangan pernah menyerah dan putus asa"],
-                                ["Seperti pohon di tengah hutan", "Tumbuh menjulang ke angkasa", "Hidup harus penuh makna", "Berbuat baik tiada henti"],
-                                ["Seperti ombak di lautan", "Bergulung tiada henti", "Hidup ini penuh gelombang", "Hadapi dengan ketabahan"],
-                                ["Bagai burung yang terbang", "Mencari sarang di pohon tinggi", "Hidup adalah perjalanan", "Tujuan akhir adalah bahagia"]
-                            ],
-                            "Cinta": [
-                                ["Cinta bagai mentari pagi", "Hangatnya terasa di hati", "Meski kadang tertutup awan", "Sinarnya takkan pernah mati"],
-                                ["Bunga mawar di taman hati", "Harum semerbak mewangi", "Cinta sejati abadi selamanya", "Takkan pudar oleh waktu"],
-                                ["Bagai bulan purnama bersinar", "Menerangi gelapnya malam", "Cinta yang tulus dan ikhlas", "Menghangatkan jiwa yang sepi"],
-                                ["Seperti hujan di musim kemarau", "Menyegarkan bumi yang kering", "Cinta adalah anugerah", "Yang menyuburkan hati"],
-                                ["Bagai pelangi setelah hujan", "Warnanya indah mempesona", "Cinta menghadirkan kebahagiaan", "Di tengah kesedihan hidup"]
-                            ],
-                            "Harapan": [
-                                ["Di ufuk timur fajar menyingsing", "Membawa harapan baru", "Jangan pernah berputus asa", "Masa depan cerah menanti"],
-                                ["Seperti bintang di langit malam", "Bersinar terang gemerlap", "Harapan adalah kekuatan", "Yang membawa pada kesuksesan"],
-                                ["Embun pagi di dedaunan", "Menyegarkan jiwa yang lesu", "Harapan adalah penyemangat", "Dalam menjalani kehidupan"],
-                                ["Bagai tunas di musim semi", "Tumbuh dengan penuh semangat", "Harapan adalah kehidupan", "Yang terus berkembang maju"],
-                                ["Seperti pelita di kegelapan", "Menerangi jalan yang gelap", "Harapan adalah penuntun", "Menuju masa depan cerah"]
-                            ]
-                        },
-                        5: {
-                            "Kehidupan": [
-                                ["Hidup bagai sungai yang mengalir", "Membawa harapan dan juga impian", "Tak selamanya airnya tetap jernih", "Tapi teruslah berjuang dan berjalan"],
-                                ["Di kala senja mulai menjelang", "Mentari tenggelam di ufuk barat", "Hidup ini penuh dengan perjuangan", "Jangan pernah menyerah dan putus asa"],
-                                ["Seperti pohon di tengah hutan", "Tumbuh menjulang ke angkasa luas", "Hidup harus penuh dengan makna", "Berbuat baik tiada hentinya"],
-                                ["Seperti ombak di lautan biru", "Bergulung-gulung tiada hentinya", "Hidup ini penuh dengan gelombang", "Hadapi dengan penuh ketabahan"],
-                                ["Bagai burung yang terbang bebas", "Mencari sarang di pohon yang tinggi", "Hidup adalah sebuah perjalanan", "Tujuan akhir adalah kebahagiaan"]
-                            ],
-                            "Cinta": [
-                                ["Cinta bagai mentari di pagi", "Hangatnya terasa di dalam hati", "Meski kadang tertutup oleh awan", "Sinarnya takkan pernah padam selamanya"],
-                                ["Bunga mawar yang indah di taman", "Harum semerbak mewangi sepanjang hari", "Cinta sejati akan abadi selamanya", "Takkan pernah pudar oleh sang waktu"],
-                                ["Bagai bulan purnama yang bersinar", "Menerangi gelapnya malam yang sunyi", "Cinta yang tulus dan juga ikhlas", "Menghangatkan jiwa yang merasa sepi"],
-                                ["Seperti hujan di musim kemarau", "Menyegarkan bumi yang terasa kering", "Cinta adalah sebuah anugerah", "Yang menyuburkan hati yang gersang"],
-                                ["Bagai pelangi setelah hujan reda", "Warnanya indah sungguh mempesona", "Cinta menghadirkan banyak kebahagiaan", "Di tengah kesedihan dalam hidup"]
-                            ],
-                            "Harapan": [
-                                ["Di ufuk timur fajar mulai menyingsing", "Membawa harapan baru yang cerah", "Jangan pernah merasa putus asa", "Masa depan yang cerah sedang menanti"],
-                                ["Seperti bintang gemerlap di malam", "Bersinar terang dengan gemerlapnya", "Harapan adalah sebuah kekuatan", "Yang membawa pada pintu kesuksesan"],
-                                ["Embun pagi yang jatuh di dedaunan", "Menyegarkan jiwa yang terasa lesu", "Harapan adalah sebuah penyemangat", "Dalam menjalani roda kehidupan"],
-                                ["Bagai tunas hijau di musim semi", "Tumbuh dengan penuh semangat hidup", "Harapan adalah sebuah kehidupan", "Yang terus berkembang dan maju"],
-                                ["Seperti pelita kecil di kegelapan", "Menerangi jalan yang terasa gelap", "Harapan adalah sebuah penuntun", "Menuju masa depan yang cerah"]
-                            ]
-                        }
-                    };
+                    const baris1 = generateRandomLine(jumlahKata);
+                    const baris2 = generateRandomLine(jumlahKata);
+                    const baris3 = generateRandomLine(jumlahKata);
+                    const baris4 = generateRandomLine(jumlahKata);
                     
-                    // Pilih template berdasarkan jumlah kata dan tema
-                    const template = syairTemplates[jumlahKata] || syairTemplates[4];
-                    const syairTema = template[tema] || template["Kehidupan"];
-                    
-                    // Jika semua syair sudah digunakan, reset daftar yang sudah digunakan
-                    if (usedSyairIndices.size >= syairTema.length) {
-                        usedSyairIndices.clear();
-                    }
-                    
-                    // Pilih syair yang belum digunakan
-                    let randomIndex;
-                    do {
-                        randomIndex = Math.floor(Math.random() * syairTema.length);
-                    } while (usedSyairIndices.has(randomIndex));
-                    
-                    // Tandai syair ini sebagai sudah digunakan
-                    usedSyairIndices.add(randomIndex);
-                    
-                    return syairTema[randomIndex];
+                    return [baris1, baris2, baris3, baris4];
                 }
                 
                 // Fungsi untuk menghasilkan syair baru dengan AI
@@ -1467,7 +1475,13 @@
                     patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
                     
                     // Gunakan generator sederhana sebagai fallback
-                    const newSyair = generateSimpleSyair(selectedKata, temaTerpilih);
+                    const newSyair = [
+                        generateRandomLine(selectedKata),
+                        generateRandomLine(selectedKata),
+                        generateRandomLine(selectedKata),
+                        generateRandomLine(selectedKata)
+                    ];
+                    
                     generateAngkaTambahan();
                     
                     // Terapkan animasi
@@ -1495,38 +1509,6 @@
                             }, 150);
                         }, 150);
                     }, 150);
-                }
-                
-                // Generator syair sederhana (fallback)
-                function generateSimpleSyair(jumlahKata, tema) {
-                    const syairSederhana = [
-                        [
-                            "Hidup ini penuh warna",
-                            "Seperti pelangi di langit",
-                            "Jalani dengan penuh syukur",
-                            "Bahagia akan menyertai"
-                        ],
-                        [
-                            "Waktu terus berlalu",
-                            "Takkan pernah kembali",
-                            "Gunakan dengan bijak",
-                            "Untuk meraih impian"
-                        ],
-                        [
-                            "Cinta adalah anugerah",
-                            "Yang diberikan Tuhan",
-                            "Jagalah dengan tulus",
-                            "Akan abadi selamanya"
-                        ],
-                        [
-                            "Alam memberikan kedamaian",
-                            "Bagi jiwa yang resah",
-                            "Syukuri setiap karunia",
-                            "Dari Yang Maha Kuasa"
-                        ]
-                    ];
-                    
-                    return syairSederhana[Math.floor(Math.random() * syairSederhana.length)];
                 }
                 
                 // Fungsi untuk generate angka tambahan (MK, Naga, Karakter)
