@@ -1243,7 +1243,7 @@
                 });
             });
             
-            // Fungsi untuk generator syair random
+            // Fungsi untuk generator syair dengan sistem rotasi yang mencegah pengulangan
             function setupSyairGenerator() {
                 const baris1 = document.getElementById('baris1');
                 const baris2 = document.getElementById('baris2');
@@ -1270,77 +1270,189 @@
                     "Tenang", "Ganas", "Santai", "Tegas", "Lembut", "Cepat", "Lambat", "Manis", "Keras", "Rapi"
                 ];
                 
-                // Tema untuk syair
-                const temaSyair = [
-                    "Kehidupan", "Cinta", "Harapan", "Perjuangan", "Kebahagiaan", "Kesedihan", 
-                    "Waktu", "Alam", "Mimpi", "Nasib", "Persahabatan", "Keluaraga", "Kesabaran", "Kesuksesan",
-                    "Pengorbanan", "Kedamaian", "Perubahan", "Kebijaksanaan", "Kesetiaan", "Kebaikan"
-                ];
+                // Sistem database kata yang sangat besar dengan rotasi
+                const kataDatabase = {
+                    // Kata untuk tema Kehidupan
+                    kehidupan: {
+                        // Struktur: [kata untuk baris1], [kata untuk baris2], [kata untuk baris3], [kata untuk baris4]
+                        3: {
+                            baris1: [
+                                "Hidup penuh makna", "Hidup ini indah", "Hidup adalah anugerah", "Hidup penuh warna",
+                                "Hidup terus berjalan", "Hidup penuh cerita", "Hidup adalah perjalanan", "Hidup tak terduga",
+                                "Hidup penuh harapan", "Hidup adalah karunia", "Hidup adalah misteri", "Hidup penuh arti",
+                                "Hidup adalah kesempatan", "Hidup adalah pembelajaran", "Hidup adalah petualangan", "Hidup adalah cinta"
+                            ],
+                            baris2: [
+                                "Waktu berjalan cepat", "Masa depan menanti", "Hari esok datang", "Waktu tak berhenti",
+                                "Detik terus berlalu", "Masa berganti masa", "Waktu adalah pedang", "Hari silih berganti",
+                                "Waktu adalah emas", "Masa depan cerah", "Waktu adalah guru", "Hari-hari berlalu",
+                                "Waktu adalah harta", "Masa depan terbuka", "Waktu adalah kehidupan", "Hari esok menjanjikan"
+                            ],
+                            baris3: [
+                                "Harapan tak pernah padam", "Cita-cita tinggi", "Impian indah selalu", "Semangat membara",
+                                "Asa terus berkobar", "Mimpi tak pernah mati", "Harapan adalah kekuatan", "Cita-cita mulia",
+                                "Impian adalah nyawa", "Semangat tak kunjung padam", "Harapan adalah cahaya", "Cita-cita abadi",
+                                "Impian adalah motivasi", "Semangat adalah api", "Harapan adalah kompas", "Cita-cita adalah tujuan"
+                            ],
+                            baris4: [
+                                "Cinta abadi selamanya", "Kebahagiaan sejati", "Kedamaian hati", "Kasih tak bertepi",
+                                "Cinta tanpa batas", "Bahagia hakiki", "Damai dalam jiwa", "Kasih sayang tulus",
+                                "Cinta adalah anugerah", "Kebahagiaan abadi", "Kedamaian sejati", "Kasih adalah kehidupan",
+                                "Cinta adalah pengorbanan", "Kebahagiaan adalah pilihan", "Kedamaian adalah tujuan", "Kasih adalah pengikat"
+                            ]
+                        },
+                        4: {
+                            baris1: [
+                                "Hidup ini penuh makna", "Perjalanan panjang hidup", "Setiap langkah kehidupan", "Hidup adalah anugerah indah",
+                                "Hidup terus berjalan maju", "Hidup penuh cerita menarik", "Hidup adalah perjalanan panjang", "Hidup tak terduga jalannya",
+                                "Hidup penuh harapan baru", "Hidup adalah karunia Tuhan", "Hidup adalah misteri besar", "Hidup penuh arti mendalam",
+                                "Hidup adalah kesempatan emas", "Hidup adalah pembelajaran terus", "Hidup adalah petualangan seru", "Hidup adalah cinta abadi"
+                            ],
+                            baris2: [
+                                "Waktu terus berjalan cepat", "Tak ada yang abadi di dunia", "Masa depan menanti kita", "Waktu tak pernah berhenti",
+                                "Detik terus berlalu cepat", "Masa berganti masa terus", "Waktu adalah pedang tajam", "Hari silih berganti terus",
+                                "Waktu adalah emas berharga", "Masa depan cerah menanti", "Waktu adalah guru bijak", "Hari-hari berlalu cepat",
+                                "Waktu adalah harta karun", "Masa depan terbuka lebar", "Waktu adalah kehidupan nyata", "Hari esok menjanjikan harapan"
+                            ],
+                            baris3: [
+                                "Harapan tak pernah padam sama", "Cita-cita setinggi langit", "Impian indah selalu bersemi", "Semangat membara tak kunjung padam",
+                                "Asa terus berkobar dalam hati", "Mimpi tak pernah mati selamanya", "Harapan adalah kekuatan hidup", "Cita-cita mulia harus diraih",
+                                "Impian adalah nyawa kehidupan", "Semangat tak kunjung padam api", "Harapan adalah cahaya terang", "Cita-cita abadi dalam sanubari",
+                                "Impian adalah motivasi kuat", "Semangat adalah api penyemangat", "Harapan adalah kompas hidup", "Cita-cita adalah tujuan akhir"
+                            ],
+                            baris4: [
+                                "Cinta abadi selamanya adanya", "Kebahagiaan sejati dalam hidup", "Kedamaian hati yang tenang", "Kasih tak bertepi dan tulus",
+                                "Cinta tanpa batas dan syarat", "Bahagia hakiki dalam jiwa", "Damai dalam jiwa yang tentram", "Kasih sayang tulus dari hati",
+                                "Cinta adalah anugerah terindah", "Kebahagiaan abadi dalam hidup", "Kedamaian sejati dalam hati", "Kasih adalah kehidupan nyata",
+                                "Cinta adalah pengorbanan ikhlas", "Kebahagiaan adalah pilihan hati", "Kedamaian adalah tujuan hidup", "Kasih adalah pengikat hubungan"
+                            ]
+                        },
+                        5: {
+                            baris1: [
+                                "Hidup ini sungguh penuh makna", "Perjalanan panjang hidup ini", "Setiap langkah dalam kehidupan kita", "Hidup adalah anugerah indah sekali",
+                                "Hidup terus berjalan maju pesat", "Hidup penuh cerita menarik dan seru", "Hidup adalah perjalanan panjang nan indah", "Hidup tak terduga jalannya kadang",
+                                "Hidup penuh harapan baru setiap hari", "Hidup adalah karunia Tuhan yang mulia", "Hidup adalah misteri besar yang tak terpecahkan", "Hidup penuh arti mendalam dan berharga",
+                                "Hidup adalah kesempatan emas yang berharga", "Hidup adalah pembelajaran terus menerus", "Hidup adalah petualangan seru dan menegangkan", "Hidup adalah cinta abadi yang tak ternilai"
+                            ],
+                            baris2: [
+                                "Waktu terus berjalan dengan cepat sekali", "Tak ada yang abadi di dunia fana ini", "Masa depan menanti kita dengan sabar", "Waktu tak pernah berhenti sedetik pun",
+                                "Detik terus berlalu dengan sangat cepat", "Masa berganti masa terus menerus saja", "Waktu adalah pedang tajam yang tak kenal ampun", "Hari silih berganti tanpa henti sama sekali",
+                                "Waktu adalah emas berharga yang langka", "Masa depan cerah menanti di depan", "Waktu adalah guru bijak yang mengajarkan", "Hari-hari berlalu dengan cepat sekali",
+                                "Waktu adalah harta karun tak ternilai", "Masa depan terbuka lebar untuk semua", "Waktu adalah kehidupan nyata yang berharga", "Hari esok menjanjikan harapan baru lagi"
+                            ],
+                            baris3: [
+                                "Harapan tak pernah padam sama sekali", "Cita-cita setinggi langit biru nan indah", "Impian indah selalu bersemi di hati", "Semangat membara tak kunjung padam api",
+                                "Asa terus berkobar dalam dada sanubari", "Mimpi tak pernah mati selamanya abadi", "Harapan adalah kekuatan hidup yang utama", "Cita-cita mulia harus diraih dengan usaha",
+                                "Impian adalah nyawa kehidupan manusia", "Semangat tak kunjung padam walau badai", "Harapan adalah cahaya terang dalam gelap", "Cita-cita abadi dalam sanubari terdalam",
+                                "Impian adalah motivasi kuat untuk maju", "Semangat adalah api penyemangat hidup", "Harapan adalah kompas hidup penuntun jalan", "Cita-cita adalah tujuan akhir perjuangan"
+                            ],
+                            baris4: [
+                                "Cinta abadi selamanya adanya di hati", "Kebahagiaan sejati dalam hidup ini", "Kedamaian hati yang tenang dan tentram", "Kasih tak bertepi dan tulus adanya",
+                                "Cinta tanpa batas dan syarat apapun", "Bahagia hakiki dalam jiwa yang tenang", "Damai dalam jiwa yang tentram dan nyaman", "Kasih sayang tulus dari hati paling dalam",
+                                "Cinta adalah anugerah terindah dari Tuhan", "Kebahagiaan abadi dalam hidup manusia", "Kedamaian sejati dalam hati sanubari", "Kasih adalah kehidupan nyata yang berarti",
+                                "Cinta adalah pengorbanan ikhlas dan tulus", "Kebahagiaan adalah pilihan hati masing-masing", "Kedamaian adalah tujuan hidup sebenarnya", "Kasih adalah pengikat hubungan abadi"
+                            ]
+                        }
+                    },
+                    // Kata untuk tema Cinta
+                    cinta: {
+                        3: {
+                            baris1: [
+                                "Cinta yang tulus", "Kasih sayangmu", "Hati yang rindu", "Jiwa yang merindu",
+                                "Cinta sejati", "Kasih abadi", "Hati berbicara", "Jiwa menyatu",
+                                "Cinta murni", "Kasih tak bertepi", "Hati berdebar", "Jiwa terpaut",
+                                "Cinta hakiki", "Kasih tanpa batas", "Hati terpikat", "Jiwa terikat"
+                            ],
+                            baris2: [
+                                "Selalu bersemi", "Takkan pernah pudar", "Abadi selamanya", "Tak berujung waktu",
+                                "Tak pernah layu", "Selalu mekar", "Takkan sirna", "Abadi dalam hati",
+                                "Tak pernah mati", "Selalu hidup", "Takkan hilang", "Abadi nan suci",
+                                "Tak pernah redup", "Selalu bersinar", "Takkan padam", "Abadi cintanya"
+                            ],
+                            baris3: [
+                                "Dalam dekapanmu", "Pelukan hangatmu", "Senyuman manismu", "Kata-kata indahmu",
+                                "Dalam pelukanmu", "Dekapan hangatmu", "Senyum manismu", "Kata lembutmu",
+                                "Dalam rangkulanmu", "Pelukan lembutmu", "Senyum indahmu", "Kata sayangmu",
+                                "Dalam belaianmu", "Pelukan mesramu", "Senyum manjamu", "Kata cintamu"
+                            ],
+                            baris4: [
+                                "Aku bahagia", "Hatiku tenang", "Jiwa damai sentosa", "Hati tentram nyaman",
+                                "Aku merasa damai", "Hatiku tenteram", "Jiwa tenang sekali", "Hati senang selalu",
+                                "Aku merasa lengkap", "Hatiku berbunga", "Jiwa bahagia sentosa", "Hati gembira selalu",
+                                "Aku merasa berarti", "Hatiku terpenuhi", "Jiwa puas dan damai", "Hati senang dan bahagia"
+                            ]
+                        },
+                        4: {
+                            baris1: [
+                                "Cinta yang tulus abadi", "Kasih sayangmu tulus", "Hati yang rindu bertemu", "Jiwa yang merindu kasih",
+                                "Cinta sejati nan abadi", "Kasih abadi tak ternilai", "Hati berbicara jujur", "Jiwa menyatu dalam cinta",
+                                "Cinta murni tanpa syarat", "Kasih tak bertepi luas", "Hati berdebar kencang", "Jiwa terpaut selamanya",
+                                "Cinta hakiki sejati", "Kasih tanpa batas waktu", "Hati terpikat dalamnya", "Jiwa terikat abadi"
+                            ],
+                            baris2: [
+                                "Selalu bersemi dalam hati", "Takkan pernah pudar oleh waktu", "Abadi selamanya di hati", "Tak berujung waktu dan masa",
+                                "Tak pernah layu selamanya", "Selalu mekar dalam kalbu", "Takkan sirna dari ingatan", "Abadi dalam sanubari",
+                                "Tak pernah mati dalam jiwa", "Selalu hidup dalam dada", "Takkan hilang dari memori", "Abadi nan suci murni",
+                                "Tak pernah redup cahayanya", "Selalu bersinar terang", "Takkan padam apinya", "Abadi cintanya sejati"
+                            ],
+                            baris3: [
+                                "Dalam dekapanmu yang hangat", "Pelukan hangatmu menenangkan", "Senyuman manismu menyegarkan", "Kata-kata indahmu menghanyutkan",
+                                "Dalam pelukanmu yang mesra", "Dekapan hangatmu membahagiakan", "Senyum manismu mengobati", "Kata lembutmu meneduhkan",
+                                "Dalam rangkulanmu yang erat", "Pelukan lembutmu mengasyikkan", "Senyum indahmu memesona", "Kata sayangmu menghangatkan",
+                                "Dalam belaianmu yang lembut", "Pelukan mesramu menggairahkan", "Senyum manjamu memabukkan", "Kata cintamu menggetarkan"
+                            ],
+                            baris4: [
+                                "Aku bahagia bersamamu", "Hatiku tenang dan tenteram", "Jiwa damai sentosa selalu", "Hati tentram nyaman adanya",
+                                "Aku merasa damai sekali", "Hatiku tenteram bersamamu", "Jiwa tenang sekali selalu", "Hati senang selalu bahagia",
+                                "Aku merasa lengkap adanya", "Hatiku berbunga-bunga", "Jiwa bahagia sentosa abadi", "Hati gembira selalu riang",
+                                "Aku merasa berarti hidup", "Hatiku terpenuhi cinta", "Jiwa puas dan damai sentosa", "Hati senang dan bahagia selalu"
+                            ]
+                        },
+                        5: {
+                            baris1: [
+                                "Cinta yang tulus dan abadi", "Kasih sayangmu tulus dan dalam", "Hati yang rindu bertemu kembali", "Jiwa yang merindu kasih sayangmu",
+                                "Cinta sejati nan abadi adanya", "Kasih abadi tak ternilai harganya", "Hati berbicara jujur dan tulus", "Jiwa menyatu dalam cinta sejati",
+                                "Cinta murni tanpa syarat apapun", "Kasih tak bertepi luasnya", "Hati berdebar kencang rasanya", "Jiwa terpaut selamanya abadi",
+                                "Cinta hakiki sejati nan murni", "Kasih tanpa batas waktu dan ruang", "Hati terpikat dalamnya cinta", "Jiwa terikat abadi selamanya"
+                            ],
+                            baris2: [
+                                "Selalu bersemi dalam hati sanubari", "Takkan pernah pudar oleh waktu yang berlalu", "Abadi selamanya di dalam hati ini", "Tak berujung waktu dan masa yang datang",
+                                "Tak pernah layu selamanya dalam jiwa", "Selalu mekar dalam kalbu yang terdalam", "Takkan sirna dari ingatan dan memori", "Abadi dalam sanubari yang paling dalam",
+                                "Tak pernah mati dalam jiwa dan raga", "Selalu hidup dalam dada yang lapang", "Takkan hilang dari memori dan kenangan", "Abadi nan suci murni adanya",
+                                "Tak pernah redup cahayanya yang terang", "Selalu bersinar terang benderang", "Takkan padam apinya yang membara", "Abadi cintanya sejati nan mulia"
+                            ],
+                            baris3: [
+                                "Dalam dekapanmu yang hangat dan nyaman", "Pelukan hangatmu menenangkan jiwa", "Senyuman manismu menyegarkan pandangan", "Kata-kata indahmu menghanyutkan perasaan",
+                                "Dalam pelukanmu yang mesra dan erat", "Dekapan hangatmu membahagiakan hati", "Senyum manismu mengobati lara", "Kata lembutmu meneduhkan sanubari",
+                                "Dalam rangkulanmu yang erat dan kuat", "Pelukan lembutmu mengasyikkan jiwa", "Senyum indahmu memesona pandangan", "Kata sayangmu menghangatkan relung hati",
+                                "Dalam belaianmu yang lembut dan halus", "Pelukan mesramu menggairahkan rasa", "Senyum manjamu memabukkan akal", "Kata cintamu menggetarkan jiwa"
+                            ],
+                            baris4: [
+                                "Aku bahagia bersamamu selalu", "Hatiku tenang dan tenteram adanya", "Jiwa damai sentosa selalu dan selamanya", "Hati tentram nyaman adanya bersamamu",
+                                "Aku merasa damai sekali dalam hati", "Hatiku tenteram bersamamu selamanya", "Jiwa tenang sekali selalu bahagia", "Hati senang selalu bahagia tiada tara",
+                                "Aku merasa lengkap adanya hidupku", "Hatiku berbunga-bunga riang gembira", "Jiwa bahagia sentosa abadi nan damai", "Hati gembira selalu riang dan ceria",
+                                "Aku merasa berarti hidup ini adanya", "Hatiku terpenuhi cinta dan kasih", "Jiwa puas dan damai sentosa abadi", "Hati senang dan bahagia selalu bersama"
+                            ]
+                        }
+                    }
+                };
                 
-                // Pola rima
-                const polaRima = [
-                    { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
-                    { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" },
-                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
-                    { pola: "a-b-c-b", contoh: "merah - biru - hijau - biru" },
-                    { pola: "a-b-c-c", contoh: "merah - biru - hijau - hijau" }
-                ];
+                // Sistem rotasi untuk mencegah pengulangan
+                const rotationState = {
+                    kehidupan: { 3: 0, 4: 0, 5: 0 },
+                    cinta: { 3: 0, 4: 0, 5: 0 }
+                };
                 
-                // Kumpulan kata untuk syair
-                const kataBenda = [
-                    "hidup", "cinta", "hati", "jiwa", "dunia", "alam", "matahari", "bulan", 
-                    "bintang", "laut", "sungai", "gunung", "angin", "hujan", "awan", "mimpi",
-                    "harapan", "nasib", "takdir", "waktu", "masa", "perjalanan", "cahaya", "bayangan",
-                    "kegelapan", "kebahagiaan", "kesedihan", "kehidupan", "kematian", "perjuangan",
-                    "perubahan", "kesetiaan", "pengorbanan", "kebaikan", "kebijaksanaan", "kedamaian"
-                ];
-                
-                const kataSifat = [
-                    "indah", "bahagia", "sedih", "susah", "senang", "gembira", "gelap", "terang",
-                    "besar", "kecil", "tinggi", "rendah", "dalam", "luas", "sempit", "panjang",
-                    "pendek", "kuat", "lemah", "keras", "lembut", "cepat", "lambat", "baru",
-                    "lama", "tua", "muda", "baik", "buruk", "benar", "salah", "pahit", "manis",
-                    "asam", "asin", "hangat", "dingin", "sejuk", "panas", "lelah", "segar"
-                ];
-                
-                const kataKerja = [
-                    "berjalan", "berlari", "terbang", "berenang", "berbicara", "mendengar", "melihat",
-                    "merasa", "memikir", "mengingat", "melupakan", "mencintai", "membenci", "menyayangi",
-                    "menolong", "menghibur", "menyakit", "menyembuh", "mencipta", "menghancur", "membangun",
-                    "merusak", "menemukan", "kehilangan", "mendapat", "memberi", "menerima", "mengambil",
-                    "melepaskan", "memegang", "melepas", "memulai", "mengakhiri", "menunggu", "mengejar",
-                    "melarikan", "menghadapi", "menghindari", "menyelesaikan", "meninggalkan", "kembali"
-                ];
-                
-                const kataDepan = [
-                    "di", "ke", "dari", "dalam", "pada", "untuk", "dengan", "tanpa", "atas", "bawah",
-                    "depan", "belakang", "samping", "antara", "sepanjang", "melalui", "selama", "setelah",
-                    "sebelum", "ketika", "sambil", "walau", "meski", "karena", "sebab", "agar", "supaya",
-                    "hingga", "sampai", "sejak", "selama", "ketika", "sementara", "begitu", "setelah"
-                ];
-                
-                const kataSambung = [
-                    "dan", "atau", "tetapi", "namun", "sedangkan", "sementara", "karena", "sebab",
-                    "jika", "apabila", "walau", "meskipun", "walaupun", "sehingga", "agar", "supaya",
-                    "bahwa", "yang", "seperti", "bagaikan", "ibarat", "laksana", "dengan", "tanpa",
-                    "untuk", "kepada", "pada", "dari", "ke", "di", "dalam", "atas", "bawah", "depan"
-                ];
-                
-                const kataGanti = [
-                    "aku", "kamu", "dia", "kami", "kita", "mereka", "ini", "itu", "sini", "situ",
-                    "sana", "yang", "siapa", "apa", "mana", "bagaimana", "mengapa", "kapan", "berapa",
-                    "semua", "segala", "setiap", "masing", "sendiri", "bersama", "saling", "satu"
-                ];
-                
-                const kataAwal = [
-                    "pagi", "siang", "sore", "malam", "senja", "fajar", "subuh", "dini", "tahun",
-                    "bulan", "minggu", "hari", "jam", "menit", "detik", "musim", "semi", "panas",
-                    "gugur", "dingin", "kemarau", "hujan", "angin", "badai", "topan", "gempa", "banjir"
-                ];
-                
-                // Fungsi untuk memilih item acak dari array
-                function randomFrom(array) {
-                    return array[Math.floor(Math.random() * array.length)];
+                // Fungsi untuk memilih kata dengan rotasi
+                function getRotatedWords(tema, jumlahKata, baris) {
+                    const words = kataDatabase[tema][jumlahKata][baris];
+                    const currentIndex = rotationState[tema][jumlahKata];
+                    const selectedIndex = (currentIndex) % words.length;
+                    
+                    // Update rotation state untuk next time
+                    rotationState[tema][jumlahKata] = (currentIndex + 1) % words.length;
+                    
+                    return words[selectedIndex];
                 }
                 
                 // Fungsi untuk mengkapitalisasi huruf pertama
@@ -1348,58 +1460,16 @@
                     return str.charAt(0).toUpperCase() + str.slice(1);
                 }
                 
-                // Generator syair yang benar-benar random
-                function generateRandomLine(jumlahKata) {
-                    const patterns3 = [
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)}`,
-                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataGanti))} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`
-                    ];
-                    
-                    const patterns4 = [
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)}`,
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)}`
-                    ];
-                    
-                    const patterns5 = [
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataSifat)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSambung)} ${randomFrom(kataKerja)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataDepan))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataGanti)}`,
-                        () => `${capitalize(randomFrom(kataSifat))} ${randomFrom(kataBenda)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)} ${randomFrom(kataBenda)}`,
-                        () => `${capitalize(randomFrom(kataKerja))} ${randomFrom(kataBenda)} ${randomFrom(kataSifat)} ${randomFrom(kataGanti)} ${randomFrom(kataKerja)}`,
-                        () => `${capitalize(randomFrom(kataBenda))} ${randomFrom(kataGanti)} ${randomFrom(kataSifat)} ${randomFrom(kataKerja)} ${randomFrom(kataDepan)}`
-                    ];
-                    
-                    let patterns;
-                    if (jumlahKata === 3) {
-                        patterns = patterns3;
-                    } else if (jumlahKata === 4) {
-                        patterns = patterns4;
-                    } else {
-                        patterns = patterns5;
-                    }
-                    
-                    return randomFrom(patterns)();
-                }
-                
-                // Fungsi untuk menghasilkan syair baru
-                function buatSyairBaru() {
-                    // Ambil jumlah kata yang dipilih
-                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
-                    
-                    // Pilih tema dan pola rima secara acak
-                    const temaTerpilih = temaSyair[Math.floor(Math.random() * temaSyair.length)];
-                    const polaTerpilih = polaRima[Math.floor(Math.random() * polaRima.length)];
+                // Fungsi untuk menghasilkan syair dengan sistem rotasi
+                function generateCoherentSyair(jumlahKata) {
+                    // Pilih tema secara bergantian
+                    const temaList = ['kehidupan', 'cinta'];
+                    const temaIndex = Math.floor(Math.random() * temaList.length);
+                    const temaTerpilih = temaList[temaIndex];
+                    const polaTerpilih = "a-b-a-b";
                     
                     // Update info pola
-                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih}`;
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih} | Tema: ${temaTerpilih === 'kehidupan' ? 'Kehidupan' : 'Cinta'}`;
                     
                     // Generate angka untuk MK dan Naga
                     generateAngkaTambahan();
@@ -1411,19 +1481,20 @@
                     baris4.style.opacity = "0";
                     
                     setTimeout(() => {
-                        baris1.textContent = generateRandomLine(selectedKata);
+                        // Gunakan sistem rotasi untuk mendapatkan kata yang unik
+                        baris1.textContent = capitalize(getRotatedWords(temaTerpilih, jumlahKata, 'baris1'));
                         baris1.style.opacity = "1";
                         
                         setTimeout(() => {
-                            baris2.textContent = generateRandomLine(selectedKata);
+                            baris2.textContent = capitalize(getRotatedWords(temaTerpilih, jumlahKata, 'baris2'));
                             baris2.style.opacity = "1";
                             
                             setTimeout(() => {
-                                baris3.textContent = generateRandomLine(selectedKata);
+                                baris3.textContent = capitalize(getRotatedWords(temaTerpilih, jumlahKata, 'baris3'));
                                 baris3.style.opacity = "1";
                                 
                                 setTimeout(() => {
-                                    baris4.textContent = generateRandomLine(selectedKata);
+                                    baris4.textContent = capitalize(getRotatedWords(temaTerpilih, jumlahKata, 'baris4'));
                                     baris4.style.opacity = "1";
                                 }, 150);
                             }, 150);
@@ -1549,11 +1620,19 @@
                         // Update radio button
                         const radio = this.querySelector('input[type="radio"]');
                         radio.checked = true;
+                        
+                        // Generate syair baru dengan jumlah kata yang dipilih
+                        const selectedKata = parseInt(radio.value);
+                        generateCoherentSyair(selectedKata);
                     });
                 });
                 
                 // Event listener untuk tombol syair
-                generateSyairBtn.addEventListener('click', buatSyairBaru);
+                generateSyairBtn.addEventListener('click', function() {
+                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
+                    generateCoherentSyair(selectedKata);
+                });
+                
                 copySyairBtn.addEventListener('click', salinSyair);
                 copyMkBtn.addEventListener('click', salinMk);
                 copyNagaBtn.addEventListener('click', salinNaga);
@@ -1592,7 +1671,8 @@
                 });
                 
                 // Buat syair pertama saat halaman dimuat
-                buatSyairBaru();
+                const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
+                generateCoherentSyair(selectedKata);
             }
             
             // Fungsi untuk prediksi togel (tetap sama seperti sebelumnya)
