@@ -3,1860 +3,2203 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ALL SHORTCUT</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🚀</text></svg>">
+    <title>Prediksi Togel & Generator Syair</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%233498db'/><path d='M50 20 L65 40 L75 35 L70 55 L85 60 L65 65 L70 85 L50 75 L30 85 L35 65 L15 60 L30 55 L25 35 L35 40 Z' fill='%23FFD700'/><text x='50' y='50' font-family='Arial' font-size='14' fill='white' text-anchor='middle' dominant-baseline='middle'>PS</text></svg>">
     <style>
-        :root {
-            --neon-green: #0aff9d;
-            --neon-green-dark: #08cc80;
-            --neon-green-light: #4dffc3;
-            --neon-purple: #9d50ff;
-            --dark-bg: #0a0a16;
-            --darker-bg: #050510;
-            --card-bg: rgba(15, 15, 35, 0.7);
-            --text-light: #ffffff;
-            --text-glow: rgba(255, 255, 255, 0.8);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-        }
-
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
         }
-
+        
         body {
-            font-family: 'Rajdhani', sans-serif;
-            background: var(--darker-bg);
-            color: var(--text-light);
-            line-height: 1.6;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            padding: 15px;
             min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            position: relative;
+            color: #2d3436;
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 15% 50%, rgba(17, 17, 55, 0.7) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(10, 80, 50, 0.5) 0%, transparent 25%),
-                radial-gradient(circle at 50% 80%, rgba(55, 17, 55, 0.6) 0%, transparent 25%);
-            z-index: -3;
+        
+        body.dark-mode {
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #0d1b2a);
+            color: #ffffff;
         }
-
-        .cyber-grid {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(10, 255, 157, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(10, 255, 157, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
-            z-index: -2;
-            opacity: 0.3;
-            perspective: 100px;
-            transform-style: preserve-3d;
-            transform: rotateX(60deg) translateZ(-20px);
-            animation: gridMove 30s infinite linear;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 40px; }
-        }
-
-        .cyber-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                linear-gradient(90deg, transparent, rgba(10, 255, 157, 0.05), transparent),
-                linear-gradient(transparent, rgba(157, 80, 255, 0.05), transparent);
-            background-size: 200% 200%;
-            z-index: -1;
-            animation: scanLines 20s infinite linear;
-            opacity: 0.05;
-            pointer-events: none;
-        }
-
-        @keyframes scanLines {
-            0% { background-position: 0 0; }
-            100% { background-position: 100% 100%; }
-        }
-
+        
         .container {
-            width: 100%;
-            max-width: 1400px;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            background: rgba(10, 10, 22, 0.7);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 30px;
-            box-shadow: 
-                0 0 30px rgba(10, 255, 157, 0.2),
-                0 0 60px rgba(157, 97, 251, 0.2),
-                inset 0 0 15px rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(10, 255, 157, 0.2);
+            max-width: 700px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.97);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 25px;
             position: relative;
             overflow: hidden;
-            z-index: 1;
         }
-
-        .container::before {
+        
+        .dark-mode .container {
+            background-color: rgba(30, 30, 30, 0.97);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dark-mode h1 {
+            color: #ffffff;
+        }
+        
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #e0e0e0;
+            position: relative;
+            justify-content: center;
+        }
+        
+        .dark-mode .tabs {
+            border-color: #444;
+        }
+        
+        .tab {
+            padding: 12px 25px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #7f8c8d;
+            position: relative;
+            transition: all 0.3s;
+            border-radius: 8px 8px 0 0;
+            margin: 0 5px;
+        }
+        
+        .dark-mode .tab {
+            color: #bdbdbd;
+        }
+        
+        .tab.active {
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .dark-mode .tab.active {
+            color: #4fc3f7;
+        }
+        
+        .tab.active::after {
             content: '';
             position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
-            z-index: -1;
-            border-radius: 30px;
-            animation: borderGlow 4s infinite alternate;
-            opacity: 0.4;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #3498db;
+            border-radius: 3px 3px 0 0;
         }
-
-        @keyframes borderGlow {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
+        
+        .dark-mode .tab.active::after {
+            background: #4fc3f7;
         }
-
-        header {
-            position: relative;
-            margin-bottom: 15px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
-            letter-spacing: 2px;
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .controls {
-            display: flex;
-            gap: 15px;
-            margin-left: auto;
-        }
-
-        .hamburger-menu {
+        
+        .tab-content {
             display: none;
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 8px;
-            transition: var(--transition);
+            animation: fadeIn 0.5s ease;
         }
-
-        .hamburger-menu:hover {
-            transform: rotate(90deg);
+        
+        .tab-content.active {
+            display: block;
         }
-
-        .subtitle {
-            color: var(--text-light);
-            font-size: 1.2rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* STYLE UNTUK PREDIKSI TOGEL */
+        .input-section {
+            margin-bottom: 25px;
             position: relative;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-align: center;
-            margin-top: 40px;
         }
-
-        .info-bar {
+        
+        .input-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 25px;
-            background: var(--glass-bg);
-            border-radius: 15px;
-            font-size: 1rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(5px);
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
-
-        .info-item {
+        
+        .input-label {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        .dark-mode .input-label {
+            color: #ffffff;
+        }
+        
+        .dark-mode-container {
             display: flex;
             align-items: center;
+            gap: 8px;
+            background: rgba(240, 240, 240, 0.2);
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .dark-mode .dark-mode-container {
+            background: rgba(50, 50, 50, 0.3);
+        }
+        
+        .dark-mode-container:hover {
+            background: rgba(200, 200, 200, 0.3);
+        }
+        
+        .dark-mode .dark-mode-container:hover {
+            background: rgba(70, 70, 70, 0.5);
+        }
+        
+        .dark-mode-toggle {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            border: none;
+            cursor: pointer;
+            width: 50px;
+            height: 26px;
+            border-radius: 13px;
+            position: relative;
+            transition: all 0.3s;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+        }
+        
+        .dark-mode .dark-mode-toggle {
+            background: linear-gradient(to right, #4a5568, #2d3748);
+            box-shadow: 0 0 5px rgba(66, 153, 225, 0.5);
+        }
+        
+        .toggle-handle {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .dark-mode .toggle-handle {
+            left: calc(100% - 23px);
+            background: #FFD700;
+            transform: rotate(360deg);
+        }
+        
+        .moon-icon, .sun-icon {
+            width: 14px;
+            height: 14px;
+            transition: all 0.3s;
+            fill: #2c3e50;
+        }
+        
+        .dark-mode .moon-icon, 
+        .dark-mode .sun-icon {
+            fill: #ffffff;
+        }
+        
+        .moon-icon {
+            opacity: 1;
+        }
+        
+        .sun-icon {
+            opacity: 0;
+            position: absolute;
+        }
+        
+        .dark-mode .moon-icon {
+            opacity: 0;
+        }
+        
+        .dark-mode .sun-icon {
+            opacity: 1;
+        }
+        
+        .dark-mode-label {
             font-weight: 500;
+            font-size: 14px;
+            color: #2c3e50;
         }
-
-        .info-item i {
-            margin-right: 12px;
-            color: var(--neon-green);
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px var(--neon-green);
+        
+        .dark-mode .dark-mode-label {
+            color: #f0f0f0;
         }
-
+        
+        /* FITUR PENCARIAN */
         .search-container {
             position: relative;
-            margin-bottom: 25px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 2;
+            margin-bottom: 15px;
         }
-
-        #search {
+        
+        #marketSearch {
             width: 100%;
-            padding: 18px 30px;
-            padding-left: 60px;
-            padding-right: 60px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            background: var(--glass-bg);
-            color: var(--text-light);
-            font-family: 'Rajdhani', sans-serif;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            transition: var(--transition);
+            padding: 14px 15px 14px 45px;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 15px;
+            background-color: white;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-
-        #search:focus {
-            outline: none;
-            box-shadow: 0 0 25px rgba(10, 255, 157, 0.3);
-            border-color: var(--neon-green);
-            background: rgba(15, 15, 35, 0.9);
+        
+        .dark-mode #marketSearch {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #ffffff;
         }
-
-        #search::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
+        
         .search-icon {
             position: absolute;
-            left: 30px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--neon-green);
-            font-size: 1.3rem;
-            z-index: 3;
-            text-shadow: 0 0 10px var(--neon-green);
+            color: #7f8c8d;
+            z-index: 2;
         }
-
-        .clear-search {
-            position: absolute;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.3rem;
-            cursor: pointer;
-            display: none;
-            z-index: 3;
-            transition: var(--transition);
+        
+        .dark-mode .search-icon {
+            color: #bdbdbd;
         }
-
-        .clear-search:hover {
-            color: var(--neon-purple);
-            transform: translateY(-50%) scale(1.2);
-            text-shadow: 0 0 10px var(--neon-purple);
-        }
-
-        .suggestions {
+        
+        .search-suggestions {
             position: absolute;
             top: 100%;
             left: 0;
             right: 0;
-            background: var(--glass-bg);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            max-height: 300px;
+            background-color: white;
+            border: 1px solid #dfe6e9;
+            border-radius: 0 0 10px 10px;
+            max-height: 250px;
             overflow-y: auto;
-            display: none;
             z-index: 100;
-            margin-top: 10px;
-            padding: 15px 0;
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            animation: fadeIn 0.3s ease;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-
+        
+        .dark-mode .search-suggestions {
+            background-color: #2d2d2d;
+            border-color: #444;
+        }
+        
         .suggestion-item {
-            padding: 14px 25px;
+            padding: 12px 15px;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            font-size: 1rem;
-            transition: var(--transition);
-            color: var(--text-light);
+            transition: background-color 0.2s;
+            border-bottom: 1px solid #eee;
         }
-
-        .suggestion-item i {
-            margin-right: 12px;
-            color: var(--neon-green);
-            font-size: 1.2rem;
-            text-shadow: 0 0 8px var(--neon-green);
+        
+        .suggestion-item:last-child {
+            border-bottom: none;
         }
-
+        
         .suggestion-item:hover {
-            background: rgba(10, 255, 157, 0.1);
-            transform: translateX(10px);
+            background-color: #f0f0f0;
         }
-
-        .shortcut-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        
+        .dark-mode .suggestion-item:hover {
+            background-color: #3d3d3d;
+        }
+        
+        .highlight {
+            background-color: #fffacd;
+            font-weight: bold;
+            padding: 2px;
+        }
+        
+        .dark-mode .highlight {
+            background-color: #5c4d00;
+            color: #fff;
+        }
+        
+        select, input[type="date"] {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #dfe6e9;
+            border-radius: 10px;
+            font-size: 15px;
+            background-color: white;
+            color: #333;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode select,
+        .dark-mode input[type="date"] {
+            background-color: #2d2d2d;
+            border-color: #444;
+            color: #ffffff;
+        }
+        
+        .radio-group {
+            display: flex;
             gap: 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .shortcut-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: inherit;
-            padding: 25px 15px;
-            position: relative;
-            text-align: center;
-            border: 1px solid var(--glass-border);
-            z-index: 1;
-            animation: cardAppear 0.6s ease forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        @keyframes cardAppear {
-            0% { opacity: 0; transform: translateY(30px) rotateX(30deg); }
-            100% { opacity: 1; transform: translateY(0) rotateX(0); }
-        }
-
-        .shortcut-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
-            z-index: -1;
-            border-radius: 20px;
-            animation: borderRotate 3s linear infinite;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        @keyframes borderRotate {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 200% 200%; }
-        }
-
-        .shortcut-card:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 
-                0 15px 40px rgba(0, 0, 0, 0.3),
-                0 0 25px rgba(10, 255, 157, 0.3),
-                0 0 35px rgba(157, 80, 255, 0.2);
-            border-color: var(--neon-green);
-        }
-
-        .shortcut-card:hover::before {
-            opacity: 1;
-        }
-
-        .icon-container {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-bottom: 15px;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            color: white;
-            font-size: 1.8rem;
-            animation: pulse 3s infinite ease-in-out;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
+            flex-wrap: wrap;
         }
-
-        .icon-container::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(45deg);
-            transition: all 0.6s;
-        }
-
-        .shortcut-card:hover .icon-container {
-            transform: scale(1.15) rotate(5deg);
-            animation: none;
-            box-shadow: 0 0 25px rgba(10, 255, 157, 0.8);
-        }
-
-        .shortcut-card:hover .icon-container::after {
-            animation: shine 1.5s ease forwards;
-        }
-
-        @keyframes shine {
-            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
-        }
-
-        .togel-dice {
-            animation: shake 3s ease infinite;
-        }
-
-        .shortcut-card:hover .togel-dice {
-            animation: shake 0.8s ease infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(10, 255, 157, 0.5); }
-            50% { transform: scale(1.08); box-shadow: 0 0 20px rgba(10, 255, 157, 0.7); }
-        }
-
-        @keyframes shake {
-            0% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-10deg) scale(1.1); }
-            50% { transform: rotate(10deg) scale(1.1); }
-            75% { transform: rotate(-5deg) scale(1.05); }
-            100% { transform: rotate(0deg) scale(1); }
-        }
-
-        .shortcut-name {
-            font-weight: 600;
-            font-size: 0.95rem;
-            color: var(--text-light);
-            line-height: 1.4;
-            transition: var(--transition);
-            position: relative;
-            letter-spacing: 0.5px;
-        }
-
-        .shortcut-card:hover .shortcut-name {
-            color: var(--neon-green);
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(10, 255, 157, 0.5);
-        }
-
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 50px 30px;
-            background: var(--glass-bg);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            animation: fadeIn 0.5s ease;
-        }
-
-        .no-results i {
-            font-size: 3rem;
-            color: var(--neon-green);
-            margin-bottom: 15px;
-            opacity: 0.7;
-            text-shadow: 0 0 15px var(--neon-green);
-        }
-
-        .no-results p {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            opacity: 0.8;
-        }
-
-        /* Login Modal */
-        .login-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #0a0a16, #1a1a3a);
+        
+        .radio-option {
             display: flex;
-            justify-content: center;
             align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.5s ease;
-            backdrop-filter: blur(10px);
+            gap: 8px;
+            cursor: pointer;
         }
-
-        .login-container {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            padding: 40px;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 
-                0 0 40px rgba(10, 255, 157, 0.2),
-                0 0 60px rgba(148, 97, 251, 0.2);
-            border: 1px solid var(--glass-border);
-            animation: modalAppear 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            transform: scale(0.9);
-            opacity: 0;
-            position: relative;
-            overflow: hidden;
+        
+        .manual-date-container {
+            display: none;
+            margin-top: 15px;
         }
-
-        .login-container::before {
-            content: '';
-            position: absolute;
-            top: -15px;
-            left: -15px;
-            right: -15px;
-            bottom: -15px;
-            background: linear-gradient(45deg, var(--neon-green), transparent, var(--neon-purple), transparent);
-            z-index: -1;
-            border-radius: 30px;
-            animation: borderGlow 4s infinite alternate;
-            opacity: 0.4;
-        }
-
-        @keyframes modalAppear {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .login-container h2 {
-            text-align: center;
+        
+        .result-container {
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #dee2e6;
             margin-bottom: 25px;
-            color: var(--neon-green);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2rem;
-            text-shadow: 0 0 15px var(--neon-green);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+        }
+        
+        .dark-mode .result-container {
+            background: linear-gradient(to right, #252525, #2d2d2d);
+            border-color: #444;
+        }
+        
+        .prediction-title {
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 18px;
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px dashed #ccc;
+        }
+        
+        .dark-mode .prediction-title {
+            color: #ffffff;
+            border-color: #555;
+        }
+        
+        .result-line {
+            display: flex;
+            margin-bottom: 12px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #eee;
+        }
+        
+        .dark-mode .result-line {
+            border-color: #444;
+        }
+        
+        .result-label {
+            min-width: 160px;
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 15px;
+        }
+        
+        .dark-mode .result-label {
+            color: #bb86fc;
+        }
+        
+        .result-value {
+            font-weight: 500;
+            color: #2c3e50;
+            font-size: 16px;
+        }
+        
+        .dark-mode .result-value {
+            color: #ffffff;
+        }
+        
+        .button-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-width: 200px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        #generateBtn {
+            background: linear-gradient(to right, #3498db, #2980b9);
+            color: white;
+        }
+        
+        #copyBtn {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            color: white;
+        }
+        
+        #copyAllBtn {
+            background: linear-gradient(to right, #9b59b6, #8e44ad);
+            color: white;
+        }
+        
+        .footer-note {
+            text-align: center;
+            margin-top: 25px;
+            color: #7f8c8d;
+            font-style: italic;
+            font-size: 14px;
+            padding: 15px;
+            background: rgba(236, 240, 241, 0.5);
+            border-radius: 8px;
+        }
+        
+        .dark-mode .footer-note {
+            color: #bdbdbd;
+            background: rgba(66, 66, 66, 0.5);
+        }
+        
+        /* STYLE UNTUK GENERATOR SYAIR */
+        .syair-container {
+            background: linear-gradient(to right, #f8f4e5, #d7ccc8);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+            border: 1px solid #5d4037;
+            position: relative;
+            min-height: 220px;
+        }
+        
+        .dark-mode .syair-container {
+            background: linear-gradient(to right, #2a2a2a, #3d3d3d);
+            border-color: #444;
+        }
+        
+        .syair-container::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px dashed #8d6e63;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+        
+        .dark-mode .syair-container::before {
+            border-color: #666;
+        }
+        
+        .baris {
+            font-size: 18px;
+            line-height: 1.7;
+            margin: 12px 0;
+            color: #4e342e;
+            padding: 8px 15px;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .dark-mode .baris {
+            color: #e0e0e0;
+        }
+        
+        .baris:hover {
+            background-color: rgba(141, 110, 99, 0.1);
+            transform: translateX(5px);
+            border-radius: 4px;
+        }
+        
+        .dark-mode .baris:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Tombol syair yang dipindahkan ke atas */
+        .syair-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .syair-button-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        #generateSyairBtn, #copySyairBtn {
+            padding: 10px 20px;
+            font-size: 14px;
+            min-width: 140px;
+        }
+        
+        #generateSyairBtn {
+            background: linear-gradient(to right, #1a2a6c, #b21f1f);
+            color: white;
+        }
+        
+        #copySyairBtn {
+            background: linear-gradient(to right, #2d6a4f, #1b5e20);
+            color: white;
+        }
+        
+        .pattern-info {
+            font-size: 15px;
+            color: #5d4037;
+            background-color: rgba(141, 110, 99, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .dark-mode .pattern-info {
+            color: #bdbdbd;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .copy-success {
+            color: #2d6a4f;
+            font-size: 15px;
+            margin-top: 15px;
+            height: 22px;
+            transition: opacity 0.3s ease;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .dark-mode .copy-success {
+            color: #81c784;
+        }
+        
+        /* STYLE UNTUK MK, NAGA DAN KARAKTER BINATANG - DIPERBAIKI */
+        .prediction-boxes {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .prediction-box {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(to right, #e8f5e9, #c8e6c9);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .prediction-box {
+            background: linear-gradient(to right, #1b5e20, #2e7d32);
+        }
+        
+        .prediction-title-small {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #2e7d32;
+        }
+        
+        .dark-mode .prediction-title-small {
+            color: #a5d6a7;
+        }
+        
+        .prediction-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1b5e20;
             letter-spacing: 1px;
+        }
+        
+        .dark-mode .prediction-value {
+            color: #c8e6c9;
+        }
+        
+        /* TOMBOL YANG LEBIH KOMPAK - DIKECILKAN */
+        .compact-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .compact-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            width: 40px;
+            height: 40px;
             position: relative;
         }
-
-        .login-container h2::after {
-            content: '';
+        
+        .compact-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .compact-btn::after {
+            content: attr(data-tooltip);
             position: absolute;
-            bottom: -15px;
+            bottom: -35px;
             left: 50%;
             transform: translateX(-50%);
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, var(--neon-green), var(--neon-purple), transparent);
-            border-radius: 100%;
-        }
-
-        .input-group {
-            margin-bottom: 25px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 500;
-            color: var(--text-light);
-            letter-spacing: 0.5px;
-        }
-
-        .input-group input {
-            width: 100%;
-            padding: 16px 20px;
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: 'Rajdhani', sans-serif;
-            background: rgba(10, 10, 25, 0.7);
-            color: var(--text-light);
-            transition: var(--transition);
-        }
-
-        .input-group input:focus {
-            outline: none;
-            border-color: var(--neon-green);
-            box-shadow: 0 0 15px rgba(10, 255, 157, 0.3);
-            background: rgba(10, 10, 25, 0.9);
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .password-container {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: rgba(255, 255, 255, 0.5);
-            transition: var(--transition);
-        }
-
-        .toggle-password:hover {
-            color: var(--neon-green);
-            transform: translateY(-50%) scale(1.2);
-            text-shadow: 0 0 10px var(--neon-green);
-        }
-
-        .login-btn {
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
+            background-color: rgba(0,0,0,0.8);
             color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
-            letter-spacing: 1px;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
         }
-
-        .login-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: rotate(45deg);
-            transition: all 0.6s;
+        
+        .compact-btn:hover::after {
+            opacity: 1;
         }
-
-        .login-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 25px rgba(10, 255, 157, 0.8);
+        
+        .generate-compact-btn {
+            background: #ff9800;
+            color: white;
         }
-
-        .login-btn:hover::after {
-            animation: shine 1.5s ease forwards;
+        
+        .generate-compact-btn:hover {
+            background: #f57c00;
         }
-
-        .login-message {
+        
+        .copy-compact-btn {
+            background: #4caf50;
+            color: white;
+        }
+        
+        .copy-compact-btn:hover {
+            background: #388e3c;
+        }
+        
+        /* Kotak Karakter Binatang */
+        .character-box {
+            min-width: 200px;
+            background: linear-gradient(to right, #e3f2fd, #bbdefb);
+            border-radius: 10px;
+            padding: 15px;
             text-align: center;
-            margin-top: 15px;
-            color: #ff3860;
-            font-size: 1rem;
-            animation: shake 0.5s ease;
-            text-shadow: 0 0 10px rgba(255, 56, 96, 0.5);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-
-        .logout-btn {
-            background: linear-gradient(45deg, #ff3860, #ff2b56);
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            cursor: pointer;
+        
+        .dark-mode .character-box {
+            background: linear-gradient(to right, #0d47a1, #1565c0);
+        }
+        
+        .character-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #1565c0;
+        }
+        
+        .dark-mode .character-title {
+            color: #90caf9;
+        }
+        
+        .character-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0d47a1;
+            min-height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.3rem;
-            box-shadow: 0 0 15px rgba(255, 56, 96, 0.5);
-            transition: var(--transition);
-            z-index: 10;
         }
-
-        .logout-btn:hover {
-            transform: rotate(15deg) scale(1.1);
-            box-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
+        
+        .dark-mode .character-value {
+            color: #e3f2fd;
         }
-
-        /* Live Chat Button */
-        .livechat-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
+        
+        .character-container {
             display: flex;
-            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
             justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            cursor: pointer;
-            box-shadow: 0 0 25px rgba(10, 255, 157, 0.5);
-            z-index: 100;
-            transition: var(--transition);
-            animation: pulse 3s infinite ease-in-out;
         }
-
-        .livechat-button:hover {
-            transform: scale(1.1) rotate(15deg);
-            box-shadow: 0 0 35px rgba(10, 255, 157, 0.8);
-            animation: none;
-        }
-
-        /* Live Chat Modal */
-        .livechat-modal {
-            position: fixed;
-            bottom: 120px;
-            right: 30px;
-            width: 380px;
-            height: 500px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(10, 255, 157, 0.2);
-            border: 1px solid var(--glass-border);
-            z-index: 101;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            animation: modalAppear 0.3s ease;
-        }
-
-        .livechat-modal.active {
-            display: flex;
-        }
-
-        .livechat-header {
-            padding: 20px;
-            background: rgba(10, 255, 157, 0.1);
-            border-bottom: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .livechat-header h3 {
-            color: var(--neon-green);
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-        }
-
-        .livechat-header .close-chat {
-            background: none;
-            border: none;
-            color: var(--text-light);
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .livechat-header .close-chat:hover {
-            color: var(--neon-green);
-            transform: rotate(90deg);
-        }
-
-        .chat-messages {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
+        
+        /* Fitur Baru: Pilihan Jumlah Kata */
+        .kata-options {
             display: flex;
             flex-direction: column;
             gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(236, 240, 241, 0.3);
+            border-radius: 12px;
         }
-
-        .message {
-            max-width: 80%;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            position: relative;
-            animation: messageAppear 0.3s ease;
+        
+        .dark-mode .kata-options {
+            background: rgba(66, 66, 66, 0.3);
         }
-
-        @keyframes messageAppear {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
+        
+        .kata-options label {
+            font-weight: 500;
+            color: #2c3e50;
+            margin-bottom: 8px;
         }
-
-        .user-message {
-            align-self: flex-end;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            color: white;
-            border-bottom-right-radius: 5px;
+        
+        .dark-mode .kata-options label {
+            color: #f0f0f0;
         }
-
-        .ai-message {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            border-bottom-left-radius: 5px;
-        }
-
-        .chat-input-container {
-            padding: 20px;
-            border-top: 1px solid var(--glass-border);
+        
+        .kata-option-group {
             display: flex;
-            gap: 10px;
+            gap: 15px;
+            flex-wrap: wrap;
         }
-
-        .chat-input {
-            flex: 1;
-            padding: 12px 18px;
-            border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            background: rgba(10, 10, 25, 0.7);
-            color: var(--text-light);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .chat-input:focus {
-            outline: none;
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px rgba(10, 255, 157, 0.3);
-        }
-
-        .send-message {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            border: none;
-            color: white;
-            font-size: 1.1rem;
-            cursor: pointer;
+        
+        .kata-option {
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(200, 230, 201, 0.5);
+            transition: all 0.3s;
         }
-
-        .send-message:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
+        
+        .dark-mode .kata-option {
+            background: rgba(30, 70, 30, 0.3);
         }
-
-        .typing-indicator {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            padding: 12px 18px;
-            border-radius: 18px;
-            border-bottom-left-radius: 5px;
+        
+        .kata-option:hover {
+            background: rgba(165, 214, 167, 0.7);
+        }
+        
+        .dark-mode .kata-option:hover {
+            background: rgba(50, 100, 50, 0.5);
+        }
+        
+        .kata-option.active {
+            background: rgba(76, 175, 80, 0.7);
+            color: white;
+        }
+        
+        .dark-mode .kata-option.active {
+            background: rgba(30, 120, 30, 0.7);
+        }
+        
+        /* AI Indicator */
+        .ai-indicator {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(52, 152, 219, 0.1);
+            color: #3498db;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        
+        .ai-loading {
             display: none;
+            text-align: center;
+            margin: 15px 0;
+            color: #3498db;
         }
-
-        .typing-indicator span {
+        
+        .ai-loading .spinner {
             display: inline-block;
-            width: 8px;
-            height: 8px;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(52, 152, 219, 0.3);
             border-radius: 50%;
-            background: var(--neon-green);
-            margin: 0 2px;
-            animation: typing 1.4s infinite ease-in-out;
+            border-top-color: #3498db;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
         }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            opacity: 0.3;
-            animation: float 20s infinite linear;
-            filter: blur(2px);
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) rotate(0deg); }
-            100% { transform: translateY(-100vh) rotate(360deg); }
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 1200px) {
-            .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-                gap: 18px;
-            }
-        }
-
+        
+        /* Responsif */
         @media (max-width: 768px) {
             .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .tabs {
                 flex-direction: column;
-                gap: 15px;
+                align-items: center;
             }
-            .hamburger-menu {
-                display: block;
+            
+            .tab {
+                width: 100%;
+                text-align: center;
+                margin: 5px 0;
+                padding: 12px;
             }
-            .shortcut-grid {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 15px;
+            
+            .button-container, .syair-button-container {
+                flex-direction: column;
+                gap: 12px;
             }
-            .icon-container {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
+            
+            button {
+                width: 100%;
             }
-            .shortcut-name {
-                font-size: 0.85rem;
+            
+            .prediction-boxes, .character-container {
+                flex-direction: column;
             }
-            .header-top {
-                margin-bottom: 12px;
-            }
-            .logout-btn {
-                width: 45px;
-                height: 45px;
-            }
-            .logo {
-                position: static;
-                transform: none;
-                margin: 0 auto;
-                order: 2;
-                font-size: 1.8rem;
-            }
-            .header-top {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: space-between;
-            }
-            .hamburger-menu {
-                order: 1;
-            }
-            .controls {
-                order: 3;
-                margin-left: 0;
-            }
-            .subtitle {
-                margin-top: 20px;
-            }
-            .livechat-modal {
-                width: 320px;
-                height: 450px;
-                right: 20px;
-                bottom: 100px;
-            }
-            .livechat-button {
-                width: 60px;
-                height: 60px;
-                font-size: 1.5rem;
-                bottom: 20px;
-                right: 20px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                padding: 15px;
-            }
-            .logo {
-                font-size: 1.6rem;
-            }
-            .subtitle {
-                font-size: 1rem;
-            }
-            .search-container {
+            
+            .prediction-box, .character-box {
+                min-width: 100%;
                 margin-bottom: 15px;
             }
-            #search {
-                padding: 14px 18px;
-                padding-left: 45px;
-                padding-right: 45px;
+            
+            .kata-option-group {
+                flex-direction: column;
             }
-            .search-icon {
-                left: 18px;
+            
+            .kata-option {
+                width: 100%;
             }
-            .clear-search {
-                right: 18px;
+            
+            .syair-controls {
+                flex-direction: column;
             }
-            .info-item {
-                font-size: 0.9rem;
+            
+            .pattern-info {
+                width: 100%;
             }
-            .info-item i {
-                font-size: 1rem;
-            }
-            .header-top {
-                justify-content: space-between;
-            }
-            .login-container {
-                padding: 30px;
-            }
-            .login-container h2 {
-                font-size: 1.6rem;
-            }
-            .livechat-modal {
-                width: calc(100% - 40px);
-                right: 20px;
-                left: 20px;
-                bottom: 90px;
-            }
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            border-radius: 8px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(45deg, var(--neon-purple), var(--neon-green));
         }
     </style>
 </head>
 <body>
-    <!-- Cyber Grid Background -->
-    <div class="cyber-grid"></div>
-    <div class="cyber-lines"></div>
-    <!-- Floating Particles -->
-    <div class="particles" id="particles"></div>
-    <!-- Login Modal -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-container">
-            <h2>ACCESS REQUIRED</h2>
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="userId">USER ID</label>
-                    <input type="text" id="userId" placeholder="Enter User ID">
-                </div>
-                <div class="input-group">
-                    <label for="password">PASSWORD</label>
-                    <div class="password-container">
-                        <input type="password" id="password" placeholder="Enter Password">
-                        <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-crystal-ball"></i> Prediksi Togel & Generator Syair <i class="fas fa-feather-alt"></i></h1>
+            <div class="tabs">
+                <div class="tab active" data-tab="togel">Prediksi Togel</div>
+                <div class="tab" data-tab="syair">Generator Syair</div>
+            </div>
+        </div>
+        
+        <!-- Konten Prediksi Togel -->
+        <div id="togelContent" class="tab-content active">
+            <div class="input-section">
+                <div class="input-header">
+                    <label class="input-label">Pilih Pasaran (<span id="marketCount">0</span> pasaran tersedia):</label>
+                    <div class="dark-mode-container" id="darkModeToggle">
+                        <button class="dark-mode-toggle">
+                            <span class="toggle-handle">
+                                <svg class="moon-icon" viewBox="0 0 24 24">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                                </svg>
+                                <svg class="sun-icon" viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="5"/>
+                                </svg>
+                            </span>
+                        </button>
+                        <span class="dark-mode-label">Mode Gelap</span>
                     </div>
                 </div>
-                <button type="submit" class="login-btn">LOGIN</button>
-            </form>
-            <p id="loginMessage" class="login-message"></p>
-        </div>
-    </div>
-    <div class="container" id="mainContainer" style="display: none;">
-        <header>
-            <div class="header-top">
-                <button class="hamburger-menu" id="hamburgerBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <div class="logo">ALL SHORTCUT</div>
-                <div class="controls">
-                    <button class="logout-btn" id="logoutBtn">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
+                
+                <!-- Fitur Pencarian Pasaran -->
+                <div class="search-container">
+                    <div class="search-icon">🔍</div>
+                    <input type="text" id="marketSearch" placeholder="Cari pasaran...">
+                    <div class="search-suggestions" id="searchSuggestions"></div>
+                </div>
+                
+                <!-- Dropdown Pasaran Standar -->
+                <select id="marketSelect" style="width:100%; padding:14px;">
+                    <option value="" disabled selected>Pilih pasaran</option>
+                    <option value="HOKIDRAW 00">HOKIDRAW 00</option>
+                    <option value="TOTOMACAU PAGI">TOTOMACAU PAGI</option>
+                    <option value="KENTUCKY MIDDAY">KENTUCKY MIDDAY</option>
+                    <option value="FLORIDA MIDDAY">FLORIDA MIDDAY</option>
+                    <option value="HUAHIN0100">HUAHIN0100</option>
+                    <option value="HOKIDRAW 01">HOKIDRAW 01</option>
+                    <option value="BANGKOK 0130">BANGKOK 0130</option>
+                    <option value="NEW YORK MIDDAY">NEW YORK MIDDAY</option>
+                    <option value="CAROLINA DAY">CAROLINA DAY</option>
+                    <option value="HOKIDRAW 02">HOKIDRAW 02</option>
+                    <option value="BRUNEI 02">BRUNEI 02</option>
+                    <option value="OREGON 03">OREGON 03</option>
+                    <option value="HOKIDRAW 03">HOKIDRAW 03</option>
+                    <option value="HOKIDRAW 04">HOKIDRAW 04</option>
+                    <option value="HOKIDRAW 05">HOKIDRAW 05</option>
+                    <option value="OREGON 06">OREGON 06</option>
+                    <option value="HOKIDRAW 06">HOKIDRAW 06</option>
+                    <option value="HOKIDRAW 07">HOKIDRAW 07</option>
+                    <option value="HOKIDRAW 08">HOKIDRAW 08</option>
+                    <option value="CALIFORNIA">CALIFORNIA</option>
+                    <option value="FLORIDA EVENING">FLORIDA EVENING</option>
+                    <option value="OREGON 09">OREGON 09</option>
+                    <option value="HOKIDRAW 09">HOKIDRAW 09</option>
+                    <option value="BANGKOK 0930">BANGKOK 0930</option>
+                    <option value="NEW YORK EVENING">NEW YORK EVENING</option>
+                    <option value="KENTUCKY EVENING">KENTUCKY EVENING</option>
+                    <option value="HOKIDRAW 10">HOKIDRAW 10</option>
+                    <option value="CAROLINA EVENING">CAROLINA EVENING</option>
+                    <option value="TOTO CAMBODIA">TOTO CAMBODIA</option>
+                    <option value="HOKIDRAW 11">HOKIDRAW 11</option>
+                    <option value="CHELSEA 11">CHELSEA 11</option>
+                    <option value="OREGON 12">OREGON 12</option>
+                    <option value="HOKIDRAW 12">HOKIDRAW 12</option>
+                    <option value="BULLSEYE">BULLSEYE</option>
+                    <option value="POIPET12">POIPET12</option>
+                    <option value="HOKIDRAW 13">HOKIDRAW 13</option>
+                    <option value="TOTOMACAU SIANG">TOTOMACAU SIANG</option>
+                    <option value="SYDNEY">SYDNEY</option>
+                    <option value="JAKARTA 1400">JAKARTA 1400</option>
+                    <option value="HOKI DRAW 14">HOKI DRAW 14</option>
+                    <option value="BRUNEI 14">BRUNEI 14</option>
+                    <option value="HOKIDRAW 15">HOKIDRAW 15</option>
+                    <option value="CHELSEA 15">CHELSEA 15</option>
+                    <option value="TOTO MACAU 5D">TOTO MACAU 5D</option>
+                    <option value="TOTOMALI 1530">TOTOMALI 1530</option>
+                    <option value="POIPET15">POIPET15</option>
+                    <option value="HOKIDRAW 16">HOKIDRAW 16</option>
+                    <option value="TOTOMACAU SORE">TOTOMACAU SORE</option>
+                    <option value="HUAHIN 1630">HUAHIN 1630</option>
+                    <option value="HOKIDRAW 17">HOKIDRAW 17</option>
+                    <option value="KING KONG 4D SORE">KING KONG 4D SORE</option>
+                    <option value="KING KONG 4D MALAM">KING KONG 4D MALAM</option>
+                    <option value="SINGAPORE">SINGAPORE</option>
+                    <option value="HOKIDRAW 18">HOKIDRAW 18</option>
+                    <option value="MAGNUM4D">MAGNUM4D</option>
+                    <option value="HOKIDRAW 19">HOKIDRAW 19</option>
+                    <option value="TOTOMACAU MALAM I">TOTOMACAU MALAM I</option>
+                    <option value="CHELSEA 19">CHELSEA 19</option>
+                    <option value="POIPET19">POIPET19</option>
+                    <option value="PCSO">PCSO</option>
+                    <option value="HOKIDRAW 20">HOKIDRAW 20</option>
+                    <option value="TOTOMALI 2030">TOTOMALI 2030</option>
+                    <option value="HUAHIN 2100">HUAHIN 2100</option>
+                    <option value="HOKIDRAW 21">HOKIDRAW 21</option>
+                    <option value="CHELSEA 21">CHELSEA 21</option>
+                    <option value="TOTOMACAU POOLS 5D II">TOTOMACAU POOLS 5D II</option>
+                    <option value="NEVADA">NEVADA</option>
+                    <option value="BRUNEI 21">BRUNEI 21</option>
+                    <option value="HOKIDRAW 22">HOKIDRAW 22</option>
+                    <option value="TOTOMACAU MALAM II">TOTOMACAU MALAM II</option>
+                    <option value="POIPET22">POIPET22</option>
+                    <option value="HOKIDRAW 23">HOKIDRAW 23</option>
+                    <option value="HONGKONG">HONGKONG</option>
+                    <option value="TOTOMACAU MALAM III">TOTOMACAU MALAM III</option>
+                    <option value="TOTOMALI 2330">TOTOMALI 2330</option>
+                    <option value="JAKARTA 2300">JAKARTA 2300</option>
+                </select>
+            </div>
+            
+            <div class="input-section">
+                <label class="input-label">Pilih Tanggal:</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="autoDate" name="dateOption" value="auto" checked>
+                        <label for="autoDate">Tanggal Otomatis</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="manualDate" name="dateOption" value="manual">
+                        <label for="manualDate">Tanggal Manual</label>
+                    </div>
+                </div>
+                <div class="manual-date-container" id="manualDateInput">
+                    <input type="date" id="customDateInput">
                 </div>
             </div>
-            <p class="subtitle">Access all tools and applications with a single click in our cyber network</p>
-            <div class="info-bar">
-                <div class="info-item">
-                    <i class="fas fa-clock"></i>
-                    <span id="datetime">Loading...</span>
+            
+            <div class="result-container" id="predictionResult">
+                <div class="prediction-title">Pilih pasaran dan klik Generate Baru</div>
+                <div class="result-line">
+                    <div class="result-label">BBFS Kuat:</div>
+                    <div class="result-value">-</div>
                 </div>
-                <div class="info-item">
-                    <i class="fas fa-network-wired"></i>
-                    <span id="ip-address">Loading IP...</span>
+                <div class="result-line">
+                    <div class="result-label">AM/AI/CK:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">4D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">3D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">2D (BB):</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Bebas:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Bebas 2D:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Colok Shio:</div>
+                    <div class="result-value">-</div>
+                </div>
+                <div class="result-line">
+                    <div class="result-label">Invest Twin:</div>
+                    <div class="result-value">-</div>
                 </div>
             </div>
-        </header>
-        <div class="search-container">
-            <div class="search-icon">
-                <i class="fas fa-search"></i>
+            
+            <div class="button-container">
+                <button id="generateBtn"><i class="fas fa-sync-alt"></i> Generate Baru</button>
+                <button id="copyBtn"><i class="fas fa-copy"></i> Copy Hasil</button>
+                <button id="copyAllBtn"><i class="fas fa-copy"></i> Copy Semua Pasaran</button>
             </div>
-            <input type="text" id="search" placeholder="Search shortcut...">
-            <div class="clear-search" id="clearSearch">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="suggestions" id="suggestions"></div>
-        </div>
-        <div class="shortcut-grid" id="shortcutGrid">
-            <!-- Shortcut cards will be generated here -->
-        </div>
-    </div>
-    
-    <!-- Live Chat Button and Modal -->
-    <div class="livechat-button" id="liveChatButton">
-        <i class="fas fa-comment-dots"></i>
-    </div>
-    <div class="livechat-modal" id="liveChatModal">
-        <div class="livechat-header">
-            <h3>Live Chat AI Assistant</h3>
-            <button class="close-chat" id="closeChat">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message ai-message">
-                <p>Halo! Saya adalah asisten AI. Ada yang bisa saya bantu hari ini?</p>
+            
+            <div class="footer-note">
+                Hasil prediksi ini dibuat secara acak. Selalu utamakan prediksi sendiri dan bermainlah dengan bijak.
             </div>
         </div>
-        <div class="typing-indicator" id="typingIndicator">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan Anda...">
-            <button class="send-message" id="sendMessage">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+        
+        <!-- Konten Generator Syair dengan AI -->
+        <div id="syairContent" class="tab-content">
+            <!-- Fitur Baru: Pilihan Jumlah Kata -->
+            <div class="kata-options">
+                <label>Pilih Jumlah Kata per Baris:</label>
+                <div class="kata-option-group">
+                    <div class="kata-option active" data-kata="3">
+                        <input type="radio" name="kataOption" id="kata3" value="3" checked>
+                        <label for="kata3">3 Kata</label>
+                    </div>
+                    <div class="kata-option" data-kata="4">
+                        <input type="radio" name="kataOption" id="kata4" value="4">
+                        <label for="kata4">4 Kata</label>
+                    </div>
+                    <div class="kata-option" data-kata="5">
+                        <input type="radio" name="kataOption" id="kata5" value="5">
+                        <label for="kata5">5 Kata</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="syair-container">
+                <div class="baris" id="baris1">Hidup ini penuh makna</div>
+                <div class="baris" id="baris2">Waktu terus berjalan</div>
+                <div class="baris" id="baris3">Harapan tak pernah padam</div>
+                <div class="baris" id="baris4">Cinta abadi selamanya</div>
+            </div>
+            
+            <!-- Tombol syair dipindahkan ke atas -->
+            <div class="syair-controls">
+                <div class="syair-button-container">
+                    <button id="generateSyairBtn"><i class="fas fa-robot"></i> Generate Syair</button>
+                    <button id="copySyairBtn"><i class="fas fa-copy"></i> Salin Syair</button>
+                </div>
+                <div class="pattern-info" id="pattern-info">Pola rima: a-b-a-b | Tema: Kehidupan</div>
+            </div>
+            
+            <div class="prediction-boxes">
+                <div class="prediction-box">
+                    <div class="prediction-title-small">MK (Mimpi Kunci)</div>
+                    <div class="prediction-value" id="mkValue">5 / 6</div>
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateMkBtn" data-tooltip="Generate MK">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="compact-btn copy-compact-btn" id="copyMkBtn" data-tooltip="Salin MK">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="prediction-box">
+                    <div class="prediction-title-small">Naga</div>
+                    <div class="prediction-value" id="nagaValue">1 - 5 - 7</div>
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateNagaBtn" data-tooltip="Generate Naga">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="compact-btn copy-compact-btn" id="copyNagaBtn" data-tooltip="Salin Naga">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Kotak Karakter Binatang Baru -->
+            <div class="character-container">
+                <div class="character-box">
+                    <div class="character-title">Karakter Binatang</div>
+                    <div class="character-value" id="binatangValue">Pemberontak</div>
+                    <div class="compact-buttons">
+                        <button class="compact-btn generate-compact-btn" id="generateBinatangBtn" data-tooltip="Generate Karakter">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                        <button class="compact-btn copy-compact-btn" id="copyBinatangBtn" data-tooltip="Salin Karakter">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copy-success" id="copy-success"></div>
+            
+            <div class="footer-note">
+                Syair ini dihasilkan secara random dengan tema kehidupan dan mengandung petunjuk angka dalam bentuk simbol
+            </div>
         </div>
     </div>
-    
+
     <script>
-        // Data shortcut dengan ikon yang telah diupdate dan dikategorikan
-        const shortcutData = [
-            { 
-                name: "JAM IZIN TERBARU", 
-                url: "https://rebrand.ly/IzinLineTgl", 
-                icon: "fas fa-clock",
-                category: "tools"
-            },
-            { 
-                name: "KEPERLUAN MEMO DAN REPORT", 
-                url: "https://rebrand.ly/untuk-report", 
-                icon: "fas fa-file-alt",
-                category: "reports"
-            },
-            { 
-                name: "CEK KTP", 
-                url: "https://ktpku.com/", 
-                icon: "fas fa-id-card",
-                category: "tools"
-            },
-            { 
-                name: "CHAT TEAM LINETOGEL", 
-                url: "https://linetogel.hokibgs.com/login.php", 
-                icon: "fas fa-users",
-                category: "chat"
-            },
-            { 
-                name: "KEPERLUAN PK CHAT 1", 
-                url: "https://script.google.com/macros/s/AKfycbw_1_Xj-_uvTpaO3_0uekUn9lpxOiHmP3yfIlrw9iRWngHTT_6p6Q_TbhQcStjA6LLo/exec", 
-                icon: "fas fa-comment",
-                category: "chat"
-            },
-            { 
-                name: "KEPERLUAN PK CHAT 2", 
-                url: "https://script.google.com/macros/s/AKfycbzFfzpsjXbw9Z1qXzFOcncmiK4QyDex5hvbXQ-JQE41KkOPzCOt_pA0GGXFUdr2YprtXw/exec", 
-                icon: "fas fa-comments",
-                category: "chat"
-            },
-            { 
-                name: "KEPERLUAN PK CHAT 3", 
-                url: "https://blvckline.page.gd", 
-                icon: "fas fa-comment-dots",
-                category: "chat"
-            },
-            { 
-                name: "KHUSUS PREDIKSI TOGEL", 
-                url: "https://tinyurl.com/prediksitogel01", 
-                icon: "fas fa-hat-wizard",
-                category: "togel"
-            },
-            { 
-                name: "SHORCUT SCATTER 1", 
-                url: "https://rebrand.ly/shorcut-htng", 
-                icon: "fas fa-dice",
-                category: "scatter"
-            },
-            { 
-                name: "SHORCUT SCATTER 2", 
-                url: "https://shortcutscatter2.onecompiler.app/", 
-                icon: "fas fa-dice-d20",
-                category: "scatter"
-            },
-            { 
-                name: "SHORCUT SCATTER 3", 
-                url: "https://tinyurl.com/233dm6bd", 
-                icon: "fas fa-dice-five",
-                category: "scatter"
-            },
-            { 
-                name: "HITUNG FREESPIN PGSOFT", 
-                url: "https://rebrand.ly/pgsoftaudit", 
-                icon: "fas fa-chess-knight",
-                category: "tools"
-            },
-            { 
-                name: "GAMBAR LINE", 
-                url: "https://gambarline.onecompiler.app/", 
-                icon: "fas fa-image",
-                category: "images"
-            },
-            { 
-                name: "SHORCUT CARI WD BESAR", 
-                url: "https://tinyurl.com/shorcutwdbesar", 
-                icon: "fas fa-search-dollar",
-                category: "tools"
-            },
-            { 
-                name: "REBRANDLY", 
-                url: "https://app.rebrandly.com/", 
-                icon: "fas fa-link",
-                category: "tools"
-            },
-            { 
-                name: "REPORT BUKTI P2MIH", 
-                url: "https://rebrand.ly/reportbukti", 
-                icon: "fas fa-flag",
-                category: "reports"
-            },
-            { 
-                name: "KALKULATOR HARI", 
-                url: "https://kalkulatorhari.onecompiler.app/", 
-                icon: "fas fa-calendar",
-                category: "tools"
-            },
-            { 
-                name: "SHORCUT SELISIH QRIS", 
-                url: "https://rebrand.ly/QRISSELISIH", 
-                icon: "fas fa-money-bill-wave",
-                category: "tools"
-            },
-            { 
-                name: "LINK PASARAN TOGEL", 
-                url: "https://rebrand.ly/pasarantogel1", 
-                icon: "fas fa-moon",
-                category: "togel"
-            },
-            { 
-                name: "LINK PASARAN TOGEL 2", 
-                url: "https://symphonny.vercel.app/Jadwal_Togel.html", 
-                icon: "fas fa-bullseye",
-                category: "togel"
-            },
-            { 
-                name: "FORMAT ANGKA", 
-                url: "https://formatangka01.onecompiler.app/", 
-                icon: "fas fa-sort-numeric-down",
-                category: "tools"
-            },
-            { 
-                name: "SHORCUT SELISIH QRIS VIP", 
-                url: "https://shorcutselisihqrisvip.onecompiler.app/", 
-                icon: "fas fa-qrcode",
-                category: "tools"
-            },
-            { 
-                name: "OCR Data", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/OCRBUKTIQRISVIP.html", 
-                icon: "fas fa-file-image",
-                category: "tools"
-            },
-            { 
-                name: "KALKULATOR TOGEL", 
-                url: "https://shortcutpro.vercel.app/togel-idn.html", 
-                icon: "fas fa-dice togel-dice",
-                category: "togel"
-            },
-            { 
-                name: "KALKULATOR TOGEL 2", 
-                url: "https://kalkulatortogel.page.gd/?i=1", 
-                icon: "fas fa-dice togel-dice",
-                category: "togel"
-            },
-            { 
-                name: "KALKULATOR TOGEL 3", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/kalkulatortogel3.html", 
-                icon: "fas fa-dice togel-dice",
-                category: "togel"
-            },
-            { 
-                name: "PASSWORD GENERATOR", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/passwprd-genator.html", 
-                icon: "fas fa-key",
-                category: "utilities"
-            },
-            { 
-                name: "LOGO & SHIO GENERATOR", 
-                url: "https://tinyurl.com/logoshio-generator", 
-                icon: "fas fa-paint-brush",
-                category: "tools"
-            },
-            { 
-                name: "SHORT LINK", 
-                url: "https://tinyurl.com/", 
-                icon: "fas fa-external-link-alt",
-                category: "tools"
-            },
-            { 
-                name: "SHORT LINK 2", 
-                url: "https://tinyurl.com/short-link02", 
-                icon: "fas fa-external-link-alt",
-                category: "tools"
-            },
-            { 
-                name: "KALKULATOR TRANSAKSI", 
-                url: "https://tinyurl.com/kalkulatortransaksi01", 
-                icon: "fas fa-calculator",
-                category: "tools"
-            },
-            { 
-                name: "KALKULATOR TRANSAKSI 2", 
-                url: "https://tinyurl.com/kalkulatortransaksi02", 
-                icon: "fas fa-calculator",
-                category: "tools"
-            },
-            { 
-                name: "PENCATATAN BUANG DANA", 
-                url: "https://tinyurl.com/pencatatanbuangdana", 
-                icon: "fas fa-money-bill-wave",
-                category: "tools"
-            },
-            { 
-                name: "INPUT LINK LC", 
-                url: "https://tinyurl.com/input-linklc", 
-                icon: "fas fa-link",
-                category: "tools"
-            },
-            { 
-                name: "BATASAN LINE", 
-                url: "https://tinyurl.com/batasan-line", 
-                icon: "fas fa-ban",
-                category: "tools"
-            },
-            { 
-                name: "REPORT LINK NAWALA", 
-                url: "https://tinyurl.com/report-linknawala", 
-                icon: "fas fa-bomb",
-                category: "reports"
-            }
-        ];
-        
-        // DOM Elements
-        const loginModal = document.getElementById('loginModal');
-        const loginForm = document.getElementById('loginForm');
-        const userIdInput = document.getElementById('userId');
-        const passwordInput = document.getElementById('password');
-        const togglePassword = document.getElementById('togglePassword');
-        const loginMessage = document.getElementById('loginMessage');
-        const mainContainer = document.getElementById('mainContainer');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const shortcutGrid = document.getElementById('shortcutGrid');
-        const searchInput = document.getElementById('search');
-        const clearSearch = document.getElementById('clearSearch');
-        const suggestionsContainer = document.getElementById('suggestions');
-        const datetimeElement = document.getElementById('datetime');
-        const ipAddressElement = document.getElementById('ip-address');
-        const particlesContainer = document.getElementById('particles');
-        const hamburgerBtn = document.getElementById('hamburgerBtn');
-        
-        // Live Chat Elements
-        const liveChatButton = document.getElementById('liveChatButton');
-        const liveChatModal = document.getElementById('liveChatModal');
-        const closeChat = document.getElementById('closeChat');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendMessage = document.getElementById('sendMessage');
-        const typingIndicator = document.getElementById('typingIndicator');
-        
-        // Create floating particles
-        function createParticles() {
-            const colors = ['#0aff9d', '#9d50ff', '#4dffc3'];
-            const count = Math.floor(window.innerWidth / 25);
-            for (let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                const size = Math.random() * 10 + 3;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, ${colors[Math.floor(Math.random() * colors.length)]})`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 30 + 15}s`;
-                particle.style.animationDelay = `${Math.random() * 5}s`;
-                particlesContainer.appendChild(particle);
-            }
-        }
-        
-        // Check if user is logged in
-        function checkLogin() {
-            const isLoggedIn = localStorage.getItem('isLoggedIn');
-            if (isLoggedIn === 'true') {
-                loginModal.style.display = 'none';
-                mainContainer.style.display = 'block';
-                liveChatButton.style.display = 'flex';
-            } else {
-                loginModal.style.display = 'flex';
-                mainContainer.style.display = 'none';
-                liveChatButton.style.display = 'none';
-            }
-        }
-        
-        // Login function
-        function login(userId, password) {
-            // Case insensitive check for userId
-            if (userId.toLowerCase() === 'andi' && password === 'Aa112233') {
-                localStorage.setItem('isLoggedIn', 'true');
-                loginModal.style.display = 'none';
-                mainContainer.style.display = 'block';
-                liveChatButton.style.display = 'flex';
-                return true;
-            } else {
-                loginMessage.textContent = 'User ID atau Password salah!';
-                return false;
-            }
-        }
-        
-        // Logout function
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            loginModal.style.display = 'flex';
-            mainContainer.style.display = 'none';
-            liveChatButton.style.display = 'none';
-            userIdInput.value = '';
-            passwordInput.value = '';
-            loginMessage.textContent = '';
-            // Close chat modal if open
-            liveChatModal.classList.remove('active');
-        }
-        
-        // Toggle password visibility
-        function togglePasswordVisibility() {
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                togglePassword.classList.remove('fa-eye');
-                togglePassword.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                togglePassword.classList.remove('fa-eye-slash');
-                togglePassword.classList.add('fa-eye');
-            }
-        }
-        
-        // Update datetime
-        function updateDateTime() {
-            const now = new Date();
-            const options = { 
-                weekday: 'short', 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            datetimeElement.textContent = now.toLocaleDateString('id-ID', options);
-        }
-        
-        // Get IP Address
-        async function getIPAddress() {
-            try {
-                const response = await fetch('https://api.ipify.org?format=json');
-                const data = await response.json();
-                ipAddressElement.textContent = data.ip;
-            } catch (error) {
-                ipAddressElement.textContent = 'Tidak tersedia';
-            }
-        }
-        
-        // Generate all shortcut cards
-        function renderShortcuts(shortcuts) {
-            shortcutGrid.innerHTML = '';
-            if (shortcuts.length === 0) {
-                shortcutGrid.innerHTML = `
-                    <div class="no-results">
-                        <i class="fas fa-search"></i>
-                        <p>Tidak ada hasil yang ditemukan</p>
-                    </div>
-                `;
-                return;
-            }
-            shortcuts.forEach((shortcut, index) => {
-                const card = document.createElement('a');
-                card.className = 'shortcut-card';
-                card.href = shortcut.url;
-                card.target = '_blank';
-                card.style.animationDelay = `${index * 0.05}s`;
-                card.innerHTML = `
-                    <div class="icon-container">
-                        <i class="${shortcut.icon}"></i>
-                    </div>
-                    <div class="shortcut-name">${shortcut.name}</div>
-                `;
-                // Add mouseenter and mouseleave effects
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-10px) scale(1.03)';
-                });
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = '';
-                });
-                shortcutGrid.appendChild(card);
-            });
-        }
-        
-        // Filter shortcuts based on search query
-        function filterShortcuts(query) {
-            let filtered = shortcutData;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elemen untuk tab
+            const tabs = document.querySelectorAll('.tab');
+            const togelContent = document.getElementById('togelContent');
+            const syairContent = document.getElementById('syairContent');
             
-            // Filter by search query
-            if (query) {
-                const lowerCaseQuery = query.toLowerCase();
-                filtered = filtered.filter(shortcut => 
-                    shortcut.name.toLowerCase().includes(lowerCaseQuery)
-                );
-            }
-            
-            return filtered;
-        }
-        
-        // Generate search suggestions
-        function showSuggestions(query) {
-            if (!query) {
-                suggestionsContainer.style.display = 'none';
-                return;
-            }
-            const lowerCaseQuery = query.toLowerCase();
-            const matchedSuggestions = [];
-            // Add name matches
-            shortcutData.forEach(shortcut => {
-                if (shortcut.name.toLowerCase().includes(lowerCaseQuery) && 
-                    !matchedSuggestions.find(s => s.name === shortcut.name)) {
-                    matchedSuggestions.push(shortcut);
-                }
-            });
-            
-            // Display suggestions
-            if (matchedSuggestions.length > 0) {
-                suggestionsContainer.innerHTML = '';
-                matchedSuggestions.forEach(shortcut => {
-                    const div = document.createElement('div');
-                    div.className = 'suggestion-item';
-                    div.innerHTML = `
-                        <i class="${shortcut.icon}"></i>
-                        ${shortcut.name}
-                    `;
-                    div.addEventListener('click', () => {
-                        searchInput.value = shortcut.name;
-                        suggestionsContainer.style.display = 'none';
-                        const filtered = filterShortcuts(shortcut.name);
-                        renderShortcuts(filtered);
-                    });
-                    // Add hover effect to suggestions
-                    div.addEventListener('mouseenter', () => {
-                        div.style.backgroundColor = 'rgba(10, 255, 157, 0.1)';
-                        div.style.transform = 'translateX(10px)';
-                    });
-                    div.addEventListener('mouseleave', () => {
-                        div.style.backgroundColor = '';
-                        div.style.transform = '';
-                    });
-                    suggestionsContainer.appendChild(div);
-                });
-                suggestionsContainer.style.display = 'block';
-            } else {
-                suggestionsContainer.style.display = 'none';
-            }
-        }
-        
-        // Clear search input
-        function clearSearchInput() {
-            searchInput.value = '';
-            clearSearch.style.display = 'none';
-            renderShortcuts(filterShortcuts(''));
-            suggestionsContainer.style.display = 'none';
-        }
-        
-        // Live Chat Functions
-        function toggleChatModal() {
-            liveChatModal.classList.toggle('active');
-        }
-        
-        function addMessage(message, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            messageDiv.innerHTML = `<p>${message}</p>`;
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        function showTypingIndicator() {
-            typingIndicator.style.display = 'block';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-        
-        function hideTypingIndicator() {
-            typingIndicator.style.display = 'none';
-        }
-        
-        // Function to get AI response using Cohere API (free tier available)
-        async function getAIResponse(message) {
-            try {
-                // Using Cohere AI API (free tier)
-                const response = await fetch('https://api.cohere.ai/v1/chat', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer YOUR_COHERE_API_KEY' // Ganti dengan API key Cohere Anda
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        model: 'command',
-                        temperature: 0.7,
-                        max_tokens: 150
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('API request failed');
-                }
-                
-                const data = await response.json();
-                return data.text;
-            } catch (error) {
-                console.error('Error getting AI response:', error);
-                // Fallback responses if API fails
-                const fallbackResponses = [
-                    "Maaf, saya sedang mengalami gangguan teknis. Silakan coba lagi nanti.",
-                    "Saat ini saya tidak dapat mengakses sistem AI. Apakah ada yang bisa saya bantu dengan informasi yang tersedia?",
-                    "Permintaan Anda tidak dapat diproses saat ini. Silakan coba lagi dalam beberapa saat."
-                ];
-                return fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
-            }
-        }
-        
-        // Function to get AI response using Hugging Face Inference API (free)
-        async function getHuggingFaceResponse(message) {
-            try {
-                const response = await fetch(
-                    "https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium",
-                    {
-                        headers: { Authorization: "Bearer YOUR_HUGGINGFACE_TOKEN" }, // Ganti dengan token Hugging Face Anda
-                        method: "POST",
-                        body: JSON.stringify({ inputs: message }),
+            // Fungsi untuk mengubah tab
+            function changeTab(tabId) {
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.dataset.tab === tabId) {
+                        tab.classList.add('active');
                     }
-                );
-                const result = await response.json();
-                return result.generated_text || "Maaf, saya tidak mengerti pertanyaan Anda.";
-            } catch (error) {
-                console.error('Error:', error);
-                return "Maaf, terjadi kesalahan saat memproses permintaan Anda.";
-            }
-        }
-        
-        // Simple AI response system for demo (works without API)
-        function getSimpleAIResponse(message) {
-            const lowerMessage = message.toLowerCase();
-            
-            // Greetings
-            if (lowerMessage.includes('halo') || lowerMessage.includes('hai') || lowerMessage.includes('hi')) {
-                return "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu?";
-            }
-            
-            // Help
-            if (lowerMessage.includes('bantuan') || lowerMessage.includes('help') || lowerMessage.includes('tolong')) {
-                return "Saya di sini untuk membantu Anda. Anda bisa menanyakan tentang shortcut yang tersedia, cara menggunakan tools, atau pertanyaan lainnya.";
-            }
-            
-            // Shortcut related
-            if (lowerMessage.includes('shortcut') || lowerMessage.includes('tools') || lowerMessage.includes('tool')) {
-                return "Di sini tersedia berbagai shortcut untuk memudahkan pekerjaan Anda. Gunakan kotak pencarian untuk menemukan shortcut yang Anda butuhkan.";
-            }
-            
-            // Togel related
-            if (lowerMessage.includes('togel') || lowerMessage.includes('prediksi')) {
-                return "Untuk prediksi togel, Anda bisa menggunakan shortcut 'KHUSUS PREDIKSI TOGEL' atau kalkulator togel yang tersedia.";
-            }
-            
-            // Report related
-            if (lowerMessage.includes('report') || lowerMessage.includes('laporan')) {
-                return "Untuk membuat laporan, gunakan shortcut 'KEPERLUAN MEMO DAN REPORT' atau 'REPORT BUKTI P2MIH' sesuai kebutuhan Anda.";
-            }
-            
-            // Default responses
-            const defaultResponses = [
-                "Saya memahami pertanyaan Anda. Bisakah Anda memberikan lebih banyak detail?",
-                "Terima kasih atas pertanyaannya. Saya akan mencoba membantu Anda dengan yang terbaik.",
-                "Itu pertanyaan yang menarik. Apakah ada hal spesifik yang ingin Anda ketahui?",
-                "Saya di sini untuk membantu. Apakah ada yang bisa saya jelaskan lebih lanjut?",
-                "Maaf, saya belum sepenuhnya memahami pertanyaan Anda. Bisakah Anda mengulanginya dengan cara yang berbeda?"
-            ];
-            
-            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
-        }
-        
-        async function sendChatMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
-            
-            // Add user message to chat
-            addMessage(message, true);
-            chatInput.value = '';
-            
-            // Show typing indicator
-            showTypingIndicator();
-            
-            // Simulate AI thinking time
-            setTimeout(async () => {
-                // Get AI response (using simple response system for demo)
-                let aiResponse;
+                });
                 
-                try {
-                    // Try to use Cohere API first if API key is available
-                    // aiResponse = await getAIResponse(message);
-                    
-                    // If API is not available, use simple response system
-                    aiResponse = getSimpleAIResponse(message);
-                } catch (error) {
-                    aiResponse = getSimpleAIResponse(message);
-                }
+                togelContent.classList.remove('active');
+                syairContent.classList.remove('active');
                 
-                // Hide typing indicator and add AI response
-                hideTypingIndicator();
-                addMessage(aiResponse, false);
-            }, 1500);
-        }
-        
-        // Initialize the page
-        function init() {
-            // Create particles background
-            createParticles();
-            
-            // Check login status
-            checkLogin();
-            
-            // Set up login form
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                login(userIdInput.value, passwordInput.value);
-            });
-            
-            // Set up password toggle
-            togglePassword.addEventListener('click', togglePasswordVisibility);
-            
-            // Set up logout button
-            logoutBtn.addEventListener('click', logout);
-            
-            // Render all shortcuts initially
-            renderShortcuts(filterShortcuts(''));
-            
-            // Set up search functionality
-            searchInput.addEventListener('input', () => {
-                const query = searchInput.value.trim();
-                if (query) {
-                    clearSearch.style.display = 'block';
+                if (tabId === 'togel') {
+                    togelContent.classList.add('active');
                 } else {
-                    clearSearch.style.display = 'none';
+                    syairContent.classList.add('active');
                 }
-                const filtered = filterShortcuts(query);
-                renderShortcuts(filtered);
-                showSuggestions(query);
+            }
+            
+            // Event listener untuk tab
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    changeTab(tab.dataset.tab);
+                });
             });
             
-            // Set up clear search button
-            clearSearch.addEventListener('click', clearSearchInput);
-            
-            // Hide suggestions when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!searchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
-                    suggestionsContainer.style.display = 'none';
+            // Fungsi untuk generator syair yang diperbaiki
+            function setupSyairGenerator() {
+                const baris1 = document.getElementById('baris1');
+                const baris2 = document.getElementById('baris2');
+                const baris3 = document.getElementById('baris3');
+                const baris4 = document.getElementById('baris4');
+                const patternInfo = document.getElementById('pattern-info');
+                const generateSyairBtn = document.getElementById('generateSyairBtn');
+                const copySyairBtn = document.getElementById('copySyairBtn');
+                const copyMkBtn = document.getElementById('copyMkBtn');
+                const copyNagaBtn = document.getElementById('copyNagaBtn');
+                const copyBinatangBtn = document.getElementById('copyBinatangBtn');
+                const generateMkBtn = document.getElementById('generateMkBtn');
+                const generateNagaBtn = document.getElementById('generateNagaBtn');
+                const generateBinatangBtn = document.getElementById('generateBinatangBtn');
+                const mkValue = document.getElementById('mkValue');
+                const nagaValue = document.getElementById('nagaValue');
+                const binatangValue = document.getElementById('binatangValue');
+                const copySuccess = document.getElementById('copy-success');
+                const kataOptions = document.querySelectorAll('.kata-option');
+                
+                // Daftar karakter binatang
+                const karakterBinatang = [
+                    "Pemberontak", "Penurut", "Pemalu", "Berani", "Licik", "Pemimpin", "Bijaksana", "Cermat", 
+                    "Tenang", "Ganas", "Santai", "Tegas", "Lembut", "Cepat", "Lambat", "Manis", "Keras", "Rapi"
+                ];
+                
+                // Tema untuk syair yang lebih spesifik
+                const temaSyair = [
+                    {
+                        nama: "Cinta & Kasih Sayang",
+                        kataKunci: ["cinta", "kasih", "sayang", "rindu", "asmara", "hati", "jiwa", "perasaan"]
+                    },
+                    {
+                        nama: "Kehidupan & Perjalanan",
+                        kataKunci: ["hidup", "perjalanan", "waktu", "nasib", "takdir", "masa", "perubahan", "harapan"]
+                    },
+                    {
+                        nama: "Alam & Keindahan",
+                        kataKunci: ["alam", "bumi", "langit", "matahari", "bulan", "bintang", "laut", "gunung"]
+                    },
+                    {
+                        nama: "Perjuangan & Kesuksesan",
+                        kataKunci: ["perjuangan", "usaha", "kerja", "kesuksesan", "kemenangan", "impian", "cita-cita"]
+                    },
+                    {
+                        nama: "Keluarga & Persahabatan",
+                        kataKunci: ["keluarga", "sahabat", "teman", "persaudaraan", "kebersamaan", "tolong-menolong"]
+                    },
+                    {
+                        nama: "Kebijaksanaan & Pengetahuan",
+                        kataKunci: ["ilmu", "pengetahuan", "kebijaksanaan", "pengalaman", "pelajaran", "hikmah"]
+                    }
+                ];
+                
+                // Pola rima
+                const polaRima = [
+                    { pola: "a-b-a-b", contoh: "merah - biru - merah - biru" },
+                    { pola: "a-a-b-b", contoh: "merah - merah - biru - biru" },
+                    { pola: "a-b-b-a", contoh: "merah - biru - biru - merah" },
+                    { pola: "a-b-c-b", contoh: "merah - biru - hijau - biru" },
+                    { pola: "a-b-c-c", contoh: "merah - biru - hijau - hijau" }
+                ];
+                
+                // Template syair yang sudah jadi untuk berbagai tema DAN jumlah kata
+                const templateSyair = {
+                    "Cinta & Kasih Sayang": {
+                        3: [
+                            ["Hati selalu rindu", "Kasih tulus abadi", "Cinta takkan pudar", "Selamanya bersemi"],
+                            ["Dibawah sinar rembulan", "Kita berjanji setia", "Cinta ini abadi", "Takkan pernah berakhir"],
+                            ["Senandung cinta dihati", "Mengalun lembut bermakna", "Bersama kita melangkah", "Menuju bahagia abadi"]
+                        ],
+                        4: [
+                            ["Hati ini selalu rindu", "Pada kasih yang tulus abadi", "Cinta kita takkan pudar", "Selamanya bersemi di hati"],
+                            ["Di bawah sinar rembulan", "Kita berjanji setia", "Cinta ini abadi", "Takkan pernah berakhir"],
+                            ["Senandung cinta di hati", "Mengalun lembut penuh makna", "Bersama kita melangkah", "Menuju bahagia abadi"]
+                        ],
+                        5: [
+                            ["Hati ini selalu merindu", "Pada kasih yang tulus abadi", "Cinta kita takkan pernah pudar", "Selamanya bersemi di dalam hati", "Sampai akhir masa nanti"],
+                            ["Di bawah cahaya sinar rembulan", "Kita berjanji akan setia", "Cinta ini sungguh abadi", "Takkan pernah akan berakhir", "Selamanya bersama bahagia"],
+                            ["Senandung cinta di dalam hati", "Mengalun lembut penuh dengan makna", "Bersama kita akan melangkah", "Menuju kehidupan bahagia abadi", "Dengan cinta yang tulus suci"]
+                        ]
+                    },
+                    "Kehidupan & Perjalanan": {
+                        3: [
+                            ["Hidup perjalanan", "Penuh liku rintangan", "Jangan menyerah", "Terus melangkah maju"],
+                            ["Waktu berjalan", "Bawa perubahan hidup", "Nikmati detik", "Sebelum hilang"],
+                            ["Ujung perjalanan", "Harapan menanti", "Terus berusaha", "Impian teraih"]
+                        ],
+                        4: [
+                            ["Hidup adalah perjalanan", "Penuh liku dan rintangan", "Tapi jangan menyerah", "Teruslah melangkah maju"],
+                            ["Waktu terus berjalan", "Membawa perubahan hidup", "Nikmati setiap detik", "Sebelum semuanya hilang"],
+                            ["Di ujung perjalanan", "Ada harapan menanti", "Teruslah berusaha", "Impian akan teraih"]
+                        ],
+                        5: [
+                            ["Hidup ini sebuah perjalanan", "Penuh liku dan juga rintangan", "Tapi jangan pernah menyerah", "Teruslah melangkah ke depan", "Menuju tujuan yang diharapkan"],
+                            ["Waktu terus berjalan tanpa henti", "Membawa perubahan dalam hidup", "Nikmatilah setiap detiknya", "Sebelum semuanya menghilang", "Dan tinggal kenangan belaka"],
+                            ["Di ujung sebuah perjalanan panjang", "Selalu ada harapan menanti", "Teruslah berusaha dengan tekun", "Impian indah akan teraih", "Dengan kerja keras dan doa"]
+                        ]
+                    },
+                    "Alam & Keindahan": {
+                        3: [
+                            ["Matahari terbit", "Sinari bumi indah", "Alam berkedamaian", "Bagi jiwa resah"],
+                            ["Bulan purnama", "Bersinar terang", "Malam sunyi senyap", "Bawa ketenangan"],
+                            ["Ombak berkejaran", "Terpa pasir pantai", "Suara debur ombak", "Hanyutkan resah"]
+                        ],
+                        4: [
+                            ["Matahari terbit cerah", "Menyinari bumi nan indah", "Alam memberikan kedamaian", "Bagi jiwa yang resah"],
+                            ["Bulan purnama bersinar", "Ditemani bintang gemintang", "Malam yang sunyi senyap", "Membawa ketenangan hati"],
+                            ["Ombak laut berkejaran", "Menerpa pasir di pantai", "Suara debur ombak", "Menghanyutkan segala resah"]
+                        ],
+                        5: [
+                            ["Matahari terbit dengan cerah", "Menyinari bumi yang indah", "Alam memberikan kedamaian abadi", "Bagi jiwa yang sedang resah", "Dan hati yang gelisah"],
+                            ["Bulan purnama bersinar terang", "Ditemani bintang gemintang", "Malam yang sunyi dan senyap", "Membawa ketenangan dalam hati", "Dan kedamaian jiwa raga"],
+                            ["Ombak laut saling berkejaran", "Menerpa pasir putih di pantai", "Suara debur ombak yang indah", "Menghanyutkan segala keresahan", "Dan kegelisahan dalam diri"]
+                        ]
+                    },
+                    "Perjuangan & Kesuksesan": {
+                        3: [
+                            ["Perjuangan tak mudah", "Butuh semangat tekad", "Hasil manis", "Terasa nikmat"],
+                            ["Impian cita-cita", "Harus diperjuangkan", "Dengan kerja keras", "Sukses diraih"],
+                            ["Jangan menyerah", "Meski rintangan datang", "Terus berusaha", "Kemenangan menanti"]
+                        ],
+                        4: [
+                            ["Perjuangan tak mudah", "Butuh semangat dan tekad", "Tapi hasil manis", "Akan terasa nikmat"],
+                            ["Impian dan cita-cita", "Harus diperjuangkan", "Dengan kerja keras", "Kesuksesan diraih"],
+                            ["Jangan pernah menyerah", "Meski rintangan datang", "Teruslah berusaha", "Kemenangan menanti"]
+                        ],
+                        5: [
+                            ["Perjuangan hidup tak mudah", "Butuh semangat dan tekad kuat", "Tapi hasil yang manis nanti", "Akan terasa sangat nikmat", "Setelah lelah berjuang"],
+                            ["Impian dan juga cita-cita", "Harus selalu diperjuangkan", "Dengan kerja keras tak kenal lelah", "Kesuksesan akan dapat diraih", "Dengan usaha dan doa tulus"],
+                            ["Jangan pernah untuk menyerah", "Meski banyak rintangan datang", "Teruslah berusaha dengan keras", "Kemenangan pasti akan menanti", "Di ujung perjalanan panjang"]
+                        ]
+                    },
+                    "Keluarga & Persahabatan": {
+                        3: [
+                            ["Keluarga anugerah", "Tempat kembali pulang", "Kasih sayang tulus", "Selalu ada untukmu"],
+                            ["Sahabat sejati", "Sulit ditemukan", "Bila kau dapat", "Jagalah baik-baik"],
+                            ["Kebersamaan keluarga", "Warnai hidup ini", "Dengan canda tawa", "Kasih sayang tulus"]
+                        ],
+                        4: [
+                            ["Keluarga adalah anugerah", "Tempat kembali dan pulang", "Kasih sayang tulus", "Selalu ada untukmu"],
+                            ["Sahabat sejati langka", "Sulit untuk ditemukan", "Tapi bila kau dapat", "Jagalah baik-baik"],
+                            ["Kebersamaan keluarga", "Mewarnai hidup ini", "Dengan canda tawa", "Dan kasih sayang tulus"]
+                        ],
+                        5: [
+                            ["Keluarga adalah anugerah terindah", "Tempat kembali dan juga pulang", "Kasih sayang yang tulus dan abadi", "Selalu ada untuk dirimu", "Di saat suka maupun duka"],
+                            ["Sahabat sejati itu langka", "Sangat sulit untuk ditemukan", "Tapi bila kau dapatkan", "Jagalah dengan baik-baik", "Sebagai harta yang berharga"],
+                            ["Kebersamaan dalam keluarga", "Mewarnai kehidupan ini", "Dengan canda tawa riang", "Dan kasih sayang yang tulus", "Membuat hidup bermakna"]
+                        ]
+                    },
+                    "Kebijaksanaan & Pengetahuan": {
+                        3: [
+                            ["Ilmu cahaya", "Penerang gelap", "Carilah selalu", "Hingga akhir hayat"],
+                            ["Kebijaksanaan datang", "Dari pengalaman hidup", "Belajarlah selalu", "Dari setiap kejadian"],
+                            ["Pengetahuan luas", "Buka wawasan baru", "Jadilah pembelajar", "Sepanjang hidupmu"]
+                        ],
+                        4: [
+                            ["Ilmu adalah cahaya", "Penerang dalam gelap", "Carilah selalu", "Hingga akhir hayat"],
+                            ["Kebijaksanaan datang", "Dari pengalaman hidup", "Belajarlah selalu", "Dari setiap kejadian"],
+                            ["Pengetahuan yang luas", "Membuka wawasan baru", "Jadilah pembelajar", "Sepanjang hidupmu"]
+                        ],
+                        5: [
+                            ["Ilmu adalah cahaya penerang", "Dalam kegelapan kehidupan", "Carilah selalu dengan tekun", "Hingga akhir hayat nanti", "Sebagai bekal di akhirat"],
+                            ["Kebijaksanaan itu datang", "Dari pengalaman hidup sehari-hari", "Belajarlah selalu dengan rendah hati", "Dari setiap kejadian yang dialami", "Agar menjadi manusia bijak"],
+                            ["Pengetahuan yang luas dan dalam", "Membuka wawasan yang baru", "Jadilah pembelajar sepanjang hayat", "Tak pernah berhenti menuntut ilmu", "Demi masa depan yang cerah"]
+                        ]
+                    }
+                };
+                
+                // Fungsi untuk memilih item acak dari array
+                function randomFrom(array) {
+                    return array[Math.floor(Math.random() * array.length)];
                 }
-            });
-            
-            // Set up hamburger menu (no sidebar to toggle)
-            hamburgerBtn.style.display = 'none';
-            
-            // Initialize date/time and IP address
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-            getIPAddress();
-            
-            // Set up live chat functionality
-            liveChatButton.addEventListener('click', toggleChatModal);
-            closeChat.addEventListener('click', toggleChatModal);
-            sendMessage.addEventListener('click', sendChatMessage);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendChatMessage();
+                
+                // Fungsi untuk mengkapitalisasi huruf pertama
+                function capitalize(str) {
+                    return str.charAt(0).toUpperCase() + str.slice(1);
                 }
-            });
-            
-            // Close chat modal when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!liveChatModal.contains(e.target) && !liveChatButton.contains(e.target) && liveChatModal.classList.contains('active')) {
-                    toggleChatModal();
+                
+                // Fungsi untuk memastikan jumlah kata sesuai
+                function ensureWordCount(text, targetCount) {
+                    const words = text.split(' ');
+                    
+                    if (words.length === targetCount) {
+                        return text;
+                    } else if (words.length < targetCount) {
+                        // Tambahkan kata jika kurang
+                        const additionalWords = [
+                            "yang", "dengan", "untuk", "dari", "pada", "di", "ke", "dari", "dan", "atau",
+                            "ini", "itu", "sangat", "amat", "benar", "sungguh", "sekali", "lagi", "telah", "akan"
+                        ];
+                        
+                        while (words.length < targetCount) {
+                            words.push(randomFrom(additionalWords));
+                        }
+                        return words.join(' ');
+                    } else {
+                        // Kurangi kata jika lebih
+                        return words.slice(0, targetCount).join(' ');
+                    }
                 }
-            });
-        }
-        
-        // Run initialization when DOM is loaded
-        document.addEventListener('DOMContentLoaded', init);
+                
+                // Generator syair yang lebih terstruktur berdasarkan tema dan jumlah kata
+                function generateSyairTema(tema, jumlahKata) {
+                    // Cek apakah ada template untuk tema dan jumlah kata ini
+                    if (templateSyair[tema.nama] && templateSyair[tema.nama][jumlahKata]) {
+                        const templateTersedia = templateSyair[tema.nama][jumlahKata];
+                        const syairTerpilih = randomFrom(templateTersedia);
+                        
+                        // Pastikan setiap baris memiliki jumlah kata yang tepat
+                        return syairTerpilih.map(baris => ensureWordCount(baris, jumlahKata));
+                    }
+                    
+                    // Fallback jika template tidak tersedia
+                    return generateSyairGeneric(tema, jumlahKata);
+                }
+                
+                // Generator syair generik jika template tidak tersedia
+                function generateSyairGeneric(tema, jumlahKata) {
+                    const kataKunciTema = tema.kataKunci;
+                    const kataBendaTema = [...kataBenda.umum, ...(kataBenda[tema.nama.split(' ')[0].toLowerCase()] || [])];
+                    const kataSifatTema = [...kataSifat.umum, ...(kataSifat[tema.nama.split(' ')[0].toLowerCase()] || [])];
+                    const kataKerjaTema = [...kataKerja.umum, ...(kataKerja[tema.nama.split(' ')[0].toLowerCase()] || [])];
+                    
+                    // Pilih kata kunci untuk setiap baris
+                    const kataKunciBaris = [];
+                    for (let i = 0; i < 4; i++) {
+                        kataKunciBaris.push(randomFrom(kataKunciTema));
+                    }
+                    
+                    // Buat setiap baris berdasarkan kata kunci dan jumlah kata
+                    const baris = [];
+                    for (let i = 0; i < 4; i++) {
+                        let kalimat = "";
+                        
+                        // Buat pola kalimat berdasarkan jumlah kata
+                        if (jumlahKata === 3) {
+                            kalimat = `${capitalize(randomFrom(kataBendaTema))} ${randomFrom(kataSifatTema)} ${randomFrom(kataKerjaTema)}`;
+                        } else if (jumlahKata === 4) {
+                            kalimat = `${capitalize(randomFrom(kataBendaTema))} ${randomFrom(kataSifatTema)} ${randomFrom(kataKerjaTema)} ${randomFrom(kataBendaTema)}`;
+                        } else {
+                            kalimat = `${capitalize(randomFrom(kataBendaTema))} ${randomFrom(kataSifatTema)} ${randomFrom(kataKerjaTema)} ${randomFrom(kataBendaTema)} ${randomFrom(kataSifatTema)}`;
+                        }
+                        
+                        // Pastikan kalimat mengandung kata kunci tema
+                        if (!kalimat.includes(kataKunciBaris[i]) && Math.random() > 0.3) {
+                            const words = kalimat.split(' ');
+                            const replaceIndex = Math.floor(Math.random() * words.length);
+                            words[replaceIndex] = kataKunciBaris[i];
+                            kalimat = words.join(' ');
+                        }
+                        
+                        // Pastikan jumlah kata sesuai
+                        kalimat = ensureWordCount(kalimat, jumlahKata);
+                        
+                        baris.push(kalimat);
+                    }
+                    
+                    return baris;
+                }
+                
+                // Fungsi untuk menghasilkan syair baru
+                function buatSyairBaru() {
+                    // Ambil jumlah kata yang dipilih
+                    const selectedKata = parseInt(document.querySelector('input[name="kataOption"]:checked').value);
+                    
+                    // Pilih tema dan pola rima secara acak
+                    const temaTerpilih = randomFrom(temaSyair);
+                    const polaTerpilih = randomFrom(polaRima);
+                    
+                    // Update info pola
+                    patternInfo.textContent = `Pola rima: ${polaTerpilih.pola} | Tema: ${temaTerpilih.nama} | Kata: ${selectedKata}`;
+                    
+                    // Generate angka untuk MK dan Naga
+                    generateAngkaTambahan();
+                    
+                    // Generate syair berdasarkan tema dan jumlah kata
+                    const syairTerpilih = generateSyairTema(temaTerpilih, selectedKata);
+                    
+                    // Terapkan efek animasi
+                    baris1.style.opacity = "0";
+                    baris2.style.opacity = "0";
+                    baris3.style.opacity = "0";
+                    baris4.style.opacity = "0";
+                    
+                    setTimeout(() => {
+                        baris1.textContent = syairTerpilih[0];
+                        baris1.style.opacity = "1";
+                        
+                        setTimeout(() => {
+                            baris2.textContent = syairTerpilih[1];
+                            baris2.style.opacity = "1";
+                            
+                            setTimeout(() => {
+                                baris3.textContent = syairTerpilih[2];
+                                baris3.style.opacity = "1";
+                                
+                                setTimeout(() => {
+                                    baris4.textContent = syairTerpilih[3];
+                                    baris4.style.opacity = "1";
+                                }, 150);
+                            }, 150);
+                        }, 150);
+                    }, 150);
+                }
+                
+                // Fungsi untuk generate angka tambahan (MK, Naga, Karakter)
+                function generateAngkaTambahan() {
+                    // Generate MK (2 angka unik 0-9)
+                    const mkNumbers = generateUniqueNumbers(2, 0, 9);
+                    mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
+                    
+                    // Generate Naga (3 angka unik 0-9)
+                    const nagaNumbers = generateUniqueNumbers(3, 0, 9);
+                    nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    
+                    // Generate karakter binatang
+                    binatangValue.textContent = generateKarakterBinatang();
+                }
+                
+                // Fungsi untuk generate angka unik
+                function generateUniqueNumbers(count, min, max) {
+                    let numbers = [];
+                    while(numbers.length < count) {
+                        const num = Math.floor(Math.random() * (max - min + 1)) + min;
+                        if (!numbers.includes(num)) {
+                            numbers.push(num);
+                        }
+                    }
+                    return numbers;
+                }
+                
+                // Fungsi untuk menghasilkan karakter binatang acak
+                function generateKarakterBinatang() {
+                    const randomIndex = Math.floor(Math.random() * karakterBinatang.length);
+                    return karakterBinatang[randomIndex];
+                }
+                
+                // Fungsi untuk menyalin syair ke clipboard
+                function salinSyair() {
+                    const syair = `${baris1.textContent}\n${baris2.textContent}\n${baris3.textContent}\n${baris4.textContent}`;
+                    
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = syair;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Syair berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                }
+                
+                // Fungsi untuk menyalin MK ke clipboard
+                function salinMk() {
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = mkValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ MK berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                }
+                
+                // Fungsi untuk menyalin Naga ke clipboard
+                function salinNaga() {
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = nagaValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Naga berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                }
+                
+                // Fungsi untuk menyalin Karakter Binatang ke clipboard
+                function salinBinatang() {
+                    // Buat elemen textarea sementara untuk menyalin
+                    const textArea = document.createElement('textarea');
+                    textArea.value = binatangValue.textContent;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    copySuccess.textContent = "✓ Karakter Binatang berhasil disalin!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                }
+                
+                // Event listener untuk pilihan jumlah kata
+                kataOptions.forEach(option => {
+                    option.addEventListener('click', function() {
+                        // Hapus kelas active dari semua opsi
+                        kataOptions.forEach(opt => opt.classList.remove('active'));
+                        
+                        // Tambahkan kelas active ke opsi yang dipilih
+                        this.classList.add('active');
+                        
+                        // Update radio button
+                        const radio = this.querySelector('input[type="radio"]');
+                        radio.checked = true;
+                        
+                        // Generate syair baru dengan jumlah kata yang baru
+                        buatSyairBaru();
+                    });
+                });
+                
+                // Event listener untuk tombol syair
+                generateSyairBtn.addEventListener('click', buatSyairBaru);
+                copySyairBtn.addEventListener('click', salinSyair);
+                copyMkBtn.addEventListener('click', salinMk);
+                copyNagaBtn.addEventListener('click', salinNaga);
+                copyBinatangBtn.addEventListener('click', salinBinatang);
+                generateMkBtn.addEventListener('click', function() {
+                    const mkNumbers = generateUniqueNumbers(2, 0, 9);
+                    mkValue.textContent = `${mkNumbers[0]} / ${mkNumbers[1]}`;
+                    
+                    copySuccess.textContent = "✓ MK berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
+                generateNagaBtn.addEventListener('click', function() {
+                    const nagaNumbers = generateUniqueNumbers(3, 0, 9);
+                    nagaValue.textContent = `${nagaNumbers[0]} - ${nagaNumbers[1]} - ${nagaNumbers[2]}`;
+                    
+                    copySuccess.textContent = "✓ Naga berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
+                generateBinatangBtn.addEventListener('click', function() {
+                    binatangValue.textContent = generateKarakterBinatang();
+                    
+                    copySuccess.textContent = "✓ Karakter Binatang berhasil di-generate!";
+                    copySuccess.style.opacity = "1";
+                    
+                    setTimeout(() => {
+                        copySuccess.style.opacity = "0";
+                    }, 2000);
+                });
+                
+                // Buat syair pertama saat halaman dimuat
+                buatSyairBaru();
+            }
+            
+            // Fungsi untuk prediksi togel
+            function setupTogelPrediction() {
+                // Elements
+                const generateBtn = document.getElementById('generateBtn');
+                const copyBtn = document.getElementById('copyBtn');
+                const copyAllBtn = document.getElementById('copyAllBtn');
+                const marketSelect = document.getElementById('marketSelect');
+                const predictionResult = document.getElementById('predictionResult');
+                const autoDateRadio = document.getElementById('autoDate');
+                const manualDateRadio = document.getElementById('manualDate');
+                const manualDateInput = document.getElementById('manualDateInput');
+                const customDateInput = document.getElementById('customDateInput');
+                const darkModeToggle = document.getElementById('darkModeToggle');
+                const marketSearch = document.getElementById('marketSearch');
+                const searchSuggestions = document.getElementById('searchSuggestions');
+                
+                // Data
+                const allMarkets = Array.from(marketSelect.options)
+                    .filter(option => option.value)
+                    .map(option => option.value);
+                
+                const shios = ['TIKUS', 'KERBAU', 'HARIMAU', 'KELINCI', 'NAGA', 'ULAR', 
+                              'KUDA', 'KAMBING', 'MONYET', 'AYAM', 'ANJING', 'BABI'];
+                const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                              'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                
+                // Tampilkan jumlah pasaran
+                document.getElementById('marketCount').textContent = allMarkets.length;
+                
+                // Format tanggal Indonesia
+                function formatCustomDate(dateString) {
+                    const date = new Date(dateString);
+                    const dayName = days[date.getDay()];
+                    const day = date.getDate();
+                    const month = months[date.getMonth()];
+                    const year = date.getFullYear();
+                    return `${dayName}, ${day} ${month} ${year}`;
+                }
+                
+                // Fungsi untuk mengecek apakah ada digit yang sama
+                function hasCommonDigits(num1, num2) {
+                    const digits1 = num1.toString().split('');
+                    const digits2 = num2.toString().split('');
+                    return digits1.some(digit => digits2.includes(digit));
+                }
+                
+                // Fungsi untuk generate angka dengan digit unik dalam 1 nomor
+                function generateUniqueDigitsNumber(length) {
+                    let digits = [];
+                    while(digits.length < length) {
+                        const digit = Math.floor(Math.random() * 10).toString();
+                        if (!digits.includes(digit)) {
+                            digits.push(digit);
+                        }
+                    }
+                    return digits.join('');
+                }
+                
+                // Update tampilan tanggal
+                function updateDateDisplay() {
+                    let dateText;
+                    
+                    if (autoDateRadio.checked) {
+                        const date = new Date();
+                        dateText = formatCustomDate(date);
+                    } else if (customDateInput.value) {
+                        dateText = formatCustomDate(customDateInput.value);
+                    } else {
+                        // Set default ke hari ini jika manual date dipilih tapi belum ada input
+                        const today = new Date();
+                        const yyyy = today.getFullYear();
+                        const mm = String(today.getMonth() + 1).padStart(2, '0');
+                        const dd = String(today.getDate()).padStart(2, '0');
+                        customDateInput.value = `${yyyy}-${mm}-${dd}`;
+                        dateText = formatCustomDate(customDateInput.value);
+                    }
+                    
+                    return dateText;
+                }
+                
+                // Simpan prediksi ke localStorage
+                function savePredictionsToStorage(predictions) {
+                    localStorage.setItem('togelPredictions', JSON.stringify(predictions));
+                }
+                
+                // Ambil prediksi dari localStorage
+                function loadPredictionsFromStorage() {
+                    const saved = localStorage.getItem('togelPredictions');
+                    return saved ? JSON.parse(saved) : {};
+                }
+                
+                // Generate angka unik (tanpa duplikat dalam 1 nomor)
+                function generateUniqueNumbers(count, digits, existingNumbers = []) {
+                    let numbers = [];
+                    while(numbers.length < count) {
+                        let num = generateUniqueDigitsNumber(digits);
+                        
+                        if (!existingNumbers.includes(num) && !numbers.includes(num)) {
+                            numbers.push(num);
+                        }
+                    }
+                    return numbers;
+                }
+                
+                // Generate angka kembar
+                function generateUniqueTwinNumbers(count, existingNumbers = []) {
+                    let twins = [];
+                    while(twins.length < count) {
+                        const num = Math.floor(Math.random() * 10);
+                        const twin = num.toString() + num.toString();
+                        
+                        if (!existingNumbers.includes(twin) && !twins.includes(twin)) {
+                            twins.push(twin);
+                        }
+                    }
+                    return twins;
+                }
+                
+                // Generate shio unik
+                function generateUniqueShios(existingShios = []) {
+                    let result = [];
+                    const availableShios = [...shios];
+                    
+                    existingShios.forEach(shio => {
+                        const index = availableShios.indexOf(shio);
+                        if (index > -1) {
+                            availableShios.splice(index, 1);
+                        }
+                    });
+                    
+                    while(result.length < 3 && availableShios.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * availableShios.length);
+                        result.push(availableShios[randomIndex]);
+                        availableShios.splice(randomIndex, 1);
+                    }
+                    
+                    return result;
+                }
+                
+                // Buat prediksi dalam format HTML (untuk tampilan)
+                function createStyledPrediction(market, dateText, data) {
+                    let html = `
+                        <div style="margin-bottom: 15px;">
+                            <div class="prediction-title">Prediksi ${market}</div>
+                            <div class="prediction-date" style="text-align:center;margin-bottom:15px;color:#7f8c8d;">${dateText}</div>
+                    `;
+                    
+                    Object.entries(data).forEach(([label, value]) => {
+                        html += `
+                            <div class="result-line">
+                                <div class="result-label">${label}</div>
+                                <div class="result-value">${value}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                        </div>
+                        <div class="footer-text" style="text-align:center;margin-top:20px;font-style:italic;">
+                            Selalu utamakan prediksi sendiri
+                        </div>
+                    `;
+                    
+                    return html;
+                }
+                
+                // Buat prediksi dalam format plain text (untuk copy)
+                function createPlainTextPrediction(market, dateText, data) {
+                    let text = `Prediksi ${market}\n${dateText}\n`;
+                    
+                    Object.entries(data).forEach(([label, value]) => {
+                        text += `${label}: ${value}\n`;
+                    });
+                    
+                    text += `Selalu utamakan prediksi sendiri`;
+                    
+                    return text;
+                }
+                
+                // Generate prediksi lengkap
+                function createPrediction(market, useCustomDate = false) {
+                    const dateText = updateDateDisplay();
+                    
+                    // Generate BBFS Kuat (7 digit unik)
+                    const bbfs = generateUniqueDigitsNumber(7);
+                    
+                    // Generate AM/AI/CK (5 digit unik) yang tidak ada digit sama dengan BBFS
+                    let amaic;
+                    let attempts = 0;
+                    const maxAttempts = 100;
+                    let foundUnique = false;
+                    
+                    while (!foundUnique && attempts < maxAttempts) {
+                        amaic = generateUniqueDigitsNumber(5);
+                        if (!hasCommonDigits(bbfs, amaic)) {
+                            foundUnique = true;
+                        }
+                        attempts++;
+                    }
+                    
+                    if (!foundUnique) {
+                        amaic = generateUniqueDigitsNumber(5);
+                    }
+                    
+                    // Generate angka prediksi lainnya (4D, 3D, 2D) dengan digit unik dalam 1 nomor
+                    const d4Numbers = generateUniqueNumbers(4, 4).join(' ');
+                    const d3Numbers = generateUniqueNumbers(4, 3).join(' ');
+                    const d2Numbers = generateUniqueNumbers(10, 2).join(' ');
+                    
+                    // Colok Bebas (1 digit unik)
+                    const colokBebas = generateUniqueNumbers(2, 1).join(' / ');
+                    
+                    // Colok Bebas 2D (2 digit unik dalam 1 nomor)
+                    const colokBebasDigits = colokBebas.replace(/[^0-9]/g, '').split('');
+                    let colokBebas2d;
+                    let valid2d = false;
+                    
+                    while (!valid2d) {
+                        const temp2d = [];
+                        for (let i = 0; i < 3; i++) {
+                            temp2d.push(generateUniqueDigitsNumber(2));
+                        }
+                        const hasDuplicate = temp2d.some(num => 
+                            colokBebasDigits.some(digit => num.includes(digit))
+                        );
+                        
+                        if (!hasDuplicate) {
+                            colokBebas2d = temp2d.join(' / ');
+                            valid2d = true;
+                        }
+                    }
+                    
+                    // Shio
+                    const shioValues = generateUniqueShios().join(' / ');
+                    
+                    // Invest Twin
+                    const investTwin = generateUniqueTwinNumbers(3).join(' / ');
+                    
+                    const predictionData = {
+                        "BBFS Kuat": bbfs,
+                        "AM/AI/CK": amaic,
+                        "4D (BB)": d4Numbers,
+                        "3D (BB)": d3Numbers,
+                        "2D (BB)": d2Numbers,
+                        "Colok Bebas": colokBebas,
+                        "Colok Bebas 2D": colokBebas2d,
+                        "Colok Shio": shioValues,
+                        "Invest Twin": investTwin
+                    };
+                    
+                    return {
+                        styled: createStyledPrediction(market, dateText, predictionData),
+                        plainText: createPlainTextPrediction(market, dateText, predictionData)
+                    };
+                }
+                
+                // Update tampilan prediksi
+                function updatePrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    const useCustomDate = manualDateRadio.checked;
+                    
+                    if (!selectedMarket) {
+                        predictionResult.innerHTML = '<div class="prediction-title">Pilih pasaran terlebih dahulu</div>';
+                        return;
+                    }
+                    
+                    if (predictions[selectedMarket]) {
+                        const storedPrediction = predictions[selectedMarket];
+                        const storedDateMatch = storedPrediction.plainText.match(/Prediksi .+\n(.+)\n/);
+                        const currentDate = updateDateDisplay();
+                        
+                        if (storedDateMatch && storedDateMatch[1] === currentDate) {
+                            predictionResult.innerHTML = storedPrediction.styled;
+                        } else {
+                            const newPrediction = createPrediction(selectedMarket, useCustomDate);
+                            predictionResult.innerHTML = newPrediction.styled;
+                            predictions[selectedMarket] = newPrediction;
+                            savePredictionsToStorage(predictions);
+                        }
+                    } else {
+                        const prediction = createPrediction(selectedMarket, useCustomDate);
+                        predictionResult.innerHTML = prediction.styled;
+                        predictions[selectedMarket] = prediction;
+                        savePredictionsToStorage(predictions);
+                    }
+                }
+                
+                // Generate prediksi baru
+                function generateNewPrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    const useCustomDate = manualDateRadio.checked;
+                    
+                    if (!selectedMarket) {
+                        predictionResult.innerHTML = '<div class="prediction-title">Pilih pasaran terlebih dahulu</div>';
+                        return;
+                    }
+                    
+                    const prediction = createPrediction(selectedMarket, useCustomDate);
+                    predictionResult.innerHTML = prediction.styled;
+                    predictions[selectedMarket] = prediction;
+                    savePredictionsToStorage(predictions);
+                }
+                
+                // Copy hasil prediksi
+                function copyPrediction() {
+                    const selectedMarket = marketSelect.value;
+                    const predictions = loadPredictionsFromStorage();
+                    
+                    if (!selectedMarket) {
+                        alert("Silakan pilih pasaran terlebih dahulu!");
+                        return;
+                    }
+                    
+                    const textToCopy = predictions[selectedMarket].plainText;
+                    
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        copyBtn.innerHTML = '<i class="fas fa-check"></i> Tercopy!';
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Hasil';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Gagal menyalin teks: ', err);
+                    });
+                }
+                
+                // Copy semua pasaran
+                function copyAllPredictions() {
+                    let allPredictionsText = '';
+                    const useCustomDate = manualDateRadio.checked;
+                    const currentDate = updateDateDisplay();
+                    
+                    allPredictionsText += `PREDIKSI TOGEL SEMUA PASARAN\n${currentDate}\n\n`;
+                    
+                    const predictions = {};
+                    allMarkets.forEach(market => {
+                        predictions[market] = createPrediction(market, useCustomDate);
+                    });
+                    
+                    savePredictionsToStorage(predictions);
+                    
+                    allMarkets.forEach(market => {
+                        allPredictionsText += predictions[market].plainText + '\n\n';
+                    });
+                    
+                    navigator.clipboard.writeText(allPredictionsText).then(() => {
+                        copyAllBtn.innerHTML = '<i class="fas fa-check"></i> Tercopy Semua!';
+                        setTimeout(() => {
+                            copyAllBtn.innerHTML = '<i class="fas fa-copy"></i> Copy Semua Pasaran';
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Gagal menyalin teks: ', err);
+                    });
+                }
+                
+                // Dark mode functions
+                function toggleDarkMode() {
+                    const body = document.body;
+                    body.classList.toggle('dark-mode');
+                    const isDarkMode = body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+                }
+                
+                function loadDarkModePreference() {
+                    const savedPreference = localStorage.getItem('darkMode');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    
+                    if (savedPreference === 'enabled' || (savedPreference === null && prefersDark)) {
+                        document.body.classList.add('dark-mode');
+                    }
+                }
+                
+                // Fungsi untuk pencarian pasaran
+                function searchMarkets(query) {
+                    if (!query) {
+                        searchSuggestions.style.display = 'none';
+                        return;
+                    }
+                    
+                    const lowerQuery = query.toLowerCase();
+                    const filteredMarkets = allMarkets.filter(market => 
+                        market.toLowerCase().includes(lowerQuery)
+                    );
+                    
+                    if (filteredMarkets.length === 0) {
+                        searchSuggestions.innerHTML = '<div class="suggestion-item">Tidak ditemukan</div>';
+                        searchSuggestions.style.display = 'block';
+                        return;
+                    }
+                    
+                    searchSuggestions.innerHTML = '';
+                    filteredMarkets.forEach(market => {
+                        const div = document.createElement('div');
+                        div.className = 'suggestion-item';
+                        
+                        // Highlight teks yang cocok
+                        const lowerMarket = market.toLowerCase();
+                        const startIndex = lowerMarket.indexOf(lowerQuery);
+                        const endIndex = startIndex + query.length;
+                        
+                        if (startIndex >= 0) {
+                            const before = market.substring(0, startIndex);
+                            const match = market.substring(startIndex, endIndex);
+                            const after = market.substring(endIndex);
+                            
+                            div.innerHTML = `${before}<span class="highlight">${match}</span>${after}`;
+                        } else {
+                            div.textContent = market;
+                        }
+                        
+                        div.addEventListener('click', () => {
+                            marketSelect.value = market;
+                            marketSearch.value = market;
+                            searchSuggestions.style.display = 'none';
+                            updatePrediction();
+                        });
+                        
+                        searchSuggestions.appendChild(div);
+                    });
+                    
+                    searchSuggestions.style.display = 'block';
+                }
+                
+                // Event listeners
+                generateBtn.addEventListener('click', generateNewPrediction);
+                marketSelect.addEventListener('change', updatePrediction);
+                copyBtn.addEventListener('click', copyPrediction);
+                copyAllBtn.addEventListener('click', copyAllPredictions);
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+                
+                // Event listeners untuk fitur pencarian
+                marketSearch.addEventListener('input', (e) => {
+                    searchMarkets(e.target.value);
+                });
+                
+                marketSearch.addEventListener('focus', () => {
+                    if (marketSearch.value) {
+                        searchMarkets(marketSearch.value);
+                    }
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (!marketSearch.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                        searchSuggestions.style.display = 'none';
+                    }
+                });
+                
+                autoDateRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        manualDateInput.style.display = 'none';
+                        updatePrediction();
+                    }
+                });
+                
+                manualDateRadio.addEventListener('change', function() {
+                    if (this.checked) {
+                        manualDateInput.style.display = 'block';
+                        if (!customDateInput.value) {
+                            const today = new Date();
+                            const yyyy = today.getFullYear();
+                            const mm = String(today.getMonth() + 1).padStart(2, '0');
+                            const dd = String(today.getDate()).padStart(2, '0');
+                            customDateInput.value = `${yyyy}-${mm}-${dd}`;
+                        }
+                        updatePrediction();
+                    }
+                });
+                
+                customDateInput.addEventListener('change', function() {
+                    updatePrediction();
+                });
+                
+                // Inisialisasi
+                loadDarkModePreference();
+                updatePrediction();
+            }
+            
+            // Panggil setup fungsi untuk kedua fitur
+            setupTogelPrediction();
+            setupSyairGenerator();
+        });
     </script>
 </body>
 </html>
-
