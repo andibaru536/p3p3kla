@@ -33,6 +33,7 @@
             --blue-light: #64b5f6;
             --blue-lighter: rgba(100, 181, 246, 0.1);
             --delete-color: #f44336;
+            --warning-color: #ff9800;
         }
 
         * {
@@ -933,12 +934,29 @@
         }
 
         .auto-input-warning {
+            color: var(--warning-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 5px;
+            background: rgba(255, 152, 0, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--warning-color);
+        }
+
+        .auto-input-error {
             color: var(--delete-color);
             font-size: 0.85rem;
             font-weight: 500;
-            display: flex;
+            display: none;
             align-items: center;
             gap: 5px;
+            background: rgba(244, 67, 54, 0.1);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--delete-color);
         }
 
         .auto-delete-btn {
@@ -1125,6 +1143,10 @@ Contoh format:
                         <i class="fas fa-info-circle"></i>
                         <span>Batas maksimal 6 data. Data lebih akan diabaikan.</span>
                     </div>
+                    <div class="auto-input-error" id="autoInputError">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>Data melebihi 6 baris. Silakan hapus data tambahan.</span>
+                    </div>
                     <button class="auto-delete-btn" id="autoDeleteBtn">
                         <i class="fas fa-trash-alt"></i> Hapus Input
                     </button>
@@ -1299,6 +1321,7 @@ Contoh format:
             const autoDeleteBtn = document.getElementById('autoDeleteBtn');
             const dataCount = document.getElementById('dataCount');
             const autoInputWarning = document.getElementById('autoInputWarning');
+            const autoInputError = document.getElementById('autoInputError');
             const inputCol1 = document.getElementById('inputCol1');
             const inputCol2 = document.getElementById('inputCol2');
             const inputCol3 = document.getElementById('inputCol3');
@@ -1372,6 +1395,7 @@ Contoh format:
                 updateSidebar();
                 updateModalColumnNavigator();
                 updateDataCount();
+                hideAllMessages();
             });
             
             // Event untuk tombol hapus per kolom
@@ -1458,12 +1482,18 @@ Contoh format:
                 });
             });
             
+            // Fungsi untuk menyembunyikan semua pesan
+            function hideAllMessages() {
+                autoInputWarning.style.display = 'none';
+                autoInputError.style.display = 'none';
+            }
+            
             // Fungsi untuk memperbarui jumlah data yang terdeteksi
             function updateDataCount() {
                 const data = autoInput.value.trim();
                 if (!data) {
                     dataCount.textContent = '0';
-                    autoInputWarning.style.display = 'none';
+                    hideAllMessages();
                     return;
                 }
                 
@@ -1478,9 +1508,13 @@ Contoh format:
                 
                 // Tampilkan peringatan jika lebih dari 6 data
                 if (validLines.length > 6) {
-                    autoInputWarning.style.display = 'flex';
-                } else {
                     autoInputWarning.style.display = 'none';
+                    autoInputError.style.display = 'flex';
+                } else if (validLines.length > 0) {
+                    autoInputWarning.style.display = 'flex';
+                    autoInputError.style.display = 'none';
+                } else {
+                    hideAllMessages();
                 }
             }
             
@@ -1507,6 +1541,21 @@ Contoh format:
                     return line.includes('BET') && line.includes('http');
                 });
                 
+                // JIKA DATA LEBIH DARI 6, TIDAK ADA HASIL INPUT SAMA SEKALI
+                if (validLines.length > 6) {
+                    // Kosongkan semua kolom input
+                    inputCol1.value = '';
+                    inputCol2.value = '';
+                    inputCol3.value = '';
+                    inputCol4.value = '';
+                    inputCol5.value = '';
+                    inputCol6.value = '';
+                    
+                    // Proses data scatter (yang sekarang kosong) untuk mengosongkan hasil
+                    processScatter6Data();
+                    return;
+                }
+                
                 if (validLines.length === 0) {
                     // Kosongkan kolom input jika tidak ada data valid
                     inputCol1.value = '';
@@ -1528,7 +1577,7 @@ Contoh format:
                 inputCol6.value = '';
                 
                 // Isi kolom input dengan data yang sesuai (maksimal 6)
-                validLines.slice(0, 6).forEach((line, index) => {
+                validLines.forEach((line, index) => {
                     const colId = `inputCol${index + 1}`;
                     const inputElement = document.getElementById(colId);
                     if (inputElement) {
