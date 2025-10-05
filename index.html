@@ -229,6 +229,42 @@
             text-shadow: 0 0 10px var(--neon-green);
         }
 
+        /* Running Text Styles */
+        .running-text-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+            margin-bottom: 15px;
+            background: rgba(10, 255, 157, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(10, 255, 157, 0.2);
+            box-shadow: 0 0 15px rgba(10, 255, 157, 0.1);
+        }
+
+        .running-text {
+            white-space: nowrap;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-green);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(10, 255, 157, 0.7);
+            animation: runText 15s linear infinite;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        @keyframes runText {
+            0% {
+                left: 100%;
+            }
+            100% {
+                left: -100%;
+            }
+        }
+
         .search-container {
             position: relative;
             margin-bottom: 25px;
@@ -993,6 +1029,9 @@
             .subtitle {
                 margin-top: 20px;
             }
+            .running-text {
+                font-size: 0.9rem;
+            }
             .livechat-modal {
                 width: 320px;
                 height: 450px;
@@ -1017,6 +1056,9 @@
             }
             .subtitle {
                 font-size: 1rem;
+            }
+            .running-text {
+                font-size: 0.8rem;
             }
             .search-container {
                 margin-bottom: 15px;
@@ -1133,6 +1175,12 @@
                 </div>
             </div>
         </header>
+        
+        <!-- Running Text -->
+        <div class="running-text-container">
+            <div class="running-text">RONI KONTOL JANGAN KAU KOTAK KATIK INI YA ANJENG, CUKUP PAKAI AJA YA KONTOL</div>
+        </div>
+        
         <div class="search-container">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
@@ -1875,9 +1923,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
