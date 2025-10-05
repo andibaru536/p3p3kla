@@ -865,6 +865,112 @@
             margin-bottom: 0;
         }
 
+        /* Styles untuk input otomatis */
+        .auto-input-container {
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .auto-input-container.minimized {
+            margin-bottom: 10px;
+        }
+
+        .auto-input-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .auto-input-header h3 {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .auto-input-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .auto-input-info .count-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .auto-input-container textarea {
+            min-height: 120px;
+            transition: all 0.3s ease;
+        }
+
+        .auto-input-container.minimized textarea {
+            min-height: 0;
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        .auto-input-container.minimized .auto-input-actions {
+            display: none;
+        }
+
+        .auto-input-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .auto-input-warning {
+            color: var(--delete-color);
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .auto-delete-btn {
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--delete-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .auto-delete-btn:hover {
+            background: rgba(244, 67, 54, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15);
+            border-color: var(--delete-color);
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .auto-input-container.minimized .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -974,6 +1080,18 @@
                 align-items: flex-start;
                 gap: 15px;
             }
+
+            .auto-input-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .auto-input-actions {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -986,6 +1104,32 @@
         
         <div class="card">
             <h2>Input Data Scatter</h2>
+            
+            <!-- Input otomatis baru -->
+            <div class="auto-input-container minimized" id="autoInputContainer">
+                <div class="auto-input-header" id="autoInputHeader">
+                    <h3>
+                        <i class="fas fa-chevron-down toggle-icon"></i>
+                        Input Otomatis
+                    </h3>
+                    <div class="auto-input-info">
+                        <span>Data terdeteksi: <span id="dataCount" class="count-badge">0</span></span>
+                    </div>
+                </div>
+                <textarea id="autoInput" placeholder="Tempel data mentah di sini... Data akan otomatis tersebar ke 6 kolom di bawah ini.
+
+Contoh format:
+6 October 2025	Brv17	https://cdn.files-text.com/us-south1/api/lc/att/13376070/2129e24bab4978bae371036c7fdcdd5e/Screenshot_2025-10-06-00-36-19-819_com.android.chrome.jpg	https://cdn.files-text.com/us-south1/api/lc/att/13376070/ec84464f28bb57a0e2b4ac4c8a71655b/Screenshot_2025-10-06-00-41-05-880_com.android.chrome.jpg	https://cdn.files-text.com/us-south1/api/lc/att/13376070/bb53748d4c10b630c37f25af3c9392d3/Screenshot_2025-10-06-00-37-27-654_com.android.chrome.jpg	060801006099508	RIZAL ARDIAN F	1974891336830041089	BET 2,000 - 8,000	#REF!	3 Scatter- 5 Scatter	WAITING	VALID	DAVID"></textarea>
+                <div class="auto-input-actions">
+                    <div class="auto-input-warning" id="autoInputWarning">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Batas maksimal 6 data. Data lebih akan diabaikan.</span>
+                    </div>
+                    <button class="auto-delete-btn" id="autoDeleteBtn">
+                        <i class="fas fa-trash-alt"></i> Hapus Input
+                    </button>
+                </div>
+            </div>
             
             <div class="six-columns-grid">
                 <div class="column-input">
@@ -1149,6 +1293,12 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Elemen DOM
+            const autoInputContainer = document.getElementById('autoInputContainer');
+            const autoInputHeader = document.getElementById('autoInputHeader');
+            const autoInput = document.getElementById('autoInput');
+            const autoDeleteBtn = document.getElementById('autoDeleteBtn');
+            const dataCount = document.getElementById('dataCount');
+            const autoInputWarning = document.getElementById('autoInputWarning');
             const inputCol1 = document.getElementById('inputCol1');
             const inputCol2 = document.getElementById('inputCol2');
             const inputCol3 = document.getElementById('inputCol3');
@@ -1192,6 +1342,22 @@
             let currentUserId = '-';
             let currentTicketCode = '-';
             
+            // Event untuk input otomatis
+            autoInputHeader.addEventListener('click', function() {
+                autoInputContainer.classList.toggle('minimized');
+            });
+            
+            autoInput.addEventListener('input', function() {
+                updateDataCount();
+                processAutoInput();
+            });
+            
+            autoDeleteBtn.addEventListener('click', function() {
+                autoInput.value = '';
+                updateDataCount();
+                processAutoInput();
+            });
+            
             // Tombol hapus untuk tab 6 kolom
             clearScatter6Btn.addEventListener('click', function() {
                 inputCol1.value = '';
@@ -1200,10 +1366,12 @@
                 inputCol4.value = '';
                 inputCol5.value = '';
                 inputCol6.value = '';
+                autoInput.value = '';
                 scatter6Results.innerHTML = '';
                 scatterResults = [null, null, null, null, null, null];
                 updateSidebar();
                 updateModalColumnNavigator();
+                updateDataCount();
             });
             
             // Event untuk tombol hapus per kolom
@@ -1289,6 +1457,90 @@
                     showImagesForColumn(colIndex);
                 });
             });
+            
+            // Fungsi untuk memperbarui jumlah data yang terdeteksi
+            function updateDataCount() {
+                const data = autoInput.value.trim();
+                if (!data) {
+                    dataCount.textContent = '0';
+                    autoInputWarning.style.display = 'none';
+                    return;
+                }
+                
+                // Hitung jumlah baris data
+                const lines = data.split('\n').filter(line => line.trim().length > 0);
+                const validLines = lines.filter(line => {
+                    // Filter baris yang memiliki pola data yang sesuai
+                    return line.includes('BET') && line.includes('http');
+                });
+                
+                dataCount.textContent = validLines.length;
+                
+                // Tampilkan peringatan jika lebih dari 6 data
+                if (validLines.length > 6) {
+                    autoInputWarning.style.display = 'flex';
+                } else {
+                    autoInputWarning.style.display = 'none';
+                }
+            }
+            
+            // Fungsi untuk memproses input otomatis
+            function processAutoInput() {
+                const data = autoInput.value.trim();
+                if (!data) {
+                    // Kosongkan kolom input jika tidak ada data
+                    inputCol1.value = '';
+                    inputCol2.value = '';
+                    inputCol3.value = '';
+                    inputCol4.value = '';
+                    inputCol5.value = '';
+                    inputCol6.value = '';
+                    processScatter6Data();
+                    return;
+                }
+                
+                // Pisahkan data menjadi baris-baris
+                const lines = data.split('\n').filter(line => line.trim().length > 0);
+                
+                // Filter baris yang valid (yang memiliki BET dan link gambar)
+                const validLines = lines.filter(line => {
+                    return line.includes('BET') && line.includes('http');
+                });
+                
+                if (validLines.length === 0) {
+                    // Kosongkan kolom input jika tidak ada data valid
+                    inputCol1.value = '';
+                    inputCol2.value = '';
+                    inputCol3.value = '';
+                    inputCol4.value = '';
+                    inputCol5.value = '';
+                    inputCol6.value = '';
+                    processScatter6Data();
+                    return;
+                }
+                
+                // Kosongkan kolom input terlebih dahulu
+                inputCol1.value = '';
+                inputCol2.value = '';
+                inputCol3.value = '';
+                inputCol4.value = '';
+                inputCol5.value = '';
+                inputCol6.value = '';
+                
+                // Isi kolom input dengan data yang sesuai (maksimal 6)
+                validLines.slice(0, 6).forEach((line, index) => {
+                    const colId = `inputCol${index + 1}`;
+                    const inputElement = document.getElementById(colId);
+                    if (inputElement) {
+                        inputElement.value = line;
+                    }
+                });
+                
+                // Proses data scatter
+                processScatter6Data();
+                updateSidebar();
+                updateModalColumnNavigator();
+            }
             
             // Fungsi untuk menampilkan indikator pemrosesan
             function showProcessingIndicator(index) {
@@ -1727,8 +1979,10 @@
                     document.body.removeChild(textarea);
                 }
             }
+            
+            // Inisialisasi jumlah data
+            updateDataCount();
         });
     </script>
 </body>
 </html>
-
