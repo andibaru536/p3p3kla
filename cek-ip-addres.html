@@ -93,15 +93,20 @@
             flex-wrap: wrap;
         }
 
+        .input-wrapper {
+            position: relative;
+            width: 300px;
+            max-width: 100%;
+        }
+
         .ip-input {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 14px;
-            padding: 14px 20px;
+            padding: 14px 45px 14px 20px;
             color: white;
             font-size: 1rem;
-            width: 300px;
-            max-width: 100%;
+            width: 100%;
             outline: none;
             transition: all 0.3s ease;
         }
@@ -113,6 +118,31 @@
 
         .ip-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
+        }
+
+        .clear-btn {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 5px;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .clear-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .check-btn {
@@ -395,7 +425,7 @@
                 flex-direction: column;
             }
             
-            .ip-input {
+            .input-wrapper {
                 width: 100%;
             }
         }
@@ -410,7 +440,10 @@
         </div>
         
         <div class="ip-checker-container">
-            <input type="text" id="ipInput" class="ip-input" placeholder="Masukkan IP address (contoh: 8.8.8.8)">
+            <div class="input-wrapper">
+                <input type="text" id="ipInput" class="ip-input" placeholder="Masukkan IP address (contoh: 8.8.8.8)">
+                <button class="clear-btn" id="clearBtn" style="display: none;">×</button>
+            </div>
             <button class="check-btn" id="checkBtn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
@@ -625,6 +658,12 @@
             });
         }
 
+        // Fungsi untuk menghapus input
+        function clearInput() {
+            document.getElementById('ipInput').value = '';
+            document.getElementById('clearBtn').style.display = 'none';
+        }
+
         // Event listeners
         document.getElementById('copyBtn').addEventListener('click', copyToClipboard);
         document.getElementById('checkBtn').addEventListener('click', () => {
@@ -640,6 +679,15 @@
                 document.getElementById('checkBtn').click();
             }
         });
+
+        // Event listener untuk menampilkan/menyembunyikan tombol clear
+        document.getElementById('ipInput').addEventListener('input', (e) => {
+            const clearBtn = document.getElementById('clearBtn');
+            clearBtn.style.display = e.target.value ? 'flex' : 'none';
+        });
+
+        // Event listener untuk tombol clear
+        document.getElementById('clearBtn').addEventListener('click', clearInput);
 
         // Inisialisasi
         document.addEventListener('DOMContentLoaded', () => {
