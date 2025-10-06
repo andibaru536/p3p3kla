@@ -117,7 +117,7 @@
                 inset 0 0 15px rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(10, 255, 157, 0.2);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             z-index: 1;
         }
 
@@ -229,40 +229,45 @@
             text-shadow: 0 0 10px var(--neon-green);
         }
 
-        /* Running Text Styles */
+        /* Running Text Styles - Diperbaiki dengan pendekatan baru */
         .running-text-container {
             width: 100%;
             overflow: hidden;
             position: relative;
-            height: 40px;
+            height: 60px;
             margin-bottom: 15px;
             background: rgba(10, 255, 157, 0.05);
             border-radius: 10px;
             border: 1px solid rgba(10, 255, 157, 0.2);
             box-shadow: 0 0 15px rgba(10, 255, 157, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5;
         }
 
         .running-text {
-            white-space: nowrap;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             color: var(--neon-green);
             font-weight: 600;
             font-size: 1.1rem;
             text-shadow: 0 0 10px rgba(10, 255, 157, 0.7);
-            animation: runText 50s linear infinite;
             font-family: 'Rajdhani', sans-serif;
             letter-spacing: 1px;
+            text-align: center;
+            padding: 0 20px;
+            position: absolute;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 1.5s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 90%;
         }
 
-        @keyframes runText {
-            0% {
-                left: 100%;
-            }
-            100% {
-                left: -300%;
-            }
+        .running-text.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .search-container {
@@ -1176,20 +1181,28 @@
             </div>
         </header>
         
-        <!-- Running Text -->
+        <!-- Running Text - Diperbaiki dengan JavaScript -->
         <div class="running-text-container">
-            <div class="running-text">
-                🌿 Kesabaran adalah kunci dari segala ketenangan. | 
-                🌅 Setiap hari adalah kesempatan baru untuk menjadi lebih baik. | 
-                ✨ Jangan menyerah, karena keajaiban butuh waktu. | 
-                🌸 Bersyukur membuat hidup terasa cukup. | 
-                💪 Kegagalan hanyalah jalan menuju keberhasilan. | 
-                😊 Senyum adalah bahasa kebaikan yang universal. | 
-                🌟 Lakukan yang terbaik, hasil akan mengikuti. | 
-                🌈 Hidup indah bagi mereka yang mau melihat. | 
-                💖 Ketulusan adalah keindahan yang tak terlihat mata. | 
-                🔆 Jadilah cahaya bagi sekitarmu, sekecil apa pun itu.
-            </div>
+            <div class="running-text">Kesabaran adalah kunci dari segala ketenangan</div>
+            <div class="running-text">Setiap hari adalah kesempatan baru untuk menjadi lebih baik</div>
+            <div class="running-text">Jangan menyerah, karena keajaiban butuh waktu</div>
+            <div class="running-text">Bersyukur membuat hidup terasa cukup</div>
+            <div class="running-text">Kegagalan hanyalah jalan menuju keberhasilan</div>
+            <div class="running-text">Senyum adalah bahasa kebaikan yang universal</div>
+            <div class="running-text">Lakukan yang terbaik, hasil akan mengikuti</div>
+            <div class="running-text">Hidup indah bagi mereka yang mau melihat</div>
+            <div class="running-text">Ketulusan adalah keindahan yang tak terlihat mata</div>
+            <div class="running-text">Jadilah cahaya bagi sekitarmu, sekecil apa pun itu</div>
+            <div class="running-text">Keberanian bukanlah ketiadaan rasa takut, tetapi kemampuan untuk bertindak meskipun takut</div>
+            <div class="running-text">Masa depan milik mereka yang percaya pada keindahan mimpi mereka</div>
+            <div class="running-text">Jangan bandingkan perjalananmu dengan orang lain, setiap orang punya waktunya sendiri</div>
+            <div class="running-text">Kebahagiaan ditemukan ketika kita berhenti menunggu dan mulai menciptakannya</div>
+            <div class="running-text">Tantangan adalah kesempatan untuk tumbuh menjadi versi terbaik diri kita</div>
+            <div class="running-text">Kebaikan kecil yang kita lakukan hari ini dapat mengubah hidup seseorang selamanya</div>
+            <div class="running-text">Pikiran positif menarik hasil positif dalam hidup</div>
+            <div class="running-text">Kesuksesan adalah perjalanan, bukan tujuan akhir</div>
+            <div class="running-text">Percayalah pada proses, hasil akan datang pada waktunya</div>
+            <div class="running-text">Kualitas hidup ditentukan oleh kualitas pikiran kita</div>
         </div>
         
         <div class="search-container">
@@ -1499,6 +1512,35 @@
         const chatInput = document.getElementById('chatInput');
         const sendMessage = document.getElementById('sendMessage');
         const typingIndicator = document.getElementById('typingIndicator');
+
+        // Running Text Functionality - Diperbaiki dengan JavaScript
+        let currentTextIndex = 0;
+        const textElements = document.querySelectorAll('.running-text');
+        const totalTexts = textElements.length;
+        const displayDuration = 5000; // 5 detik untuk setiap teks
+        const transitionDuration = 1500; // 1.5 detik untuk transisi
+
+        function rotateText() {
+            // Sembunyikan semua teks
+            textElements.forEach(text => {
+                text.classList.remove('active');
+            });
+            
+            // Tampilkan teks saat ini
+            textElements[currentTextIndex].classList.add('active');
+            
+            // Pindah ke teks berikutnya
+            currentTextIndex = (currentTextIndex + 1) % totalTexts;
+            
+            // Atur timer untuk teks berikutnya
+            setTimeout(rotateText, displayDuration);
+        }
+
+        // Mulai rotasi teks setelah transisi pertama selesai
+        setTimeout(() => {
+            textElements[0].classList.add('active');
+            setTimeout(rotateText, displayDuration);
+        }, 100);
 
         // Create floating particles
         function createParticles() {
