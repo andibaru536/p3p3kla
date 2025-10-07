@@ -536,45 +536,63 @@
                 });
             });
             
-            // Fungsi untuk memendekkan URL berdasarkan layanan yang dipilih
-            async function shortenUrl(longUrl) {
+            // Fungsi untuk memendekkan URL menggunakan TinyURL
+            async function shortenWithTinyURL(longUrl) {
                 try {
-                    let shortUrl;
+                    const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
                     
-                    if (selectedService === 'tinyurl') {
-                        // Menggunakan layanan TinyURL
-                        const response = await fetch(`https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`);
-                        
-                        if (!response.ok) {
-                            throw new Error('Gagal memendekkan URL dengan TinyURL');
-                        }
-                        
-                        shortUrl = await response.text();
-                        
-                        // Validasi hasil dari TinyURL
-                        if (!shortUrl.startsWith('https://tinyurl.com/')) {
-                            throw new Error('Format URL pendek tidak valid dari TinyURL');
-                        }
-                    } else if (selectedService === 'isgd') {
-                        // Menggunakan layanan is.gd
-                        const response = await fetch(`https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`);
-                        
-                        if (!response.ok) {
-                            throw new Error('Gagal memendekkan URL dengan is.gd');
-                        }
-                        
-                        shortUrl = await response.text();
-                        
-                        // Validasi hasil dari is.gd
-                        if (!shortUrl.startsWith('https://is.gd/')) {
-                            throw new Error('Format URL pendek tidak valid dari is.gd');
-                        }
+                    if (!response.ok) {
+                        throw new Error('Gagal memendekkan URL dengan TinyURL');
+                    }
+                    
+                    const shortUrl = await response.text();
+                    
+                    // Validasi hasil dari TinyURL
+                    if (!shortUrl.startsWith('https://tinyurl.com/')) {
+                        throw new Error('Format URL pendek tidak valid dari TinyURL');
                     }
                     
                     return shortUrl;
                 } catch (error) {
                     console.error('Error:', error);
-                    throw new Error(`Gagal membuat tautan pendek menggunakan ${selectedService === 'tinyurl' ? 'TinyURL' : 'is.gd'}`);
+                    throw new Error('Gagal membuat tautan pendek menggunakan TinyURL');
+                }
+            }
+            
+            // Fungsi untuk memendekkan URL menggunakan is.gd
+            async function shortenWithIsGd(longUrl) {
+                try {
+                    // Menggunakan proxy untuk menghindari masalah CORS
+                    const proxyUrl = 'https://api.allorigins.win/get?url=';
+                    const targetUrl = `https://is.gd/create.php?format=simple&url=${encodeURIComponent(longUrl)}`;
+                    
+                    const response = await fetch(proxyUrl + encodeURIComponent(targetUrl));
+                    
+                    if (!response.ok) {
+                        throw new Error('Gagal memendekkan URL dengan is.gd');
+                    }
+                    
+                    const data = await response.json();
+                    const shortUrl = data.contents;
+                    
+                    // Validasi hasil dari is.gd
+                    if (!shortUrl.startsWith('https://is.gd/')) {
+                        throw new Error('Format URL pendek tidak valid dari is.gd');
+                    }
+                    
+                    return shortUrl;
+                } catch (error) {
+                    console.error('Error:', error);
+                    throw new Error('Gagal membuat tautan pendek menggunakan is.gd');
+                }
+            }
+            
+            // Fungsi untuk memendekkan URL berdasarkan layanan yang dipilih
+            async function shortenUrl(longUrl) {
+                if (selectedService === 'tinyurl') {
+                    return await shortenWithTinyURL(longUrl);
+                } else if (selectedService === 'isgd') {
+                    return await shortenWithIsGd(longUrl);
                 }
             }
             
