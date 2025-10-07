@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pemisah Layanan Shortlink</title>
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23000'/><text x='50' y='65' font-size='60' text-anchor='middle' fill='%23FFD700'>⚡</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -13,26 +14,38 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-card: #252525;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #FFD700;
+            --accent-secondary: #4FC3F7;
+            --btn-gradient: linear-gradient(to right, #FF416C, #FF4B2B);
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+        
         body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            background: var(--bg-primary);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            color: #fff;
+            color: var(--text-primary);
+            transition: background 0.3s ease;
         }
         
         .container {
             max-width: 900px;
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: var(--bg-secondary);
             border-radius: 20px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
         
         header {
@@ -43,21 +56,22 @@
         .favicon {
             font-size: 48px;
             margin-bottom: 15px;
-            color: #FFD700;
+            color: var(--accent);
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
         }
         
         h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 4px var(--shadow);
         }
         
         .description {
             font-size: 1.1rem;
-            opacity: 0.9;
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.6;
         }
         
         .services {
@@ -69,26 +83,27 @@
         }
         
         .service-card {
-            background: rgba(255, 255, 255, 0.15);
+            background: var(--bg-card);
             border-radius: 15px;
             padding: 25px;
             width: 250px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px var(--shadow);
         }
         
         .service-icon {
             font-size: 40px;
             margin-bottom: 15px;
-            color: #4FC3F7;
+            color: var(--accent-secondary);
         }
         
         .service-name {
@@ -99,14 +114,15 @@
         
         .service-desc {
             font-size: 0.9rem;
-            opacity: 0.8;
+            color: var(--text-secondary);
             margin-bottom: 20px;
             line-height: 1.4;
+            flex-grow: 1;
         }
         
         .btn {
             display: inline-block;
-            background: linear-gradient(to right, #FF416C, #FF4B2B);
+            background: var(--btn-gradient);
             color: white;
             padding: 10px 20px;
             border-radius: 50px;
@@ -114,6 +130,8 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 65, 108, 0.4);
+            border: none;
+            cursor: pointer;
         }
         
         .btn:hover {
@@ -125,7 +143,7 @@
             margin-top: 40px;
             text-align: center;
             font-size: 0.9rem;
-            opacity: 0.7;
+            color: var(--text-secondary);
         }
         
         @media (max-width: 768px) {
@@ -143,9 +161,37 @@
                 font-size: 2rem;
             }
         }
+        
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--bg-card);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow);
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+    
     <div class="container">
         <header>
             <div class="favicon">
@@ -158,7 +204,7 @@
         </header>
         
         <div class="services">
-            <div class="service-card" onclick="window.open('https://app.bitly.com/', '_blank')">
+            <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-link"></i>
                 </div>
@@ -167,7 +213,7 @@
                 <a href="https://app.bitly.com/" class="btn" target="_blank">Kunjungi Bitly</a>
             </div>
             
-            <div class="service-card" onclick="window.open('https://app.rebrandly.com/', '_blank')">
+            <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-globe"></i>
                 </div>
@@ -176,7 +222,7 @@
                 <a href="https://app.rebrandly.com/" class="btn" target="_blank">Kunjungi Rebrandly</a>
             </div>
             
-            <div class="service-card" onclick="window.open('https://tinyurl.com/', '_blank')">
+            <div class="service-card">
                 <div class="service-icon">
                     <i class="fas fa-bolt"></i>
                 </div>
@@ -187,8 +233,58 @@
         </div>
         
         <footer>
-            <p>&copy; 2023 Layanan Shortlink | Klik kartu atau tombol untuk mengunjungi situs</p>
+            <p>&copy; 2023 Layanan Shortlink | Klik tombol "Kunjungi" untuk mengarahkan ke situs</p>
         </footer>
     </div>
+
+    <script>
+        // Toggle tema gelap/terang
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        
+        // Cek preferensi tema dari localStorage
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        if (currentTheme === 'light') {
+            body.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            if (body.classList.contains('light-mode')) {
+                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+        
+        // Tambahkan CSS untuk mode terang
+        const style = document.createElement('style');
+        style.textContent = `
+            .light-mode {
+                --bg-primary: #f0f2f5;
+                --bg-secondary: #ffffff;
+                --bg-card: #f8f9fa;
+                --text-primary: #333333;
+                --text-secondary: #666666;
+                --accent: #FF8C00;
+                --accent-secondary: #007bff;
+                --btn-gradient: linear-gradient(to right, #007bff, #0056b3);
+                --shadow: rgba(0, 0, 0, 0.1);
+            }
+            
+            .light-mode .container {
+                border: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            
+            .light-mode .service-card {
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
