@@ -187,16 +187,51 @@
             position: relative;
         }
 
-        .column-input h4 {
-            color: var(--primary-light);
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: center;
+        .column-input-header {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 5px 10px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .column-input-header h4 {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
             gap: 8px;
+        }
+
+        .toggle-icon {
+            transition: transform 0.3s ease;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .column-input.minimized .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        .column-input.minimized .input-wrapper {
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 0;
+        }
+
+        .column-input.minimized textarea {
+            min-height: 0;
+            height: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+        }
+
+        .column-input.minimized .processing-indicator {
+            display: none;
         }
 
         .column-input textarea {
@@ -872,16 +907,11 @@
             transition: all 0.3s ease;
         }
 
-        .auto-input-container.minimized {
-            margin-bottom: 10px;
-        }
-
         .auto-input-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
             margin-bottom: 10px;
-            cursor: pointer;
         }
 
         .auto-input-header h3 {
@@ -911,19 +941,6 @@
         .auto-input-container textarea {
             min-height: 120px;
             transition: all 0.3s ease;
-        }
-
-        .auto-input-container.minimized textarea {
-            min-height: 0;
-            height: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            border: none;
-            overflow: hidden;
-        }
-
-        .auto-input-container.minimized .auto-input-actions {
-            display: none;
         }
 
         .auto-input-actions {
@@ -981,12 +998,29 @@
             border-color: var(--delete-color);
         }
 
-        .toggle-icon {
-            transition: transform 0.3s ease;
+        /* Global minimize button */
+        .global-minimize-btn {
+            background: rgba(76, 175, 80, 0.15);
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 15px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            margin-bottom: 15px;
+            width: fit-content;
         }
 
-        .auto-input-container.minimized .toggle-icon {
-            transform: rotate(-90deg);
+        .global-minimize-btn:hover {
+            background: rgba(76, 175, 80, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+            border-color: var(--primary-color);
         }
 
         @media (max-width: 1600px) {
@@ -1123,12 +1157,11 @@
         <div class="card">
             <h2>Input Data Scatter</h2>
             
-            <!-- Input otomatis baru -->
-            <div class="auto-input-container minimized" id="autoInputContainer">
-                <div class="auto-input-header" id="autoInputHeader">
+            <!-- Input otomatis (tidak ada minimize) -->
+            <div class="auto-input-container" id="autoInputContainer">
+                <div class="auto-input-header">
                     <h3>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                        Input Otomatis 6 Kolom sekaligus ( Buka Kalau mau Di Pakai )
+                        Input Otomatis 6 Kolom sekaligus
                     </h3>
                     <div class="auto-input-info">
                         <span>Data terdeteksi: <span id="dataCount" class="count-badge">0</span></span>
@@ -1153,9 +1186,16 @@ Contoh format:
                 </div>
             </div>
             
+            <!-- Tombol minimize global untuk semua kolom -->
+            <button class="global-minimize-btn" id="globalMinimizeBtn">
+                <i class="fas fa-chevron-down"></i> Minimize Semua Kolom
+            </button>
+            
             <div class="six-columns-grid">
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col1-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 1</h4>
+                <div class="column-input minimized" id="column1">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col1-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 1</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol1" placeholder="Tempel data kolom 1 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="1">
@@ -1167,8 +1207,10 @@ Contoh format:
                         <span>Memproses...</span>
                     </div>
                 </div>
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col2-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 2</h4>
+                <div class="column-input minimized" id="column2">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col2-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 2</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol2" placeholder="Tempel data kolom 2 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="2">
@@ -1180,8 +1222,10 @@ Contoh format:
                         <span>Memproses...</span>
                     </div>
                 </div>
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col3-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 3</h4>
+                <div class="column-input minimized" id="column3">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col3-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 3</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol3" placeholder="Tempel data kolom 3 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="3">
@@ -1193,8 +1237,10 @@ Contoh format:
                         <span>Memproses...</span>
                     </div>
                 </div>
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col4-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 4</h4>
+                <div class="column-input minimized" id="column4">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col4-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 4</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol4" placeholder="Tempel data kolom 4 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="4">
@@ -1206,8 +1252,10 @@ Contoh format:
                         <span>Memproses...</span>
                     </div>
                 </div>
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col5-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 5</h4>
+                <div class="column-input minimized" id="column5">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col5-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 5</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol5" placeholder="Tempel data kolom 5 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="5">
@@ -1219,8 +1267,10 @@ Contoh format:
                         <span>Memproses...</span>
                     </div>
                 </div>
-                <div class="column-input">
-                    <h4><span class="col-badge" style="background: var(--col6-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 6</h4>
+                <div class="column-input minimized" id="column6">
+                    <div class="column-input-header">
+                        <h4><span class="col-badge" style="background: var(--col6-color); width: 12px; height: 12px; border-radius: 50%;"></span> Kolom 6</h4>
+                    </div>
                     <div class="input-wrapper">
                         <textarea id="inputCol6" placeholder="Tempel data kolom 6 di sini..."></textarea>
                         <button class="clear-col-btn" data-col="6">
@@ -1316,7 +1366,6 @@ Contoh format:
         document.addEventListener('DOMContentLoaded', function() {
             // Elemen DOM
             const autoInputContainer = document.getElementById('autoInputContainer');
-            const autoInputHeader = document.getElementById('autoInputHeader');
             const autoInput = document.getElementById('autoInput');
             const autoDeleteBtn = document.getElementById('autoDeleteBtn');
             const dataCount = document.getElementById('dataCount');
@@ -1354,6 +1403,7 @@ Contoh format:
             const modalColumnBtns = modalColumnNavigator.querySelectorAll('.column-nav-btn');
             const clearColBtns = document.querySelectorAll('.clear-col-btn');
             const tsToggle = document.getElementById('tsToggle');
+            const globalMinimizeBtn = document.getElementById('globalMinimizeBtn');
             
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
@@ -1365,11 +1415,27 @@ Contoh format:
             let currentUserId = '-';
             let currentTicketCode = '-';
             
-            // Event untuk input otomatis
-            autoInputHeader.addEventListener('click', function() {
-                autoInputContainer.classList.toggle('minimized');
-            });
+            // Status minimize global
+            let isAllMinimized = true;
             
+            // Event untuk minimize global
+            globalMinimizeBtn.addEventListener('click', function() {
+                const allColumns = document.querySelectorAll('.column-input');
+                
+                if (isAllMinimized) {
+                    // Jika semua minimized, buka semua
+                    allColumns.forEach(col => col.classList.remove('minimized'));
+                    globalMinimizeBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Minimize Semua Kolom';
+                    isAllMinimized = false;
+                } else {
+                    // Jika semua terbuka, minimize semua
+                    allColumns.forEach(col => col.classList.add('minimized'));
+                    globalMinimizeBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Buka Semua Kolom';
+                    isAllMinimized = true;
+                }
+            });
+
+            // Event untuk input otomatis
             autoInput.addEventListener('input', function() {
                 updateDataCount();
                 processAutoInput();
@@ -2035,6 +2101,3 @@ Contoh format:
     </script>
 </body>
 </html>
-
-
-
