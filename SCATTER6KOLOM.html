@@ -495,6 +495,41 @@
             background: linear-gradient(145deg, #757575, #616161);
         }
 
+        .cancel-btn {
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--delete-color);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .cancel-btn:hover {
+            background: rgba(244, 67, 54, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.15);
+            border-color: var(--delete-color);
+        }
+
+        .cancel-btn.undo {
+            background: rgba(100, 181, 246, 0.15);
+            color: var(--blue-light);
+        }
+
+        .cancel-btn.undo:hover {
+            background: rgba(100, 181, 246, 0.25);
+            border-color: var(--blue-light);
+        }
+
         .link-preview-container {
             display: flex;
             gap: 5px;
@@ -524,6 +559,7 @@
 
         .modal-content {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100%;
@@ -531,14 +567,22 @@
             position: relative;
         }
 
+        .images-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            max-width: 100%;
+            margin-top: 20px;
+        }
+
         .modal-img {
-            max-width: 90%;
-            max-height: 90%;
+            max-width: 600px;
+            max-height: 700px;
             object-fit: contain;
-            animation: zoomIn 0.3s;
             border: 3px solid var(--primary-color);
             border-radius: 8px;
-            box-shadow: 0 0 40px rgba(76, 175, 80, 0.5);
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
         }
 
         .close-btn {
@@ -557,54 +601,6 @@
         .close-btn:hover {
             color: var(--primary-light);
             transform: rotate(90deg);
-        }
-
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--primary-color);
-            font-size: 55px;
-            cursor: pointer;
-            z-index: 1001;
-            background-color: rgba(0, 0, 0, 0.6);
-            width: 70px;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s;
-            user-select: none;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-        }
-
-        .nav-btn:hover {
-            background-color: rgba(0, 0, 0, 0.9);
-            color: var(--primary-light);
-            transform: translateY(-50%) scale(1.05);
-        }
-
-        .prev-btn {
-            left: 40px;
-        }
-
-        .next-btn {
-            right: 40px;
-        }
-
-        .image-counter {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--primary-color);
-            font-size: 20px;
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 10px 25px;
-            border-radius: 30px;
-            z-index: 1001;
-            font-weight: 600;
         }
 
         .image-info {
@@ -638,50 +634,6 @@
             min-width: 20px;
             text-align: center;
         }
-
-        .nav-btn.hidden {
-            display: none;
-        }
-
-        .modal-column-navigator {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            display: flex;
-            gap: 10px;
-            z-index: 1001;
-        }
-
-        .column-nav-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-        }
-
-        .column-nav-btn:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        .column-nav-btn.active {
-            border-color: white;
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.5);
-        }
-
-        .column-nav-btn.col1 { background-color: var(--col1-color); color: white; }
-        .column-nav-btn.col2 { background-color: var(--col2-color); color: white; }
-        .column-nav-btn.col3 { background-color: var(--col3-color); color: var(--bg-card); }
-        .column-nav-btn.col4 { background-color: var(--col4-color); color: white; }
-        .column-nav-btn.col5 { background-color: var(--col5-color); color: white; }
-        .column-nav-btn.col6 { background-color: var(--col6-color); color: white; }
 
         @keyframes fadeIn {
             from { opacity: 0; }
@@ -731,96 +683,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        #sidebar-nav {
-            position: fixed;
-            top: 50%;
-            right: 20px;
-            transform: translateY(-50%);
-            z-index: 100;
-            background: var(--bg-card);
-            border-radius: 16px;
-            padding: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .sidebar-title {
-            text-align: center;
-            color: var(--primary-light);
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .sidebar-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--bg-secondary);
-            color: var(--text-secondary);
-            border: 2px solid transparent;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.4);
-        }
-
-        .sidebar-btn:hover {
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-
-        .sidebar-btn.active {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
-        }
-
-        .sidebar-btn.col1 { background-color: var(--col1-color); color: white; }
-        .sidebar-btn.col2 { background-color: var(--col2-color); color: white; }
-        .sidebar-btn.col3 { background-color: var(--col3-color); color: var(--bg-card); }
-        .sidebar-btn.col4 { background-color: var(--col4-color); color: white; }
-        .sidebar-btn.col5 { background-color: var(--col5-color); color: white; }
-        .sidebar-btn.col6 { background-color: var(--col6-color); color: white; }
-
-        /* Tombol hapus per kolom */
-        .clear-col-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: rgba(244, 67, 54, 0.15);
-            color: var(--delete-color);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 2;
-            opacity: 0.7;
-        }
-
-        .clear-col-btn:hover {
-            background: rgba(244, 67, 54, 0.3);
-            color: white;
-            transform: scale(1.1);
-            opacity: 1;
-        }
-
-        .input-wrapper {
-            position: relative;
         }
 
         /* Toggle TS Styles */
@@ -1023,6 +885,33 @@
             border-color: var(--primary-color);
         }
 
+        /* Tombol hapus per kolom */
+        .clear-col-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: rgba(244, 67, 54, 0.15);
+            color: var(--delete-color);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2;
+            opacity: 0.7;
+        }
+
+        .clear-col-btn:hover {
+            background: rgba(244, 67, 54, 0.3);
+            color: white;
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -1034,15 +923,6 @@
             .six-columns-grid,
             .six-columns-result {
                 grid-template-columns: repeat(3, 1fr);
-            }
-            
-            #sidebar-nav {
-                top: auto;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                flex-direction: row;
-                width: auto;
             }
         }
 
@@ -1087,44 +967,16 @@
                 font-size: 35px;
             }
             
-            .nav-btn {
-                font-size: 40px;
-                width: 50px;
-                height: 50px;
-            }
-            
-            .prev-btn {
-                left: 15px;
-            }
-            
-            .next-btn {
-                right: 15px;
-            }
-            
-            .image-counter,
-            .image-info {
-                font-size: 16px;
-                padding: 8px 20px;
-                bottom: 20px;
-            }
-            
             .image-info {
                 top: 20px;
                 left: 15px;
                 font-size: 14px;
                 padding: 10px 15px;
             }
-            
-            .modal-column-navigator {
-                top: 20px;
-                right: 15px;
-                gap: 5px;
-            }
-            
-            .column-nav-btn {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
+
+            .modal-img {
+                max-width: 90%;
+                max-height: 400px;
             }
 
             .result-header {
@@ -1308,17 +1160,6 @@ Contoh format:
         </div>
     </div>
 
-    <!-- Sidebar navigasi -->
-    <div id="sidebar-nav">
-        <div class="sidebar-title">Kolom</div>
-        <button class="sidebar-btn col1" data-col="1">1</button>
-        <button class="sidebar-btn col2" data-col="2">2</button>
-        <button class="sidebar-btn col3" data-col="3">3</button>
-        <button class="sidebar-btn col4" data-col="4">4</button>
-        <button class="sidebar-btn col5" data-col="5">5</button>
-        <button class="sidebar-btn col6" data-col="6">6</button>
-    </div>
-
     <!-- Modal untuk preview gambar -->
     <div id="imageModal" class="modal">
         <span class="close-btn">&times;</span>
@@ -1338,23 +1179,9 @@ Contoh format:
                 </div>
             </div>
             
-            <div class="modal-column-navigator" id="modalColumnNavigator">
-                <button class="column-nav-btn col1" data-col="1">1</button>
-                <button class="column-nav-btn col2" data-col="2">2</button>
-                <button class="column-nav-btn col3" data-col="3">3</button>
-                <button class="column-nav-btn col4" data-col="4">4</button>
-                <button class="column-nav-btn col5" data-col="5">5</button>
-                <button class="column-nav-btn col6" data-col="6">6</button>
+            <div class="images-container" id="imagesContainer">
+                <!-- Gambar akan ditambahkan di sini -->
             </div>
-            
-            <div class="nav-btn prev-btn" id="prevBtn">
-                <i class="fas fa-chevron-left"></i>
-            </div>
-            <img id="modalImage" class="modal-img" src="" alt="Preview Gambar">
-            <div class="nav-btn next-btn" id="nextBtn">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="image-counter" id="imageCounter"></div>
         </div>
     </div>
 
@@ -1380,15 +1207,12 @@ Contoh format:
             const clearScatter6Btn = document.getElementById('clearScatter6Btn');
             const scatter6Results = document.getElementById('scatter6Results');
             const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
             const closeBtn = document.querySelector('.close-btn');
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-            const imageCounter = document.getElementById('imageCounter');
             const imageInfo = document.getElementById('imageInfo');
             const colInfo = document.getElementById('colInfo');
             const userIdInfo = document.getElementById('userIdInfo');
             const ticketInfo = document.getElementById('ticketInfo');
+            const imagesContainer = document.getElementById('imagesContainer');
             const indicators = [
                 document.getElementById('indicator1'),
                 document.getElementById('indicator2'),
@@ -1397,10 +1221,6 @@ Contoh format:
                 document.getElementById('indicator5'),
                 document.getElementById('indicator6')
             ];
-            const sidebarNav = document.getElementById('sidebar-nav');
-            const sidebarBtns = sidebarNav.querySelectorAll('.sidebar-btn');
-            const modalColumnNavigator = document.getElementById('modalColumnNavigator');
-            const modalColumnBtns = modalColumnNavigator.querySelectorAll('.column-nav-btn');
             const clearColBtns = document.querySelectorAll('.clear-col-btn');
             const tsToggle = document.getElementById('tsToggle');
             const globalMinimizeBtn = document.getElementById('globalMinimizeBtn');
@@ -1408,16 +1228,12 @@ Contoh format:
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
             
-            // Variabel untuk menyimpan data gambar
-            let currentImageLinks = [];
-            let currentImageIndex = 0;
-            let currentColIndex = 0;
-            let currentUserId = '-';
-            let currentTicketCode = '-';
-            
+            // Data untuk fitur undo cancel
+            let undoData = [null, null, null, null, null, null];
+
             // Status minimize global
             let isAllMinimized = true;
-            
+
             // Event untuk minimize global
             globalMinimizeBtn.addEventListener('click', function() {
                 const allColumns = document.querySelectorAll('.column-input');
@@ -1458,8 +1274,8 @@ Contoh format:
                 autoInput.value = '';
                 scatter6Results.innerHTML = '';
                 scatterResults = [null, null, null, null, null, null];
-                updateSidebar();
-                updateModalColumnNavigator();
+                // Reset undo data
+                undoData = [null, null, null, null, null, null];
                 updateDataCount();
                 hideAllMessages();
             });
@@ -1474,13 +1290,14 @@ Contoh format:
                     // Kosongkan input kolom
                     inputElement.value = '';
                     
+                    // Reset undo data untuk kolom ini
+                    undoData[colNum - 1] = null;
+                    
                     // Proses ulang data
                     showProcessingIndicator(parseInt(colNum) - 1);
                     setTimeout(() => {
                         processScatter6Data();
                         hideProcessingIndicator(parseInt(colNum) - 1);
-                        updateSidebar();
-                        updateModalColumnNavigator();
                     }, 300);
                 });
             });
@@ -1494,20 +1311,10 @@ Contoh format:
                 }
             });
             
-            // Navigasi gambar
-            prevBtn.addEventListener('click', showPrevImage);
-            nextBtn.addEventListener('click', showNextImage);
-            
             // Tutup modal dengan tombol ESC
             document.addEventListener('keydown', function(e) {
                 if (e.key === "Escape" && modal.style.display === "block") {
                     closeModal();
-                } else if (modal.style.display === "block") {
-                    if (e.key === "ArrowLeft") {
-                        showPrevImage();
-                    } else if (e.key === "ArrowRight") {
-                        showNextImage();
-                    }
                 }
             });
             
@@ -1526,25 +1333,7 @@ Contoh format:
                     setTimeout(() => {
                         processScatter6Data();
                         hideProcessingIndicator(index);
-                        updateSidebar();
-                        updateModalColumnNavigator();
                     }, 300);
-                });
-            });
-            
-            // Event listener untuk sidebar navigasi
-            sidebarBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const colIndex = parseInt(this.getAttribute('data-col'));
-                    scrollToColumn(colIndex);
-                });
-            });
-            
-            // Event listener untuk navigasi kolom di modal
-            modalColumnBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const colIndex = parseInt(this.getAttribute('data-col'));
-                    showImagesForColumn(colIndex);
                 });
             });
             
@@ -1653,8 +1442,6 @@ Contoh format:
                 
                 // Proses data scatter
                 processScatter6Data();
-                updateSidebar();
-                updateModalColumnNavigator();
             }
             
             // Fungsi untuk menampilkan indikator pemrosesan
@@ -1770,6 +1557,9 @@ Contoh format:
                 const displayUserId = tsToggle.checked && result.userId !== '-' ? 
                     `${result.userId} TS` : result.userId;
                 
+                // Cek apakah ada data undo untuk kolom ini
+                const hasUndoData = undoData[colIndex - 1] !== null;
+                
                 colDiv.innerHTML = `
                     <h4>Kolom ${colIndex}</h4>
                     <div class="column-result-item">
@@ -1811,6 +1601,9 @@ Contoh format:
                     ` : ''}
                     <button class="done-btn">
                         <i class="fas fa-check-circle"></i> Tandai Selesai
+                    </button>
+                    <button class="cancel-btn ${hasUndoData ? 'undo' : ''}" data-col-index="${colIndex}">
+                        <i class="fas fa-${hasUndoData ? 'undo' : 'times'}"></i> ${hasUndoData ? 'Undo' : 'Cancel'}
                     </button>
                 `;
                 
@@ -1908,6 +1701,41 @@ Contoh format:
                         columnResult.classList.add('done');
                     }
                 }
+                
+                // Event untuk tombol Cancel
+                const cancelBtn = e.target.closest('.cancel-btn');
+                if (cancelBtn) {
+                    const colIndex = parseInt(cancelBtn.getAttribute('data-col-index'));
+                    const inputElement = document.getElementById(`inputCol${colIndex}`);
+                    
+                    if (cancelBtn.classList.contains('undo')) {
+                        // Jika tombol sudah dalam mode "Undo", kembalikan data
+                        if (undoData[colIndex - 1]) {
+                            inputElement.value = undoData[colIndex - 1];
+                            undoData[colIndex - 1] = null;
+                            
+                            // Proses ulang data
+                            showProcessingIndicator(colIndex - 1);
+                            setTimeout(() => {
+                                processScatter6Data();
+                                hideProcessingIndicator(colIndex - 1);
+                            }, 300);
+                        }
+                    } else {
+                        // Simpan data untuk undo
+                        undoData[colIndex - 1] = inputElement.value;
+                        
+                        // Kosongkan input kolom
+                        inputElement.value = '';
+                        
+                        // Proses ulang data
+                        showProcessingIndicator(colIndex - 1);
+                        setTimeout(() => {
+                            processScatter6Data();
+                            hideProcessingIndicator(colIndex - 1);
+                        }, 300);
+                    }
+                }
             });
             
             // Fungsi untuk menutup modal
@@ -1915,150 +1743,29 @@ Contoh format:
                 modal.style.display = "none";
             }
             
-            // Fungsi untuk menampilkan gambar sebelumnya (tidak berputar)
-            function showPrevImage() {
-                if (currentImageLinks.length === 0) return;
-                
-                // Jika bukan di gambar pertama, tampilkan gambar sebelumnya
-                if (currentImageIndex > 0) {
-                    currentImageIndex--;
-                    updateModalImage();
-                }
-                
-                updateNavButtonsVisibility();
-            }
-            
-            // Fungsi untuk menampilkan gambar berikutnya (tidak berputar)
-            function showNextImage() {
-                if (currentImageLinks.length === 0) return;
-                
-                // Jika bukan di gambar terakhir, tampilkan gambar berikutnya
-                if (currentImageIndex < currentImageLinks.length - 1) {
-                    currentImageIndex++;
-                    updateModalImage();
-                }
-                
-                updateNavButtonsVisibility();
-            }
-            
-            // Fungsi untuk memperbarui gambar di modal
-            function updateModalImage() {
-                if (currentImageLinks.length === 0) return;
-                
-                modalImg.src = currentImageLinks[currentImageIndex];
-                updateImageCounter();
-                updateNavButtonsVisibility();
-            }
-            
-            // Fungsi untuk memperbarui counter gambar
-            function updateImageCounter() {
-                if (currentImageLinks.length > 1) {
-                    imageCounter.textContent = `${currentImageIndex + 1} / ${currentImageLinks.length}`;
-                    imageCounter.style.display = 'block';
-                } else {
-                    imageCounter.style.display = 'none';
-                }
-            }
-            
-            // Fungsi untuk memperbarui visibilitas tombol navigasi
-            function updateNavButtonsVisibility() {
-                if (currentImageLinks.length <= 1) {
-                    prevBtn.classList.add('hidden');
-                    nextBtn.classList.add('hidden');
-                    return;
-                }
-                
-                // Tampilkan/sembunyikan tombol prev
-                if (currentImageIndex === 0) {
-                    prevBtn.classList.add('hidden');
-                } else {
-                    prevBtn.classList.remove('hidden');
-                }
-                
-                // Tampilkan/sembunyikan tombol next
-                if (currentImageIndex === currentImageLinks.length - 1) {
-                    nextBtn.classList.add('hidden');
-                } else {
-                    nextBtn.classList.remove('hidden');
-                }
-            }
-            
             // Fungsi untuk menampilkan gambar dari kolom tertentu
             function showImagesForColumn(colIndex) {
                 const colData = scatterResults[colIndex - 1];
                 if (!colData || !colData.hasImages) return;
                 
-                currentImageLinks = colData.links;
-                currentImageIndex = 0;
-                currentColIndex = colIndex;
-                currentUserId = colData.userId;
-                currentTicketCode = colData.ticketCode;
-                
                 modal.style.display = "block";
-                updateModalImage();
                 
                 // Update informasi kolom
                 colInfo.textContent = `Kolom ${colIndex}`;
-                userIdInfo.textContent = `User ID: ${currentUserId}`;
-                ticketInfo.textContent = `Kode Tiket: ${currentTicketCode}`;
+                userIdInfo.textContent = `User ID: ${colData.userId}`;
+                ticketInfo.textContent = `Kode Tiket: ${colData.ticketCode}`;
                 
-                // Update navigator kolom
-                updateModalColumnNavigator();
-            }
-            
-            // Fungsi untuk memperbarui sidebar navigasi
-            function updateSidebar() {
-                sidebarBtns.forEach(btn => {
-                    const colIndex = parseInt(btn.getAttribute('data-col'));
-                    const colResult = scatterResults[colIndex - 1];
-                    
-                    if (colResult && colResult.hasData) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
+                // Kosongkan container gambar
+                imagesContainer.innerHTML = '';
+                
+                // Tambahkan semua gambar ke container
+                colData.links.forEach(link => {
+                    const img = document.createElement('img');
+                    img.src = link;
+                    img.className = 'modal-img';
+                    img.alt = 'Bukti gambar';
+                    imagesContainer.appendChild(img);
                 });
-            }
-            
-            // Fungsi untuk memperbarui navigator kolom di modal
-            function updateModalColumnNavigator() {
-                modalColumnBtns.forEach(btn => {
-                    const colIndex = parseInt(btn.getAttribute('data-col'));
-                    const colResult = scatterResults[colIndex - 1];
-                    
-                    // Tandai tombol aktif
-                    if (colIndex === currentColIndex) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                    
-                    // Aktifkan/nonaktifkan tombol berdasarkan ada/tidaknya gambar
-                    if (colResult && colResult.hasImages) {
-                        btn.disabled = false;
-                        btn.style.opacity = '1';
-                    } else {
-                        btn.disabled = true;
-                        btn.style.opacity = '0.5';
-                    }
-                });
-            }
-            
-            // Fungsi untuk scroll ke kolom tertentu
-            function scrollToColumn(colIndex) {
-                const colElement = document.getElementById(`result-col${colIndex}`);
-                if (colElement) {
-                    colElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                    
-                    // Tambahkan efek highlight
-                    colElement.classList.add('highlighted');
-                    setTimeout(() => {
-                        colElement.classList.remove('highlighted');
-                    }, 1500);
-                }
             }
             
             function formatNumber(num) {
