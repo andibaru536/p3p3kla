@@ -895,6 +895,17 @@
             transform: translateY(-2px);
         }
 
+        .save-feedback {
+            color: var(--neon-green);
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .save-feedback.show {
+            opacity: 1;
+        }
+
         /* Floating particles */
         .particles {
             position: fixed;
@@ -1589,7 +1600,7 @@
             localStorage.removeItem('isLoggedIn');
             loginModal.style.display = 'flex';
             mainContainer.style.display = 'none';
-                notepadButton.style.display = 'none';
+            notepadButton.style.display = 'none';
             userIdInput.value = '';
             passwordInput.value = '';
             loginMessage.textContent = '';
@@ -1778,15 +1789,14 @@
         function saveNotepadContent() {
             const content = notepadTextarea.value;
             localStorage.setItem('notepadContent', content);
-            alert('Catatan berhasil disimpan!');
+            // Tidak ada alert/popup
         }
 
         function clearNotepadContent() {
-            if (confirm('Apakah Anda yakin ingin menghapus semua isi notepad?')) {
-                notepadTextarea.value = '';
-                localStorage.removeItem('notepadContent');
-                updateCharCount();
-            }
+            notepadTextarea.value = '';
+            localStorage.removeItem('notepadContent');
+            updateCharCount();
+            // Tidak ada confirm/popup
         }
 
         function updateCharCount() {
