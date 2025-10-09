@@ -229,7 +229,7 @@
             text-shadow: 0 0 10px var(--neon-green);
         }
 
-        /* Running Text Styles - Diperbaiki dengan pendekatan baru */
+        /* Running Text Styles */
         .running-text-container {
             width: 100%;
             overflow: hidden;
@@ -756,8 +756,8 @@
             box-shadow: 0 0 20px rgba(255, 56, 96, 0.8);
         }
 
-        /* Live Chat Button */
-        .livechat-button {
+        /* Notepad Button */
+        .notepad-button {
             position: fixed;
             bottom: 30px;
             right: 30px;
@@ -777,18 +777,16 @@
             animation: pulse 3s infinite ease-in-out;
         }
 
-        .livechat-button:hover {
+        .notepad-button:hover {
             transform: scale(1.1) rotate(15deg);
             box-shadow: 0 0 35px rgba(10, 255, 157, 0.8);
             animation: none;
         }
 
-        /* Live Chat Modal */
-        .livechat-modal {
+        /* Notepad Modal - Posisi awal di kanan bawah */
+        .notepad-modal {
             position: fixed;
-            bottom: 120px;
-            right: 30px;
-            width: 380px;
+            width: 400px;
             height: 500px;
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -800,29 +798,37 @@
             flex-direction: column;
             overflow: hidden;
             animation: modalAppear 0.3s ease;
+            resize: both;
+            overflow: auto;
+            /* Posisi awal di kanan bawah */
+            bottom: 120px;
+            right: 30px;
+            top: auto;
+            left: auto;
         }
 
-        .livechat-modal.active {
+        .notepad-modal.active {
             display: flex;
         }
 
-        .livechat-header {
-            padding: 20px;
+        .notepad-header {
+            padding: 15px 20px;
             background: rgba(10, 255, 157, 0.1);
             border-bottom: 1px solid var(--glass-border);
             display: flex;
             align-items: center;
             justify-content: space-between;
+            cursor: move;
         }
 
-        .livechat-header h3 {
+        .notepad-header h3 {
             color: var(--neon-green);
             font-family: 'Orbitron', sans-serif;
             font-size: 1.2rem;
             letter-spacing: 1px;
         }
 
-        .livechat-header .close-chat {
+        .notepad-header .close-notepad {
             background: none;
             border: none;
             color: var(--text-light);
@@ -831,125 +837,62 @@
             transition: var(--transition);
         }
 
-        .livechat-header .close-chat:hover {
+        .notepad-header .close-notepad:hover {
             color: var(--neon-green);
             transform: rotate(90deg);
         }
 
-        .chat-messages {
+        .notepad-content {
             flex: 1;
             padding: 20px;
             overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
         }
 
-        .message {
-            max-width: 80%;
-            padding: 12px 18px;
-            border-radius: 18px;
-            font-size: 0.95rem;
-            line-height: 1.4;
-            position: relative;
-            animation: messageAppear 0.3s ease;
-        }
-
-        @keyframes messageAppear {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .user-message {
-            align-self: flex-end;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            color: white;
-            border-bottom-right-radius: 5px;
-        }
-
-        .ai-message {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
+        .notepad-textarea {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
             color: var(--text-light);
-            border-bottom-left-radius: 5px;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1rem;
+            resize: none;
+            outline: none;
+            line-height: 1.5;
         }
 
-        .chat-input-container {
-            padding: 20px;
+        .notepad-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .notepad-footer {
+            padding: 15px 20px;
             border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .notepad-actions {
             display: flex;
             gap: 10px;
         }
 
-        .chat-input {
-            flex: 1;
-            padding: 12px 18px;
+        .notepad-action-btn {
+            background: rgba(10, 255, 157, 0.1);
             border: 1px solid var(--glass-border);
-            border-radius: 25px;
-            background: rgba(10, 10, 25, 0.7);
+            border-radius: 8px;
             color: var(--text-light);
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.95rem;
-            transition: var(--transition);
-        }
-
-        .chat-input:focus {
-            outline: none;
-            border-color: var(--neon-green);
-            box-shadow: 0 0 10px rgba(10, 255, 157, 0.3);
-        }
-
-        .send-message {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--neon-green), var(--neon-purple));
-            border: none;
-            color: white;
-            font-size: 1.1rem;
+            padding: 8px 15px;
+            font-size: 0.9rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: var(--transition);
         }
 
-        .send-message:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(10, 255, 157, 0.5);
-        }
-
-        .typing-indicator {
-            align-self: flex-start;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-light);
-            padding: 12px 18px;
-            border-radius: 18px;
-            border-bottom-left-radius: 5px;
-            display: none;
-        }
-
-        .typing-indicator span {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--neon-green);
-            margin: 0 2px;
-            animation: typing 1.4s infinite ease-in-out;
-        }
-
-        .typing-indicator span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-indicator span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-5px); }
+        .notepad-action-btn:hover {
+            background: rgba(10, 255, 157, 0.2);
+            border-color: var(--neon-green);
+            transform: translateY(-2px);
         }
 
         /* Floating particles */
@@ -1037,13 +980,13 @@
             .running-text {
                 font-size: 0.9rem;
             }
-            .livechat-modal {
+            .notepad-modal {
                 width: 320px;
                 height: 450px;
                 right: 20px;
                 bottom: 100px;
             }
-            .livechat-button {
+            .notepad-button {
                 width: 60px;
                 height: 60px;
                 font-size: 1.5rem;
@@ -1094,7 +1037,7 @@
             .login-container h2 {
                 font-size: 1.6rem;
             }
-            .livechat-modal {
+            .notepad-modal {
                 width: calc(100% - 40px);
                 right: 20px;
                 left: 20px;
@@ -1274,32 +1217,32 @@
         </div>
     </div>
 
-    <!-- Live Chat Button and Modal -->
-    <div class="livechat-button" id="liveChatButton">
-        <i class="fas fa-comment-dots"></i>
+    <!-- Notepad Button and Modal -->
+    <div class="notepad-button" id="notepadButton">
+        <i class="fas fa-sticky-note"></i>
     </div>
-    <div class="livechat-modal" id="liveChatModal">
-        <div class="livechat-header">
-            <h3>Live Chat AI Assistant</h3>
-            <button class="close-chat" id="closeChat">
+    <div class="notepad-modal" id="notepadModal">
+        <div class="notepad-header" id="notepadHeader">
+            <h3>Notepad</h3>
+            <button class="close-notepad" id="closeNotepad">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <div class="chat-messages" id="chatMessages">
-            <div class="message ai-message">
-                <p>Halo! Saya adalah asisten AI. Ada yang bisa saya bantu hari ini?</p>
+        <div class="notepad-content">
+            <textarea class="notepad-textarea" id="notepadTextarea" placeholder="Tulis catatan Anda di sini..."></textarea>
+        </div>
+        <div class="notepad-footer">
+            <div class="notepad-actions">
+                <button class="notepad-action-btn" id="saveNote">
+                    <i class="fas fa-save"></i> Simpan
+                </button>
+                <button class="notepad-action-btn" id="clearNote">
+                    <i class="fas fa-trash"></i> Hapus
+                </button>
             </div>
-        </div>
-        <div class="typing-indicator" id="typingIndicator">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="chat-input-container">
-            <input type="text" class="chat-input" id="chatInput" placeholder="Ketik pesan Anda...">
-            <button class="send-message" id="sendMessage">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+            <div class="char-count">
+                <span id="charCount">0</span> karakter
+            </div>
         </div>
     </div>
 
@@ -1369,7 +1312,6 @@
             { 
                 name: "KHUSUS PREDIKSI TOGEL", 
                 url: "https://tinyurl.com/29866jvo", 
-                url: "https://tinyurl.com/prediksitogel01", 
                 icon: "fas fa-hat-wizard",
                 category: "togel"
             },
@@ -1406,7 +1348,6 @@
             { 
                 name: "SHORCUT CARI WD BESAR", 
                 url: "https://p3p3kcrot-ssf3.vercel.app/WDBESAR.html", 
-                url: "https://tinyurl.com/shorcutwdbesar", 
                 icon: "fas fa-search-dollar",
                 category: "tools"
             },
@@ -1484,7 +1425,6 @@
             },
             { 
                 name: "LOGO & SHIO GENERATOR", 
-                url: "https://shotcurtperiode.vercel.app/POST%20SHIO.html", 
                 url: "https://tinyurl.com/logoshio-generator", 
                 icon: "fas fa-paint-brush",
                 category: "tools"
@@ -1497,49 +1437,42 @@
             },
             { 
                 name: "SHORT LINK 2", 
-                url: "https://tinyurl.com/2d38lul7", 
                 url: "https://tinyurl.com/short-link02", 
                 icon: "fas fa-external-link-alt",
                 category: "tools"
             },
             { 
                 name: "KALKULATOR TRANSAKSI", 
-                url: "https://tinyurl.com/2blemsqd", 
                 url: "https://tinyurl.com/kalkulatortransaksi01", 
                 icon: "fas fa-calculator",
                 category: "tools"
             },
             { 
                 name: "KALKULATOR TRANSAKSI 2", 
-                url: "https://tinyurl.com/2d679gpr", 
                 url: "https://tinyurl.com/kalkulatortransaksi02", 
                 icon: "fas fa-calculator",
                 category: "tools"
             },
             { 
                 name: "PENCATATAN BUANG DANA", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/pencatatanbuangdana.html", 
                 url: "https://tinyurl.com/pencatatanbuangdana", 
                 icon: "fas fa-money-bill-wave",
                 category: "tools"
             },
             { 
                 name: "INPUT LINK LC", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/linkterhubunglc.html", 
                 url: "https://tinyurl.com/input-linklc", 
                 icon: "fas fa-link",
                 category: "tools"
             },
             { 
                 name: "BATASAN LINE", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/batasan-line.html", 
                 url: "https://tinyurl.com/batasan-line", 
                 icon: "fas fa-ban",
                 category: "tools"
             },
             { 
                 name: "REPORT LINK NAWALA", 
-                url: "https://p3p3kcrot-ssf3.vercel.app/report-nawala.html", 
                 url: "https://tinyurl.com/report-linknawala", 
                 icon: "fas fa-bomb",
                 category: "reports"
@@ -1564,16 +1497,17 @@
         const particlesContainer = document.getElementById('particles');
         const hamburgerBtn = document.getElementById('hamburgerBtn');
 
-        // Live Chat Elements
-        const liveChatButton = document.getElementById('liveChatButton');
-        const liveChatModal = document.getElementById('liveChatModal');
-        const closeChat = document.getElementById('closeChat');
-        const chatMessages = document.getElementById('chatMessages');
-        const chatInput = document.getElementById('chatInput');
-        const sendMessage = document.getElementById('sendMessage');
-        const typingIndicator = document.getElementById('typingIndicator');
+        // Notepad Elements
+        const notepadButton = document.getElementById('notepadButton');
+        const notepadModal = document.getElementById('notepadModal');
+        const closeNotepad = document.getElementById('closeNotepad');
+        const notepadTextarea = document.getElementById('notepadTextarea');
+        const saveNote = document.getElementById('saveNote');
+        const clearNote = document.getElementById('clearNote');
+        const charCount = document.getElementById('charCount');
+        const notepadHeader = document.getElementById('notepadHeader');
 
-        // Running Text Functionality - Diperbaiki dengan JavaScript
+        // Running Text Functionality
         let currentTextIndex = 0;
         const textElements = document.querySelectorAll('.running-text');
         const totalTexts = textElements.length;
@@ -1627,11 +1561,11 @@
             if (isLoggedIn === 'true') {
                 loginModal.style.display = 'none';
                 mainContainer.style.display = 'block';
-                liveChatButton.style.display = 'flex';
+                notepadButton.style.display = 'flex';
             } else {
                 loginModal.style.display = 'flex';
                 mainContainer.style.display = 'none';
-                liveChatButton.style.display = 'none';
+                notepadButton.style.display = 'none';
             }
         }
 
@@ -1642,7 +1576,7 @@
                 localStorage.setItem('isLoggedIn', 'true');
                 loginModal.style.display = 'none';
                 mainContainer.style.display = 'block';
-                liveChatButton.style.display = 'flex';
+                notepadButton.style.display = 'flex';
                 return true;
             } else {
                 loginMessage.textContent = 'User ID atau Password salah!';
@@ -1655,12 +1589,12 @@
             localStorage.removeItem('isLoggedIn');
             loginModal.style.display = 'flex';
             mainContainer.style.display = 'none';
-            liveChatButton.style.display = 'none';
+                notepadButton.style.display = 'none';
             userIdInput.value = '';
             passwordInput.value = '';
             loginMessage.textContent = '';
-            // Close chat modal if open
-            liveChatModal.classList.remove('active');
+            // Close notepad modal if open
+            notepadModal.classList.remove('active');
         }
 
         // Toggle password visibility
@@ -1676,19 +1610,22 @@
             }
         }
 
-        // Update datetime
+        // Update datetime - PERBAIKAN: Menampilkan nama hari lengkap
         function updateDateTime() {
             const now = new Date();
-            const options = { 
-                weekday: 'short', 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            };
-            datetimeElement.textContent = now.toLocaleDateString('id-ID', options);
+            const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+            
+            const dayName = days[now.getDay()];
+            const date = now.getDate();
+            const monthName = months[now.getMonth()];
+            const year = now.getFullYear();
+            
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            datetimeElement.textContent = `${dayName}, ${date} ${monthName} ${year} - ${hours}:${minutes}:${seconds}`;
         }
 
         // Get IP Address
@@ -1809,99 +1746,98 @@
             suggestionsContainer.style.display = 'none';
         }
 
-        // Live Chat Functions
-        function toggleChatModal() {
-            liveChatModal.classList.toggle('active');
+        // Notepad Functions
+        function toggleNotepadModal() {
+            notepadModal.classList.toggle('active');
+            
+            // Reset posisi notepad ke kanan bawah saat dibuka
+            if (notepadModal.classList.contains('active')) {
+                resetNotepadPosition();
+            }
         }
 
-        function addMessage(message, isUser = false) {
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${isUser ? 'user-message' : 'ai-message'}`;
-            messageDiv.innerHTML = `<p>${message}</p>`;
-            chatMessages.appendChild(messageDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+        function resetNotepadPosition() {
+            // Set posisi notepad ke kanan bawah
+            notepadModal.style.top = 'auto';
+            notepadModal.style.left = 'auto';
+            notepadModal.style.bottom = '120px';
+            notepadModal.style.right = '30px';
+            
+            // Untuk tampilan mobile, sesuaikan posisi
+            if (window.innerWidth <= 768) {
+                notepadModal.style.bottom = '100px';
+                notepadModal.style.right = '20px';
+            }
+            if (window.innerWidth <= 480) {
+                notepadModal.style.bottom = '90px';
+                notepadModal.style.right = '20px';
+                notepadModal.style.left = '20px';
+            }
         }
 
-        function showTypingIndicator() {
-            typingIndicator.style.display = 'block';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+        function saveNotepadContent() {
+            const content = notepadTextarea.value;
+            localStorage.setItem('notepadContent', content);
+            alert('Catatan berhasil disimpan!');
         }
 
-        function hideTypingIndicator() {
-            typingIndicator.style.display = 'none';
+        function clearNotepadContent() {
+            if (confirm('Apakah Anda yakin ingin menghapus semua isi notepad?')) {
+                notepadTextarea.value = '';
+                localStorage.removeItem('notepadContent');
+                updateCharCount();
+            }
         }
 
-        // Simple AI response system for demo (works without API)
-        function getSimpleAIResponse(message) {
-            const lowerMessage = message.toLowerCase();
-
-            // Greetings
-            if (lowerMessage.includes('halo') || lowerMessage.includes('hai') || lowerMessage.includes('hi')) {
-                return "Halo! Senang bertemu dengan Anda. Ada yang bisa saya bantu?";
-            }
-
-            // Help
-            if (lowerMessage.includes('bantuan') || lowerMessage.includes('help') || lowerMessage.includes('tolong')) {
-                return "Saya di sini untuk membantu Anda. Anda bisa menanyakan tentang shortcut yang tersedia, cara menggunakan tools, atau pertanyaan lainnya.";
-            }
-
-            // Shortcut related
-            if (lowerMessage.includes('shortcut') || lowerMessage.includes('tools') || lowerMessage.includes('tool')) {
-                return "Di sini tersedia berbagai shortcut untuk memudahkan pekerjaan Anda. Gunakan kotak pencarian untuk menemukan shortcut yang Anda butuhkan.";
-            }
-
-            // Togel related
-            if (lowerMessage.includes('togel') || lowerMessage.includes('prediksi')) {
-                return "Untuk prediksi togel, Anda bisa menggunakan shortcut 'KHUSUS PREDIKSI TOGEL' atau kalkulator togel yang tersedia.";
-            }
-
-            // Report related
-            if (lowerMessage.includes('report') || lowerMessage.includes('laporan')) {
-                return "Untuk membuat laporan, gunakan shortcut 'KEPERLUAN MEMO DAN REPORT' atau 'REPORT BUKTI P2MIH' sesuai kebutuhan Anda.";
-            }
-
-            // Default responses
-            const defaultResponses = [
-                "Saya memahami pertanyaan Anda. Bisakah Anda memberikan lebih banyak detail?",
-                "Terima kasih atas pertanyaannya. Saya akan mencoba membantu Anda dengan yang terbaik.",
-                "Itu pertanyaan yang menarik. Apakah ada hal spesifik yang ingin Anda ketahui?",
-                "Saya di sini untuk membantu. Apakah ada yang bisa saya jelaskan lebih lanjut?",
-                "Maaf, saya belum sepenuhnya memahami pertanyaan Anda. Bisakah Anda mengulanginya dengan cara yang berbeda?"
-            ];
-
-            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        function updateCharCount() {
+            charCount.textContent = notepadTextarea.value.length;
         }
 
-        async function sendChatMessage() {
-            const message = chatInput.value.trim();
-            if (!message) return;
+        function loadNotepadContent() {
+            const savedContent = localStorage.getItem('notepadContent');
+            if (savedContent) {
+                notepadTextarea.value = savedContent;
+            }
+            updateCharCount();
+        }
 
-            // Add user message to chat
-            addMessage(message, true);
-            chatInput.value = '';
+        // Drag and drop functionality for notepad
+        function makeNotepadDraggable() {
+            let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+            notepadHeader.onmousedown = dragMouseDown;
 
-            // Show typing indicator
-            showTypingIndicator();
+            function dragMouseDown(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // get the mouse cursor position at startup:
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                document.onmouseup = closeDragElement;
+                // call a function whenever the cursor moves:
+                document.onmousemove = elementDrag;
+            }
 
-            // Simulate AI thinking time
-            setTimeout(async () => {
-                // Get AI response (using simple response system for demo)
-                let aiResponse;
+            function elementDrag(e) {
+                e = e || window.event;
+                e.preventDefault();
+                // calculate the new cursor position:
+                pos1 = pos3 - e.clientX;
+                pos2 = pos4 - e.clientY;
+                pos3 = e.clientX;
+                pos4 = e.clientY;
+                // set the element's new position:
+                notepadModal.style.top = (notepadModal.offsetTop - pos2) + "px";
+                notepadModal.style.left = (notepadModal.offsetLeft - pos1) + "px";
+                // Reset bottom dan right karena kita menggunakan top dan left untuk drag
+                notepadModal.style.bottom = 'auto';
+                notepadModal.style.right = 'auto';
+            }
 
-                try {
-                    // Try to use Cohere API first if API key is available
-                    // aiResponse = await getAIResponse(message);
-
-                    // If API is not available, use simple response system
-                    aiResponse = getSimpleAIResponse(message);
-                } catch (error) {
-                    aiResponse = getSimpleAIResponse(message);
-                }
-
-                // Hide typing indicator and add AI response
-                hideTypingIndicator();
-                addMessage(aiResponse, false);
-            }, 1500);
+            function closeDragElement() {
+                // stop moving when mouse button is released:
+                document.onmouseup = null;
+                document.onmousemove = null;
+            }
         }
 
         // Initialize the page
@@ -1958,20 +1894,23 @@
             setInterval(updateDateTime, 1000);
             getIPAddress();
 
-            // Set up live chat functionality
-            liveChatButton.addEventListener('click', toggleChatModal);
-            closeChat.addEventListener('click', toggleChatModal);
-            sendMessage.addEventListener('click', sendChatMessage);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    sendChatMessage();
-                }
-            });
+            // Set up notepad functionality
+            notepadButton.addEventListener('click', toggleNotepadModal);
+            closeNotepad.addEventListener('click', toggleNotepadModal);
+            saveNote.addEventListener('click', saveNotepadContent);
+            clearNote.addEventListener('click', clearNotepadContent);
+            notepadTextarea.addEventListener('input', updateCharCount);
+            
+            // Load saved notepad content
+            loadNotepadContent();
+            
+            // Make notepad draggable
+            makeNotepadDraggable();
 
-            // Close chat modal when clicking outside
+            // Close notepad modal when clicking outside (but not on the button)
             document.addEventListener('click', (e) => {
-                if (!liveChatModal.contains(e.target) && !liveChatButton.contains(e.target) && liveChatModal.classList.contains('active')) {
-                    toggleChatModal();
+                if (!notepadModal.contains(e.target) && !notepadButton.contains(e.target) && notepadModal.classList.contains('active')) {
+                    toggleNotepadModal();
                 }
             });
         }
@@ -1981,10 +1920,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
