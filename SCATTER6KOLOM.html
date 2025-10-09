@@ -583,6 +583,15 @@
             border: 3px solid var(--primary-color);
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            transition: transform 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .modal-img.zoomed {
+            cursor: zoom-out;
+            transform: scale(1.5);
+            z-index: 1002;
+            position: relative;
         }
 
         .close-btn {
@@ -962,6 +971,52 @@
             transform: none;
         }
 
+        /* Styles untuk kontrol zoom */
+        .zoom-controls {
+            position: absolute;
+            top: 30px;
+            right: 100px;
+            display: flex;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .zoom-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(10, 14, 18, 0.7);
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 18px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .zoom-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .zoom-indicator {
+            position: absolute;
+            top: 80px;
+            right: 40px;
+            color: var(--primary-color);
+            font-size: 14px;
+            background: rgba(10, 14, 18, 0.7);
+            padding: 5px 10px;
+            border-radius: 20px;
+            z-index: 1001;
+            font-weight: 600;
+            display: none;
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -1056,6 +1111,23 @@
                 height: 35px;
                 font-size: 14px;
             }
+            
+            .zoom-controls {
+                top: 20px;
+                right: 70px;
+            }
+            
+            .zoom-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .zoom-indicator {
+                top: 65px;
+                right: 25px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
@@ -1079,7 +1151,10 @@
                         <span>Data terdeteksi: <span id="dataCount" class="count-badge">0</span></span>
                     </div>
                 </div>
-                <textarea id="autoInput" placeholder="Tempel data mentah di sini... Data akan otomatis tersebar ke 6 kolom di bawah ini. "></textarea>
+                <textarea id="autoInput" placeholder="Tempel data mentah di sini... Data akan otomatis tersebar ke 6 kolom di bawah ini.
+
+Contoh format:
+6 October 2025	Brv17	https://cdn.files-text.com/us-south1/api/lc/att/13376070/2129e24bab4978bae371036c7fdcdd5e/Screenshot_2025-10-06-00-36-19-819_com.android.chrome.jpg	https://cdn.files-text.com/us-south1/api/lc/att/13376070/ec84464f28bb57a0e2b4ac4c8a71655b/Screenshot_2025-10-06-00-41-05-880_com.android.chrome.jpg	https://cdn.files-text.com/us-south1/api/lc/att/13376070/bb53748d4c10b630c37f25af3c9392d3/Screenshot_2025-10-06-00-37-27-654_com.android.chrome.jpg	060801006099508	RIZAL ARDIAN F	1974891336830041089	BET 2,000 - 8,000	#REF!	3 Scatter- 5 Scatter	WAITING	VALID	DAVID"></textarea>
                 <div class="auto-input-actions">
                     <div class="auto-input-warning" id="autoInputWarning">
                         <i class="fas fa-info-circle"></i>
@@ -1236,6 +1311,21 @@
                 </div>
             </div>
             
+            <!-- Kontrol zoom -->
+            <div class="zoom-controls">
+                <button class="zoom-btn" id="zoomOutBtn" title="Zoom Out">
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="zoom-btn" id="zoomResetBtn" title="Reset Zoom">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+                <button class="zoom-btn" id="zoomInBtn" title="Zoom In">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+            </div>
+            
+            <div class="zoom-indicator" id="zoomIndicator">100%</div>
+            
             <!-- Tambahkan tombol navigasi kolom -->
             <div class="modal-navigation" id="modalNavigation">
                 <button class="nav-btn" data-col="1">1</button>
@@ -1289,6 +1379,12 @@
             const globalMinimizeBtn = document.getElementById('globalMinimizeBtn');
             const modalNavigation = document.getElementById('modalNavigation');
             
+            // Variabel untuk kontrol zoom
+            const zoomInBtn = document.getElementById('zoomInBtn');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const zoomResetBtn = document.getElementById('zoomResetBtn');
+            const zoomIndicator = document.getElementById('zoomIndicator');
+            
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
             
@@ -1300,6 +1396,12 @@
 
             // Variabel untuk menyimpan kolom yang sedang aktif di modal
             let currentModalColumn = 1;
+            
+            // Variabel untuk kontrol zoom
+            let currentZoomLevel = 1;
+            const ZOOM_STEP = 0.2;
+            const MIN_ZOOM = 0.5;
+            const MAX_ZOOM = 3;
 
             // Event untuk minimize global
             globalMinimizeBtn.addEventListener('click', function() {
@@ -1415,6 +1517,58 @@
                 }
             });
             
+            // Event listener untuk kontrol zoom
+            zoomInBtn.addEventListener('click', function() {
+                zoomIn();
+            });
+            
+            zoomOutBtn.addEventListener('click', function() {
+                zoomOut();
+            });
+            
+            zoomResetBtn.addEventListener('click', function() {
+                resetZoom();
+            });
+            
+            // Fungsi untuk zoom in
+            function zoomIn() {
+                if (currentZoomLevel < MAX_ZOOM) {
+                    currentZoomLevel += ZOOM_STEP;
+                    applyZoom();
+                }
+            }
+            
+            // Fungsi untuk zoom out
+            function zoomOut() {
+                if (currentZoomLevel > MIN_ZOOM) {
+                    currentZoomLevel -= ZOOM_STEP;
+                    applyZoom();
+                }
+            }
+            
+            // Fungsi untuk reset zoom
+            function resetZoom() {
+                currentZoomLevel = 1;
+                applyZoom();
+            }
+            
+            // Fungsi untuk menerapkan zoom ke semua gambar
+            function applyZoom() {
+                const images = document.querySelectorAll('.modal-img');
+                images.forEach(img => {
+                    img.style.transform = `scale(${currentZoomLevel})`;
+                });
+                
+                // Update indikator zoom
+                zoomIndicator.textContent = `${Math.round(currentZoomLevel * 100)}%`;
+                
+                // Tampilkan indikator zoom sementara
+                zoomIndicator.style.display = 'block';
+                setTimeout(() => {
+                    zoomIndicator.style.display = 'none';
+                }, 2000);
+            }
+            
             // Fungsi untuk navigasi ke kolom tertentu
             function navigateToColumn(colIndex) {
                 const colData = scatterResults[colIndex - 1];
@@ -1448,7 +1602,22 @@
                     img.className = 'modal-img';
                     img.alt = 'Bukti gambar';
                     imagesContainer.appendChild(img);
+                    
+                    // Tambahkan event listener untuk klik gambar (toggle zoom)
+                    img.addEventListener('click', function() {
+                        this.classList.toggle('zoomed');
+                        if (this.classList.contains('zoomed')) {
+                            // Jika di-zoom, atur transform scale
+                            this.style.transform = `scale(${currentZoomLevel})`;
+                        } else {
+                            // Jika tidak di-zoom, kembalikan ke ukuran normal
+                            this.style.transform = 'scale(1)';
+                        }
+                    });
                 });
+                
+                // Reset zoom setiap kali mengganti kolom
+                resetZoom();
                 
                 // Update status tombol navigasi
                 updateNavigationButtons();
@@ -1887,6 +2056,8 @@
             // Fungsi untuk menutup modal
             function closeModal() {
                 modal.style.display = "none";
+                // Reset zoom saat menutup modal
+                resetZoom();
             }
             
             // Fungsi untuk menampilkan gambar dari kolom tertentu
@@ -1936,4 +2107,3 @@
     </script>
 </body>
 </html>
-
