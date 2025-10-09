@@ -912,6 +912,62 @@
             opacity: 1;
         }
 
+        /* Styles untuk tombol navigasi kolom di modal */
+        .modal-navigation {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            position: absolute;
+            bottom: 30px;
+            left: 0;
+            right: 0;
+            z-index: 1002;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            background: rgba(10, 14, 18, 0.7);
+            color: var(--primary-color);
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .nav-btn.active {
+            background: var(--primary-color);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.7);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: var(--text-secondary);
+            color: var(--text-secondary);
+        }
+
+        .nav-btn:disabled:hover {
+            background: rgba(10, 14, 18, 0.7);
+            color: var(--text-secondary);
+            transform: none;
+        }
+
         @media (max-width: 1600px) {
             .six-columns-grid,
             .six-columns-result {
@@ -995,6 +1051,16 @@
                 flex-direction: column;
                 gap: 10px;
                 align-items: flex-start;
+            }
+            
+            .modal-navigation {
+                bottom: 20px;
+            }
+            
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 14px;
             }
         }
     </style>
@@ -1179,6 +1245,16 @@ Contoh format:
                 </div>
             </div>
             
+            <!-- Tambahkan tombol navigasi kolom -->
+            <div class="modal-navigation" id="modalNavigation">
+                <button class="nav-btn" data-col="1">1</button>
+                <button class="nav-btn" data-col="2">2</button>
+                <button class="nav-btn" data-col="3">3</button>
+                <button class="nav-btn" data-col="4">4</button>
+                <button class="nav-btn" data-col="5">5</button>
+                <button class="nav-btn" data-col="6">6</button>
+            </div>
+            
             <div class="images-container" id="imagesContainer">
                 <!-- Gambar akan ditambahkan di sini -->
             </div>
@@ -1224,6 +1300,7 @@ Contoh format:
             const clearColBtns = document.querySelectorAll('.clear-col-btn');
             const tsToggle = document.getElementById('tsToggle');
             const globalMinimizeBtn = document.getElementById('globalMinimizeBtn');
+            const modalNavigation = document.getElementById('modalNavigation');
             
             // Variabel global untuk menyimpan hasil
             let scatterResults = [null, null, null, null, null, null];
@@ -1233,6 +1310,9 @@ Contoh format:
 
             // Status minimize global
             let isAllMinimized = true;
+
+            // Variabel untuk menyimpan kolom yang sedang aktif di modal
+            let currentModalColumn = 1;
 
             // Event untuk minimize global
             globalMinimizeBtn.addEventListener('click', function() {
@@ -1336,6 +1416,80 @@ Contoh format:
                     }, 300);
                 });
             });
+            
+            // Event listener untuk tombol navigasi di modal
+            modalNavigation.addEventListener('click', function(e) {
+                const navBtn = e.target.closest('.nav-btn');
+                if (navBtn) {
+                    const colIndex = parseInt(navBtn.getAttribute('data-col'));
+                    
+                    // Pindah ke kolom yang dipilih
+                    navigateToColumn(colIndex);
+                }
+            });
+            
+            // Fungsi untuk navigasi ke kolom tertentu
+            function navigateToColumn(colIndex) {
+                const colData = scatterResults[colIndex - 1];
+                
+                // Jika kolom memiliki gambar, tampilkan gambar kolom tersebut
+                if (colData && colData.hasImages) {
+                    updateModalForColumn(colIndex);
+                }
+            }
+            
+            // Fungsi untuk memperbarui modal dengan data kolom tertentu
+            function updateModalForColumn(colIndex) {
+                const colData = scatterResults[colIndex - 1];
+                if (!colData || !colData.hasImages) return;
+                
+                // Update kolom yang sedang aktif
+                currentModalColumn = colIndex;
+                
+                // Update informasi kolom
+                colInfo.textContent = `Kolom ${colIndex}`;
+                userIdInfo.textContent = `User ID: ${colData.userId}`;
+                ticketInfo.textContent = `Kode Tiket: ${colData.ticketCode}`;
+                
+                // Kosongkan container gambar
+                imagesContainer.innerHTML = '';
+                
+                // Tambahkan semua gambar ke container
+                colData.links.forEach(link => {
+                    const img = document.createElement('img');
+                    img.src = link;
+                    img.className = 'modal-img';
+                    img.alt = 'Bukti gambar';
+                    imagesContainer.appendChild(img);
+                });
+                
+                // Update status tombol navigasi
+                updateNavigationButtons();
+            }
+            
+            // Fungsi untuk memperbarui status tombol navigasi
+            function updateNavigationButtons() {
+                const navButtons = document.querySelectorAll('.nav-btn');
+                
+                navButtons.forEach(btn => {
+                    const colIndex = parseInt(btn.getAttribute('data-col'));
+                    const colData = scatterResults[colIndex - 1];
+                    
+                    // Nonaktifkan tombol jika kolom tidak memiliki gambar
+                    if (!colData || !colData.hasImages) {
+                        btn.disabled = true;
+                    } else {
+                        btn.disabled = false;
+                    }
+                    
+                    // Tandai tombol aktif untuk kolom yang sedang ditampilkan
+                    if (colIndex === currentModalColumn) {
+                        btn.classList.add('active');
+                    } else {
+                        btn.classList.remove('active');
+                    }
+                });
+            }
             
             // Fungsi untuk menyembunyikan semua pesan
             function hideAllMessages() {
@@ -1489,6 +1643,11 @@ Contoh format:
                 renderScatter6Result(col4Result, 4);
                 renderScatter6Result(col5Result, 5);
                 renderScatter6Result(col6Result, 6);
+                
+                // Update tombol navigasi di modal jika modal terbuka
+                if (modal.style.display === "block") {
+                    updateNavigationButtons();
+                }
             }
             
             // Fungsi untuk memproses data scatter tunggal
@@ -1745,27 +1904,9 @@ Contoh format:
             
             // Fungsi untuk menampilkan gambar dari kolom tertentu
             function showImagesForColumn(colIndex) {
-                const colData = scatterResults[colIndex - 1];
-                if (!colData || !colData.hasImages) return;
-                
+                currentModalColumn = colIndex;
+                updateModalForColumn(colIndex);
                 modal.style.display = "block";
-                
-                // Update informasi kolom
-                colInfo.textContent = `Kolom ${colIndex}`;
-                userIdInfo.textContent = `User ID: ${colData.userId}`;
-                ticketInfo.textContent = `Kode Tiket: ${colData.ticketCode}`;
-                
-                // Kosongkan container gambar
-                imagesContainer.innerHTML = '';
-                
-                // Tambahkan semua gambar ke container
-                colData.links.forEach(link => {
-                    const img = document.createElement('img');
-                    img.src = link;
-                    img.className = 'modal-img';
-                    img.alt = 'Bukti gambar';
-                    imagesContainer.appendChild(img);
-                });
             }
             
             function formatNumber(num) {
