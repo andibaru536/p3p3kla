@@ -645,14 +645,6 @@
             to { transform: scale(1); opacity: 1; }
         }
 
-        footer {
-            text-align: center;
-            padding: 30px 20px 20px;
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
-
         .processing-indicator {
             position: absolute;
             bottom: 10px;
@@ -763,7 +755,7 @@
             margin-bottom: 0;
         }
 
-        /* Styles untuk input otomatis */
+        /* Styles untuk input otomatis - DIKECILKAN */
         .auto-input-container {
             margin-bottom: 25px;
             transition: all 0.3s ease;
@@ -781,6 +773,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.1rem;
         }
 
         .auto-input-info {
@@ -801,7 +794,8 @@
         }
 
         .auto-input-container textarea {
-            min-height: 120px;
+            /* DIKECILKAN dari 120px menjadi 90px */
+            min-height: 90px;
             transition: all 0.3s ease;
         }
 
@@ -1075,7 +1069,7 @@
         <div class="card">
             <h2>Input Data Scatter</h2>
             
-            <!-- Input otomatis (tidak ada minimize) -->
+            <!-- Input otomatis (tidak ada minimize) - DIKECILKAN -->
             <div class="auto-input-container" id="autoInputContainer">
                 <div class="auto-input-header">
                     <h3>
@@ -1260,10 +1254,6 @@ Contoh format:
             </div>
         </div>
     </div>
-
-    <footer>
-        <p>© 2025 Scatter 6 Kolom Tools - All rights reserved</p>
-    </footer>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
