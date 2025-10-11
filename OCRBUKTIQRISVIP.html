@@ -345,7 +345,6 @@ body.dark-mode #preview {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
   border-left: 3px solid var(--primary);
   backdrop-filter: blur(5px);
 }
@@ -353,10 +352,6 @@ body.dark-mode #preview {
 body.dark-mode .result {
   background-color: rgba(30, 30, 30, 0.85);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
-}
-
-.result:hover {
-  transform: translateY(-2px);
 }
 
 .result h3 {
@@ -1319,10 +1314,27 @@ body.dark-mode .download-btn {
       <div class="form-group">
         <label for="imageUrl"><i class="fas fa-link"></i> URL Gambar Bukti:</label>
         <div class="input-container">
-          <input type="text" id="imageUrl" placeholder="Tempel URL gambar bukti transfer">
+          <input type="text" id="imageUrl" placeholder="Tempel URL gambar bukti transfer (prnt.sc, sleekshot.app, dll)">
           <button class="clear-btn" id="clearImageUrl">
             <i class="fas fa-times"></i>
           </button>
+        </div>
+        <div class="supported-services">
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> prnt.sc
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> sleekshot.app
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> imghostr.com
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> imgur.com
+          </span>
+          <span class="service-badge">
+            <i class="fas fa-check-circle"></i> gambar langsung
+          </span>
         </div>
       </div>
 
@@ -1603,6 +1615,104 @@ let mergedImageData = null;
 
 // ======= FUNGSI UMUM =======
 
+// Fungsi untuk mengekstrak URL gambar sebenarnya dari berbagai layanan
+async function extractImageUrl(url) {
+  try {
+    // Untuk layanan prnt.sc
+    if (url.includes('prnt.sc')) {
+      // Coba ambil dari meta og:image
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      
+      // Metode 1: Cari meta property og:image
+      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^"]+)"/i;
+      const ogMatch = ogImageRegex.exec(html);
+      if (ogMatch && ogMatch[1]) {
+        return ogMatch[1].replace(/&amp;/g, '&');
+      }
+      
+      // Metode 2: Cari gambar dengan class khusus
+      const classRegex = /<img[^>]+class="[^"]*screenshot-image[^"]*"[^>]+src="([^">]+)"/i;
+      const classMatches = classRegex.exec(html);
+      if (classMatches && classMatches[1]) {
+        return classMatches[1].startsWith('//') ? 'https:' + classMatches[1] : classMatches[1];
+      }
+      
+      // Metode 3: Coba dengan CORS proxy alternatif
+      try {
+        const corsProxyResponse = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+        const corsHtml = await corsProxyResponse.text();
+        
+        const corsOgMatch = ogImageRegex.exec(corsHtml);
+        if (corsOgMatch && corsOgMatch[1]) {
+          return corsOgMatch[1].replace(/&amp;/g, '&');
+        }
+        
+        const corsClassMatches = classRegex.exec(corsHtml);
+        if (corsClassMatches && corsClassMatches[1]) {
+          return corsClassMatches[1].startsWith('//') ? 'https:' + corsClassMatches[1] : corsClassMatches[1];
+        }
+      } catch (corsError) {
+        console.error('CORS proxy error:', corsError);
+      }
+      
+      return url;
+    }
+    
+    // Untuk layanan sleekshot.app
+    if (url.includes('sleekshot.app')) {
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^">]+)"/i;
+      const matches = ogImageRegex.exec(html);
+      if (matches && matches[1]) {
+        return matches[1];
+      }
+      return url;
+    }
+    
+    // Untuk layanan imghostr.com
+    if (url.includes('imghostr.com')) {
+      // Coba ekstrak ID gambar dari URL (contoh: https://imghostr.com/66e5d9_wl61 -> ID:66e5d9)
+      const idMatch = url.match(/imghostr\.com\/([a-zA-Z0-9]+)_/);
+      if (idMatch && idMatch[1]) {
+        return `https://img.imghostr.com/${idMatch[1]}.png`;
+      }
+      
+      // Jika tidak berhasil, coba parsing HTML
+      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
+      const data = await response.json();
+      const html = data.contents;
+      const imgRegex = /<img[^>]+id="image-view"[^>]+src="([^">]+)"/i;
+      const matches = imgRegex.exec(html);
+      if (matches && matches[1]) {
+        return matches[1];
+      }
+      return url;
+    }
+    
+    // Untuk imgur.com
+    if (url.includes('imgur.com')) {
+      // Konversi URL gallery ke direct image
+      if (url.includes('/gallery/') || url.includes('/a/')) {
+        const idMatch = url.match(/\/([a-zA-Z0-9]+)$/);
+        if (idMatch && idMatch[1]) {
+          return `https://i.imgur.com/${idMatch[1]}.jpg`;
+        }
+      }
+      return url;
+    }
+    
+    // Untuk URL langsung
+    return url;
+  } catch (error) {
+    console.error('Extraction error:', error);
+    return url;
+  }
+}
+
 // Fungsi untuk memvalidasi URL gambar
 function isValidImageUrl(url) {
   return /\.(jpe?g|png|gif|bmp|webp)$/i.test(url) || 
@@ -1777,12 +1887,33 @@ async function processImage() {
     return;
   }
 
+  // Ekstrak URL gambar sebenarnya jika diperlukan (prnt.sc, sleekshot.app, dll)
   if (!isValidImageUrl(imageUrl)) {
-    showNotification('URL gambar tidak valid. Pastikan URL berakhir dengan ekstensi gambar (.jpg, .png, dll)', true);
-    return;
+    try {
+      // Tampilkan loader untuk proses ekstraksi URL
+      if (loading) {
+        loading.style.display = 'block';
+        progressBar.style.width = '0%';
+        progressStatus.textContent = 'Mengekstrak URL gambar...';
+      }
+      
+      const directImageUrl = await extractImageUrl(imageUrl);
+      
+      if (isValidImageUrl(directImageUrl)) {
+        imageUrl = directImageUrl;
+        currentImageUrl = imageUrl;
+      } else {
+        showNotification('URL gambar tidak valid. Pastikan URL berakhir dengan ekstensi gambar (.jpg, .png, dll)', true);
+        return;
+      }
+    } catch (error) {
+      console.error('Error extracting image URL:', error);
+      showNotification('Gagal mengekstrak URL gambar. Pastikan URL benar dan mendukung CORS.', true);
+      return;
+    }
+  } else {
+    currentImageUrl = imageUrl;
   }
-  
-  currentImageUrl = imageUrl;
   
   if (preview) {
     preview.src = imageUrl;
@@ -2112,86 +2243,6 @@ function extractDataFromText(text, bankType) {
 }
 
 // ======= FUNGSI PENGGABUNG GAMBAR =======
-
-// Fungsi untuk mengekstrak URL gambar sebenarnya dari berbagai layanan
-async function extractImageUrl(url) {
-  try {
-    // Untuk layanan prnt.sc
-    if (url.includes('prnt.sc')) {
-      // Coba ambil dari meta og:image
-      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-      const data = await response.json();
-      const html = data.contents;
-      
-      // Metode 1: Cari meta property og:image
-      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^"]+)"/i;
-      const ogMatch = ogImageRegex.exec(html);
-      if (ogMatch && ogMatch[1]) {
-        return ogMatch[1].replace(/&amp;/g, '&');
-      }
-      
-      // Metode 2: Cari gambar dengan class khusus
-      const classRegex = /<img[^>]+class="[^"]*screenshot-image[^"]*"[^>]+src="([^">]+)"/i;
-      const classMatches = classRegex.exec(html);
-      if (classMatches && classMatches[1]) {
-        return classMatches[1].startsWith('//') ? 'https:' + classMatches[1] : classMatches[1];
-      }
-      
-      return url;
-    }
-    
-    // Untuk layanan sleekshot.app
-    if (url.includes('sleekshot.app')) {
-      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-      const data = await response.json();
-      const html = data.contents;
-      const ogImageRegex = /<meta\s+property="og:image"\s+content="([^">]+)"/i;
-      const matches = ogImageRegex.exec(html);
-      if (matches && matches[1]) {
-        return matches[1];
-      }
-      return url;
-    }
-    
-    // Untuk layanan imghostr.com
-    if (url.includes('imghostr.com')) {
-      // Coba ekstrak ID gambar dari URL (contoh: https://imghostr.com/66e5d9_wl61 -> ID:66e5d9)
-      const idMatch = url.match(/imghostr\.com\/([a-zA-Z0-9]+)_/);
-      if (idMatch && idMatch[1]) {
-        return `https://img.imghostr.com/${idMatch[1]}.png`;
-      }
-      
-      // Jika tidak berhasil, coba parsing HTML
-      const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(url)}`);
-      const data = await response.json();
-      const html = data.contents;
-      const imgRegex = /<img[^>]+id="image-view"[^>]+src="([^">]+)"/i;
-      const matches = imgRegex.exec(html);
-      if (matches && matches[1]) {
-        return matches[1];
-      }
-      return url;
-    }
-    
-    // Untuk imgur.com
-    if (url.includes('imgur.com')) {
-      // Konversi URL gallery ke direct image
-      if (url.includes('/gallery/') || url.includes('/a/')) {
-        const idMatch = url.match(/\/([a-zA-Z0-9]+)$/);
-        if (idMatch && idMatch[1]) {
-          return `https://i.imgur.com/${idMatch[1]}.jpg`;
-        }
-      }
-      return url;
-    }
-    
-    // Untuk URL langsung
-    return url;
-  } catch (error) {
-    console.error('Extraction error:', error);
-    return url;
-  }
-}
 
 // Fungsi untuk memperbarui preview gambar
 function updatePreviews() {
@@ -2784,6 +2835,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
-
